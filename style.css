@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #F5F5F5;
+}
+
+.content {
+    position: relative;
+}
+
+nav {
+    background-color: #2A3647;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 66px 20px;
+    gap: 103px;
+
+    position: absolute;
+    width: 232px;
+    height: 1024px;
+    left: 0px;
+    top: 0px;
+}
