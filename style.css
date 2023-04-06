@@ -22,25 +22,38 @@ nav {
     align-items: center;
     padding: 66px 20px;
     gap: 103px;
-
+    justify-content: space-between;
     position: absolute;
     width: 232px;
     height: 1024px;
     left: 0px;
     top: 0px;
 }
-.logo-nav{
+
+.nav-link {
+    display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 8px 53px;
+gap: 20px;
+
+width: 232px;
+height: 46px;
+}
+
+.logo-nav {
     width: 100.03px;
     height: 121.97px;
 }
 
-.legal-notice{
+.legal-notice {
     width: 18px;
     height: 18px;
 }
 
 a {
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 .nav-links {
@@ -48,12 +61,14 @@ a {
     flex-direction: column;
     align-items: center;
 }
+.nav-link img {
+    
+}
 
-.d-flex{
+.d-flex {
     display: flex;
 }
 
 .flex-column {
     flex-direction: column;
 }
-
