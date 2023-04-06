@@ -13,9 +13,16 @@ function generateAddTaskHTML(){
     addContentTitle('Add Task','addTask');
     generateTableHTML('addTask');
     generateTableRowHTML('Title');
+    generateInputFieldHTML();
     generateTableRowHTML('Description');
+    generateInputFieldHTML();
+
     generateTableRowHTML('Category');
+    generateInputFieldHTML();
+
     generateTableRowHTML('Assigned To');
+    generateInputFieldHTML();
+
 }
 
 /**
@@ -24,9 +31,7 @@ function generateAddTaskHTML(){
  */
 function generateTableHTML(id){
     document.getElementById(id).innerHTML += `
-    <table>
-        <tbody id="addTaskDetails"></tbody>
-    </table>
+    <div class="details" id="addTaskDetails"></div>
     `;
 }
 
@@ -47,7 +52,12 @@ function addContentTitle(title, id){
  * @param {*} headline  
  */
 function generateTableRowHTML(headline){
-    document.getElementById('addTaskDetails').innerHTML += `<tr id="detail"><td>${headline}</td></tr>`;
+    document.getElementById('addTaskDetails').innerHTML += `<label id="detail">${headline}</label>`;
+}
+
+function generateInputFieldHTML(){
+    document.getElementById('addTaskDetails').innerHTML += `<input>`;
+
 }
 
 /**
