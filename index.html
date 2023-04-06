@@ -12,17 +12,25 @@
 
 <body onload="init()">
     <div class="content" id="content">
-        <nav>
+        <nav class="navigation-left" id="navigation-left">
             <a href="">
                 <img class="logo-nav" src="img/logo-nav.png">
             </a>
-            <div class="nav-links">
-                <a href="" class="nav-link"> <img src="img/summary.png" alt=""> Summary</a>
-                <a href="" class="nav-link"> <img src="img/board.png" alt=""> Board</a>
-                <a onclick="showLink('addTask')" class="nav-link"> <img src="img/addTask.png" alt=""> Add Task</a>
-                <a href="" class="nav-link"> <img src="img/contacts.png" alt=""> Contacts</a>
+            <div class="navigation-left-links">
+                <a href="" class="navigation-left-link"> <img src="img/summary.png" alt=""> Summary</a>
+                <a href="" class="navigation-left-link"> <img src="img/board.png" alt=""> Board</a>
+                <a onclick="showLink('addTask')" class="navigation-left-link"> <img src="img/addTask.png" alt=""> Add
+                    Task</a>
+                <a href="" class="navigation-left-link"> <img src="img/contacts.png" alt=""> Contacts</a>
             </div>
             <a href=""> <img class="logal-notice" src="img/legal-notice.png"> Legal notice</a>
+        </nav>
+        <nav class="navigation-top" id="navigation-top">
+            <a>Kanban Project Management Tool</a>
+            <div>
+                <a><img src="img/questionmark.png"></a>
+                <a><img src="img/profileBase.png"></a>
+            </div>
         </nav>
         <div class="d-none" id="summary"></div>
         <div class="d-none" id="board"></div>
