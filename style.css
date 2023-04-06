@@ -62,9 +62,11 @@ a {
     align-items: center;
 }
 .nav-link img {
-    
-}
 
+}
+.d-none{
+    display: none;
+}
 .d-flex {
     display: flex;
 }

@@ -34,7 +34,12 @@ function generateTableRowHTML(headline){
 
 }
 
-function generateInputHeadline(headline){
+function showLink(link){
+    document.getElementById('summary').classList.add('d-none');
+    document.getElementById('board').classList.add('d-none');
+    document.getElementById('addTask').classList.add('d-none');
+    document.getElementById('contacts').classList.add('d-none');
 
-    document.getElementById('detail').innerHTML += ``;
+    document.getElementById(link).classList.remove('d-none');
+
 }
