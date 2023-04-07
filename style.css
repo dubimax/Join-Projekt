@@ -21,6 +21,14 @@ body {
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
+    
+}
+.inputTextStd::-webkit-calendar-picker-indicator {
+      background: url('img/calendarIcon.png') no-repeat;  
+      opacity: 1;
+      object-fit: contain;
+      width: 23px;
+      height: 23px;
 }
 
 .inputDescriptionField {
@@ -193,3 +201,4 @@ label {
     width: calc(100% - 232px);
 
 }
+

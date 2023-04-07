@@ -41,7 +41,7 @@ function generateAddTaskHTML(){
         <div class="detailBox-right">
             <div class="detail">
                 <label>Due Date</label>
-                <input type="date" class="inputTextStd">
+                <input type="date" class="inputTextStd" >
             </div>
             <div class="detail">
                 <label>Prio</label>
