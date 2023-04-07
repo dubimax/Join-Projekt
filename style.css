@@ -23,6 +23,7 @@ body {
     border-radius: 10px;
     
 }
+
 .inputTextStd::-webkit-calendar-picker-indicator {
       background: url('img/calendarIcon.png') no-repeat;  
       opacity: 1;
@@ -96,6 +97,14 @@ a {
     text-decoration: none;
 }
 
+.gap-10px{
+    gap: 10px;
+}
+
+.align-c {
+    align-items: center;
+}
+
 .navigation-left-links {
     display: flex;
     flex-direction: column;
@@ -133,7 +142,6 @@ a {
 }
 
 .navigation-top {
-    height: 50px;
     position: absolute;
     top: 0;
     left: 0;
@@ -146,13 +154,17 @@ a {
     gap: 34px;
 }
 
+.navigation-top a{
+    font-size: 21px;
+}
+
 h2 {
     font-size: 61px;
     margin-left: 100px;
 }
 
 label {
-    margin: 15px 0;
+    margin: 5px 0;
 }
 
 .navigation-top a {
@@ -193,7 +205,7 @@ label {
 
 #addTask {
     display: flex;
-    margin-top: 100px;
+    margin-top: 175px;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
