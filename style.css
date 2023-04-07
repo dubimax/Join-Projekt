@@ -16,15 +16,31 @@ body {
 
 .inputTextStd {
     gap: 10px;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+}
 
-width: 422px;
-height: 51px;
+.inputDescriptionField {
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 119px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+}
 
-background: #FFFFFF;
-/* Style */
-
-border: 1px solid #D1D1D1;
-border-radius: 10px;
+.dropDownMenuField {
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
 }
 
 .navigation-left {
@@ -90,6 +106,24 @@ a {
     flex-direction: column;
 }
 
+.detail div label {
+    gap: 10px;
+    width: 136px;
+    height: 51px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.detail div {
+    gap: 10px;
+
+}
+
 .navigation-top {
     height: 50px;
     position: absolute;
@@ -104,15 +138,28 @@ a {
     gap: 34px;
 }
 
+h2 {
+    font-size: 61px;
+    margin-left: 100px;
+}
+
+label {
+    margin: 15px 0;
+}
+
 .navigation-top a {
     color: black;
 }
 
 .details {
     display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
-.border-1px-solid{
+.border-1px-solid {
     border: 1px solid #D1D1D1;
 }
 
@@ -124,9 +171,25 @@ a {
     font-size: 21px;
 }
 
+.detailBox-left {
+    display: flex;
+    flex-direction: column;
+    margin-right: inherit;
+}
+.detailBox-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: inherit;
+}
 
-#addTask{
+
+#addTask {
     display: flex;
     margin-top: 100px;
     flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    right: 0;
+    width: calc(100% - 232px);
+
 }

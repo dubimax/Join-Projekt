@@ -13,39 +13,39 @@ function generateAddTaskHTML(){
     addContentTitle('Add Task','addTask');
     document.getElementById('addTask').innerHTML += `
     <div class="details">
-        <div class="detailBox">
+        <div class="detailBox-left">
             <div class="detail">
                 <label>Title</label>
                 <input class="inputTextStd" type="text">
             </div>
             <div class="detail">
                 <label>Description</label>
-                <textarea type="text"></textarea>
+                <textarea class="inputDescriptionField" type="text"></textarea>
             </div>
             <div class="detail">
                 <label>Category</label>
-                <select>
+                <select class="dropDownMenuField">
                     <option>Kunst</option>
                     <option>Natur</option>
                 </select>
             </div>
             <div class="detail">
                 <label>Assigned to</label>
-                <select>
+                <select class="dropDownMenuField">
                     <option>Kunst</option>
                     <option>Natur</option>
                 </select>
             </div>
         </div>
         <div class="border-1px-solid"></div>
-        <div class="detailBox">
+        <div class="detailBox-right">
             <div class="detail">
                 <label>Due Date</label>
-                <input type="date">
+                <input type="date" class="inputTextStd">
             </div>
             <div class="detail">
                 <label>Prio</label>
-                <div>
+                <div class="d-flex">
                     <label>Urgent</label>
                     <label>Medium</label>
                     <label>Low</label>
@@ -53,7 +53,7 @@ function generateAddTaskHTML(){
             </div>
             <div class="detail">
                 <label>Subtasks</label>
-                <input type="text" placeholder="Add a new Subtask">
+                <input type="text" placeholder="Add a new Subtask" class="inputTextStd">
             </div>
         </div>
     </div>
