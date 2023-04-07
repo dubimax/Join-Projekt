@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -8,11 +9,22 @@ body {
 }
 
 .content {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-table {
-    width: 100%;
+.inputTextStd {
+    gap: 10px;
+
+width: 422px;
+height: 51px;
+
+background: #FFFFFF;
+/* Style */
+
+border: 1px solid #D1D1D1;
+border-radius: 10px;
 }
 
 .navigation-left {
@@ -96,13 +108,25 @@ a {
     color: black;
 }
 
-
 .details {
-    display: grid;
+    display: flex;
 }
+
+.border-1px-solid{
+    border: 1px solid #D1D1D1;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 5px;
+    font-size: 21px;
+}
+
 
 #addTask{
     display: flex;
-    flex-direction: column;
     margin-top: 100px;
+    flex-direction: column;
 }

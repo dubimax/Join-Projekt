@@ -11,29 +11,56 @@ function init(){
  */
 function generateAddTaskHTML(){
     addContentTitle('Add Task','addTask');
-    generateTableHTML('addTask');
-    generateTableRowHTML('Title');
-    generateInputFieldHTML();
-    generateTableRowHTML('Description');
-    generateInputFieldHTML();
-
-    generateTableRowHTML('Category');
-    generateInputFieldHTML();
-
-    generateTableRowHTML('Assigned To');
-    generateInputFieldHTML();
-
-}
-
-/**
- *  generates a Table in an Element
- * @param {*} id Insert the ID you want to Create the Table
- */
-function generateTableHTML(id){
-    document.getElementById(id).innerHTML += `
-    <div class="details" id="addTaskDetails"></div>
+    document.getElementById('addTask').innerHTML += `
+    <div class="details">
+        <div class="detailBox">
+            <div class="detail">
+                <label>Title</label>
+                <input class="inputTextStd" type="text">
+            </div>
+            <div class="detail">
+                <label>Description</label>
+                <textarea type="text"></textarea>
+            </div>
+            <div class="detail">
+                <label>Category</label>
+                <select>
+                    <option>Kunst</option>
+                    <option>Natur</option>
+                </select>
+            </div>
+            <div class="detail">
+                <label>Assigned to</label>
+                <select>
+                    <option>Kunst</option>
+                    <option>Natur</option>
+                </select>
+            </div>
+        </div>
+        <div class="border-1px-solid"></div>
+        <div class="detailBox">
+            <div class="detail">
+                <label>Due Date</label>
+                <input type="date">
+            </div>
+            <div class="detail">
+                <label>Prio</label>
+                <div>
+                    <label>Urgent</label>
+                    <label>Medium</label>
+                    <label>Low</label>
+                </div>
+            </div>
+            <div class="detail">
+                <label>Subtasks</label>
+                <input type="text" placeholder="Add a new Subtask">
+            </div>
+        </div>
+    </div>
     `;
 }
+
+
 
 /**
  * Adds a Title to the shown Content
@@ -46,19 +73,7 @@ function addContentTitle(title, id){
     `;
 }
 
-/**
- *  Add a tableRow with a <td></td> Element
- *  with param inserted as Headline for inputfields
- * @param {*} headline  
- */
-function generateTableRowHTML(headline){
-    document.getElementById('addTaskDetails').innerHTML += `<label id="detail">${headline}</label>`;
-}
 
-function generateInputFieldHTML(){
-    document.getElementById('addTaskDetails').innerHTML += `<input>`;
-
-}
 
 /**
  * Adds the class "d-none" (display: none) to all nav Links
