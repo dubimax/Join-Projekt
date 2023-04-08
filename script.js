@@ -9,14 +9,16 @@ function generateAddTaskHTML() {
     document.getElementById('addTask').innerHTML += `
     <div class="details">
         <div class="detailBox-left">
-            ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text')}
+            ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle')}
             ${generatesTextareaFieldHTML('label', 'textarea', 'Description')}
-            ${generatesOptionsFieldHTML('label', 'select', 'option', 'Category', 'dropDownMenuField')}
-            ${generatesOptionsFieldHTML('label', 'select', 'option', 'Assigned to', 'dropDownMenuField', 'assignedTo')}
+            ${generatesOptionsFieldHTML('label', 'select', 'Category', 'dropDownMenuField', 'categoryBox')}
+
+            ${generatesOptionsFieldHTML('label', 'select', 'Assigned to', 'dropDownMenuField', 'assignedTo')}
+
         </div>
         <div class="border-1px-solid"></div>
         <div class="detailBox-right">
-        ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date')}
+        ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate' )}
         ${generateLabelsHTML('label', 'Prio')}
             
            
@@ -30,34 +32,57 @@ function generateAddTaskHTML() {
         </div>
     </div>
     `;
-    generateOptionsHTML('assignedTo');
+    generateOptionsHTML('assignedTo', users, 'users');
+    addOptionWithFunction();
+    generateOptionsHTML('categoryBox', categories, 'categories');
+
 }
 let users = [];
-setURL('https://marijan-dupkovic.developerakademie.net/smallest_backend_ever');
+let categories = [];
+setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    generateAddTaskHTML()
-
+    categories = JSON.parse(backend.getItem('categories')) || [];
+    generateAddTaskHTML();
 }
-async function getUsers() {
 
-    users = JSON.parse(backend.getItem('users')) || [];
-    return users;
-}
 
 async function addUsers() {
     let name = 'guest';
     let email = 'guest@guest.de'
-    let password = 'guest'; 
-    users.push({'name': name,'email': email,'pwd': password});
+    let password = 'guest';
+    users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
+}
+
+function getCategory(i) {
+    return categories[i];
+}
+
+function addOptionWithFunction(){
+    document.getElementById('categoryBox').innerHTML += `
+            <option><a onselect="changeToInputField()">Add new Category</a></option>`;
+}
+
+function changeToInputField(){
+    if(document.getElementById('categoryBox').value == 'Add new Category'){
+        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'newCategory', 'inputTextStd', 'text','newCat');
+
+    }
+}
+
+async function addCategory(category) {
+    categories.push(category);
+    backend.setItem('categories', JSON.stringify(categories));
 }
 
 function getUser(i) {
     return users[i]['name'];
 }
+
+
 
 function generateLabelsHTML(field, headline) {
     return `
@@ -81,31 +106,49 @@ function generatesTextareaFieldHTML(field1, field2, headline) {
     `;
 }
 
-function generatesInputFieldHTML(field1, field2, headline, properties, type) {
+
+
+function generatesInputFieldHTML(field1, field2, headline, properties, type,id) {
     return `
-    <div class="detail">
+    <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
-        <${field2} class="${properties}" type="${type}">
+        <${field2} class="${properties}" type="${type}" id="${id}" >
     </div>
     `;
 }
-
-function generatesOptionsFieldHTML(field1, field2, field3, headline, properties , id) {
+function generatesChangedInputFieldHTML(field1, field2, headline, properties, type,id) {
     return `
-    <div class="detail">
         <${field1}>${headline}</${field1}>
-        <${field2} class="${properties}" id="${id}">
-            
+        <${field2} class="${properties}" type="${type}" id="${id}" >
+    `;
+}
+
+function generatesOptionsFieldHTML(field1, field2, headline, properties, id) {
+    
+    return `
+    <div class="detail" id="id_${id}">
+        <${field1}>${headline}</${field1}>
+        <${field2} onchange="changeToInputField()" class="${properties}" id="${id}" placeholder="Choose">
+        <option value="" disabled selected>Select your option</option>
+
         </${field2}>
     </div>
     `;
 }
 
-function generateOptionsHTML(id) {
-    for (let i = 0; i < users.length; i++) {
-        document.getElementById(id).innerHTML += `
-            <option>${getUser(i)}</option>
+function generateOptionsHTML(id, array, nameOfArray) {
+    for (let i = 0; i < array.length; i++) {
+        if(nameOfArray == 'users'){
+            document.getElementById(id).innerHTML += `
+            <option value="${getUser(i)}">${getUser(i)}</option>
         `;
+        }
+        if(nameOfArray == 'categories'){
+            document.getElementById(id).innerHTML += `
+            <option value="${getCategory(i)}">${getCategory(i)}</option>
+        `;
+        }
+        
     }
 }
 
