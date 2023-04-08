@@ -14,48 +14,65 @@ function generateAddTaskHTML(){
     document.getElementById('addTask').innerHTML += `
     <div class="details">
         <div class="detailBox-left">
-            <div class="detail">
-                <label>Title</label>
-                <input class="inputTextStd" type="text">
-            </div>
-            <div class="detail">
-                <label>Description</label>
-                <textarea class="inputDescriptionField" type="text"></textarea>
-            </div>
-            <div class="detail">
-                <label>Category</label>
-                <select class="dropDownMenuField">
-                    <option>Kunst</option>
-                    <option>Natur</option>
-                </select>
-            </div>
-            <div class="detail">
-                <label>Assigned to</label>
-                <select class="dropDownMenuField">
-                    <option>Kunst</option>
-                    <option>Natur</option>
-                </select>
-            </div>
+            ${generatesInputFieldHTML('label', 'input','Title','inputTextStd','text')}
+            ${generatesTextareaFieldHTML('label', 'textarea', 'Description')}
+            ${generatesOptionsFieldHTML('label','select', 'option', 'Category','dropDownMenuField')}
+            ${generatesOptionsFieldHTML('label','select', 'option', 'Assigned to','dropDownMenuField')}
         </div>
         <div class="border-1px-solid"></div>
         <div class="detailBox-right">
-            <div class="detail">
-                <label>Due Date</label>
-                <input type="date" class="inputTextStd" >
-            </div>
-            <div class="detail">
-                <label>Prio</label>
-                <div class="d-flex">
-                    <label>Urgent</label>
-                    <label>Medium</label>
-                    <label>Low</label>
-                </div>
-            </div>
+        ${generatesInputFieldHTML('label', 'input','Due Date','inputTextStd','date')}
+        ${generateLabelsHTML('label', 'Prio')}
+            
+           
             <div class="detail">
                 <label>Subtasks</label>
                 <input type="text" placeholder="Add a new Subtask" class="inputTextStd">
             </div>
         </div>
+    </div>
+    `;
+}
+
+function generateLabelsHTML(field, headline){
+    return `
+    <div class="detail">
+        <${field}>${headline}</${field}>
+        <div class="d-flex">
+            <${field}>Urgent</${field}>
+            <${field}>Medium</${field}>
+            <${field}>Low</${field}>
+        </div>
+    </div>
+    `;
+}
+
+function generatesTextareaFieldHTML(field1, field2, headline){
+    return `
+    <div class="detail">
+        <${field1}>${headline}</${field1}>
+        <${field2} class="inputDescriptionField" type="text"></${field2}>
+    </div>
+    `;
+}
+
+function generatesInputFieldHTML(field1, field2, headline,properties,type){
+    return `
+    <div class="detail">
+        <${field1}>${headline}</${field1}>
+        <${field2} class="${properties}" type="${type}">
+    </div>
+    `;
+}
+
+function generatesOptionsFieldHTML(field1,field2, field3, headline,properties){
+    return `
+    <div class="detail">
+        <${field1}>${headline}</${field1}>
+        <${field2} class="${properties}">
+            <${field3}>Kunst</${field3}>
+            <${field3}>Natur</${field3}>
+        </${field2}>
     </div>
     `;
 }
