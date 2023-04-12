@@ -7,7 +7,7 @@ async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
         const element = includeElements[i];
-        file = element.getAttribute("w3-include-html"); 
+        file = element.getAttribute("w3-include-html");
         let resp = await fetch(file);
         if (resp.ok) {
             element.innerHTML = await resp.text();
@@ -26,7 +26,7 @@ function changeStyleOfLabel(id) {
     document.getElementById('urgentImgID').src = 'img/urgentIcon.png';
     document.getElementById('mediumImgID').src = 'img/mediumIcon.png';
     document.getElementById('lowImgID').src = 'img/lowIcon.png';
-    if(activeID.length <=0){
+    if (activeID.length <= 0) {
         if (id == 'id_urgent') {
             document.getElementById(id).style = urgentColor;
             document.getElementById('urgentImgID').src = 'img/urgentWhiteIcon.png';
@@ -48,13 +48,13 @@ function changeStyleOfLabel(id) {
             activeImg = 'mediumImgID';
             return;
         }
-    }else {
+    } else {
         document.getElementById(activeID).style = 'background-color: #FFFFFF; color: #000000;';
         document.getElementById(activeImg).style = 'background-color: #FFFFFF; color: #000000;';
         activeID = '';
         activeImg = '';
     }
-   
+
 }
 /**
  *  Generates Add Task HTML Content
@@ -62,6 +62,7 @@ function changeStyleOfLabel(id) {
 function generateAddTaskHTML() {
     addContentTitle('Add Task', 'addTask');
     document.getElementById('addTask').innerHTML += `
+    <div class="details" onload="generateAddTaskHTML()">
         <div class="detailBox-left">
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle')}
             ${generatesTextareaFieldHTML('label', 'textarea', 'Description')}
@@ -84,6 +85,8 @@ function generateAddTaskHTML() {
                 </list>
             </div>
         </div>
+        </div>
+
     `;
     generateOptionsHTML('assignedTo', users, 'users');
     addOptionWithFunction();
@@ -96,7 +99,7 @@ setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
     await downloadFromServer();
-        await includeHTML();
+    await includeHTML();
 
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
@@ -108,7 +111,7 @@ function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('userMail').value;
     let password = document.getElementById('userPassword').value;
-    users.push({'name': name, 'email': email, 'pwd': password });
+    users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
 }
 
@@ -121,14 +124,14 @@ function addOptionWithFunction() {
             <div onselect="changeToInputField()" class="cl_categories d-none">Add new Category</div>`;
 }
 
-function cancelNewCategory(){
+function cancelNewCategory() {
     document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'select', 'Category', 'dropDownMenuField', 'categoryBox');
     addOptionWithFunction();
     generateOptionsHTML('categoryBox', categories, 'categories');
 
 }
 
-function setBackToOptionsField(field1, field2, headline, properties, id){
+function setBackToOptionsField(field1, field2, headline, properties, id) {
     return `
     <${field1}>${headline}</${field1}>
     <${field2} onchange="changeToInputField()" class="${properties}" id="${id}" placeholder="Choose">
@@ -214,27 +217,27 @@ function generatesOptionsFieldHTML(field1, field2, headline, properties, id, use
     `;
 }
 
-function showDropDownItems(usedItems){
-    if(usedItems == 'categories'){
+function showDropDownItems(usedItems) {
+    if (usedItems == 'categories') {
         showCategoryItems();
     }
-    if(usedItems == 'users'){
+    if (usedItems == 'users') {
         showUsersItems();
     }
 }
 
-function showCategoryItems(){
-    for(let i = 0;i<categories.length;i++){
-        if(document.getElementById(categories[i]).classList.contains('d-none')){
-        document.getElementById(categories[i]).classList.remove('d-none');
+function showCategoryItems() {
+    for (let i = 0; i < categories.length; i++) {
+        if (document.getElementById(categories[i]).classList.contains('d-none')) {
+            document.getElementById(categories[i]).classList.remove('d-none');
         }
     }
 }
 
-function showUsersItems(){
-    for(let i = 0;i<users.length;i++){
-        if(document.getElementById(users[i]['name']).classList.contains('d-none')){
-        document.getElementById(users[i]['name']).classList.remove('d-none');
+function showUsersItems() {
+    for (let i = 0; i < users.length; i++) {
+        if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
+            document.getElementById(users[i]['name']).classList.remove('d-none');
         }
     }
 }
