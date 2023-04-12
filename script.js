@@ -113,6 +113,8 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
+
+    /*window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';*/
 }
 
 function getCategory(i) {
