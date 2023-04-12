@@ -281,10 +281,10 @@ function addContentTitle(title, id) {
  * @param {*} id Insert the ID you want to get shown
  */
 function showLink(id) {
-    document.getElementById('summary').classList.add('d-none');
-    document.getElementById('board').classList.add('d-none');
+    document.getElementById('sum').classList.add('d-none');
+    // document.getElementById('board').classList.add('d-none');
     document.getElementById('addTask').classList.add('d-none');
-    document.getElementById('contacts').classList.add('d-none');
+    // document.getElementById('contacts').classList.add('d-none');
 
     document.getElementById(id).classList.remove('d-none');
 }
