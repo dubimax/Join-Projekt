@@ -1,0 +1,234 @@
+body {
+    background-color: #F5F5F5;
+    height: 100vh;
+    width: 100vw;
+}
+
+.loginHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-top: 80px;
+    margin-left: 77px;
+    margin-right: 114px;
+}
+
+.loginHeaderContainer img {
+    width: 100px;
+    height: 122px;
+
+
+}
+
+.notJoinUserContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    margin-top: -13px !important;
+}
+
+.notJoinUserContainer p {
+    width: 161px;
+    height: 25px;
+
+    color: #000000;
+
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+}
+
+.notJoinUserContainer button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    gap: 10px;
+
+    width: 95px;
+    height: 51px;
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+
+    background: #2A3647;
+    border-radius: 8px;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+}
+
+h1 {
+    width: 315px;
+    height: 73px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+
+    text-align: center;
+    color: #000000;
+}
+
+.headerLine {
+    margin-top: -24px;
+    width: 150px;
+    height: 0px;
+
+    border: 3px solid #29ABE2;
+}
+
+.loginFrame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 0px;
+    gap: 35px;
+
+    position: absolute;
+    width: 652px;
+    height: 513px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: #FFFFFF;
+
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+}
+
+.inputField {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 13px 21px;
+    gap: 10px;
+
+    width: 422px;
+    height: 51px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+}
+
+.inputField::placeholder{
+    color: #D1D1D1;
+}
+
+input[type=email]:focus {
+    border: 1px solid #000000;
+    color: #000000;
+    outline: none;
+}
+
+input[type=password]:focus {
+    border: 1px solid #000000;
+    color: #000000;
+    outline: none;
+    background: url(img/dontShowPassword.png) no-repeat scroll right 21px center;
+}
+
+.emailField{
+    background: url(img/emailVector.png) no-repeat scroll right 21px center;
+}
+
+.passwordField{
+    background: url(img/passwordVector.png) no-repeat scroll right 21px center;
+}
+.containerRememberAndForgot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    margin-top: 55px;
+    margin-bottom: 35px;
+}
+
+.containerRememberAndForgot a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+
+    color: #29ABE2;
+}
+
+.containerCbRememberMe {
+    display: flex;
+}
+
+.containerCbRememberMe p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+
+    color: #000000;
+
+    margin-left: 20px;
+}
+
+.btnLogin {
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+
+    color: #FFFFFF;
+
+    padding: 4px 0px;
+    gap: 10px;
+
+    width: 145px;
+    height: 51px;
+
+    background: #2A3647;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.btnGuest {
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+
+    color: #2A3647;
+
+    padding: 4px 0px;
+    gap: 10px;
+
+    width: 150px;
+    height: 51px;
+
+    background: #FFFFFF;
+
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}

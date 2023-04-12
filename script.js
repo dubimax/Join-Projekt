@@ -87,15 +87,15 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
-    generateAddTaskHTML();
+    /*generateAddTaskHTML();*/
 }
 
 
-async function addUsers() {
-    let name = 'guest';
-    let email = 'guest@guest.de'
-    let password = 'guest';
-    users.push({ 'name': name, 'email': email, 'pwd': password });
+function addUser() {
+    let name = document.getElementById('name');
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    users.push({ 'name': name.value, 'email': email.value, 'pwd': password.value });
     backend.setItem('users', JSON.stringify(users));
 }
 
@@ -270,3 +270,15 @@ function showLink(id) {
 
     document.getElementById(id).classList.remove('d-none');
 }
+
+function showSignUp() {
+    document.getElementById('loginWindow').classList.add('d-none');
+
+    document.getElementById('signInWindow').classList.remove('d-none');
+}
+/*
+function showGuest(){
+    document.getElementById('loginWindow').classList.add('d-none');
+
+    document.getElementById('content').classList.remove('d-none');
+}*/
