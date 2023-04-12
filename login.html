@@ -8,7 +8,9 @@
     <title>JOIN - Login</title>
     <script src="../smallest_backend_ever/mini_backend.js"></script>
     <script src="login.js"></script>
+
     <script src="script.js"></script>
+
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="style.css">
 
@@ -51,8 +53,8 @@
     <div class="signInWindow d-none" id="signInWindow">
         <form onsubmit="addUser(); return false;">
             <input type="text" id="name" placeholder="name" required>
-            <input type="email" id="email" placeholder="email"required>
-            <input type="password" id="password" placeholder="passwort"required>
+            <input type="email" name="email" id="userMail" placeholder="email" required spellcheck="false">
+            <input type="password" name="pwd"  id="userPassword" placeholder="passwort" required>
             <button>Registrieren</button>
         </form>
     </div>

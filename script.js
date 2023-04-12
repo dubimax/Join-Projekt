@@ -95,8 +95,9 @@ let categories = [];
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
-    await includeHTML();
     await downloadFromServer();
+        await includeHTML();
+
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
     /*generateAddTaskHTML();*/
@@ -104,10 +105,10 @@ async function init() {
 
 
 function addUser() {
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    users.push({ 'name': name.value, 'email': email.value, 'pwd': password.value });
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('userMail').value;
+    let password = document.getElementById('userPassword').value;
+    users.push({'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
 }
 
