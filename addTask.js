@@ -1,7 +1,7 @@
 function generateAddTaskHTML() {
     addContentTitle('Add Task', 'addTask');
     document.getElementById('addTask').innerHTML += `
-    <form onsubmit="createNewTask()">
+    <form onsubmit="createNewTask()" class="addTaskForm">
     <div class="details">
         <div class="detailBox-left">
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle')}
@@ -25,12 +25,13 @@ function generateAddTaskHTML() {
         </div>
         
         </div>
-        <div class="d-flex align-c">
-            <div class="clearButton">
-                <a onclick="clearAllInputs()">Clear</button>
+        <div class="d-flex align-c container-btns">
+            <div class="clearButton" onclick="clearAllInputs()">
+                Clear
             </div>
             <div class="createTaskBtnContainer">
                 <button class="createTaskBtn">Create Task</button>
+                <img class="" src="./img/checkIconWhite.png">
             </div>
         </div>
         </form>
@@ -40,8 +41,17 @@ function generateAddTaskHTML() {
     generateOptionsHTML('categoryBox', categories, 'categories');
 }
 
+function createNewTask(){
+    
+}
+
 function clearAllInputs() {
     clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtask');
+    clearListSubtask();
+}
+
+function clearListSubtask() {
+    document.getElementById('list-subtask').innerHTML = '';
 }
 
 
@@ -55,7 +65,7 @@ function clearFields(...ids) {
 
 
 function changeStyleOfLabel(id) {
-    
+
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
@@ -87,7 +97,7 @@ function changeStyleOfLabel(id) {
     } else {
         if (activeImg == 'urgentImgID') {
             document.getElementById(activeImg).src = 'img/urgentIcon.png';
-6
+            6
         }
         if (activeImg == 'mediumImgID') {
             document.getElementById(activeImg).src = 'img/mediumIcon.png';
