@@ -1,8 +1,3 @@
-
-let urgentColor = 'background-color: #FF3D00; color: #FFFFFF;';
-let mediumColor = 'background-color: #FFA800;color: #FFFFFF;';
-let lowColor = 'background-color: #7AE229;color: #FFFFFF;';
-
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -54,8 +49,8 @@ function changeStyleOfLabel(id) {
         activeID = '';
         activeImg = '';
     }
-
 }
+
 /**
  *  Generates Add Task HTML Content
  */
@@ -84,26 +79,21 @@ function generateAddTaskHTML() {
             </div>
         </div>
         </div>
-
     `;
     generateOptionsHTML('assignedTo', users, 'users');
     addOptionWithFunction();
     generateOptionsHTML('categoryBox', categories, 'categories');
-
 }
-let users = [];
-let categories = [];
+
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
     await includeHTML();
-
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
     generateAddTaskHTML();
 }
-
 
 function addUser() {
     let name = document.getElementById('name').value;
@@ -111,7 +101,6 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
-
     /*window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';*/
 }
 
@@ -136,8 +125,6 @@ function setBackToOptionsField(field1, field2, headline, properties, id, usedIte
     <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
             <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="img/dropdownIcon.png">
-
-
             </div>
         </div>
     `;
@@ -157,8 +144,6 @@ async function addCategory(category) {
 function getUser(i) {
     return users[i]['name'];
 }
-
-
 
 function generateLabelsHTML(field, headline) {
     return `
@@ -182,8 +167,6 @@ function generatesTextareaFieldHTML(field1, field2, headline) {
     `;
 }
 
-
-
 function generatesInputFieldHTML(field1, field2, headline, properties, type, id) {
     return `
     <div class="detail" id="id_${id}">
@@ -192,6 +175,7 @@ function generatesInputFieldHTML(field1, field2, headline, properties, type, id)
     </div>
     `;
 }
+
 function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id) {
     return `
     <${field1}>${headline}</${field1}>
@@ -213,8 +197,6 @@ function generatesOptionsFieldHTML(field1, field2, headline, properties, id, use
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
             <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="img/dropdownIcon.png">
-
-
             </div>
         </div>
     </div>
@@ -250,7 +232,6 @@ function showUsersItems() {
         }
         else {
             document.getElementById(users[i]['name']).classList.add('d-none');
-
         }
     }
 }
@@ -281,8 +262,6 @@ function generateOptionsHTML(id, array, nameOfArray) {
     }
 }
 
-
-
 /**
  * Adds a Title to the shown Content
  * @param {*} title Insert the title which should be shown
@@ -294,8 +273,6 @@ function addContentTitle(title, id) {
     `;
 }
 
-
-
 /**
  * Adds the class "d-none" (display: none) to all nav Links
  * than removes "d-none" from the param id 
@@ -306,13 +283,11 @@ function showLink(id) {
     // document.getElementById('board').classList.add('d-none');
     document.getElementById('addTask').classList.add('d-none');
     // document.getElementById('contacts').classList.add('d-none');
-
     document.getElementById(id).classList.remove('d-none');
 }
 
 function showSignUp() {
     document.getElementById('loginWindow').classList.add('d-none');
-
     document.getElementById('signInWindow').classList.remove('d-none');
 }
 /*
