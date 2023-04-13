@@ -12,44 +12,7 @@ async function includeHTML() {
     }
 }
 
-function changeStyleOfLabel(id) {
-    let activeID = '';
-    let activeImg = '';
-    document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('urgentImgID').src = 'img/urgentIcon.png';
-    document.getElementById('mediumImgID').src = 'img/mediumIcon.png';
-    document.getElementById('lowImgID').src = 'img/lowIcon.png';
-    if (activeID.length <= 0) {
-        if (id == 'id_urgent') {
-            document.getElementById(id).style = urgentColor;
-            document.getElementById('urgentImgID').src = 'img/urgentWhiteIcon.png';
-            activeID = id;
-            activeImg = 'urgentImgID';
-            return;
-        }
-        if (id == 'id_medium') {
-            document.getElementById(id).style = mediumColor;
-            document.getElementById('mediumImgID').src = 'img/mediumWhiteIcon.png';
-            activeID = id;
-            activeImg = 'mediumImgID';
-            return;
-        }
-        if (id == 'id_low') {
-            document.getElementById(id).style = lowColor;
-            document.getElementById('lowImgID').src = 'img/lowWhiteIcon.png';
-            activeID = id;
-            activeImg = 'mediumImgID';
-            return;
-        }
-    } else {
-        document.getElementById(activeID).style = 'background-color: #FFFFFF; color: #000000;';
-        document.getElementById(activeImg).style = 'background-color: #FFFFFF; color: #000000;';
-        activeID = '';
-        activeImg = '';
-    }
-}
+
 
 /**
  *  Generates Add Task HTML Content
@@ -133,7 +96,7 @@ function generatesTextareaFieldHTML(field1, field2, headline) {
     return `
     <div class="detail">
         <${field1}>${headline}</${field1}>
-        <${field2} class="inputDescriptionField" type="text"></${field2}>
+        <${field2} class="inputDescriptionField" type="text" id="inputDescription"></${field2}>
     </div>
     `;
 }
