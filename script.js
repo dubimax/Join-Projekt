@@ -67,21 +67,19 @@ function generateAddTaskHTML() {
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle')}
             ${generatesTextareaFieldHTML('label', 'textarea', 'Description')}
             ${generatesOptionsFieldHTML('label', 'select', 'Category', 'dropDownMenuField', 'categoryBox', 'categories')}
-
             ${generatesOptionsFieldHTML('label', 'select', 'Assigned to', 'dropDownMenuField', 'assignedTo', 'users')}
-
         </div>
         <div class="border-1px-solid"></div>
         <div class="detailBox-right">
         ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-        ${generateLabelsHTML('label', 'Prio')}
-            
-           
+        ${generateLabelsHTML('label', 'Prio')} 
             <div class="detail">
                 <label>Subtasks</label>
-                <input type="text" placeholder="Add a new Subtask" class="inputTextStd">
-                <list class="d-none" id="list-subtask">
-                    <input type="checkbox"> Test
+                <div class="p-relative d-flex align-c">
+                    <input type="text" placeholder="Add a new Subtask" class="inputTextStd" id="newSubtask">
+                    <img onclick="generateCheckboxItem()" src="./img/addIcon.png" class="inputAddIcon">
+                </div>
+                <list class="" id="list-subtask">
                 </list>
             </div>
         </div>
@@ -98,12 +96,12 @@ let categories = [];
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
-    await downloadFromServer();
     await includeHTML();
 
+    await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
-    /*generateAddTaskHTML();*/
+    generateAddTaskHTML();
 }
 
 
@@ -123,28 +121,30 @@ function getCategory(i) {
 
 function addOptionWithFunction() {
     document.getElementById('categoryBox').innerHTML += `
-            <div onselect="changeToInputField()" class="cl_categories d-none">Add new Category</div>`;
+            <div class="cl_categories d-none" onclick="changeToInputField()" id="addNewCat" >Add new Category</div>`;
 }
 
 function cancelNewCategory() {
-    document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'select', 'Category', 'dropDownMenuField', 'categoryBox');
+    document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', '', 'Categories', 'dropDownMenuField', 'categoryBox', 'categories');
     addOptionWithFunction();
     generateOptionsHTML('categoryBox', categories, 'categories');
 
 }
 
-function setBackToOptionsField(field1, field2, headline, properties, id) {
+function setBackToOptionsField(field1, field2, headline, properties, id, usedItems) {
     return `
     <${field1}>${headline}</${field1}>
-    <${field2} onchange="changeToInputField()" class="${properties}" id="${id}" placeholder="Choose">
-    <option value="" disabled selected>Select your option</option>
+        <div class="${properties}" id="${id}">
+            <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="img/dropdownIcon.png">
 
-    </${field2}>
+
+            </div>
+        </div>
     `;
 }
 
 function changeToInputField() {
-    if (document.getElementById('categoryBox').value == 'Add new Category') {
+    if (document.getElementById('addNewCat').innerHTML == 'Add new Category') {
         document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'newCategory', 'inputTextStd', 'text', 'newCat');
     }
 }
@@ -211,8 +211,10 @@ function generatesOptionsFieldHTML(field1, field2, headline, properties, id, use
     return `
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
-        <div onchange="changeToInputField()" class="${properties}" id="${id}">
+        <div class="${properties}" id="${id}">
             <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="img/dropdownIcon.png">
+
+
             </div>
         </div>
     </div>
@@ -232,6 +234,11 @@ function showCategoryItems() {
     for (let i = 0; i < categories.length; i++) {
         if (document.getElementById(categories[i]).classList.contains('d-none')) {
             document.getElementById(categories[i]).classList.remove('d-none');
+            document.getElementById('addNewCat').classList.remove('d-none');
+        }
+        else {
+            document.getElementById(categories[i]).classList.add('d-none');
+            document.getElementById('addNewCat').classList.add('d-none');
         }
     }
 }
@@ -241,18 +248,32 @@ function showUsersItems() {
         if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
             document.getElementById(users[i]['name']).classList.remove('d-none');
         }
+        else {
+            document.getElementById(users[i]['name']).classList.add('d-none');
+
+        }
     }
+}
+
+function generateCheckboxItem() {
+    return document.getElementById('list-subtask').innerHTML += `
+    <li><input type="checkbox" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
+    `;
+}
+
+function getItemFromInput() {
+    return document.getElementById('newSubtask').value;
 }
 
 function generateOptionsHTML(id, array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
         if (nameOfArray == 'users') {
-            document.getElementById(id).innerHTML += `
+            document.getElementById('assignedTo').innerHTML += `
             <div class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">${getUser(i)}</div>
         `;
         }
         if (nameOfArray == 'categories') {
-            document.getElementById(id).innerHTML += `
+            document.getElementById('categoryBox').innerHTML += `
             <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >${getCategory(i)}</div>
         `;
         }
