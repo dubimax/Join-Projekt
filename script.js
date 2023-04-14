@@ -35,6 +35,7 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
+    backToLogin();
     /*window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';*/
 }
 
@@ -221,12 +222,12 @@ function showLink(id) {
 }
 
 function showSignUp() {
-    document.getElementById('loginWindow').classList.add('d-none');
-    document.getElementById('signInWindow').classList.remove('d-none');
+    document.getElementById('notJoinUserContainer').classList.add('d-none');
+    document.getElementById('loginFrame').classList.add('d-none');
+    document.getElementById('signUpFrame').classList.remove('d-none');
 }
-/*
-function showGuest(){
-    document.getElementById('loginWindow').classList.add('d-none');
-
-    document.getElementById('content').classList.remove('d-none');
-}*/
+function backToLogin() {
+    document.getElementById('notJoinUserContainer').classList.remove('d-none');
+    document.getElementById('loginFrame').classList.remove('d-none');
+    document.getElementById('signUpFrame').classList.add('d-none');
+}

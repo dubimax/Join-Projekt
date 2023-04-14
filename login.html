@@ -20,15 +20,15 @@
 
 <body onload="init()">
     <div class="loginWindow" id="loginWindow">
-        <div class="loginHeaderContainer">
+        <div class="loginHeaderContainer ">
             <img src="img/logo-dunkel.png" alt="Join-Logo-Dunkel">
-            <div class="notJoinUserContainer">
+            <div class="notJoinUserContainer d-none" id="notJoinUserContainer">
                 <p>Not a Join user?</p>
                 <button onclick="showSignUp()">Sign up</button>
             </div>
         </div>
 
-        <div class="loginFrame">
+        <div class="frameStyle d-none" id="loginFrame">
             <h1>Log in</h1>
             <div class="headerLine">
             </div>
@@ -45,19 +45,27 @@
                 </div>
 
                 <div class="btnContainer">
-                    <button class="btnLogin">Log in</button>
+                    <button class="btnLoginAndSignUp">Log in</button>
                     <button class="btnGuest" onclick="window.location.href='summary.html'">Guest Log in</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="signInWindow d-none" id="signInWindow">
+    <div class="frameStyle" id="signUpFrame">
+        <img src="img/backBtn.png" onclick="backToLogin()" class="backBtn">
+        <h1>Sign up</h1>
+        <div class="headerLine">
+        </div>
         <form onsubmit="addUser(); return false;">
-            <input type="text" id="name" placeholder="name" required>
-            <input type="email" name="email" id="userMail" placeholder="email" required spellcheck="false">
-            <input type="password" name="pwd"  id="userPassword" placeholder="passwort" required>
-            <button>Registrieren</button>
+            <input class="inputField nameField" type="text" id="name" placeholder="Name" required>
+            <input class="inputField emailField" type="email" name="email" id="userMail" placeholder="Email" required
+                spellcheck="false">
+            <input class="inputField passwordField" type="password" name="pwd" id="userPassword" placeholder="Password"
+                required>
+            <div class="btnSignUpContainer">
+                <button class="btnLoginAndSignUp">Sign up</button>
+            </div>
         </form>
     </div>
 
