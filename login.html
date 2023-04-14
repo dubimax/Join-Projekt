@@ -24,7 +24,7 @@
             <img src="img/logo-dunkel.png" alt="Join-Logo-Dunkel">
             <div class="notJoinUserContainer" id="notJoinUserContainer">
                 <p>Not a Join user?</p>
-                <button onclick="showSignUp()">Sign up</button>
+                <button onclick="showFrame('signUpFrame','loginFrame','notJoinUserContainer','signUpFrame')">Sign up</button>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
     </div>
 
     <div class="frameStyle d-none" id="signUpFrame">
-        <img src="img/backBtn.png" onclick="backToLogin()" class="backBtn">
+        <img src="img/backBtn.png" onclick="showFrame('loginFrame','signUpFrame','notJoinUserContainer','loginFrame')" class="backBtn">
         <h1>Sign up</h1>
         <div class="headerLine">
         </div>

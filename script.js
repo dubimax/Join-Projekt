@@ -41,7 +41,7 @@ function addUser() {
 async function addCategory(category) {
     let newCategory = document.getElementById('newCat').value;
     let color = getValueOfChosenColor();
-    categories.push({'name': newCategory, 'color': color});
+    categories.push({ 'name': newCategory, 'color': color });
     backend.setItem('categories', JSON.stringify(categories));
 }
 
@@ -150,7 +150,7 @@ function generatesOptionsFieldHTML(field1, field2, headline, properties, id, use
     `;
 }
 
-function setBackToSubTaskField(field1, headline, properties, id , source){
+function setBackToSubTaskField(field1, headline, properties, id, source) {
     return `
     <${field1}>${headline}</${field1}>
     <div class="${properties}" id="${id}">
@@ -183,7 +183,7 @@ function showDropDownItems(usedItems) {
 
 function showCategoryItems() {
     for (let i = 0; i <= categories.length; i++) {
-        if(categories.length >0){
+        if (categories.length > 0) {
             if (document.getElementById(categories[i]['name']).classList.contains('d-none')) {
                 document.getElementById(categories[i]['name']).classList.remove('d-none');
                 document.getElementById('addNewCat').classList.remove('d-none');
@@ -192,17 +192,17 @@ function showCategoryItems() {
                 document.getElementById(categories[i]).classList.add('d-none');
                 document.getElementById('addNewCat').classList.add('d-none');
             }
-        }else {
-            if(document.getElementById('addNewCat').classList.contains('d-none')){
+        } else {
+            if (document.getElementById('addNewCat').classList.contains('d-none')) {
                 document.getElementById('addNewCat').classList.remove('d-none');
 
-            }else {
+            } else {
                 document.getElementById('addNewCat').classList.add('d-none');
-    
+
             }
 
         }
-        
+
     }
 }
 
@@ -267,17 +267,17 @@ function showLink(id) {
     document.getElementById(id).classList.remove('d-none');
 }
 
-function showSignUp() {
-    document.getElementById('notJoinUserContainer').classList.add('d-none');
-    document.getElementById('loginFrame').classList.add('d-none');
-    document.getElementById('signUpFrame').classList.remove('d-none');
-}
-function backToLogin() {
-    document.getElementById('notJoinUserContainer').classList.remove('d-none');
-    document.getElementById('loginFrame').classList.remove('d-none');
-    document.getElementById('signUpFrame').classList.add('d-none');
-}
 
-function closeMsgBox() {
-    document.getElementById('msgBox').classList.add('d-none');
+function showFrame(...ids) {
+    let element1 = ids[0];
+    let element2 = ids[1];
+
+    for (let i = 0; i < ids.length; i++) {
+
+        document.getElementById(ids[i]).classList.add('d-none');
+    }
+    document.getElementById(element1).classList.remove('d-none');
+    if( element2.length > 0 ){
+        document.getElementById(element2).classList.remove('d-none');
+    }
 }
