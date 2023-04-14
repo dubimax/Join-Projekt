@@ -116,6 +116,7 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     padding: 13px 21px;
     gap: 10px;
 
@@ -130,6 +131,11 @@ h1 {
     margin-top: 25px;
     margin-bottom: 25px;
 
+
+}
+
+.inputField input {
+    border: none;
     font-weight: 400;
     font-size: 21px;
     line-height: 120%;
@@ -139,30 +145,28 @@ h1 {
     color: #D1D1D1;
 }
 
-input[type=email]:focus {
-    border: 1px solid #000000;
+.inputField input[type=text]:focus {
+    outline: none;
+    color: #000000;
+
+}
+
+.inputField input[type=email]:focus {
     color: #000000;
     outline: none;
 }
 
-input[type=password]:focus {
-    border: 1px solid #000000;
+.inputField input[type=password]:focus {
     color: #000000;
     outline: none;
-    background: url(img/dontShowPassword.png) no-repeat scroll right 21px center;
 }
 
-.nameField {
-    background: url(img/nameVector.png) no-repeat scroll right 21px center;
+.inputField img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
-.emailField {
-    background: url(img/emailVector.png) no-repeat scroll right 21px center;
-}
-
-.passwordField {
-    background: url(img/passwordVector.png) no-repeat scroll right 21px center;
-}
 
 .containerRememberAndForgot {
     display: flex;
@@ -244,18 +248,18 @@ input[type=password]:focus {
 
 }
 
-.btnSignUpContainer{
+.btnSignUpContainer {
     display: flex;
     justify-content: center;
 
 }
 
-.backBtn{
+.backBtn {
     position: absolute;
     left: 4.67%;
     right: 16.67%;
     top: 9.59%;
     bottom: 17.59%;
-    
+
     cursor: pointer;
 }

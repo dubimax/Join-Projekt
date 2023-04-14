@@ -36,7 +36,6 @@ function addUser() {
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
     backToLogin();
-    /*window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';*/
 }
 
 function getCategory(i) {
@@ -230,4 +229,8 @@ function backToLogin() {
     document.getElementById('notJoinUserContainer').classList.remove('d-none');
     document.getElementById('loginFrame').classList.remove('d-none');
     document.getElementById('signUpFrame').classList.add('d-none');
+}
+
+function closeMsgBox() {
+    document.getElementById('msgBox').classList.add('d-none');
 }
