@@ -47,12 +47,12 @@ function createNewTask(){
 function addColorChoser(){
     document.getElementById('id_categoryBox').innerHTML += `
     <div class="d-flex">
-        <a onclick="setActiveColor('8AA4FF')" id="8AA4FF" value="#8AA4FF" class="colorCircle"style="background-color:#8AA4FF;"></a>
-        <a onclick="setActiveColor('FF0000')" id="FF0000" value="#FF0000" class="colorCircle"style="background-color:#FF0000;"></a>
-        <a onclick="setActiveColor('2AD300')" id="2AD300" value="#2AD300" class="colorCircle"style="background-color:#2AD300;"></a>
-        <a onclick="setActiveColor('FF8A00')" id="FF8A00" value="#FF8A00" class="colorCircle"style="background-color:#FF8A00;"></a>
-        <a onclick="setActiveColor('E200BE')" id="E200BE" value="#E200BE" class="colorCircle"style="background-color:#E200BE;"></a>
-        <a onclick="setActiveColor('0038FF')" id="0038FF" value="#0038FF" class="colorCircle"style="background-color:#0038FF;"></a>
+        <a onclick="setActiveColor('8AA4FF')" id="8AA4FF" class="colorCircle"style="background-color:#8AA4FF;"></a>
+        <a onclick="setActiveColor('FF0000')" id="FF0000" class="colorCircle"style="background-color:#FF0000;"></a>
+        <a onclick="setActiveColor('2AD300')" id="2AD300" class="colorCircle"style="background-color:#2AD300;"></a>
+        <a onclick="setActiveColor('FF8A00')" id="FF8A00" class="colorCircle"style="background-color:#FF8A00;"></a>
+        <a onclick="setActiveColor('E200BE')" id="E200BE" class="colorCircle"style="background-color:#E200BE;"></a>
+        <a onclick="setActiveColor('0038FF')" id="0038FF" class="colorCircle"style="background-color:#0038FF;"></a>
         </div>
     `;
 }
@@ -60,9 +60,8 @@ function addColorChoser(){
 function getValueOfChosenColor(){
     for(let i = 0;i<colors.length;i++){
         let isActive = document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');
-        let setValue = document.getElementById(colors[i].slice(1)).value;
         if(isActive){
-            return setValue;
+            return colors[i];
         }
     }
    
@@ -82,8 +81,10 @@ function setActiveColor(id){
 }
 
 function clearAllInputs() {
-    clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtask');
+    clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
     clearListSubtask();
+    cancelAddNew('addNewCat');
+    cancelAddNew('addNewSubTask');
 }
 
 function clearListSubtask() {
