@@ -27,7 +27,7 @@ body {
 
 }
 
-#contacts{
+#contacts {
     display: flex;
     position: absolute;
     left: 233px;
@@ -36,6 +36,9 @@ body {
     bottom: 0;
     width: 453px;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .letter {
@@ -261,7 +264,7 @@ select option:hover {
     display: flex;
     margin-top: 20px;
     justify-content: space-around;
-   
+
 }
 
 .border-1px-solid {
@@ -345,10 +348,10 @@ select option:hover {
 }
 
 .colorCircleisActive {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.input[type=color]{
+.input[type=color] {
     border: 0;
     text-decoration: none;
     appearance: none;
@@ -396,13 +399,14 @@ select option:hover {
     margin-left: 5px;
 
 }
-.container-btns{
+
+.container-btns {
     justify-content: flex-end;
     margin-top: 25px;
     width: calc(100% - 130px);
 }
 
-.addTaskForm{
+.addTaskForm {
     width: 100%;
 }
 
@@ -411,7 +415,7 @@ select option:hover {
     line-height: 120%;
     background-color: #2A3647;
     color: #FFFFFF;
-    
+
     border-radius: 10px;
     border: none;
 
@@ -423,7 +427,7 @@ select option:hover {
     object-fit: contain;
 }
 
-.border-bottom-1px{
+.border-bottom-1px {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -431,6 +435,18 @@ select option:hover {
     list-style: upper-alpha;
     width: 360px;
     padding-top: 10px;
+}
+
+.contactSegment div {
+    width: 357px;
+    height: 79px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.contactSegment div:hover {
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 
 .contacts {

@@ -18,6 +18,7 @@ function addContactCategories() {
 }
 
 function getContactsWith(startLetter) {
+    names = [];
     for (let i = 0; i < users.length; i++) {
         if (users[i]['name'].charAt(0) == startLetter) {
             names.push(users[i]['name']);
@@ -56,4 +57,15 @@ function setVisibleIfnotEmpty() {
 
     }
 
+}
+
+function getFirstLettersOfName() {
+    for(let i = 0;i< users.length;i++){
+        let str = users[i]['name'];
+        let matches = str.match(/\b(\w)/g); // ['J','S','O','N']
+        let acronym = matches.join(''); // JSON
+    
+        console.log(acronym)
+    }
+    
 }
