@@ -1,6 +1,7 @@
 function generateContactsHTML() {
     addContactCategories();
     setVisibleIfnotEmpty();
+    generateContactDetailsHTML();
 }
 let names = [];
 
@@ -68,4 +69,19 @@ function getFirstLettersOfName() {
         console.log(acronym)
     }
     
+}
+
+
+function generateContactDetailsHTML(){
+    generateContactDetailsTitle();
+}
+
+function generateContactDetailsTitle(){
+    document.getElementById('contactDetails').innerHTML += `
+    <div class="d-flex">
+        <h2 class="contactsTitle"">Contacts</h2>
+        <div class="fillerDiv"></div>
+        <h4>Better with a team</h4>
+    </div>
+`;
 }
