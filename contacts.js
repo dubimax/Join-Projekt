@@ -10,8 +10,8 @@ function addContactCategories() {
         let ascicode = (65 + i).toString();
         let value = String.fromCharCode(ascicode);
         document.getElementById('contacts').innerHTML += `
-       <div class="contactSegmentA d-none" id="contact${value}">
-            <h3>${value}</h3>
+       <div class="contactSegment d-none" id="contact${value}">
+            <h3 class="letter">${value}</h3>
        </div>`;
         getContactsWith(value);
     }
