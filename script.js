@@ -33,7 +33,7 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
-    backToLogin();
+    showFrame('signUpConfirmFrame','signUpFrame');
 }
 
 function addCategory() {
