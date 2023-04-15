@@ -401,3 +401,16 @@ select option:hover {
     height: 24px;
     object-fit: contain;
 }
+
+.border-bottom-1px{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.contactSegmentA {
+    list-style: upper-alpha;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+}

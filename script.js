@@ -12,8 +12,6 @@ async function includeHTML() {
     }
 }
 
-
-
 /**
  *  Generates Add Task HTML Content
  */
@@ -60,8 +58,6 @@ function addOptionWithFunction(id) {
             <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
 }
 
-
-
 function setBackToOptionsField(field1, field2, headline, properties, id, usedItems) {
     return `
     <${field1}>${headline}</${field1}>
@@ -81,8 +77,6 @@ function changeToInputField(id) {
         document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
     }
 }
-
-
 
 function getUser(i) {
     return users[i]['name'];
@@ -204,11 +198,8 @@ function showCategoryItems() {
 
             } else {
                 document.getElementById('addNewCat').classList.add('d-none');
-
             }
-
         }
-
     }
 }
 
@@ -250,7 +241,6 @@ function generateOptionsHTML(id, array, nameOfArray) {
             </div>
         `;
         }
-
     }
 }
 
@@ -288,7 +278,7 @@ function showFrame(...ids) {
         document.getElementById(ids[i]).classList.add('d-none');
     }
     document.getElementById(element1).classList.remove('d-none');
-    if( element2.length > 0 ){
+    if (element2.length > 0) {
         document.getElementById(element2).classList.remove('d-none');
     }
 }
