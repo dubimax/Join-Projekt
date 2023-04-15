@@ -24,11 +24,11 @@
             <img src="img/logo-dunkel.png" alt="Join-Logo-Dunkel">
             <div class="notJoinUserContainer" id="notJoinUserContainer">
                 <p>Not a Join user?</p>
-                <button onclick="showFrame('signUpFrame','loginFrame','notJoinUserContainer','signUpFrame')">Sign up</button>
+                <button onclick="showFrame('signUpFrame','loginFrame','notJoinUserContainer')">Sign up</button>
             </div>
         </div>
 
-        <div class="frameStyle" id="loginFrame">
+        <div class="frameStyle " id="loginFrame">
             <h1>Log in</h1>
             <div class="headerLine">
             </div>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="frameStyle d-none" id="signUpFrame">
-        <img src="img/backBtn.png" onclick="showFrame('loginFrame','signUpFrame','notJoinUserContainer','loginFrame')" class="backBtn">
+        <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','signUpFrame')" class="backBtn">
         <h1>Sign up</h1>
         <div class="headerLine">
         </div>
@@ -87,6 +87,15 @@
                 <button class="btnLoginAndSignUp">Sign up</button>
             </div>
         </form>
+    </div>
+
+    <div class="frameStyle d-none" id="signUpConfirmFrame">
+        <h1>Join us!</h1>
+        <div class="headerLine">
+        </div>
+        <p>Welcome to Join!
+         <br>You have successfully registered.<br>Please click on the button and log in.</p>
+         <button class="btnLoginAndSignUp" onclick="window.location.href='login.html'">Log in</button>
     </div>
 
 </body>
