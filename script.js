@@ -38,15 +38,21 @@ function addUser() {
     backToLogin();
 }
 
-async function addCategory(category) {
+function addCategory() {
     let newCategory = document.getElementById('newCat').value;
     let color = getValueOfChosenColor();
     categories.push({ 'name': newCategory, 'color': color });
     backend.setItem('categories', JSON.stringify(categories));
+    cancelAddNew('addNewCat');
+    generateOptionsHTML('categoryBox', categories, 'categories');
+
 }
 
 function getCategory(i) {
-    return categories[i];
+    return categories[i]['name'];
+}
+function getCategoryColor(i) {
+    return categories[i]['color'];
 }
 
 function addOptionWithFunction(id) {
@@ -68,11 +74,11 @@ function setBackToOptionsField(field1, field2, headline, properties, id, usedIte
 
 function changeToInputField(id) {
     if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat');
+        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
         addColorChoser();
     }
     if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask');
+        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
     }
 }
 
@@ -113,7 +119,7 @@ function generatesInputFieldHTML(field1, field2, headline, properties, type, id,
     `;
 }
 
-function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID) {
+function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick) {
     return `
     <${field1}>${headline}</${field1}>
 
@@ -122,7 +128,7 @@ function generatesChangedInputFieldHTML(field1, field2, headline, properties, ty
 
         <a onclick="cancelAddNew('${restoreID}')"><img src="img/cancelIcon.png"></a>
         <div class="border-1px-solid width0-height31px"></div>
-        <a onclick="generateCheckboxItem()"><img src="img/checkIcon.png"></a>
+        <a onclick="${atClick}"><img src="img/checkIcon.png"></a>
     </div>  
     `;
 }
@@ -182,14 +188,14 @@ function showDropDownItems(usedItems) {
 }
 
 function showCategoryItems() {
-    for (let i = 0; i <= categories.length; i++) {
+    for (let i = 0; i < categories.length; i++) {
         if (categories.length > 0) {
             if (document.getElementById(categories[i]['name']).classList.contains('d-none')) {
                 document.getElementById(categories[i]['name']).classList.remove('d-none');
                 document.getElementById('addNewCat').classList.remove('d-none');
             }
             else {
-                document.getElementById(categories[i]).classList.add('d-none');
+                document.getElementById(categories[i]['name']).classList.add('d-none');
                 document.getElementById('addNewCat').classList.add('d-none');
             }
         } else {
@@ -231,12 +237,17 @@ function generateOptionsHTML(id, array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
         if (nameOfArray == 'users') {
             document.getElementById('assignedTo').innerHTML += `
-            <div class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">${getUser(i)}</div>
+            <div class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
+                ${getUser(i)} 
+            </div>
         `;
         }
         if (nameOfArray == 'categories') {
             document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >${getCategory(i)}</div>
+            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
+                ${getCategory(i)}
+                <div class="colorCircle" style="background:${getCategoryColor(i)}"
+            </div>
         `;
         }
 

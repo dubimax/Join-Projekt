@@ -327,6 +327,12 @@ select option:hover {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
 }
 
+.input[type=color]{
+    border: 0;
+    text-decoration: none;
+    appearance: none;
+}
+
 #addTask {
     display: flex;
     margin-top: 125px;
