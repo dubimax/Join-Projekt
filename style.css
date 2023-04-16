@@ -27,6 +27,223 @@ body {
 
 }
 
+#contacts {
+    display: flex;
+    position: absolute;
+    left: 233px;
+    top: 71px;
+    background-color: #FFFFFF;
+    bottom: 0;
+    width: 453px;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.fillerDiv {
+    width: 0px;
+    height: 59px;
+    border: 3px solid #29ABE2;
+    margin: 0 50px;
+    align-self: center;
+}
+
+h4 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 120%;
+    align-self: center;
+    color: #2A3647;
+}
+
+#contactName {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 47px;
+    line-height: 120%;
+}
+
+.contactHeadContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.contactInformationContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.contactInformationTitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    gap: 59px;
+    width: 392.85px;
+    height: 74px;
+}
+
+.contactInformationTitle div {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #2A3647;
+}
+
+.contactInformationTitle div span {
+    align-self: flex-end;
+}
+
+.contactInformationTitle div img {
+
+    object-fit: contain;
+}
+
+.contactInformationContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 22px;
+    width: 146px;
+    height: 128px;
+    margin-top: 25px;
+}
+
+.colorCircleMedium {
+    width: 42px;
+    height: 42px;
+    background: #9327FF;
+    border: 1px solid #FFFFFF;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.contactInformationContentTitles {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contactInformationContentLink {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #007CEE;
+}
+
+.contactSelectName {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contactSelectMail {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #007CEE;
+}
+
+.contactSelect {
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 10px;
+    width: 357px;
+    height: 79px;
+    padding: 15px 25px;
+    gap: 35px;
+}
+
+.contactInformationContentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 15px;
+    width: 124px;
+    height: 53px;
+}
+
+.add-task-link {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #29ABE2;
+}
+
+.addTaskContacts {
+    object-fit: contain;
+    width: 15px;
+    height: 15px;
+}
+
+.contactHead {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.contactsTitle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+}
+
+#contactDetails {
+    position: absolute;
+    right: 0;
+    top: 89px;
+    bottom: 0;
+    left: 687px;
+}
+
+.letter {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    width: 282px;
+    height: 40px;
+}
+
+.contactListFillerDiv {
+    width: 323px;
+    height: 0px;
+    border: 1px solid #D1D1D1;
+    border-radius: 3px;
+    align-self: center;
+}
+
 .inputTextStd::-webkit-calendar-picker-indicator {
     background: url('img/calendarIcon.png') no-repeat;
     opacity: 1;
@@ -206,8 +423,12 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 36px 20px 348px;
     gap: 34px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    z-index: 7;
+    height: 89px;
+    padding-left: 340px;
+    padding-right: 20px;
 }
 
 .navigation-top a {
@@ -240,7 +461,7 @@ select option:hover {
     display: flex;
     margin-top: 20px;
     justify-content: space-around;
-   
+
 }
 
 .border-1px-solid {
@@ -324,10 +545,26 @@ select option:hover {
 }
 
 .colorCircleisActive {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.input[type=color]{
+.colorCircle-big {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    border: 2px solid #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 47px;
+    line-height: 120%;
+    color: #FFFFFF;
+    margin-right: 30px;
+}
+
+.input[type=color] {
     border: 0;
     text-decoration: none;
     appearance: none;
@@ -375,13 +612,14 @@ select option:hover {
     margin-left: 5px;
 
 }
-.container-btns{
+
+.container-btns {
     justify-content: flex-end;
     margin-top: 25px;
     width: calc(100% - 130px);
 }
 
-.addTaskForm{
+.addTaskForm {
     width: 100%;
 }
 
@@ -390,7 +628,7 @@ select option:hover {
     line-height: 120%;
     background-color: #2A3647;
     color: #FFFFFF;
-    
+
     border-radius: 10px;
     border: none;
 
@@ -400,4 +638,43 @@ select option:hover {
     width: 24px;
     height: 24px;
     object-fit: contain;
+}
+
+.border-bottom-1px {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.contactSegment {
+    list-style: upper-alpha;
+    width: 360px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contactSegment div {
+    display: flex;
+    align-items: center;
+
+}
+
+.contactSelect:hover {
+    background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+}
+
+.contactsAttributeBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts {
+    display: flex;
+    position: absolute;
+    left: 233px;
+    top: 65px;
+    background-color: #FFFFFF;
+    bottom: 0;
+    width: 453px;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
 }
