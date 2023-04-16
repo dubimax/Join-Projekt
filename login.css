@@ -159,12 +159,16 @@ h1 {
 .inputField input[type=password]:focus {
     color: #000000;
     outline: none;
+
 }
 
 .inputField img {
     width: 20px;
     height: 20px;
     object-fit: contain;
+}
+#userPasswordIcon{
+    cursor: pointer;
 }
 
 
