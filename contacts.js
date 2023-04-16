@@ -22,7 +22,7 @@ function getContactsWith(startLetter) {
     names = [];
     for (let i = 0; i < users.length; i++) {
         if (users[i]['name'].charAt(0) == startLetter) {
-            names.push(users[i]['name']);
+            names.push(users[i]);
             generateAlphaContainerFor(users[i]['name'].charAt(0));
 
         }
@@ -30,15 +30,19 @@ function getContactsWith(startLetter) {
     }
 }
 
-function getContactWith(i) {
-    return names[i];
+function getContactWith(i, value) {
+    return names[i][value];
 }
 
 function generateAlphaContainerFor(letter) {
     for (let i = 0; i < names.length; i++) {
+        let contactName = getContactWith(i, 'name');
+        let userMail = getContactWith(i, 'email');
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
-        <div id="${getContactWith(i, letter)}">
-            ${getContactWith(i, letter)}
+        <div class="contactSelect" id="${contactName}">
+            <span class="contactSelectName"> ${contactName}</span>
+            <span class="contactSelectMail">${userMail}</span>
+
         </div>
         `;
     }
