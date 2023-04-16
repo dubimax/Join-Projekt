@@ -65,11 +65,91 @@ h4 {
     line-height: 120%;
 }
 
-.contactHeadContainer{
+.contactHeadContainer {
     display: flex;
     align-items: center;
     margin-left: 100px;
     margin-top: 50px;
+}
+
+.contactInformationContaier {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.contactInformationTitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    gap: 59px;
+    width: 392.85px;
+    height: 74px;
+}
+
+.contactInformationTitle div {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #2A3647;
+}
+
+.contactInformationTitle div span {
+    align-self: flex-end;
+}
+
+.contactInformationTitle div img {
+
+    object-fit: contain;
+}
+
+.contactInformationContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 22px;
+    width: 146px;
+    height: 128px;
+    margin-top: 25px;
+}
+
+.contactInformationContentTitles {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contactInformationContentLink {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #007CEE;
+}
+
+.contactInformationContentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 15px;
+    width: 124px;
+    height: 53px;
 }
 
 .add-task-link {

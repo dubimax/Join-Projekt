@@ -106,22 +106,24 @@ function generateContactHead(){
 
 function generateContactBody(){
     document.getElementById('contactDetails').innerHTML += `
-    <div>
-        <div>
+    <div class="contactInformationContaier">
+        <div class="contactInformationTitle">
             <span>Contact Information</span>
             <div>
-                <img src="">
+                <img src="./img/editContactPen.png">
                 <span>Edit Contact</span>
             </div>
         </div>
-        <div>
-            <h5>Email</h5>
-            <a>email@email.de</a>
-        </div>
-        <div>
-        <h5>Phone</h5>
-        <a>+49123456789</a>
-    </div>
+        <div class="contactInformationContent">
+            <div class="contactInformationContentContainer">
+                <h5 class="contactInformationContentTitles">Email</h5>
+                <a class="contactInformationContentLink">email@email.de</a>
+            </div>
+            <div class="contactInformationContentContainer">
+                <h5 class="contactInformationContentTitles">Phone</h5>
+                <a class="contactInformationContentLink">+49123456789</a>
+            </div>
+         </div>
     </div>
     `;
 }
