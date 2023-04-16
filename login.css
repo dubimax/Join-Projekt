@@ -167,7 +167,8 @@ h1 {
     height: 20px;
     object-fit: contain;
 }
-#userPasswordIcon{
+
+#userPasswordIcon {
     cursor: pointer;
 }
 
@@ -181,12 +182,17 @@ h1 {
     align-items: center;
 }
 
-.containerRememberAndForgot a {
+.containerRememberAndForgot button {
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
 
     color: #29ABE2;
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
 }
 
 .containerCbRememberMe {
@@ -274,4 +280,46 @@ p {
 
     font-size: 22px;
     line-height: 120%;
+}
+
+#forgotMyPasswordFrame {
+
+    width: 826px;
+    height: 462px;
+}
+
+.headerForgotMyPassword {
+    width: 626px;
+    height: 73px;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+
+    text-align: center;
+
+    color: #000000;
+}
+
+.btnSendMeMail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+    gap: 10px;
+
+    width: 264px;
+    height: 51px;
+
+    border: 1px solid #2A3647;
+    background: #2A3647;
+    border-radius: 8px ;
+
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+
+    color: #FFFFFF;
+    margin: auto;
+    cursor: pointer;
 }
