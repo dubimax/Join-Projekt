@@ -75,6 +75,7 @@ function getFirstLettersOfName() {
 function generateContactDetailsHTML(){
     generateContactDetailsTitle();
     generateContactHead();
+    generateContactBody();
 }
 
 function generateContactDetailsTitle(){
@@ -89,16 +90,38 @@ function generateContactDetailsTitle(){
 
 function generateContactHead(){
     document.getElementById('contactDetails').innerHTML += `
-    <div class="d-flex">
-        <img>
+    <div class="contactHeadContainer">
+        <div class="colorCircle-big" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
-            <h5>Name</h5>
+            <h5 id="contactName">Name</h5>
             <div class="d-flex">
                 <img src="./img/plusContacts.png" class="addTaskContacts">
                 <span class="add-task-link">Add Task</span>
             </div>
         </div>
         
+    </div>
+    `;
+}
+
+function generateContactBody(){
+    document.getElementById('contactDetails').innerHTML += `
+    <div>
+        <div>
+            <span>Contact Information</span>
+            <div>
+                <img src="">
+                <span>Edit Contact</span>
+            </div>
+        </div>
+        <div>
+            <h5>Email</h5>
+            <a>email@email.de</a>
+        </div>
+        <div>
+        <h5>Phone</h5>
+        <a>+49123456789</a>
+    </div>
     </div>
     `;
 }
