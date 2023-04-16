@@ -13,6 +13,7 @@ function addContactCategories() {
         document.getElementById('contacts').innerHTML += `
        <div class="contactSegment d-none" id="contact${value}">
             <h3 class="letter">${value}</h3>
+            <div class="contactListFillerDiv"></div>
        </div>`;
         getContactsWith(value);
     }
@@ -57,7 +58,7 @@ function setVisibleIfnotEmpty() {
         let ascicode = (65 + j).toString();
         let value = String.fromCharCode(ascicode);
         let child = document.getElementById('contact' + value).children;
-        if (child[1]) {
+        if (child[2]) {
             document.getElementById('contact' + value).classList.remove('d-none');
 
         }
