@@ -18,6 +18,32 @@
     <div class="content">
         <div id="contacts" class="details"></div>
         <div id="contactDetails"></div>
+        <div id="createNewUserAtContacts">
+            <div class="createNewUserAtContactsContainer">
+                <div class="createNewUserAtContacts-left">
+                    <div>
+                       <img src="" alt="">
+                       <h3></h3>
+                       <h5></h5>
+                    </div>
+                </div>
+
+                <div class="createNewUserAtContacts-right">
+                    <form onsubmit="createNewContact()">
+                        <img src="" alt="">
+                        <div>
+                            <input type="text" required placeholder="Name"   id="createNewContactName">
+                            <input type="email" required placeholder="Email" id="createNewContactEmail">
+                            <input type="phone" required placeholder="Phone" id="createNewContactPhone">
+                            <div>
+                                <a href="">Cancel</a>
+                                <button>Create Contact</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

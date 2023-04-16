@@ -89,8 +89,19 @@ function generateContactDetailsTitle(){
         <div class="fillerDiv"></div>
         <h4>Better with a team</h4>
     </div>
+    <div class="addNewContactButton">New Contact</div>
 `;
 }
+
+function createNewContact(){
+    let userName = document.getElementById('createNewContactName').value;
+    let userEmail = document.getElementById('createNewContactEmail').value;
+    let userPhone = document.getElementById('createNewContactPhone').value;
+    users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone });
+    backend.setItem('users', JSON.stringify(users));
+
+}
+
 
 function generateContactHead(){
     document.getElementById('contactDetails').innerHTML += `
