@@ -22,13 +22,13 @@
     <div class="loginWindow" id="loginWindow">
         <div class="loginHeaderContainer ">
             <img src="img/logo-dunkel.png" alt="Join-Logo-Dunkel">
-            <div class="notJoinUserContainer" id="notJoinUserContainer">
+            <div class="notJoinUserContainer " id="notJoinUserContainer">
                 <p>Not a Join user?</p>
                 <button onclick="showFrame('signUpFrame','loginFrame','notJoinUserContainer')">Sign up</button>
             </div>
         </div>
 
-        <div class="frameStyle " id="loginFrame">
+        <div class="frameStyle" id="loginFrame">
             <h1>Log in</h1>
             <div class="headerLine">
             </div>
@@ -37,12 +37,14 @@
                     <input id="userMail" type="email" placeholder="Email" autocomplete="off" required>
                     <img src="img/emailVector.png" alt="email symbol">
                 </div>
-                
+
                 <div class="inputField">
                     <input id="userPassword" type="password" placeholder="Password" autocomplete="off" required>
                     <img id="user_password_icon" src="img/passwordVector.png" alt="password symbol">
-                    <img id="user_password_hidden" onclick="makePasswordVisible()" src="img/showPassword.png" alt="password symbol" class="d-none">
-                    <img id="user_password_visible" onclick="makePasswordUnvisible()" src="img/dontShowPassword.png" alt="password symbol" class="d-none">
+                    <img id="user_password_hidden" onclick="makePasswordVisible()" src="img/showPassword.png"
+                        alt="password symbol" class="d-none">
+                    <img id="user_password_visible" onclick="makePasswordUnvisible()" src="img/dontShowPassword.png"
+                        alt="password symbol" class="d-none">
                 </div>
 
                 <div class="containerRememberAndForgot">
@@ -50,7 +52,8 @@
                         <input type="checkbox">
                         <p>Remember me</p>
                     </div>
-                    <a href="#">Forgot my password</a>
+                    <button onclick="showFrame('forgotMyPasswordFrame','notJoinUserContainer','loginFrame')">Forgot my
+                        password</button>
                 </div>
 
                 <div class="btnContainer">
@@ -62,7 +65,8 @@
     </div>
 
     <div class="frameStyle d-none" id="signUpFrame">
-        <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','signUpFrame')" class="backBtn">
+        <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','signUpFrame')"
+            class="backBtn">
         <h1>Sign up</h1>
         <div class="headerLine">
         </div>
@@ -71,17 +75,15 @@
                 <input id="name" type="text" placeholder="Name" autocomplete="off" required>
                 <img src="img/nameVector.png" alt="user symbol">
             </div>
-            
+
             <div class="inputField">
                 <input id="userMail" type="email" placeholder="Email" autocomplete="off" required>
                 <img src="img/emailVector.png" alt="email symbol">
             </div>
-            
+
             <div class="inputField">
                 <input id="userPassword" type="password" placeholder="Password" autocomplete="off" required>
-                <img id="user_password_icon" src="img/passwordVector.png" alt="password symbol">
-                <img id="user_password_hidden" onclick="makePasswordVisible()" src="img/showPassword.png" alt="password symbol" class="d-none">
-                <img id="user_password_visible" onclick="makePasswordUnvisible()" src="img/dontShowPassword.png" alt="password symbol" class="d-none">
+                <img id="userPasswordIcon" onclick="showPassword()" src="img/passwordVector.png">
             </div>
             <div class="btnSignUpContainer">
                 <button class="btnLoginAndSignUp">Sign up</button>
@@ -94,9 +96,27 @@
         <div class="headerLine">
         </div>
         <p>Welcome to Join!
-         <br>You have successfully registered.<br>Please click on the button and log in.</p>
-         <button class="btnLoginAndSignUp" onclick="window.location.href='login.html'">Log in</button>
+            <br>You have successfully registered.<br>Please click on the button and log in.
+        </p>
+        <button class="btnLoginAndSignUp" onclick="window.location.href='login.html'">Log in</button>
     </div>
+
+    <div class="frameStyle d-none" id="forgotMyPasswordFrame">
+        <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','forgotMyPasswordFrame')"
+            class="backBtn">
+        <h1 class="headerForgotMyPassword">I forgot my password</h1>
+        <div class="headerLine">
+        </div>
+        <p>Don't worry! We will send you an email with the instructions to reset your password.</p>
+        <form action="https://www.gruppe-527.developerakademie.net/send_mail.php" method="POST">
+            <div class="inputField inputEmailForgotPassword">
+                <input id="userMail" type="email" placeholder="Email" autocomplete="off" required>
+                <img src="img/emailVector.png" alt="email symbol">
+            </div>
+            <button class="btnSendMeMail">Send me the mail</button>
+        </form>
+    </div>
+
 
 </body>
 
