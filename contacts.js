@@ -40,9 +40,11 @@ function generateAlphaContainerFor(letter) {
         let userMail = getContactWith(i, 'email');
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
         <div onclick="setContactDetails('${contactName}','${userMail}')" class="contactSelect" id="${contactName}">
-            <span class="contactSelectName"> ${contactName}</span>
-            <span class="contactSelectMail">${userMail}</span>
-
+            <div class="colorCircleMedium" id="colorCircleMedium">${getFirstLettersOfName(contactName)}</div>
+            <div class="contactsAttributeBox">
+                <span class="contactSelectName"> ${contactName}</span>
+                <span class="contactSelectMail">${userMail}</span>
+            </div>
         </div>
         `;
     }
@@ -65,14 +67,11 @@ function setVisibleIfnotEmpty() {
 }
 
 function getFirstLettersOfName(username) {
-    for(let i = 0;i< users.length;i++){
         let str = username;
-        let matches = str.match(/\b(\w)/g); // ['J','S','O','N']
-        let acronym = matches.join(''); // JSON
+        let matches = str.match(/\b(\w)/g); 
+        let acronym = matches.join(''); 
     
-        return acronym;
-    }
-    
+        return acronym;    
 }
 
 

@@ -122,6 +122,19 @@ h4 {
     margin-top: 25px;
 }
 
+.colorCircleMedium {
+    width: 42px;
+    height: 42px;
+    background: #9327FF;
+    border: 1px solid #FFFFFF;
+    border-radius: 100%;
+    margin-right: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
 .contactInformationContentTitles {
     font-style: normal;
     font-weight: 700;
@@ -164,8 +177,10 @@ h4 {
 
 .contactSelect {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    border-radius: 10px;
+    width: 357px;
+    height: 79px;
 }
 
 .contactInformationContentContainer {
@@ -626,15 +641,18 @@ select option:hover {
 }
 
 .contactSegment div {
-    width: 357px;
-    height: 79px;
     display: flex;
     align-items: center;
-    border-radius: 10px;
+
 }
 
-.contactSegment div:hover {
+.contactSelect:hover {
     background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+}
+
+.contactsAttributeBox {
+    display: flex;
+    flex-direction: column;
 }
 
 .contacts {
