@@ -72,7 +72,7 @@ h4 {
     margin-top: 50px;
 }
 
-.contactInformationContaier {
+.contactInformationContainer {
     display: flex;
     flex-direction: column;
     margin-top: 50px;
@@ -195,7 +195,7 @@ h4 {
 .contactHead {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .contactsTitle {

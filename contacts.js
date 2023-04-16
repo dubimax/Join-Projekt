@@ -39,7 +39,7 @@ function generateAlphaContainerFor(letter) {
         let contactName = getContactWith(i, 'name');
         let userMail = getContactWith(i, 'email');
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
-        <div class="contactSelect" id="${contactName}">
+        <div onclick="setContactDetails('${contactName}','${userMail}')" class="contactSelect" id="${contactName}">
             <span class="contactSelectName"> ${contactName}</span>
             <span class="contactSelectMail">${userMail}</span>
 
@@ -64,13 +64,13 @@ function setVisibleIfnotEmpty() {
 
 }
 
-function getFirstLettersOfName() {
+function getFirstLettersOfName(username) {
     for(let i = 0;i< users.length;i++){
-        let str = users[i]['name'];
+        let str = username;
         let matches = str.match(/\b(\w)/g); // ['J','S','O','N']
         let acronym = matches.join(''); // JSON
     
-        console.log(acronym)
+        return acronym;
     }
     
 }
@@ -94,8 +94,8 @@ function generateContactDetailsTitle(){
 
 function generateContactHead(){
     document.getElementById('contactDetails').innerHTML += `
-    <div class="contactHeadContainer">
-        <div class="colorCircle-big" style="background-color:#8AA4FF;">AB</div>
+    <div class="contactHeadContainer d-none" id="contactHeadContainer">
+        <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
             <h5 id="contactName">Name</h5>
             <div class="d-flex">
@@ -110,7 +110,7 @@ function generateContactHead(){
 
 function generateContactBody(){
     document.getElementById('contactDetails').innerHTML += `
-    <div class="contactInformationContaier">
+    <div class="contactInformationContainer d-none" id="contactInformationContainer">
         <div class="contactInformationTitle">
             <span>Contact Information</span>
             <div>
@@ -121,13 +121,22 @@ function generateContactBody(){
         <div class="contactInformationContent">
             <div class="contactInformationContentContainer">
                 <h5 class="contactInformationContentTitles">Email</h5>
-                <a class="contactInformationContentLink">email@email.de</a>
+                <a class="contactInformationContentLink" id="contactDetailsEmail">email@email.de</a>
             </div>
             <div class="contactInformationContentContainer">
                 <h5 class="contactInformationContentTitles">Phone</h5>
-                <a class="contactInformationContentLink">+49123456789</a>
+                <a class="contactInformationContentLink" id="contactDetailsPhone">+49123456789</a>
             </div>
          </div>
     </div>
     `;
+}
+
+function setContactDetails(userName, userMail){
+    document.getElementById('contactName').innerHTML = userName;
+    document.getElementById('contactDetailsLogo').innerHTML = getFirstLettersOfName(userName);
+    document.getElementById('contactDetailsEmail').innerHTML = userMail;
+    document.getElementById('contactDetailsPhone').innerHTML = 'Noch fehlend';
+    document.getElementById('contactHeadContainer').classList.remove('d-none');
+    document.getElementById('contactInformationContainer').classList.remove('d-none');
 }
