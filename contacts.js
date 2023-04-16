@@ -24,7 +24,7 @@ function getContactsWith(startLetter) {
     for (let i = 0; i < users.length; i++) {
         if (users[i]['name'].charAt(0) == startLetter) {
             names.push(users[i]);
-            generateAlphaContainerFor(users[i]['name'].charAt(0));
+            generateAlphaContainerFor(`${users[i]['name'].charAt(0)}`);
 
         }
 
@@ -32,11 +32,13 @@ function getContactsWith(startLetter) {
 }
 
 function getContactWith(i, value) {
+        
+    
     return names[i][value];
 }
 
 function generateAlphaContainerFor(letter) {
-    for (let i = 0; i < names.length; i++) {
+    for(let i = 0; i < names.length;i++){
         let contactName = getContactWith(i, 'name');
         let userMail = getContactWith(i, 'email');
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
@@ -48,7 +50,12 @@ function generateAlphaContainerFor(letter) {
             </div>
         </div>
         `;
+        names.splice(0);
+
     }
+
+       
+    
 
 }
 
@@ -68,32 +75,40 @@ function setVisibleIfnotEmpty() {
 }
 
 function getFirstLettersOfName(username) {
-        let str = username;
-        let matches = str.match(/\b(\w)/g); 
-        let acronym = matches.join(''); 
-    
-        return acronym;    
+    let str = username;
+    let matches = str.match(/\b(\w)/g);
+    let acronym = matches.join('');
+
+    return acronym;
 }
 
 
-function generateContactDetailsHTML(){
+function generateContactDetailsHTML() {
     generateContactDetailsTitle();
     generateContactHead();
     generateContactBody();
 }
 
-function generateContactDetailsTitle(){
+function generateContactDetailsTitle() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="d-flex">
         <h2 class="contactsTitle"">Contacts</h2>
         <div class="fillerDiv"></div>
         <h4>Better with a team</h4>
     </div>
-    <div class="addNewContactButton">New Contact</div>
+    <div onclick="showAddNewContact()" class="addNewContactButton">New Contact</div>
 `;
 }
 
-function createNewContact(){
+function showAddNewContact() {
+    document.getElementById('createNewUserAtContacts').classList.remove('d-none');
+}
+
+function hideAddNewContact() {
+    document.getElementById('createNewUserAtContacts').classList.add('d-none');
+}
+
+function createNewContact() {
     let userName = document.getElementById('createNewContactName').value;
     let userEmail = document.getElementById('createNewContactEmail').value;
     let userPhone = document.getElementById('createNewContactPhone').value;
@@ -103,7 +118,7 @@ function createNewContact(){
 }
 
 
-function generateContactHead(){
+function generateContactHead() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="contactHeadContainer d-none" id="contactHeadContainer">
         <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
@@ -119,7 +134,7 @@ function generateContactHead(){
     `;
 }
 
-function generateContactBody(){
+function generateContactBody() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="contactInformationContainer d-none" id="contactInformationContainer">
         <div class="contactInformationTitle">
@@ -143,7 +158,7 @@ function generateContactBody(){
     `;
 }
 
-function setContactDetails(userName, userMail){
+function setContactDetails(userName, userMail) {
     document.getElementById('contactName').innerHTML = userName;
     document.getElementById('contactDetailsLogo').innerHTML = getFirstLettersOfName(userName);
     document.getElementById('contactDetailsEmail').innerHTML = userMail;
