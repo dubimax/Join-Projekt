@@ -88,7 +88,7 @@ function generateContactDetailsHTML() {
 }
 
 function generateContactDetailsTitle() {
-    document.getElementById('contactDetails').innerHTML += `
+    document.getElementById('contactDetails').innerHTML = `
     <div class="d-flex">
         <h2 class="contactsTitle"">Contacts</h2>
         <div class="fillerDiv"></div>
