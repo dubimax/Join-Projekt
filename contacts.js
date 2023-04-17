@@ -7,6 +7,7 @@ let names = [];
 
 
 function addContactCategories() {
+    document.getElementById('contacts').innerHTML = '';
     for (let i = 0; i < 26; i++) {
         let ascicode = (65 + i).toString();
         let value = String.fromCharCode(ascicode);
@@ -32,13 +33,14 @@ function getContactsWith(startLetter) {
 }
 
 function getContactWith(i, value) {
-        
-    
+
+
     return names[i][value];
 }
 
 function generateAlphaContainerFor(letter) {
-    for(let i = 0; i < names.length;i++){
+
+    for (let i = 0; i < names.length; i++) {
         let contactName = getContactWith(i, 'name');
         let userMail = getContactWith(i, 'email');
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
@@ -53,10 +55,6 @@ function generateAlphaContainerFor(letter) {
         names.splice(0);
 
     }
-
-       
-    
-
 }
 
 function setVisibleIfnotEmpty() {
@@ -90,7 +88,7 @@ function generateContactDetailsHTML() {
 }
 
 function generateContactDetailsTitle() {
-    document.getElementById('contactDetails').innerHTML += `
+    document.getElementById('contactDetails').innerHTML = `
     <div class="d-flex">
         <h2 class="contactsTitle"">Contacts</h2>
         <div class="fillerDiv"></div>
@@ -108,6 +106,22 @@ function hideAddNewContact() {
     document.getElementById('createNewUserAtContacts').classList.add('d-none');
 }
 
+function hideEditContact() {
+    document.getElementById('editUserAtContacts').classList.add('d-none');
+
+}
+function showEditContact() {
+    let oldName = document.getElementById('contactName').innerHTML;
+    let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
+    let oldPhone = document.getElementById('contactDetailsPhone').innerHTML;
+
+    document.getElementById('editContactName').value = oldName;
+    document.getElementById('editContactEmail').value = oldEmail;
+    document.getElementById('editContactPhone').value = oldPhone;
+
+    document.getElementById('editUserAtContacts').classList.remove('d-none');
+}
+
 function createNewContact() {
     let userName = document.getElementById('createNewContactName').value;
     let userEmail = document.getElementById('createNewContactEmail').value;
@@ -115,6 +129,21 @@ function createNewContact() {
     users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone });
     backend.setItem('users', JSON.stringify(users));
 
+}
+
+function editContact() {
+    let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
+
+    let userName = document.getElementById('editContactName').value;
+    let userEmail = document.getElementById('editContactEmail').value;
+    let userPhone = document.getElementById('editContactPhone').value;
+    let oldUser = users.findIndex(user => user.email == oldEmail);
+    users[oldUser]['name'] = userName;
+    users[oldUser]['email'] = userEmail;
+    users[oldUser]['phone'] = userPhone;
+    backend.setItem('users', JSON.stringify(users));
+    generateContactsHTML();
+    hideEditContact();
 }
 
 
@@ -139,7 +168,7 @@ function generateContactBody() {
     <div class="contactInformationContainer d-none" id="contactInformationContainer">
         <div class="contactInformationTitle">
             <span>Contact Information</span>
-            <div>
+            <div onclick="showEditContact()">
                 <img src="./img/editContactPen.png">
                 <span>Edit Contact</span>
             </div>

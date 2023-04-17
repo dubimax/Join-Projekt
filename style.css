@@ -187,7 +187,8 @@ h4 {
     margin-top: 15px;
 }
 
-#createNewUserAtContacts {
+#createNewUserAtContacts,
+#editUserAtContacts {
     position: fixed;
     top: 200px;
     left: 450px;
@@ -199,7 +200,42 @@ h4 {
     border-radius: 30px;
 }
 
-.createNewUserAtContacts-left {
+#createNewContactName,
+#createNewContactEmail,
+#createNewContactPhone,
+#editContactName,
+#editContactEmail,
+#editContactPhone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    border: none;
+    width: 380px;
+    height: 25px;
+    outline: none;
+}
+
+.createNewContactNameInput,
+.editContactNameInput {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 13px 21px;
+    gap: 10px;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    position: relative;
+
+}
+
+.createNewUserAtContacts-left,
+.editUserAtContacts-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -210,10 +246,105 @@ h4 {
     width: 463px;
     height: 594px;
     background: #2A3647;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
 }
 
-.createNewUserAtContactsContainer{
+.fillDiv-w90 {
+    width: 90px;
+    border: 3px solid #29ABE2;
+}
+
+.profileDummyInside {
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    left: 29px;
+    top: 29px;
+}
+
+.profileDummy {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    left: 0px;
+    top: 0px;
+    background: #D1D1D1;
+    border-radius: 100%;
+}
+
+.addNewContactInputs,
+.editContactInputs {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 29px;
+    position: absolute;
+    width: 422px;
+    height: 271px;
+    left: 737px;
+    top: 129px;
+}
+
+.closeIconAtContacts {
+    position: absolute;
+    height: 21.65px;
+    left: 1148.82px;
+    top: 49.11px;
+    object-fit: contain;
+}
+
+.addNewContactProfileImgContainer,
+.editContactProfileImgContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    isolation: isolate;
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    left: 533px;
+    top: 204px;
+    background: #FFFFFF;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 70px;
+}
+
+.left-side-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.createNewUserAtContactsContainer,
+.editUserAtContactsContainer {
+    display: flex;
+    border-radius: 30px;
+
+}
+
+.addNewContactTitle,
+.editContact {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    color: #FFFFFF;
+}
+
+.addNewContactSubTitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 120%;
+    color: #FFFFFF;
 }
 
 .addNewContactButton {
@@ -435,8 +566,6 @@ a {
 .flex-column {
     flex-direction: column;
 }
-
-
 
 .detail div label {
     gap: 10px;
@@ -708,6 +837,45 @@ select option:hover {
 
 }
 
+.addNewContactsButtonContainer,
+.editContactsButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 25px;
+    width: 369px;
+    height: 61px;
+}
+
+.addNewContactCreateButton,
+.editContactButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    width: 208px;
+    height: 61px;
+    background: #2A3647;
+    border-radius: 10px;
+}
+
+.addNewContactCancelButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    width: 136px;
+    height: 61px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+}
+
 .contactSelect:hover {
     background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
@@ -727,4 +895,3 @@ select option:hover {
     width: 453px;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
 }
-
