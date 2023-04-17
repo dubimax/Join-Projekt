@@ -125,6 +125,17 @@ function createNewContact() {
 
 }
 
+function editContact(oldEmail) {
+    let userName = document.getElementById('editContactName').value;
+    let userEmail = document.getElementById('editContactEmail').value;
+    let userPhone = document.getElementById('editContactPhone').value;
+    let oldUser = users.find(user => user.Email == oldEmail);
+    console.log(oldUser);
+    // users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone });
+    // backend.setItem('users', JSON.stringify(users));
+
+}
+
 
 function generateContactHead() {
     document.getElementById('contactDetails').innerHTML += `
