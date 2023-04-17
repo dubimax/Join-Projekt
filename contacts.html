@@ -19,6 +19,8 @@
         <div id="contacts" class="details"></div>
         <div id="contactDetails"></div>
         <div id="createNewUserAtContacts" class="d-none">
+            <img onclick="hideAddNewContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
+
             <div class="createNewUserAtContactsContainer">
                 <div class="createNewUserAtContacts-left">
                     <div class="left-side-Contacts">
@@ -62,9 +64,59 @@
                         </div>
                     </form>
                 </div>
+               
             </div>
         </div>
+        <div id="editUserAtContacts" class="d-none">
+            <img onclick="hideEditContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
+            <div class="editUserAtContactsContainer">
+                <div class="editUserAtContacts-left">
+                    <div class="left-side-Contacts">
+                        <img src="img/logo-nav.png" alt="">
+                        <div>
+                            <h3 class="addNewContactTitle">Add Contact</h3>
+                            <div class="fillDiv-w90"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editUserAtContacts-right">
+                    <form onsubmit="editNewContact(); return false;">
+                        <div class="editContactProfileImgContainer">
+                            <img class="profileDummy" src="img/profileDummy.png">
+                            <img class="profileDummyInside" src="img/profileDummyInside.png">
+                        </div>
+                        <div class="editContactInputs">
+                            <div class="editContactNameInput">
+                                <input type="text" required placeholder="Name"
+                                    pattern="/[A-Z] + [a-z]{*,} + \s[A-Z] + [a-z]{*,}/" id="editContactName">
+                                <img class="editContactNameImg" src="img/miniProfile.png">
+                            </div>
+                            <div class="editContactNameInput">
+                
+                                <input type="email" required placeholder="Email" id="editContactEmail">
+                                <img class="editContactNameImg" src="img/miniProfile.png">
+                
+                            </div>
+                            <div class="editContactNameInput">
+                
+                                <input type="phone" required placeholder="Phone" id="editContactPhone">
+                                <img class="editContactNameImg" src="img/miniProfile.png">
+                
+                            </div>
+                            <div class="editButtonContainer">
+                                <button class="editContactButton">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+
     </div>
 </body>
 
 </html>
+
+

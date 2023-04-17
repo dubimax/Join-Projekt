@@ -187,7 +187,8 @@ h4 {
     margin-top: 15px;
 }
 
-#createNewUserAtContacts {
+#createNewUserAtContacts,
+#editUserAtContacts {
     position: fixed;
     top: 200px;
     left: 450px;
@@ -201,7 +202,10 @@ h4 {
 
 #createNewContactName,
 #createNewContactEmail,
-#createNewContactPhone {
+#createNewContactPhone,
+#editContactName,
+#editContactEmail,
+#editContactPhone {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -214,7 +218,8 @@ h4 {
     outline: none;
 }
 
-.createNewContactNameInput {
+.createNewContactNameInput,
+.editContactNameInput {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -229,7 +234,8 @@ h4 {
 
 }
 
-.createNewUserAtContacts-left {
+.createNewUserAtContacts-left,
+.editUserAtContacts-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -267,7 +273,8 @@ h4 {
     border-radius: 100%;
 }
 
-.addNewContactInputs {
+.addNewContactInputs,
+.editContactInputs {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -280,7 +287,16 @@ h4 {
     top: 129px;
 }
 
-.addNewContactProfileImgContainer {
+.closeIconAtContacts {
+    position: absolute;
+    height: 21.65px;
+    left: 1148.82px;
+    top: 49.11px;
+    object-fit: contain;
+}
+
+.addNewContactProfileImgContainer,
+.editContactProfileImgContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -307,13 +323,15 @@ h4 {
     justify-content: center;
 }
 
-.createNewUserAtContactsContainer {
+.createNewUserAtContactsContainer,
+.editUserAtContactsContainer {
     display: flex;
     border-radius: 30px;
 
 }
 
-.addNewContactTitle {
+.addNewContactTitle,
+.editContact {
     font-style: normal;
     font-weight: 700;
     font-size: 61px;
@@ -819,7 +837,8 @@ select option:hover {
 
 }
 
-.addNewContactsButtonContainer {
+.addNewContactsButtonContainer,
+.editContactsButtonContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -827,10 +846,11 @@ select option:hover {
     padding: 0px;
     gap: 25px;
     width: 369px;
-    height: 61px; 
+    height: 61px;
 }
 
-.addNewContactCreateButton {
+.addNewContactCreateButton,
+.editContactButton {
     display: flex;
     flex-direction: row;
     justify-content: center;

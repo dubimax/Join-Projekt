@@ -108,6 +108,14 @@ function hideAddNewContact() {
     document.getElementById('createNewUserAtContacts').classList.add('d-none');
 }
 
+function hideEditContact(){
+    document.getElementById('editUserAtContacts').classList.add('d-none');
+
+}
+function showEditContact() {
+    document.getElementById('editUserAtContacts').classList.remove('d-none');
+}
+
 function createNewContact() {
     let userName = document.getElementById('createNewContactName').value;
     let userEmail = document.getElementById('createNewContactEmail').value;
@@ -139,7 +147,7 @@ function generateContactBody() {
     <div class="contactInformationContainer d-none" id="contactInformationContainer">
         <div class="contactInformationTitle">
             <span>Contact Information</span>
-            <div>
+            <div onclick="showEditContact()">
                 <img src="./img/editContactPen.png">
                 <span>Edit Contact</span>
             </div>
