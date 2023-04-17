@@ -27,19 +27,22 @@
                 <button onclick="showFrame('signUpFrame','loginFrame','notJoinUserContainer')">Sign up</button>
             </div>
         </div>
-
+<!-- Log in Page-->
         <div class="frameStyle" id="loginFrame">
             <h1>Log in</h1>
             <div class="headerLine">
             </div>
             <form onsubmit="login(); return false;">
                 <div class="inputField">
-                    <input id="userMail" type="email" placeholder="Email" autocomplete="off" required>
+                    <input id="userMailLogIn" type="email" placeholder="Email" autocomplete="off" required>
                     <img src="img/emailVector.png" alt="email symbol">
+                </div>
+                <div class="checkUserData">
+                    <span id="dataCheck" class="d-none">The email address or password is not correct.</span>
                 </div>
 
                 <div class="inputField">
-                    <input id="userPassword" type="password" placeholder="Password" autocomplete="off" required>
+                    <input id="userPasswordLogIn" type="password" placeholder="Password" autocomplete="off" required>
                     <img id="user_password_icon" src="img/passwordVector.png" alt="password symbol">
                     <img id="user_password_hidden" onclick="makePasswordVisible()" src="img/showPassword.png"
                         alt="password symbol" class="d-none">
@@ -57,13 +60,13 @@
                 </div>
 
                 <div class="btnContainer">
-                    <button class="btnLoginAndSignUp">Log in</button>
+                    <button type="submit"class="btnLoginAndSignUp">Log in</button>
                     <button class="btnGuest" onclick="window.location.href='summary.html'">Guest Log in</button>
                 </div>
             </form>
         </div>
     </div>
-
+<!-- Sign Up Page-->
     <div class="frameStyle d-none" id="signUpFrame">
         <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','signUpFrame')"
             class="backBtn">
@@ -72,7 +75,8 @@
         </div>
         <form onsubmit="addUser(); return false;">
             <div class="inputField">
-                <input id="name" type="text" placeholder="Name" autocomplete="off" required>
+                <input id="name" type="text" placeholder="Name" autocomplete="off" required
+                pattern="[A-Za-z]{4}" title="Please enter your Name and Surname. No numbers!">
                 <img src="img/nameVector.png" alt="user symbol">
             </div>
 
@@ -82,7 +86,8 @@
             </div>
 
             <div class="inputField">
-                <input id="userPassword" type="password" placeholder="Password" autocomplete="off" required>
+                <input id="userPassword" type="password" placeholder="Password" autocomplete="off" required
+                pattern=".{6,}" title="Password need six or more character">
                 <img id="userPasswordIcon" onclick="showPassword()" src="img/passwordVector.png">
             </div>
             <div class="btnSignUpContainer">
@@ -90,7 +95,7 @@
             </div>
         </form>
     </div>
-
+<!-- Confirm Page-->
     <div class="frameStyle d-none" id="signUpConfirmFrame">
         <h1>Join us!</h1>
         <div class="headerLine">
@@ -100,7 +105,7 @@
         </p>
         <button class="btnLoginAndSignUp" onclick="window.location.href='login.html'">Log in</button>
     </div>
-
+<!-- Reset Password Page-->
     <div class="frameStyle d-none" id="forgotMyPasswordFrame">
         <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','forgotMyPasswordFrame')"
             class="backBtn">
@@ -110,7 +115,7 @@
         <p>Don't worry! We will send you an email with the instructions to reset your password.</p>
         <form action="https://www.gruppe-527.developerakademie.net/send_mail.php" method="POST">
             <div class="inputField inputEmailForgotPassword">
-                <input id="userMail" type="email" placeholder="Email" autocomplete="off" required>
+                <input id="userMailResetPassword" type="email" placeholder="Email" autocomplete="off" required>
                 <img src="img/emailVector.png" alt="email symbol">
             </div>
             <button class="btnSendMeMail">Send me the mail</button>

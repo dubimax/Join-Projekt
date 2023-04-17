@@ -28,6 +28,34 @@ async function init() {
     generateContactsHTML();
 }
 
+// function login() {
+//     let emailLogIn = document.getElementById('userMailLogIn');
+//     let passwordLogIn = document.getElementById('userPasswordLogin');
+//     let user = users.findIndex( u => u.email == emailLogIn.value && u.password == passwordLogIn.value ); 
+//     console.log(user);
+//     if(user){
+//         console.log('User gefunden');
+//         // window.location.href = 'summary.html';
+//     }
+// }
+
+function login() {
+    let userEmail = document.getElementById('userMailLogIn').value;
+    let userPassword = document.getElementById('userPasswordLogin').value;
+    checkUserData(userEmail, userPassword)
+}
+
+function checkUserData(userEmail, userPassword) {
+    let indexOfEmail = users.find(u => u.email == userEmail);
+    let indexOfPassword = users.find(u => u.password == userPassword);
+    if (indexOfEmail == -1 || indexOfPassword == -1) {
+        let dataCheck = document.getElementById('dataCheck');
+        dataCheck.classList.remove('d-none');
+    } else {
+        login(indexOfEmail);
+    }
+}
+
 function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('userMail').value;
@@ -315,3 +343,4 @@ icon.onclick =  function(){
         icon.src = "img/showPassword";
     }
 }
+
