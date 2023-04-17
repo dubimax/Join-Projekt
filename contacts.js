@@ -43,9 +43,11 @@ function generateAlphaContainerFor(letter) {
     for (let i = 0; i < names.length; i++) {
         let contactName = getContactWith(i, 'name');
         let userMail = getContactWith(i, 'email');
+        let userPhone = getContactWith(i, 'phone');
+        let userColor = getContactWith(i, 'color')
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
-        <div onclick="setContactDetails('${contactName}','${userMail}')" class="contactSelect" id="${contactName}">
-            <div class="colorCircleMedium" id="colorCircleMedium">${getFirstLettersOfName(contactName)}</div>
+        <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}')" class="contactSelect" id="${contactName}">
+            <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
             <div class="contactsAttributeBox">
                 <span class="contactSelectName"> ${contactName}</span>
                 <span class="contactSelectMail">${userMail}</span>
@@ -126,9 +128,10 @@ function createNewContact() {
     let userName = document.getElementById('createNewContactName').value;
     let userEmail = document.getElementById('createNewContactEmail').value;
     let userPhone = document.getElementById('createNewContactPhone').value;
-    users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone });
+    let userColor = randomcolor();
+    users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone , 'color': userColor});
     backend.setItem('users', JSON.stringify(users));
-
+    hideAddNewContact();
 }
 
 function editContact() {
@@ -187,11 +190,20 @@ function generateContactBody() {
     `;
 }
 
-function setContactDetails(userName, userMail) {
+function setContactDetails(userName, userMail, userPhone, userColor) {
     document.getElementById('contactName').innerHTML = userName;
+    document.getElementById('contactDetailsLogo').style = `background:${userColor}`;
     document.getElementById('contactDetailsLogo').innerHTML = getFirstLettersOfName(userName);
     document.getElementById('contactDetailsEmail').innerHTML = userMail;
-    document.getElementById('contactDetailsPhone').innerHTML = 'Noch fehlend';
+    document.getElementById('contactDetailsPhone').innerHTML = userPhone;
     document.getElementById('contactHeadContainer').classList.remove('d-none');
     document.getElementById('contactInformationContainer').classList.remove('d-none');
 }
+
+function randomcolor() {
+    let random = Math.floor(0x100000000 * Math.random());
+    console.log('#' + ('00000' + random.toString(16)).slice(-6).toUpperCase());
+    return '#' + ('00000' + random.toString(16)).slice(-6).toUpperCase();
+
+}
+
