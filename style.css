@@ -39,6 +39,8 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .fillerDiv {
@@ -183,6 +185,52 @@ h4 {
     padding: 15px 25px;
     gap: 35px;
     margin-top: 15px;
+}
+
+#createNewUserAtContacts {
+    position: fixed;
+    top: 200px;
+    left: 450px;
+    right: 100px;
+    bottom: 200px;
+    width: 1212px;
+    height: 594px;
+    background: #FFFFFF;
+    border-radius: 30px;
+}
+
+.createNewUserAtContacts-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 66px 46px;
+    gap: 12px;
+    isolation: isolate;
+    width: 463px;
+    height: 594px;
+    background: #2A3647;
+}
+
+.createNewUserAtContactsContainer{
+    display: flex;
+}
+
+.addNewContactButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    position: absolute;
+    width: 193px;
+    height: 53px;
+    right: 190px;
+    bottom: 100px;
+    background: #2A3647;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
 }
 
 .contactInformationContentContainer {
