@@ -21,18 +21,28 @@
         <div id="createNewUserAtContacts" class="d-none">
             <div class="createNewUserAtContactsContainer">
                 <div class="createNewUserAtContacts-left">
-                    <div>
-                       <img src="" alt="">
-                       <h3></h3>
-                       <h5></h5>
+                    <div class="left-side-Contacts">
+                        <img src="img/logo-nav.png" alt="">
+                        <div>
+                            <h3 class="addNewContactTitle">Add Contact</h3>
+                            <h5 class="addNewContactSubTitle">Tasks are better with a team</h5>
+                            <div class="fillDiv-w90"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="createNewUserAtContacts-right">
                     <form onsubmit="createNewContact(); return false;">
-                        <img src="" alt="">
-                        <div>
-                            <input type="text" required placeholder="Name" pattern="/[A-Z] + [a-z]{*,} + \s[A-Z] + [a-z]{*,}/"  id="createNewContactName">
+                        <div class="addNewContactProfileImgContainer">
+                            <img class="profileDummy" src="img/profileDummy.png">
+                            <img class="profileDummyInside" src="img/profileDummyInside.png">
+                        </div>
+                            <div class="addNewContactInputs">
+                                <div class="createNewContactNameInput">
+                                    <input type="text" required placeholder="Name"
+                                    pattern="/[A-Z] + [a-z]{*,} + \s[A-Z] + [a-z]{*,}/" id="createNewContactName">
+
+                                </div>
                             <input type="email" required placeholder="Email" id="createNewContactEmail">
                             <input type="phone" required placeholder="Phone" id="createNewContactPhone">
                             <div>
