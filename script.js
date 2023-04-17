@@ -41,18 +41,18 @@ async function init() {
 
 function login() {
     let userEmail = document.getElementById('userMailLogIn').value;
-    let userPassword = document.getElementById('userPasswordLogin').value;
+    let userPassword = document.getElementById('userPasswordLogIn').value;
     checkUserData(userEmail, userPassword)
 }
 
 function checkUserData(userEmail, userPassword) {
-    let indexOfEmail = users.find(u => u.email == userEmail);
-    let indexOfPassword = users.find(u => u.password == userPassword);
+    let indexOfEmail = users.findIndex(u => u.email == userEmail);
+    let indexOfPassword = users.findIndex(u => u.pwd == userPassword);
     if (indexOfEmail == -1 || indexOfPassword == -1) {
         let dataCheck = document.getElementById('dataCheck');
         dataCheck.classList.remove('d-none');
     } else {
-        login(indexOfEmail);
+        window.location.href = 'summary.html';
     }
 }
 
@@ -316,31 +316,4 @@ function showFrame(...ids) {
 /**
  * check if the input field length with the id user_password on index.html is longer as 0 letters and change the icon on end of input
  */
-function passwordInputIconChange() {
-    let userPasswordInput = document.getElementById('userPassword');
-    let passwordIcon = document.getElementById('userPasswordIcon');
-    let passwordIconHidden = document.getElementById('userPasswordHidden');
-    userPasswordInput.addEventListener('input', function () {
-        if (userPasswordInput.value.length > 0) {
-            passwordIcon.classList.add('d-none');
-            passwordIconHidden.classList.remove('d-none');
-        } else {
-            passwordIcon.classList.remove('d-none');
-            passwordIconHidden.classList.add('d-none');
-        }
-    })
-}
-
-icon.onclick =  function(){
-    let icon = document.getElementById('userPasswordIcon');
-    let password = document.getElementById('userPassword');
-
-    if (password.type == "password"){
-        password.type = "text";
-        icon.src = "img/dontShowPassword";
-    } else{
-        password.type = "password";
-        icon.src = "img/showPassword";
-    }
-}
 
