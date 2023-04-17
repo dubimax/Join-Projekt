@@ -199,6 +199,21 @@ h4 {
     border-radius: 30px;
 }
 
+#createNewContactName,
+#createNewContactEmail,
+#createNewContactPhone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    border: none;
+    width: 380px;
+    height: 25px;
+    outline: none;
+}
+
 
 
 .createNewContactNameInput {
@@ -212,7 +227,11 @@ h4 {
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
+    position: relative;
+
 }
+
+
 
 .createNewUserAtContacts-left {
     display: flex;
@@ -825,4 +844,3 @@ select option:hover {
     width: 453px;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
 }
-
