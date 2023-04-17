@@ -40,11 +40,20 @@ function generateAddTaskHTML() {
     generateOptionsHTML('categoryBox', categories, 'categories');
 }
 
-function createNewTask(){
-    
+function createNewTask() {
+    let taskTitle = document.getElementById('inputTitle').value;
+    let taskDesc = document.getElementById('inputDescription').value;
+    // let taskTitle = document.getElementById()
+    // let taskTitle = document.getElementById()
+    let taskDueDate = document.getElementById('inputDate').value;
+    let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
+    taskPrio = taskPrio[0];
+    let taskSubtasks = subtasks;
+    console.log(taskTitle,taskDesc,taskDueDate,taskPrio, taskSubtasks);
+    subtasks = [];
 }
 
-function addColorChoser(){
+function addColorChoser() {
     document.getElementById('id_categoryBox').innerHTML += `
     <div class="d-flex">
         <a onclick="setActiveColor('8AA4FF')" id="8AA4FF" class="colorCircle"style="background-color:#8AA4FF;"></a>
@@ -57,18 +66,18 @@ function addColorChoser(){
     `;
 }
 
-function getValueOfChosenColor(){
-    for(let i = 0;i<colors.length;i++){
+function getValueOfChosenColor() {
+    for (let i = 0; i < colors.length; i++) {
         let isActive = document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');
-        if(isActive){
+        if (isActive) {
             return colors[i];
         }
     }
-   
+
 
 }
 
-function setActiveColor(id){
+function setActiveColor(id) {
     document.getElementById('8AA4FF').classList.remove('colorCircleisActive');
     document.getElementById('FF0000').classList.remove('colorCircleisActive');
     document.getElementById('2AD300').classList.remove('colorCircleisActive');
@@ -77,7 +86,7 @@ function setActiveColor(id){
     document.getElementById('0038FF').classList.remove('colorCircleisActive');
 
     document.getElementById(id).classList.add('colorCircleisActive');
-    
+
 }
 
 function clearAllInputs() {
@@ -132,20 +141,14 @@ function changeStyleOfLabel(id) {
             return;
         }
     } else {
-        if (activeImg == 'urgentImgID') {
-            document.getElementById(activeImg).src = 'img/urgentIcon.png';
-            6
+        if(activeID == id){
+            document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
+        }else {
+            activeID = '';
+            activeImg = '';
+            changeStyleOfLabel(id);
         }
-        if (activeImg == 'mediumImgID') {
-            document.getElementById(activeImg).src = 'img/mediumIcon.png';
-        }
-        if (activeImg == 'lowImgID') {
-            document.getElementById(activeImg).src = 'img/lowIcon.png';
+        
 
-        }
-
-        document.getElementById(activeID).style = 'background-color: #FFFFFF; color: #000000;';
-        activeID = '';
-        activeImg = '';
     }
 }

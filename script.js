@@ -116,9 +116,9 @@ function generateLabelsHTML(field, headline) {
     <div class="detail">
         <${field}>${headline}</${field}>
         <div class="d-flex">
-            <${field} id="id_urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
-            <${field} id="id_medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
-            <${field} id="id_low" onclick="changeStyleOfLabel('id_low')">Low <img src="img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
+            <${field} id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
+            <${field} id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
+            <${field} id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img src="img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
         </div>
     </div>
     `;
@@ -231,7 +231,7 @@ function showCategoryItems() {
         }
     }
 }
-
+let subtasks = [];
 function showUsersItems() {
     for (let i = 0; i < users.length; i++) {
         if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
@@ -245,8 +245,9 @@ function showUsersItems() {
 
 function generateCheckboxItem() {
     document.getElementById('list-subtask').innerHTML += `
-    <li><input type="checkbox" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
+    <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
     `;
+    subtasks.push(getItemFromInput());
 }
 
 function getItemFromInput() {
