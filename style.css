@@ -214,8 +214,6 @@ h4 {
     outline: none;
 }
 
-
-
 .createNewContactNameInput {
     display: flex;
     flex-direction: row;
@@ -230,8 +228,6 @@ h4 {
     position: relative;
 
 }
-
-
 
 .createNewUserAtContacts-left {
     display: flex;
@@ -553,8 +549,6 @@ a {
     flex-direction: column;
 }
 
-
-
 .detail div label {
     gap: 10px;
     width: 136px;
@@ -823,6 +817,43 @@ select option:hover {
     display: flex;
     align-items: center;
 
+}
+
+.addNewContactsButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 25px;
+    width: 369px;
+    height: 61px; 
+}
+
+.addNewContactCreateButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    width: 208px;
+    height: 61px;
+    background: #2A3647;
+    border-radius: 10px;
+}
+
+.addNewContactCancelButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    width: 136px;
+    height: 61px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
 }
 
 .contactSelect:hover {
