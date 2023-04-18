@@ -62,7 +62,7 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
-    showFrame('signUpConfirmFrame','signUpFrame');
+    showFrame('signUpConfirmFrame', 'signUpFrame');
 }
 
 function addCategory() {
@@ -172,7 +172,8 @@ function generatesOptionsFieldHTML(field1, field2, headline, properties, id, use
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="${source}">
+            <img src="${source}" class="selectImg">
+            <div  class="dropDownStart" id="${headline}${id}" disabled >Select task category
             </div>
         </div>
     </div>
@@ -211,26 +212,28 @@ function showDropDownItems(usedItems) {
 }
 
 function showCategoryItems() {
-    for (let i = 0; i < categories.length; i++) {
-        if (categories.length > 0) {
+    if (document.getElementById('addNewCat').classList.contains('d-none')) {
+
+        for (let i = 0; i < categories.length; i++) {
             if (document.getElementById(categories[i]['name']).classList.contains('d-none')) {
                 document.getElementById(categories[i]['name']).classList.remove('d-none');
-                document.getElementById('addNewCat').classList.remove('d-none');
-            }
-            else {
-                document.getElementById(categories[i]['name']).classList.add('d-none');
-                document.getElementById('addNewCat').classList.add('d-none');
-            }
-        } else {
-            if (document.getElementById('addNewCat').classList.contains('d-none')) {
-                document.getElementById('addNewCat').classList.remove('d-none');
-
-            } else {
-                document.getElementById('addNewCat').classList.add('d-none');
             }
         }
+        document.getElementById('addNewCat').classList.remove('d-none');
+
+    } else {
+        for (let i = 0; i < categories.length; i++) {
+            if (!document.getElementById(categories[i]['name']).classList.contains('d-none')) {
+                document.getElementById(categories[i]['name']).classList.add('d-none');
+            }
+        }
+        document.getElementById('addNewCat').classList.add('d-none');
+
     }
+
 }
+
+
 let subtasks = [];
 function showUsersItems() {
     for (let i = 0; i < users.length; i++) {
@@ -258,7 +261,7 @@ function generateOptionsHTML(id, array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
         if (nameOfArray == 'users') {
             document.getElementById('assignedTo').innerHTML += `
-            <div class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
+            <div  class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
                 ${getUser(i)} 
             </div>
         `;
@@ -267,7 +270,7 @@ function generateOptionsHTML(id, array, nameOfArray) {
             document.getElementById('categoryBox').innerHTML += `
             <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
                 ${getCategory(i)}
-                <div class="colorCircle" style="background:${getCategoryColor(i)}"
+                <div class="colorCircle" style="background:${getCategoryColor(i)}">
             </div>
         `;
         }

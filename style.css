@@ -424,6 +424,14 @@ h4 {
     align-self: center;
 }
 
+.selectImg {
+    position: absolute;
+    width: 16px;
+    height: 8px;
+    left: 392px;
+    top: 22px;
+}
+
 .inputTextStd::-webkit-calendar-picker-indicator {
     background: url('img/calendarIcon.png') no-repeat;
     opacity: 1;
@@ -477,17 +485,16 @@ li {
     z-index: 9;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
+    position: relative;
 }
 
 
 .dropDownStart {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 18px 21px;
     border-radius: 10px;
-
 }
 
 .navigation-left {

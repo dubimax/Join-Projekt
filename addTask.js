@@ -38,6 +38,8 @@ function generateAddTaskHTML() {
     generateOptionsHTML('assignedTo', users, 'users');
     addOptionWithFunction('addNewCat');
     generateOptionsHTML('categoryBox', categories, 'categories');
+    addEventListenerToDropDown();
+
 }
 
 function createNewTask() {
@@ -49,7 +51,7 @@ function createNewTask() {
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
     let taskSubtasks = subtasks;
-    console.log(taskTitle,taskDesc,taskDueDate,taskPrio, taskSubtasks);
+    console.log(taskTitle, taskDesc, taskDueDate, taskPrio, taskSubtasks);
     subtasks = [];
 }
 
@@ -141,14 +143,57 @@ function changeStyleOfLabel(id) {
             return;
         }
     } else {
-        if(activeID == id){
+        if (activeID == id) {
             document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
-        }else {
+        } else {
             activeID = '';
             activeImg = '';
             changeStyleOfLabel(id);
         }
-        
+
 
     }
 }
+function addEventListenerToDropDown(){
+    let box = document.getElementById('categoryBox');
+    let element;
+    box.addEventListener('click', function (){
+        showDropDownItems('categories');
+
+    });
+    for(let i = 0; i<categories.length;i++){
+        element = document.getElementById(categories[i]['name']);
+        element.addEventListener('click', function (e){
+            let txt = e.currentTarget.attributes[1].textContent;
+            setOption(txt);
+            e.stopPropagation();
+    
+        });
+    }
+
+    
+
+    
+}
+
+function setOption( id) {
+
+  
+        
+    document.getElementById('CategorycategoryBox').classList.add('d-none');
+    document.getElementById('addNewCat').classList.add('d-none');
+
+    for (let i = 0; i < categories.length; i++) {
+        document.getElementById(categories[i]['name']).classList.add('d-none');
+        document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
+        document.getElementById(categories[i]['name']).classList.add('cl_categories');
+    }
+    document.getElementById(id).classList.remove('d-none');
+    document.getElementById(id).classList.add('dropDownStart');
+    document.getElementById(id).classList.remove('cl_categories');
+    document.getElementById(id).ariaDisabled;
+}
+
+
+
+
