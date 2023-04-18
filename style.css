@@ -712,16 +712,10 @@ select option:hover {
 }
 
 .colorCircle {
-    position: absolute;
-    top:5px;
-    bottom: 5px;
     width: 20px;
     height: 20px;
     border-radius: 100%;
     border: 2px solid #FFFFFF;
-}
-select:focus {
-    outline: 0px solid #ccc;
 }
 
 .colorCircle:hover {

@@ -62,7 +62,7 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     users.push({ 'name': name, 'email': email, 'pwd': password });
     backend.setItem('users', JSON.stringify(users));
-    showFrame('signUpConfirmFrame', 'signUpFrame');
+    showFrame('signUpConfirmFrame','signUpFrame');
 }
 
 function addCategory() {
@@ -84,35 +84,27 @@ function getCategoryColor(i) {
 
 function addOptionWithFunction(id) {
     document.getElementById('categoryBox').innerHTML += `
-            <option class="cl_categories" id="addNewCat" value="addNewCat" >New Category</option>`;
+            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
 }
 
-function setBackToOptionsField(field1, headline, properties, id, source) {
+function setBackToOptionsField(field1, field2, headline, properties, id, usedItems) {
     return `
     <${field1}>${headline}</${field1}>
-        <select onchange="changeToInputField('id_${id}')" class="${properties}" id="${id}">
-            <option class="dropDownStart" value="" >Select task category<img src="${source}">
-            </option>
-        </select>
+        <div class="${properties}" id="${id}">
+            <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="./img/dropdownIcon.png">
+            </div>
+        </div>
     `;
-
 }
 
 function changeToInputField(id) {
-    let optionValue = document.getElementById('categoryBox');
-    let text = optionValue.options[optionValue.selectedIndex].text;
-    if (text == 'New Category') {
-        if (id == 'id_categoryBox') {
-            document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
-            addColorChoser();
-
-
-        }
-        if (id == 'id_assignedTo') {
-            document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
-        }
+    if (id == 'addNewCat') {
+        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
+        addColorChoser();
     }
-
+    if (id == 'addNewSubTask') {
+        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
+    }
 }
 
 function getUser(i) {
@@ -165,14 +157,12 @@ function generatesChangedInputFieldHTML(field1, field2, headline, properties, ty
 }
 function cancelAddNew(id) {
     if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label','Category','dropDownMenuField', 'categoryBox', './img/dropdownIcon.png');
-        
+        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', '', 'Category', 'dropDownMenuField', 'categoryBox', 'categories');
         addOptionWithFunction('addNewCat');
         generateOptionsHTML('categoryBox', categories, 'categories');
     }
     if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = generatesOptionsFieldHTML('label', 'select', 'Assigned to', 'dropDownMenuField', 'assignedTo', 'users', './img/dropdownIcon.png');
-
+        document.getElementById('id_addNewSubTask').innerHTML = setBackToSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png');
     }
 }
 
@@ -181,10 +171,10 @@ function generatesOptionsFieldHTML(field1, field2, headline, properties, id, use
     return `
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
-        <select onchange="changeToInputField('id_${id}')" class="${properties}" id="${id}">
-            <option class="dropDownStart" value="" >Select task category<img src="${source}">
-            </option>
-        </select>
+        <div class="${properties}" id="${id}">
+            <div onclick="showDropDownItems('${usedItems}')" class="dropDownStart" value="" disabled selected>Select task category<img src="${source}">
+            </div>
+        </div>
     </div>
     `;
 }
@@ -268,18 +258,17 @@ function generateOptionsHTML(id, array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
         if (nameOfArray == 'users') {
             document.getElementById('assignedTo').innerHTML += `
-            <option class="cl_${nameOfArray}" id="${getUser(i)}" value="${getUser(i)}">
+            <div class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
                 ${getUser(i)} 
-            </option>
+            </div>
         `;
         }
         if (nameOfArray == 'categories') {
             document.getElementById('categoryBox').innerHTML += `
-            <option class="cl_${nameOfArray}" id="${getCategory(i)}" value="${getCategory(i)}" >
+            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
                 ${getCategory(i)}
-
-                <div class="colorCircle" id="color_${getCategoryColor(i)}" style="background:${getCategoryColor(i)}"></div>
-            </option>
+                <div class="colorCircle" style="background:${getCategoryColor(i)}"
+            </div>
         `;
         }
     }
