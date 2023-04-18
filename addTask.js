@@ -39,7 +39,7 @@ function generateAddTaskHTML() {
     addOptionWithFunction('addNewCat');
     generateOptionsHTML('categoryBox', categories, 'categories');
 }
-
+let tasks = [];
 function createNewTask() {
     let taskTitle = document.getElementById('inputTitle').value;
     let taskDesc = document.getElementById('inputDescription').value;
@@ -51,6 +51,8 @@ function createNewTask() {
     let taskSubtasks = subtasks;
     console.log(taskTitle,taskDesc,taskDueDate,taskPrio, taskSubtasks);
     subtasks = [];
+    tasks.push({'title': taskTitle,'description': taskDesc,'dueDate': taskDueDate,'prio': taskPrio, 'subtasks': taskSubtasks });
+    backend.setItem('tasks',JSON.stringify(tasks));
 }
 
 function addColorChoser() {
@@ -152,3 +154,15 @@ function changeStyleOfLabel(id) {
 
     }
 }
+
+function addCategory(id) {
+    
+    document.getElementById('selected_categoryBox').value = document.getElementById(id).innerHTML;
+    document.getElementById('categoryColor').innerHTML = document.getElementById('imageCat' + i).innerHTML;
+    document.getElementById('categoryImage').innerHTML = `<img src="assets/img/arrow_drop.svg">`;
+    openCloseCategories();
+    selectedCategory = '';
+    selectedColor = '';
+    selectedCategory = categoryName.value;
+    selectedColor = colors[i];
+  }
