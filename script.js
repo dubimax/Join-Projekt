@@ -28,17 +28,6 @@ async function init() {
     generateContactsHTML();
 }
 
-// function login() {
-//     let emailLogIn = document.getElementById('userMailLogIn');
-//     let passwordLogIn = document.getElementById('userPasswordLogin');
-//     let user = users.findIndex( u => u.email == emailLogIn.value && u.password == passwordLogIn.value ); 
-//     console.log(user);
-//     if(user){
-//         console.log('User gefunden');
-//         // window.location.href = 'summary.html';
-//     }
-// }
-
 function login() {
     let userEmail = document.getElementById('userMailLogIn').value;
     let userPassword = document.getElementById('userPasswordLogIn').value;
@@ -54,6 +43,11 @@ function checkUserData(userEmail, userPassword) {
     } else {
         window.location.href = 'summary.html';
     }
+}
+
+function guestLogin() {
+    checkUserData('guest@guest.de', 'guest');
+    console.log('gast user angemeldet');
 }
 
 function addUser() {
