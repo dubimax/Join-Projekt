@@ -1,13 +1,13 @@
 function generateAddTaskHTML() {
     addContentTitle('Add Task', 'addTask');
     document.getElementById('addTask').innerHTML += `
-    <form onsubmit="createNewTask()" class="addTaskForm">
+    <form onsubmit="createNewTask(); return false;" class="addTaskForm">
     <div class="details">
         <div class="detailBox-left">
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
             ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
-            ${generatesOptionsFieldHTML('label', 'select', 'Category', 'dropDownMenuField', 'categoryBox', 'categories', './img/dropdownIcon.png')}
-            ${generatesOptionsFieldHTML('label', 'select', 'Assigned to', 'dropDownMenuField', 'assignedTo', 'users', './img/dropdownIcon.png')}
+            ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
+            ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
         </div>
         <div class="border-1px-solid"></div>
         <div class="detailBox-right">
@@ -46,13 +46,15 @@ function createNewTask() {
     let taskTitle = document.getElementById('inputTitle').value;
     let taskDesc = document.getElementById('inputDescription').value;
     let taskCategory = selectedCategory;
-    // let taskTitle = document.getElementById()
+    let assignedTo = getAssignedContacts();
     let taskDueDate = document.getElementById('inputDate').value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
     let taskSubtasks = subtasks;
-    console.log(taskTitle, taskDesc, taskDueDate, taskPrio, taskSubtasks);
+    tasks.push({'title':taskTitle,'description': taskDesc,'category': taskCategory,'isAssigned':assignedTo, 'dueDate': taskDueDate,'prio': taskPrio,'subtasks': taskSubtasks});
+    backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];
+    clearAllInputs();
 }
 
 function addColorChoser() {
@@ -183,15 +185,23 @@ function addEventListenerToDropDown() {
         selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
             let txt = e.currentTarget.attributes[1].textContent;
-            setOption(txt, 'user');
             e.stopPropagation();
-
+                
         });
     }
 
 
 
 
+}
+
+function getAssignedContacts(){
+    for(let i= 0; i< users.length;i++){
+        if(document.getElementById(users[i]['name']).children[0].checked){
+            assigned.push(document.getElementById(users[i]['name']).children[0].value);
+        }
+    }
+    return assigned;
 }
 
 function setOption(id, id2) {
@@ -204,35 +214,38 @@ function setOption(id, id2) {
             document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
             document.getElementById(categories[i]['name']).classList.add('cl_categories');
         }
-        if(document.getElementById(id).classList.contains('d-none')){
+        if (document.getElementById(id).classList.contains('d-none')) {
             document.getElementById(id).classList.remove('d-none');
             document.getElementById(id).classList.add('dropDownStart');
             document.getElementById(id).classList.remove('cl_categories');
-        }else {
+        } else {
             document.getElementById(id).classList.add('d-none');
             document.getElementById(id).classList.remove('dropDownStart');
             document.getElementById(id).classList.add('cl_categories');
         }
         selectedCategory = id;
-        
+
     }
-    if (id2 == 'user') {
-        document.getElementById('Assigned toassignedTo').classList.add('d-none');
+    
+}
 
-        for (let j = 0; j < users.length; j++) {
-            document.getElementById(users[j]['name']).classList.add('d-none');
-            document.getElementById(users[j]['name']).classList.remove('dropDownStart');
-            document.getElementById(users[j]['name']).classList.add('cl_categories');
-        }
-        document.getElementById(id).classList.remove('d-none');
-        document.getElementById(id).classList.add('dropDownStart');
-        document.getElementById(id).classList.remove('cl_categories');
-    }
-
-
+function addOptionWithFunction(id) {
+    document.getElementById('categoryBox').innerHTML += `
+            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
 }
 
 
+
+function changeToInputField(id) {
+    if (id == 'addNewCat') {
+        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
+        addColorChoser();
+        dropDown = false;
+    }
+    if (id == 'addNewSubTask') {
+        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
+    }
+}
 
 
 
