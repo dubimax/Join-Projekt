@@ -82,23 +82,7 @@ function getCategoryColor(i) {
     return categories[i]['color'];
 }
 
-function addOptionWithFunction(id) {
-    document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
-}
 
-
-
-function changeToInputField(id) {
-    if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
-        addColorChoser();
-        dropDown = false;
-    }
-    if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
-    }
-}
 
 function getUser(i) {
     return users[i]['name'];
@@ -150,7 +134,7 @@ function generatesChangedInputFieldHTML(field1, field2, headline, properties, ty
 }
 function cancelAddNew(id) {
     if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox');
+        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', 'task category');
         addOptionWithFunction('addNewCat');
         generateOptionsHTML('categoryBox', categories, 'categories');
         addEventListenerToDropDown();
@@ -160,25 +144,25 @@ function cancelAddNew(id) {
     }
 }
 
-function generatesOptionsFieldHTML(field1, field2, headline, properties, id, usedItems, source) {
+function generatesOptionsFieldHTML(field1, headline, properties, id, source, selectionText) {
 
     return `
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
             <img src="${source}" class="selectImg">
-            <div  class="dropDownStart" id="${headline}${id}" disabled >Select task category
+            <div  class="dropDownStart" id="${headline}${id}" disabled >Select ${selectionText}
             </div>
         </div>
     </div>
     `;
 }
 
-function setBackToOptionsField(field1, headline, properties, id) {
+function setBackToOptionsField(field1, headline, properties, id, selectionText) {
     return `
     <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <div class="dropDownStart"  id="${headline}${id}" value="" disabled>Select task category
+            <div class="dropDownStart"  id="${headline}${id}" value="" disabled>Select ${selectionText}
             </div>
             <img src="./img/dropdownIcon.png" class="selectImg">
         </div>
@@ -240,59 +224,64 @@ function showCategoryItems() {
 
 
 function checkDropDown() {
-    if(!selectedCategory){
-        if (!dropDown) {
+    if (!selectedCategory) {
+        if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
             document.getElementById('addNewCat').classList.remove('d-none');
-            dropDown = true;
-    
+            dropDownCat = true;
+
         } else {
             document.getElementById('addNewCat').classList.add('d-none');
-            dropDown = false;
-    
+            dropDownCat = false;
+
         }
-    }else {
-        if (!dropDown) {
+    } else {
+        if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
             document.getElementById('addNewCat').classList.remove('d-none');
-            dropDown = true;
-    
+            dropDownCat = true;
+
         } else {
-            if(document.getElementById('addNewCat').classList.contains('d-none') && document.getElementById('addNewCat').classList.contains('d-none')){
+            if (document.getElementById('addNewCat').classList.contains('d-none') && document.getElementById('addNewCat').classList.contains('d-none')) {
                 document.getElementById('addNewCat').classList.remove('d-none');
                 document.getElementById('CategorycategoryBox').classList.remove('d-none');
-            }else {
+            } else {
                 document.getElementById('addNewCat').classList.add('d-none');
                 document.getElementById('CategorycategoryBox').classList.add('d-none');
             }
-           
+            dropDownCat = false;
 
-            dropDown = false;
-    
         }
     }
-    
+
 }
 
 
 let subtasks = [];
 function showUsersItems() {
-    if (document.getElementById('Assigned toassignedTo')) {
+    if (!dropDownAssign) {
 
-        if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
+        document.getElementById('Assigned toassignedTo').classList.remove('d-none');
+        dropDownAssign = true;
+
+
+    } else {
+        if(document.getElementById('Assigned toassignedTo').classList.contains('d-none')){
+            document.getElementById('Assigned toassignedTo').classList.add('d-none');
+
+        }else {
             document.getElementById('Assigned toassignedTo').classList.remove('d-none');
 
-        } else {
-            document.getElementById('Assigned toassignedTo').classList.add('d-none');
         }
+        dropDownAssign = false;
 
-        for (let i = 0; i < users.length; i++) {
-            if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
-                document.getElementById(users[i]['name']).classList.remove('d-none');
-            }
-            else {
-                document.getElementById(users[i]['name']).classList.add('d-none');
-            }
+    }
+    for (let i = 0; i < users.length; i++) {
+        if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
+            document.getElementById(users[i]['name']).classList.remove('d-none');
+        }
+        else {
+            document.getElementById(users[i]['name']).classList.add('d-none');
         }
     }
 }
@@ -314,6 +303,7 @@ function generateOptionsHTML(id, array, nameOfArray) {
             document.getElementById('assignedTo').innerHTML += `
             <div  class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
                 ${getUser(i)} 
+                <input type="checkbox" value="${getUser(i)}">
             </div>
         `;
         }
@@ -366,9 +356,4 @@ function showFrame(...ids) {
         document.getElementById(element2).classList.remove('d-none');
     }
 }
-
-
-/**
- * check if the input field length with the id user_password on index.html is longer as 0 letters and change the icon on end of input
- */
 
