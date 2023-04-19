@@ -45,7 +45,7 @@ function generateAddTaskHTML() {
 function createNewTask() {
     let taskTitle = document.getElementById('inputTitle').value;
     let taskDesc = document.getElementById('inputDescription').value;
-    // let taskTitle = document.getElementById()
+    let taskCategory = selectedCategory;
     // let taskTitle = document.getElementById()
     let taskDueDate = document.getElementById('inputDate').value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
@@ -154,45 +154,86 @@ function changeStyleOfLabel(id) {
 
     }
 }
-function addEventListenerToDropDown(){
-    let box = document.getElementById('categoryBox');
-    let element;
-    box.addEventListener('click', function (){
+function addEventListenerToDropDown() {
+    let catBox = document.getElementById('categoryBox');
+    let selCat;
+    catBox.addEventListener('click', function () {
         showDropDownItems('categories');
 
     });
-    for(let i = 0; i<categories.length;i++){
-        element = document.getElementById(categories[i]['name']);
-        element.addEventListener('click', function (e){
+
+    let userBox = document.getElementById('assignedTo');
+    let selUser;
+    userBox.addEventListener('click', function () {
+        showDropDownItems('users');
+
+    });
+
+
+    for (let i = 0; i < categories.length; i++) {
+        selCat = document.getElementById(categories[i]['name']);
+        selCat.addEventListener('click', function (e) {
             let txt = e.currentTarget.attributes[1].textContent;
-            setOption(txt);
+            setOption(txt, 'category');
             e.stopPropagation();
-    
+
+        });
+    }
+    for (let j = 0; j < users.length; j++) {
+        selUser = document.getElementById(users[j]['name']);
+        selUser.addEventListener('click', function (e) {
+            let txt = e.currentTarget.attributes[1].textContent;
+            setOption(txt, 'user');
+            e.stopPropagation();
+
         });
     }
 
-    
 
-    
+
+
 }
 
-function setOption( id) {
+function setOption(id, id2) {
+    if (id2 == 'category') {
+        document.getElementById('CategorycategoryBox').classList.add('d-none');
+        document.getElementById('addNewCat').classList.add('d-none');
 
-  
+        for (let i = 0; i < categories.length; i++) {
+            document.getElementById(categories[i]['name']).classList.add('d-none');
+            document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
+            document.getElementById(categories[i]['name']).classList.add('cl_categories');
+        }
+        if(document.getElementById(id).classList.contains('d-none')){
+            document.getElementById(id).classList.remove('d-none');
+            document.getElementById(id).classList.add('dropDownStart');
+            document.getElementById(id).classList.remove('cl_categories');
+        }else {
+            document.getElementById(id).classList.add('d-none');
+            document.getElementById(id).classList.remove('dropDownStart');
+            document.getElementById(id).classList.add('cl_categories');
+        }
+        selectedCategory = id;
         
-    document.getElementById('CategorycategoryBox').classList.add('d-none');
-    document.getElementById('addNewCat').classList.add('d-none');
-
-    for (let i = 0; i < categories.length; i++) {
-        document.getElementById(categories[i]['name']).classList.add('d-none');
-        document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
-        document.getElementById(categories[i]['name']).classList.add('cl_categories');
     }
-    document.getElementById(id).classList.remove('d-none');
-    document.getElementById(id).classList.add('dropDownStart');
-    document.getElementById(id).classList.remove('cl_categories');
-    document.getElementById(id).ariaDisabled;
+    if (id2 == 'user') {
+        document.getElementById('Assigned toassignedTo').classList.add('d-none');
+
+        for (let j = 0; j < users.length; j++) {
+            document.getElementById(users[j]['name']).classList.add('d-none');
+            document.getElementById(users[j]['name']).classList.remove('dropDownStart');
+            document.getElementById(users[j]['name']).classList.add('cl_categories');
+        }
+        document.getElementById(id).classList.remove('d-none');
+        document.getElementById(id).classList.add('dropDownStart');
+        document.getElementById(id).classList.remove('cl_categories');
+    }
+
+
 }
+
+
+
 
 
 
