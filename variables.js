@@ -6,3 +6,5 @@ let mediumColor = 'background-color: #FFA800;color: #FFFFFF;';
 let lowColor = 'background-color: #7AE229;color: #FFFFFF;';
 let activeID = '';
 let activeImg = '';
+let selectedCategory;
+let dropDown = false;
