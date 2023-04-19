@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="summary.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+
 </head>
 
 <body onload="init()">
 
     <div w3-include-html="./templates/navs.html"></div>
+
     <div class="summaryHeader">
         <h1>Summary</h1>
         <div class="verticalLine"></div>
         <span>Everything in a nutshell!</span>
     </div>
-
-    <div class="summaryContainer">
         <div class="summeryBoxContainer">
             <div class="summaryTop">
                 <div class="summaryTopSingle">
@@ -29,21 +29,50 @@
                     <div class="boxText">Tasks in Board</div>
                 </div>
                 <div class="summaryTopSingle">
-                    <div class="boxNumber">5</div>
-                    <div class="boxText">Tasks in Board</div>
+                    <div class="boxNumber">2</div>
+                    <div class="boxText">Tasks in Progress</div>
                 </div>
                 <div class="summaryTopSingle">
-                    <div class="boxNumber">5</div>
-                    <div class="boxText">Tasks in Board</div>
+                    <div class="boxNumber">2</div>
+                    <div class="boxText">Awaiting Feedback</div>
                 </div>
             </div>
-            <div class="summaryCenter"></div>
+            <div class="summaryCenter">
+                <div class="summaryPrioContainer">
+                    <img src="img/urgentFilled.png" class="prioImg">
+                    <div class="prioContainer">
+                        <div class="prioNumber">1</div>
+                        <div class="prioText">Urgent</div>
+                    </div>
+                </div>
+                <div class="prioVerticalLine"></div>
+                <div class="upcomingDateContainer">
+                    <div class="upcomingDate">October 16, 2022</div>
+                    <div class="upcomingDateText">Upcoming Date</div>
+                </div>
+            </div>
+            <div class="summaryBottom">
+                <div class="summaryBottomSingle">
+                    <img src="img/todoPencil.png" class="todoPencilImg">
+                    <div class="todoContainer">
+                        <div class="todoNumber">1</div>
+                        <div class="todoText">To-do</div>
+                    </div>
+                </div>
+                <div class="summaryBottomSingle">
+                    <img src="img/todoDone.png" class="todoDoneImg">
+                    <div class="todoContainer">
+                        <div class="todoNumber">1</div>
+                        <div class="todoText">Done</div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="summaryWelcomeText">
             <span class="summaryGreeting">Good morning,</span>
             <span class="summaryContactName">Sofia Müller</span>
         </div>
-    </div>
 </body>
 
 </html>

@@ -2,7 +2,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Inter;
 }
+
+@font-face {
+    font-family:'Inter';
+    font-style: normal;
+    src: local('Inter'), local('Inter-Regular'),
+    url(/fonts/Inter/static/Inter-Regular.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-Black.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-Bold.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-ExtraBold.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-ExtraLight.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-Light.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-Medium.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-SemiBold.ttf) format('ttf'),
+    url(/fonts/Inter/static/Inter-Thin.ttf) format('ttf');
+ }
 
 body {
     background-color: #F5F5F5;
