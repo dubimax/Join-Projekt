@@ -1,3 +1,8 @@
+function load(){
+    users = JSON.parse(localStorage.getItem("users") || [] );
+}
+
+load();
 function generateContactsHTML() {
     includeHTML();
     addContactCategories();

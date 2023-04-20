@@ -208,7 +208,7 @@ function addContentTitle(title, id) {
  * @param {*} id Insert the ID you want to get shown
  */
 function showLink(id) {
-    window.location.href = id;
+    location.href = id;
 }
 
 
