@@ -1,31 +1,16 @@
 
 let currentDraggedElement;
-let todos = [{
-    'id': 0,
-    'title': 'Putzen',
-    'status': 'toDos'
-}, {
-    'id': 1,
-    'title': 'saugen',
-    'status': 'toDos'
-}, {
-    'id': 2,
-    'title': 'essen',
-    'status': 'toDos'
-}, {
-    'id': 3,
-    'title': 'Kochen',
-    'status': 'toDos'
-}];
 
-function updateHTML() {
+async function updateHTML() {
+    await includeHTML();
+    load();
     toDosArea();
     inProgressArea();
     awaitingFeedbackArea();
-    doneArea(); 
+    doneArea();
 }
 
-function toDosArea(){
+function toDosArea() {
     let toDos = todos.filter(t => t['status'] == 'toDos');
     document.getElementById('toDos').innerHTML = '';
 
@@ -45,7 +30,7 @@ function inProgressArea() {
     }
 }
 
-function awaitingFeedbackArea() {
+function awaitingFeedbackArea() {
     let awaitingFeedback = todos.filter(t => t['status'] == 'awaitingFeedback');
     document.getElementById('awaitingFeedback').innerHTML = '';
 
@@ -55,7 +40,7 @@ function awaitingFeedbackArea() {
     }
 }
 
-function doneArea() {
+function doneArea() {
     let done = todos.filter(t => t['status'] == 'done');
     document.getElementById('done').innerHTML = '';
 
@@ -63,7 +48,7 @@ function doneArea() {
         const element = done[index];
         document.getElementById('done').innerHTML += generateTodoHTML(element);
     }
-} 
+}
 
 function startDragging(id) {
     currentDraggedElement = id;

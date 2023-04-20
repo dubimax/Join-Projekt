@@ -12,3 +12,4 @@ let selectedCategory;
 let dropDownCat = false;
 let dropDownAssign = false;
 let assigned = [];
+let loggedIn = false;

@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="board.css">
     <script src="board.js"></script>
+    <script src="js/script.js"></script>
 
 </head>
 
 <body onload="updateHTML()">
+    <!-- <div w3-include-html="./templates/navs.html"></div> -->
+
     <div class="cardHeaders">
         <div class="dragArea" id="toDos" ondrop="moveTo('toDos')" ondragover="allowDrop(event); highlight('toDos')">
             To do</div>

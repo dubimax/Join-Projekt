@@ -1,6 +1,7 @@
 function generateAddTaskHTML() {
     includeHTML();
     load();
+    if(loggedIn) {
     addContentTitle('Add Task', 'addTask');
     document.getElementById('addTask').innerHTML += `
     <form onsubmit="createNewTask(); return false;" class="addTaskForm">
@@ -39,6 +40,9 @@ function generateAddTaskHTML() {
     addOptionWithFunction('addNewCat');
     generateOptionsHTML('categoryBox', categories, 'categories');
     addEventListenerToDropDown();
+    } else {
+        window.location.href = 'login.html';
+    }
 }
 
 function addColorChoser() {
