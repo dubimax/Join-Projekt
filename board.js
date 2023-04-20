@@ -19,6 +19,13 @@ let todos = [{
 }];
 
 function updateHTML() {
+    toDosArea();
+    inProgressArea();
+    awaitingFeedbackArea();
+    doneArea(); 
+}
+
+function toDosArea(){
     let toDos = todos.filter(t => t['status'] == 'toDos');
     document.getElementById('toDos').innerHTML = '';
 
@@ -26,8 +33,29 @@ function updateHTML() {
         const element = toDos[index];
         document.getElementById('toDos').innerHTML += generateTodoHTML(element);
     }
-    generatePseudoHTML('toDos');
+}
 
+function inProgressArea() {
+    let inProgress = todos.filter(t => t['status'] == 'inProgress');
+    document.getElementById('inProgress').innerHTML = '';
+
+    for (let index = 0; index < inProgress.length; index++) {
+        const element = inProgress[index];
+        document.getElementById('inProgress').innerHTML += generateTodoHTML(element);
+    }
+}
+
+function awaitingFeedbackArea() {
+    let awaitingFeedback = todos.filter(t => t['status'] == 'awaitingFeedback');
+    document.getElementById('awaitingFeedback').innerHTML = '';
+
+    for (let index = 0; index < awaitingFeedback.length; index++) {
+        const element = awaitingFeedback[index];
+        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element);
+    }
+}
+
+function doneArea() {
     let done = todos.filter(t => t['status'] == 'done');
     document.getElementById('done').innerHTML = '';
 
@@ -35,8 +63,7 @@ function updateHTML() {
         const element = done[index];
         document.getElementById('done').innerHTML += generateTodoHTML(element);
     }
-    generatePseudoHTML('done');
-}
+} 
 
 function startDragging(id) {
     currentDraggedElement = id;
