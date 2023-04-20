@@ -110,6 +110,8 @@ function createNewContact() {
     users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone , 'color': userColor});
     backend.setItem('users', JSON.stringify(users));
     hideAddNewContact();
+    addContactCategories();
+    setVisibleIfnotEmpty();
 }
 
 function editContact() {
@@ -122,8 +124,10 @@ function editContact() {
     users[oldUser]['email'] = userEmail;
     users[oldUser]['phone'] = userPhone;
     backend.setItem('users', JSON.stringify(users));
-    generateContactsHTML();
     hideEditContact();
+    addContactCategories();
+    setVisibleIfnotEmpty();
+    generateContactDetailsHTML();
 }
 
 function setContactDetails(userName, userMail, userPhone, userColor) {
