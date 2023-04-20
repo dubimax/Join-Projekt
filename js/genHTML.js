@@ -1,5 +1,6 @@
 function generateAddTaskHTML() {
     includeHTML();
+    load();
     addContentTitle('Add Task', 'addTask');
     document.getElementById('addTask').innerHTML += `
     <form onsubmit="createNewTask(); return false;" class="addTaskForm">

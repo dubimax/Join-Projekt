@@ -1,10 +1,7 @@
-function load(){
-    users = JSON.parse(localStorage.getItem("users") || [] );
-}
 
-load();
 function generateContactsHTML() {
     includeHTML();
+    load();
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();

@@ -11,6 +11,18 @@ async function includeHTML() {
         }
     }
 }
+function load(){
+    users = JSON.parse(localStorage.getItem("users") || [{}] );
+    categories = JSON.parse(localStorage.getItem("categories") || [{}] );
+    tasks = JSON.parse(localStorage.getItem("tasks") || [{}] );
+}
+
+function save(){
+    localStorage.clear();
+    localStorage.setItem( "users", JSON.stringify( users) );
+    localStorage.setItem( "categories", JSON.stringify(categories) );
+    localStorage.setItem( "tasks", JSON.stringify(tasks) );
+}
 
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
@@ -207,7 +219,8 @@ function addContentTitle(title, id) {
  * than removes "d-none" from the param id 
  * @param {*} id Insert the ID you want to get shown
  */
-function showLink(id) {
+async function showLink(id) {
+    await save();
     location.href = id;
 }
 
