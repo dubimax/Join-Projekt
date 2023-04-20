@@ -12,11 +12,6 @@ async function includeHTML() {
     }
 }
 
-/**
- *  Generates Add Task HTML Content
- */
-
-
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
@@ -24,8 +19,7 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
-    // generateAddTaskHTML();
-    generateContactsHTML();
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
 }
 
 function login() {
@@ -66,7 +60,6 @@ function addCategory() {
     backend.setItem('categories', JSON.stringify(categories));
     cancelAddNew('addNewCat');
     generateOptionsHTML('categoryBox', categories, 'categories');
-
 }
 
 function getCategory(i) {
@@ -76,56 +69,10 @@ function getCategoryColor(i) {
     return categories[i]['color'];
 }
 
-
-
 function getUser(i) {
     return users[i]['name'];
 }
 
-function generateLabelsHTML(field, headline) {
-    return `
-    <div class="detail">
-        <${field}>${headline}</${field}>
-        <div class="d-flex">
-            <${field} id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
-            <${field} id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
-            <${field} id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img src="img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
-        </div>
-    </div>
-    `;
-}
-
-function generatesTextareaFieldHTML(field1, field2, headline, placeholder) {
-    return `
-    <div class="detail">
-        <${field1}>${headline}</${field1}>
-        <${field2} class="inputDescriptionField" type="text" id="inputDescription" placeholder="${placeholder}"></${field2}>
-    </div>
-    `;
-}
-
-function generatesInputFieldHTML(field1, field2, headline, properties, type, id, placeholder) {
-    return `
-    <div class="detail" id="id_${id}">
-        <${field1}>${headline}</${field1}>
-        <${field2} class="${properties}" type="${type}" id="${id}" placeholder="${placeholder}" >
-    </div>
-    `;
-}
-
-function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick) {
-    return `
-    <${field1}>${headline}</${field1}>
-
-    <${field2} class="${properties}" type="${type}" id="${id}" >
-    <div class="newCat">
-
-        <a onclick="cancelAddNew('${restoreID}')"><img src="img/cancelIcon.png"></a>
-        <div class="border-1px-solid width0-height31px"></div>
-        <a onclick="${atClick}"><img src="img/checkIcon.png"></a>
-    </div>  
-    `;
-}
 function cancelAddNew(id) {
     if (id == 'addNewCat') {
         document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', 'task category');
@@ -136,53 +83,6 @@ function cancelAddNew(id) {
     if (id == 'addNewSubTask') {
         document.getElementById('id_addNewSubTask').innerHTML = setBackToSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png');
     }
-}
-
-function generatesOptionsFieldHTML(field1, headline, properties, id, source, selectionText) {
-
-    return `
-    <div class="detail" id="id_${id}">
-        <${field1}>${headline}</${field1}>
-        <div class="${properties}" id="${id}">
-            <img src="${source}" class="selectImg">
-            <div  class="dropDownStart" id="${headline}${id}" disabled >Select ${selectionText}
-            </div>
-        </div>
-    </div>
-    `;
-}
-
-function setBackToOptionsField(field1, headline, properties, id, selectionText) {
-    return `
-    <${field1}>${headline}</${field1}>
-        <div class="${properties}" id="${id}">
-            <div class="dropDownStart"  id="${headline}${id}" value="" disabled>Select ${selectionText}
-            </div>
-            <img src="./img/dropdownIcon.png" class="selectImg">
-        </div>
-    `;
-}
-
-function setBackToSubTaskField(field1, headline, properties, id, source) {
-    return `
-    <${field1}>${headline}</${field1}>
-    <div class="${properties}" id="${id}">
-        <div onclick="changeToInputField('${id}')" class="dropDownStart" value="" disabled selected>Add new Subtask<img src="${source}">
-        </div>
-    </div>
-    `;
-}
-
-function generateSubTaskField(field1, headline, properties, id, source) {
-    return `
-    <div class="detail" id="id_${id}">
-        <${field1}>${headline}</${field1}>
-        <div class="${properties}" id="${id}">
-            <div onclick="changeToInputField('${id}')" class="dropDownStart" value="" disabled selected>Add new Subtask<img src="${source}">
-            </div>
-        </div>
-    </div>
-    `;
 }
 
 function showDropDownItems(usedItems) {
@@ -196,26 +96,18 @@ function showDropDownItems(usedItems) {
 
 function showCategoryItems() {
     if (document.getElementById('CategorycategoryBox')) {
-
         checkDropDown();
-
-
         for (let i = 0; i < categories.length; i++) {
             if (document.getElementById(categories[i]['name']).classList.contains('d-none')) {
                 document.getElementById(categories[i]['name']).classList.remove('d-none');
             } else {
                 document.getElementById(categories[i]['name']).classList.add('d-none');
-
             }
         } if (selectedCategory) {
             document.getElementById(selectedCategory).classList.remove('d-none');
         }
-
     }
-
 }
-
-
 
 function checkDropDown() {
     if (!selectedCategory) {
@@ -223,18 +115,15 @@ function checkDropDown() {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
             document.getElementById('addNewCat').classList.remove('d-none');
             dropDownCat = true;
-
         } else {
             document.getElementById('addNewCat').classList.add('d-none');
             dropDownCat = false;
-
         }
     } else {
         if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
             document.getElementById('addNewCat').classList.remove('d-none');
             dropDownCat = true;
-
         } else {
             if (document.getElementById('addNewCat').classList.contains('d-none') && document.getElementById('addNewCat').classList.contains('d-none')) {
                 document.getElementById('addNewCat').classList.remove('d-none');
@@ -244,31 +133,21 @@ function checkDropDown() {
                 document.getElementById('CategorycategoryBox').classList.add('d-none');
             }
             dropDownCat = false;
-
         }
     }
-
 }
 
-
-let subtasks = [];
 function showUsersItems() {
     if (!dropDownAssign) {
-
         document.getElementById('Assigned toassignedTo').classList.remove('d-none');
         dropDownAssign = true;
-
-
     } else {
-        if(document.getElementById('Assigned toassignedTo').classList.contains('d-none')){
+        if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
             document.getElementById('Assigned toassignedTo').classList.add('d-none');
-
-        }else {
+        } else {
             document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-
         }
         dropDownAssign = false;
-
     }
     for (let i = 0; i < users.length; i++) {
         if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
@@ -329,11 +208,7 @@ function addContentTitle(title, id) {
  * @param {*} id Insert the ID you want to get shown
  */
 function showLink(id) {
-    document.getElementById('sum').classList.add('d-none');
-    // document.getElementById('board').classList.add('d-none');
-    document.getElementById('addTask').classList.add('d-none');
-    // document.getElementById('contacts').classList.add('d-none');
-    document.getElementById(id).classList.remove('d-none');
+    window.location.href = id;
 }
 
 

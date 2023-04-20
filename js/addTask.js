@@ -1,47 +1,3 @@
-function generateAddTaskHTML() {
-    addContentTitle('Add Task', 'addTask');
-    document.getElementById('addTask').innerHTML += `
-    <form onsubmit="createNewTask(); return false;" class="addTaskForm">
-    <div class="details">
-        <div class="detailBox-left">
-            ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
-            ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
-            ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
-            ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
-        </div>
-        <div class="border-1px-solid"></div>
-        <div class="detailBox-right">
-        ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-        ${generateLabelsHTML('label', 'Prio')} 
-
-        ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
-
-        <div class="p-relative d-flex align-c">
-
-                <list class="" id="list-subtask">
-                </list>
-            </div>
-        </div>
-        
-        </div>
-        <div class="d-flex align-c container-btns">
-            <div class="clearButton" onclick="clearAllInputs()">
-                Clear
-            </div>
-            <div class="createTaskBtnContainer">
-                <button class="createTaskBtn">Create Task</button>
-                <img class="" src="./img/checkIconWhite.png">
-            </div>
-        </div>
-        </form>
-    `;
-    generateOptionsHTML('assignedTo', users, 'users');
-    addOptionWithFunction('addNewCat');
-    generateOptionsHTML('categoryBox', categories, 'categories');
-    addEventListenerToDropDown();
-
-}
-
 function createNewTask() {
     let taskTitle = document.getElementById('inputTitle').value;
     let taskDesc = document.getElementById('inputDescription').value;
@@ -57,19 +13,6 @@ function createNewTask() {
     clearAllInputs();
 }
 
-function addColorChoser() {
-    document.getElementById('id_categoryBox').innerHTML += `
-    <div class="d-flex">
-        <a onclick="setActiveColor('8AA4FF')" id="8AA4FF" class="colorCircle"style="background-color:#8AA4FF;"></a>
-        <a onclick="setActiveColor('FF0000')" id="FF0000" class="colorCircle"style="background-color:#FF0000;"></a>
-        <a onclick="setActiveColor('2AD300')" id="2AD300" class="colorCircle"style="background-color:#2AD300;"></a>
-        <a onclick="setActiveColor('FF8A00')" id="FF8A00" class="colorCircle"style="background-color:#FF8A00;"></a>
-        <a onclick="setActiveColor('E200BE')" id="E200BE" class="colorCircle"style="background-color:#E200BE;"></a>
-        <a onclick="setActiveColor('0038FF')" id="0038FF" class="colorCircle"style="background-color:#0038FF;"></a>
-        </div>
-    `;
-}
-
 function getValueOfChosenColor() {
     for (let i = 0; i < colors.length; i++) {
         let isActive = document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');
@@ -77,8 +20,6 @@ function getValueOfChosenColor() {
             return colors[i];
         }
     }
-
-
 }
 
 function setActiveColor(id) {
@@ -104,7 +45,6 @@ function clearListSubtask() {
     document.getElementById('list-subtask').innerHTML = '';
 }
 
-
 function clearFields(...ids) {
     for (let i = 0; i < ids.length; i++) {
         document.getElementById(ids[i]).value = '';
@@ -112,10 +52,7 @@ function clearFields(...ids) {
     }
 }
 
-
-
 function changeStyleOfLabel(id) {
-
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
@@ -161,38 +98,27 @@ function addEventListenerToDropDown() {
     let selCat;
     catBox.addEventListener('click', function () {
         showDropDownItems('categories');
-
     });
-
     let userBox = document.getElementById('assignedTo');
     let selUser;
     userBox.addEventListener('click', function () {
         showDropDownItems('users');
 
     });
-
-
     for (let i = 0; i < categories.length; i++) {
         selCat = document.getElementById(categories[i]['name']);
         selCat.addEventListener('click', function (e) {
             let txt = e.currentTarget.attributes[1].textContent;
             setOption(txt, 'category');
             e.stopPropagation();
-
         });
     }
     for (let j = 0; j < users.length; j++) {
         selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
-            let txt = e.currentTarget.attributes[1].textContent;
-            e.stopPropagation();
-                
+            e.stopPropagation();          
         });
     }
-
-
-
-
 }
 
 function getAssignedContacts(){
@@ -224,17 +150,8 @@ function setOption(id, id2) {
             document.getElementById(id).classList.add('cl_categories');
         }
         selectedCategory = id;
-
     }
-    
 }
-
-function addOptionWithFunction(id) {
-    document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
-}
-
-
 
 function changeToInputField(id) {
     if (id == 'addNewCat') {

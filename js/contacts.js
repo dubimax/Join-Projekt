@@ -1,10 +1,10 @@
 function generateContactsHTML() {
+    includeHTML();
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
 }
 let names = [];
-
 
 function addContactCategories() {
     document.getElementById('contacts').innerHTML = '';
@@ -26,20 +26,15 @@ function getContactsWith(startLetter) {
         if (users[i]['name'].charAt(0) == startLetter) {
             names.push(users[i]);
             generateAlphaContainerFor(`${users[i]['name'].charAt(0)}`);
-
         }
-
     }
 }
 
 function getContactWith(i, value) {
-
-
     return names[i][value];
 }
 
 function generateAlphaContainerFor(letter) {
-
     for (let i = 0; i < names.length; i++) {
         let contactName = getContactWith(i, 'name');
         let userMail = getContactWith(i, 'email');
@@ -55,23 +50,18 @@ function generateAlphaContainerFor(letter) {
         </div>
         `;
         names.splice(0);
-
     }
 }
 
 function setVisibleIfnotEmpty() {
     for (let j = 0; j < 26; j++) {
-
         let ascicode = (65 + j).toString();
         let value = String.fromCharCode(ascicode);
         let child = document.getElementById('contact' + value).children;
         if (child[2]) {
             document.getElementById('contact' + value).classList.remove('d-none');
-
         }
-
     }
-
 }
 
 function getFirstLettersOfName(username) {
@@ -82,22 +72,10 @@ function getFirstLettersOfName(username) {
     return acronym;
 }
 
-
 function generateContactDetailsHTML() {
     generateContactDetailsTitle();
     generateContactHead();
     generateContactBody();
-}
-
-function generateContactDetailsTitle() {
-    document.getElementById('contactDetails').innerHTML = `
-    <div class="d-flex">
-        <h2 class="contactsTitle"">Contacts</h2>
-        <div class="fillerDiv"></div>
-        <h4>Better with a team</h4>
-    </div>
-    <div onclick="showAddNewContact()" class="addNewContactButton">New Contact</div>
-`;
 }
 
 function showAddNewContact() {
@@ -110,17 +88,15 @@ function hideAddNewContact() {
 
 function hideEditContact() {
     document.getElementById('editUserAtContacts').classList.add('d-none');
-
 }
+
 function showEditContact() {
     let oldName = document.getElementById('contactName').innerHTML;
     let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
     let oldPhone = document.getElementById('contactDetailsPhone').innerHTML;
-
     document.getElementById('editContactName').value = oldName;
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
-
     document.getElementById('editUserAtContacts').classList.remove('d-none');
 }
 
@@ -136,7 +112,6 @@ function createNewContact() {
 
 function editContact() {
     let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
-
     let userName = document.getElementById('editContactName').value;
     let userEmail = document.getElementById('editContactEmail').value;
     let userPhone = document.getElementById('editContactPhone').value;
@@ -147,47 +122,6 @@ function editContact() {
     backend.setItem('users', JSON.stringify(users));
     generateContactsHTML();
     hideEditContact();
-}
-
-
-function generateContactHead() {
-    document.getElementById('contactDetails').innerHTML += `
-    <div class="contactHeadContainer d-none" id="contactHeadContainer">
-        <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
-        <div class="contactHead">
-            <h5 id="contactName">Name</h5>
-            <div class="d-flex">
-                <img src="./img/plusContacts.png" class="addTaskContacts">
-                <span class="add-task-link">Add Task</span>
-            </div>
-        </div>
-        
-    </div>
-    `;
-}
-
-function generateContactBody() {
-    document.getElementById('contactDetails').innerHTML += `
-    <div class="contactInformationContainer d-none" id="contactInformationContainer">
-        <div class="contactInformationTitle">
-            <span>Contact Information</span>
-            <div onclick="showEditContact()">
-                <img src="./img/editContactPen.png">
-                <span>Edit Contact</span>
-            </div>
-        </div>
-        <div class="contactInformationContent">
-            <div class="contactInformationContentContainer">
-                <h5 class="contactInformationContentTitles">Email</h5>
-                <a class="contactInformationContentLink" id="contactDetailsEmail">email@email.de</a>
-            </div>
-            <div class="contactInformationContentContainer">
-                <h5 class="contactInformationContentTitles">Phone</h5>
-                <a class="contactInformationContentLink" id="contactDetailsPhone">+49123456789</a>
-            </div>
-         </div>
-    </div>
-    `;
 }
 
 function setContactDetails(userName, userMail, userPhone, userColor) {

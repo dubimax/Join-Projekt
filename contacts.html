@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <script src="variables.js"></script>
+    <script src="./js/genHTML.js"></script>
+    <script src="./js/variables.js"></script>
     <script src="../smallest_backend_ever/mini_backend.js"></script>
-    <script src="contacts.js"></script>
-    <script src="script.js"></script>
+    <script src="./js/contacts.js"></script>
+    <script src="./js/script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="init()">
+<body onload="generateContactsHTML()">
     <div w3-include-html="./templates/navs.html"></div>
     <div class="content">
         <div id="contacts" class="details"></div>
         <div id="contactDetails"></div>
         <div id="createNewUserAtContacts" class="d-none">
             <img onclick="hideAddNewContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
-
             <div class="createNewUserAtContactsContainer">
                 <div class="createNewUserAtContacts-left">
                     <div class="left-side-Contacts">
