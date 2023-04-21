@@ -2,7 +2,7 @@ function generateAddTaskHTML(id) {
     includeHTML();
     load();
     if(loggedIn) {
-    addContentTitle('Add Task', 'addTaskAtContacts');
+    addContentTitle('Add Task', id);
     document.getElementById(id).innerHTML += `
     <form onsubmit="createNewTask(); return false;" class="addTaskForm">
     <div class="details">

@@ -38,7 +38,7 @@ body {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 18px 21px;
-
+    cursor: pointer;
     outline: none;
 
 }
@@ -656,7 +656,8 @@ a {
 
 h2 {
     font-size: 61px;
-    margin-left: 100px;
+    position: relative;
+    width: 100%;
 }
 
 label {
@@ -679,8 +680,6 @@ select option:hover {
 .details {
     display: flex;
     margin-top: 20px;
-    justify-content: space-around;
-
 }
 
 .border-1px-solid {
@@ -797,6 +796,7 @@ select option:hover {
     position: absolute;
     right: 0;
     width: calc(100% - 232px);
+    padding-left: 100px;
 
 }
 
@@ -839,6 +839,9 @@ select option:hover {
 }
 
 .addTaskForm {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
