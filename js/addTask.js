@@ -7,7 +7,9 @@ function createNewTask() {
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
     let taskSubtasks = subtasks;
-    tasks.push({'title':taskTitle,'description': taskDesc,'category': taskCategory,'isAssigned':assignedTo, 'dueDate': taskDueDate,'prio': taskPrio,'subtasks': taskSubtasks});
+    let id = tasks.length +1;
+    let status = 'toDos';
+    tasks.push({'title':taskTitle,'description': taskDesc,'category': taskCategory,'isAssigned':assignedTo, 'dueDate': taskDueDate,'prio': taskPrio,'subtasks': taskSubtasks, 'id': id, 'status': status });
     backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];
     clearAllInputs();
