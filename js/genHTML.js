@@ -1,9 +1,9 @@
-function generateAddTaskHTML() {
+function generateAddTaskHTML(id) {
     includeHTML();
     load();
     if(loggedIn) {
-    addContentTitle('Add Task', 'addTask');
-    document.getElementById('addTask').innerHTML += `
+    addContentTitle('Add Task', 'addTaskAtContacts');
+    document.getElementById(id).innerHTML += `
     <form onsubmit="createNewTask(); return false;" class="addTaskForm">
     <div class="details">
         <div class="detailBox-left">
@@ -80,7 +80,7 @@ function generateContactHead() {
         <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
             <h5 id="contactName">Name</h5>
-            <div class="d-flex">
+            <div class="d-flex" onclick="showAddNewTaskAtContacts()">
                 <img src="./img/plusContacts.png" class="addTaskContacts">
                 <span class="add-task-link">Add Task</span>
             </div>

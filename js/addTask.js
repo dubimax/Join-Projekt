@@ -49,8 +49,11 @@ function clearListSubtask() {
 
 function clearFields(...ids) {
     for (let i = 0; i < ids.length; i++) {
-        document.getElementById(ids[i]).value = '';
+        if(document.getElementById(ids[i])){
+            document.getElementById(ids[i]).value = '';
+        }
         changeStyleOfLabel(ids[i]);
+        
     }
 }
 
@@ -95,6 +98,21 @@ function changeStyleOfLabel(id) {
 
     }
 }
+
+
+
+
+function changeToInputField(id) {
+    if (id == 'addNewCat') {
+        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
+        addColorChoser();
+        dropDown = false;
+    }
+    if (id == 'addNewSubTask') {
+        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
+    }
+}
+
 function addEventListenerToDropDown() {
     let catBox = document.getElementById('categoryBox');
     let selCat;
@@ -118,11 +136,10 @@ function addEventListenerToDropDown() {
     for (let j = 0; j < users.length; j++) {
         selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
-            e.stopPropagation();          
+            e.stopPropagation();
         });
     }
 }
-
 function getAssignedContacts(){
     for(let i= 0; i< users.length;i++){
         if(document.getElementById(users[i]['name']).children[0].checked){
@@ -154,19 +171,6 @@ function setOption(id, id2) {
         selectedCategory = id;
     }
 }
-
-function changeToInputField(id) {
-    if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
-        addColorChoser();
-        dropDown = false;
-    }
-    if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
-    }
-}
-
-
 
 
 

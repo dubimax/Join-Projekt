@@ -11,19 +11,19 @@ async function includeHTML() {
         }
     }
 }
-function load(){
+function load() {
     loggedIn = JSON.parse(localStorage.getItem("loggedIn" || false));
-    users = JSON.parse(localStorage.getItem("users") || [{}] );
-    categories = JSON.parse(localStorage.getItem("categories") || [{}] );
-    tasks = JSON.parse(localStorage.getItem("tasks") || [{}] );
+    users = JSON.parse(localStorage.getItem("users") || [{}]);
+    categories = JSON.parse(localStorage.getItem("categories") || [{}]);
+    tasks = JSON.parse(localStorage.getItem("tasks") || [{}]);
 }
 
-function save(){
+function save() {
     localStorage.clear();
-    localStorage.setItem( "loggedIn", JSON.stringify(loggedIn));
-    localStorage.setItem( "users", JSON.stringify(users));
-    localStorage.setItem( "categories", JSON.stringify(categories));
-    localStorage.setItem( "tasks", JSON.stringify(tasks));
+    localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("categories", JSON.stringify(categories));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
@@ -243,3 +243,5 @@ function showFrame(...ids) {
         document.getElementById(element2).classList.remove('d-none');
     }
 }
+
+

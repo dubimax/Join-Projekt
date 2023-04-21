@@ -6,6 +6,8 @@ function generateContactsHTML() {
         addContactCategories();
         setVisibleIfnotEmpty();
         generateContactDetailsHTML();
+        generateAddTaskHTML('addTaskAtContacts');
+        addCloseBtnToAddTaskAtContacts ();
     }else {
         window.location.href = 'login.html';
     }
@@ -48,7 +50,7 @@ function generateAlphaContainerFor(letter) {
         let userPhone = getContactWith(i, 'phone');
         let userColor = getContactWith(i, 'color')
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
-        <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}')" class="contactSelect" id="${contactName}">
+        <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}')" class="contactSelect" id="contactAt${contactName}">
             <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
             <div class="contactsAttributeBox">
                 <span class="contactSelectName"> ${contactName}</span>
@@ -91,6 +93,14 @@ function showAddNewContact() {
 
 function hideAddNewContact() {
     document.getElementById('createNewUserAtContacts').classList.add('d-none');
+}
+
+function showAddNewTaskAtContacts() {
+    document.getElementById('addTaskAtContacts').classList.remove('d-none');
+}
+
+function hideAddNewTaskAtContacts() {
+    document.getElementById('addTaskAtContacts').classList.add('d-none');
 }
 
 function hideEditContact() {
@@ -154,3 +164,8 @@ function randomcolor() {
 
 }
 
+function addCloseBtnToAddTaskAtContacts () {
+    document.getElementById('addTaskAtContacts').innerHTML += `
+    <img onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
+    `;
+}

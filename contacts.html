@@ -6,109 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
+    <script src="./js/addTask.js"></script>
+
     <script src="./js/genHTML.js"></script>
     <script src="./js/variables.js"></script>
     <script src="../smallest_backend_ever/mini_backend.js"></script>
+
     <script src="./js/contacts.js"></script>
     <script src="./js/script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="generateContactsHTML()">
+<body onload="generateContactsHTML('addTaskAtContacts')">
     <div w3-include-html="./templates/navs.html"></div>
     <div class="content">
         <div id="contacts" class="details"></div>
         <div id="contactDetails"></div>
-        <div id="addTaskAtContacts">
-            <h2>Add Task</h2>
-            <div class="addTaskAtContactsContainer" style="z-index: 10;">
-                <div class="detailBox-left">
-                    <label for="addTaskTitletContacts">Title</label>
-                    <input type="text" name="addTaskTitleAtContacts" class="inputTextStd" id="addTaskTitleAtContacts" placeholder="Title">
-                    <label for="addTaskDescriptionAtContacts">Description</label>
-                    <textarea type="text" name="addTaskDescriptionAtContacts" class="inputDescriptionField" id="addTaskDescriptionAtContacts"
-                        placeholder="Description"></textarea>
-                    <div class="dropDown"></div>
-                    <div class="dropDown"></div>
-
-                </div>
-                <div class="border-1px-solid"></div>
-                <div class="detailBox-right">
-                    <label for="addTaskDueDateAtContacts">Due Date</label>
-                    <input type="date" name="addTaskDueDateAtContacts" class="inputTextStd" id="addTaskDueDateAtContacts">
-                    <div class="detail">
-                        <label>Prio</label>
-                        <div class="d-flex">
-                            <label id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img
-                                    src="img/urgentIcon.png" class="prioImg" id="urgentImgID"> </label>
-                            <label id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img
-                                    src="img/mediumIcon.png" class="prioImg" id="mediumImgID"> </label>
-                            <label id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img
-                                    src="img/lowIcon.png" class="prioImg" id="lowImgID"> </label>
-                        </div>
-                    </div>
-                    <div class="detail" id="subTaskAtContacts">
-                        <label>Subtasks</label>
-                        <div class="dropDownMenuField" id="addNewSubTaskAtContacts">
-                            <div onclick="changeToInputField('subTaskAtContacts')" class="dropDownStart" value="" disabled selected>Add new Subtask<img src="./img/dropdownIcon.png">
-                            </div>
-                        </div>
-                        <list class="" id="list-subtask">
-                            Test
-                        </list>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div id="createNewUserAtContacts" class="d-none">
-            <img onclick="hideAddNewContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
-            <div class="createNewUserAtContactsContainer">
-                <div class="createNewUserAtContacts-left">
-                    <div class="left-side-Contacts">
-                        <img src="img/logo-nav.png" alt="">
-                        <div>
-                            <h3 class="addNewContactTitle">Add Contact</h3>
-                            <h5 class="addNewContactSubTitle">Tasks are better with a team</h5>
-                            <div class="fillDiv-w90"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="createNewUserAtContacts-right">
-                    <form onsubmit="createNewContact(); return false;">
-                        <div class="addNewContactProfileImgContainer">
-                            <img class="profileDummy" src="img/profileDummy.png">
-                            <img class="profileDummyInside" src="img/profileDummyInside.png">
-                        </div>
-                        <div class="addNewContactInputs">
-                            <div class="createNewContactNameInput">
-                                <input type="text" required placeholder="Name"
-                                    pattern="[A-Z]{1}[a-z]*[\s][A-Z]{1}[a-z]*" id="createNewContactName">
-                                <img class="createNewContactNameImg" src="img/miniProfile.png">
-                            </div>
-                            <div class="createNewContactNameInput">
-
-                                <input type="email" required placeholder="Email" id="createNewContactEmail">
-                                <img class="createNewContactNameImg" src="img/miniProfile.png">
-
-                            </div>
-                            <div class="createNewContactNameInput">
-
-                                <input type="phone" required placeholder="Phone" id="createNewContactPhone">
-                                <img class="createNewContactNameImg" src="img/miniProfile.png">
-
-                            </div>
-                            <div class="addNewContactsButtonContainer">
-                                <div onclick="hideAddNewContact()" class="addNewContactCancelButton">Cancel</div>
-                                <button class="addNewContactCreateButton">Create Contact</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
+        <div id="addTaskAtContacts" class="d-none">
         <div id="editUserAtContacts" class="d-none">
             <img onclick="hideEditContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
             <div class="editUserAtContactsContainer">
@@ -153,7 +67,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> 
 
     </div>
 </body>
