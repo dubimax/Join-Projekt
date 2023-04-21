@@ -19,6 +19,48 @@
     <div class="content">
         <div id="contacts" class="details"></div>
         <div id="contactDetails"></div>
+        <div id="addTaskAtContacts">
+            <h2>Add Task</h2>
+            <div class="d-flex" style="z-index: 10;">
+                <div class="left-side-contacts">
+                    <label for="addTaskTitletContacts">Title</label>
+                    <input type="text" name="addTaskTitleAtContacts" id="addTaskTitleAtContacts" placeholder="Title">
+                    <label for="addTaskDescriptionAtContacts">Description</label>
+                    <textarea type="text" name="addTaskDescriptionAtContacts" id="addTaskDescriptionAtContacts"
+                        placeholder="Description"></textarea>
+                    <div class="dropDown"></div>
+                    <div class="dropDown"></div>
+
+                </div>
+                <div class="fillerDiv"></div>
+                <div class="right-side-contacts">
+                    <label for="addTaskTitleAtContacts">Title</label>
+                    <input type="date" name="addTaskDueDateAtContacts" id="addTaskDueDateAtContacts">
+                    <div class="detail">
+                        <label>Prio</label>
+                        <div class="d-flex">
+                            <label id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img
+                                    src="img/urgentIcon.png" class="prioImg" id="urgentImgID"> </label>
+                            <label id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img
+                                    src="img/mediumIcon.png" class="prioImg" id="mediumImgID"> </label>
+                            <label id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img
+                                    src="img/lowIcon.png" class="prioImg" id="lowImgID"> </label>
+                        </div>
+                    </div>
+                    <div class="detail" id="subTaskAtContacts">
+                        <label>Subtasks</label>
+                        <div class="dropDownMenuField" id="addNewSubTaskAtContacts">
+                            <div onclick="changeToInputField('subTaskAtContacts')" class="dropDownStart" value="" disabled selected>Add new Subtask<img src="./img/dropdownIcon.png">
+                            </div>
+                        </div>
+                        <list class="" id="list-subtask">
+                            Test
+                        </list>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div id="createNewUserAtContacts" class="d-none">
             <img onclick="hideAddNewContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
             <div class="createNewUserAtContactsContainer">
@@ -42,7 +84,7 @@
                         <div class="addNewContactInputs">
                             <div class="createNewContactNameInput">
                                 <input type="text" required placeholder="Name"
-                                pattern="[A-Z]{1}[a-z]*[\s][A-Z]{1}[a-z]*" id="createNewContactName">
+                                    pattern="[A-Z]{1}[a-z]*[\s][A-Z]{1}[a-z]*" id="createNewContactName">
                                 <img class="createNewContactNameImg" src="img/miniProfile.png">
                             </div>
                             <div class="createNewContactNameInput">
@@ -64,7 +106,7 @@
                         </div>
                     </form>
                 </div>
-               
+
             </div>
         </div>
         <div id="editUserAtContacts" class="d-none">
@@ -92,16 +134,16 @@
                                 <img class="editContactNameImg" src="img/miniProfile.png">
                             </div>
                             <div class="editContactNameInput">
-                
+
                                 <input type="email" required placeholder="Email" id="editContactEmail">
                                 <img class="editContactNameImg" src="img/miniProfile.png">
-                
+
                             </div>
                             <div class="editContactNameInput">
-                
+
                                 <input type="phone" required placeholder="Phone" id="editContactPhone">
                                 <img class="editContactNameImg" src="img/miniProfile.png">
-                
+
                             </div>
                             <div class="editButtonContainer">
                                 <button class="editContactButton">Save</button>
@@ -109,7 +151,7 @@
                         </div>
                     </form>
                 </div>
-               
+
             </div>
         </div>
 
@@ -117,5 +159,3 @@
 </body>
 
 </html>
-
-
