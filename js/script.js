@@ -31,10 +31,10 @@ setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 async function init() {
     await includeHTML();
     await downloadFromServer();
+    load();
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
-    load();
 }
 
 function login() {
