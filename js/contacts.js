@@ -112,6 +112,7 @@ function createNewContact() {
     hideAddNewContact();
     addContactCategories();
     setVisibleIfnotEmpty();
+    save();
 }
 
 function editContact() {
@@ -128,6 +129,7 @@ function editContact() {
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
+    save();
 }
 
 function setContactDetails(userName, userMail, userPhone, userColor) {

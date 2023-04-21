@@ -238,4 +238,3 @@ function showFrame(...ids) {
         document.getElementById(element2).classList.remove('d-none');
     }
 }
-
