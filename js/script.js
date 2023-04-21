@@ -34,6 +34,7 @@ async function init() {
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
+    load();
 }
 
 function login() {
@@ -50,6 +51,7 @@ function checkUserData(userEmail, userPassword) {
         dataCheck.classList.remove('d-none');
     } else {
         loggedIn = true;
+        save();
         window.location.href = 'summary.html';
     }
 }

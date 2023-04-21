@@ -2,9 +2,14 @@
 function generateContactsHTML() {
     includeHTML();
     load();
-    addContactCategories();
-    setVisibleIfnotEmpty();
-    generateContactDetailsHTML();
+    if(loggedIn){
+        addContactCategories();
+        setVisibleIfnotEmpty();
+        generateContactDetailsHTML();
+    }else {
+        window.location.href = 'login.html';
+    }
+    
 }
 let names = [];
 
