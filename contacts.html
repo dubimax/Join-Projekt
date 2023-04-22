@@ -19,10 +19,10 @@
 
 <body onload="generateContactsHTML('addTaskAtContacts')">
     <div w3-include-html="./templates/navs.html"></div>
-    <div class="content">
+    <div class="content" id="contactDetailsContainer">
         <div id="contacts" class="details"></div>
         <div id="contactDetails"></div>
-        <div id="addTaskAtContacts" class="d-none">
+        <div id="addTaskAtContacts" class="d-none"></div>
         <div id="editUserAtContacts" class="d-none">
             <img onclick="hideEditContact()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
             <div class="editUserAtContactsContainer">

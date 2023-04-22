@@ -43,10 +43,17 @@ body {
 
 }
 
+#contactDetailsContainer {
+    position: absolute;
+    width: calc(100% - 232px);
+    right: 0;
+    height: 100%;
+}
+
 #contacts {
     display: flex;
     position: absolute;
-    left: 233px;
+    left: 0;
     top: 71px;
     background-color: #FFFFFF;
     bottom: 0;
@@ -86,15 +93,11 @@ h4 {
 .contactHeadContainer {
     display: flex;
     align-items: center;
-    margin-left: 100px;
-    margin-top: 50px;
 }
 
 .contactInformationContainer {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
-    margin-left: 100px;
 }
 
 .contactInformationTitle {
@@ -433,6 +436,7 @@ h4 {
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
+    width: unset;
 }
 
 #contactDetails {
@@ -440,7 +444,15 @@ h4 {
     right: 0;
     top: 89px;
     bottom: 0;
-    left: 687px;
+    /* left: 687px; */
+    padding-left: 52px;
+    padding-top: 82px;
+    width: calc(100% - 460px);
+}
+
+.contactsTitleContainer{
+    display: flex;
+    margin-bottom: 52px;
 }
 
 .letter {
@@ -527,6 +539,10 @@ li {
 #id_medium,
 #id_low {
     cursor: pointer;
+}
+
+.margin0px {
+    margin: 0 !important;
 }
 
 
@@ -841,9 +857,9 @@ select option:hover {
 }
 
 .container-btns {
+    right: calc(100% - 1220px + 125px);
     position: absolute;
     bottom: -70px;
-    right: calc(232px + 230px);
 }
 
 .addTaskForm {

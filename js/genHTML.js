@@ -65,7 +65,7 @@ function addOptionWithFunction(id) {
 
 function generateContactDetailsTitle() {
     document.getElementById('contactDetails').innerHTML = `
-    <div class="d-flex">
+    <div class="contactsTitleContainer">
         <h2 class="contactsTitle"">Contacts</h2>
         <div class="fillerDiv"></div>
         <h4>Better with a team</h4>
@@ -153,7 +153,7 @@ function generatesChangedInputFieldHTML(field1, field2, headline, properties, ty
     <div class="newCat">
 
         <a onclick="cancelAddNew('${restoreID}')"><img src="img/cancelIcon.png"></a>
-        <div class="border-1px-solid width0-height31px"></div>
+        <div class="border-1px-solid margin0px width0-height31px"></div>
         <a onclick="${atClick}"><img src="img/checkIcon.png"></a>
     </div>  
     `;

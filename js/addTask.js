@@ -94,13 +94,8 @@ function changeStyleOfLabel(id) {
             activeImg = '';
             changeStyleOfLabel(id);
         }
-
-
     }
 }
-
-
-
 
 function changeToInputField(id) {
     if (id == 'addNewCat') {
