@@ -340,11 +340,11 @@ h4 {
     top: 45px;
     padding: 20px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 30px; 
+    border-radius: 30px;
     justify-content: space-evenly;
 }
 
-.addTaskAtContactsContainer{
+.addTaskAtContactsContainer {
     display: flex;
     justify-content: space-evenly;
 }
@@ -484,7 +484,7 @@ h4 {
     border-radius: 10px;
     resize: vertical;
     padding: 18px 21px;
-
+    cursor: pointer;
     outline: none;
 }
 
@@ -520,6 +520,13 @@ li {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     position: relative;
+    cursor: pointer;
+}
+
+#id_urgent,
+#id_medium,
+#id_low {
+    cursor: pointer;
 }
 
 
@@ -684,6 +691,7 @@ select option:hover {
 
 .border-1px-solid {
     border: 1px solid #D1D1D1;
+    margin: 0 125px;
 }
 
 .cl_categories {
@@ -796,7 +804,7 @@ select option:hover {
     position: absolute;
     right: 0;
     width: calc(100% - 232px);
-    padding-left: 100px;
+    padding-left: 125px;
 
 }
 
@@ -833,9 +841,9 @@ select option:hover {
 }
 
 .container-btns {
-    justify-content: flex-end;
-    margin-top: 25px;
-    width: calc(100% - 130px);
+    position: absolute;
+    bottom: -70px;
+    right: calc(232px + 230px);
 }
 
 .addTaskForm {

@@ -23,17 +23,17 @@ function generateAddTaskHTML(id) {
                 </list>
             </div>
         </div>
-        
-        </div>
         <div class="d-flex align-c container-btns">
-            <div class="clearButton" onclick="clearAllInputs()">
-                Clear
-            </div>
-            <div class="createTaskBtnContainer">
-                <button class="createTaskBtn">Create Task</button>
-                <img class="" src="./img/checkIconWhite.png">
-            </div>
+        <div class="clearButton" onclick="clearAllInputs()">
+            Clear
         </div>
+        <div class="createTaskBtnContainer">
+            <button class="createTaskBtn">Create Task</button>
+            <img class="" src="./img/checkIconWhite.png">
+        </div>
+    </div>
+        </div>
+       
         </form>
     `;
     generateOptionsHTML('assignedTo', users, 'users');
