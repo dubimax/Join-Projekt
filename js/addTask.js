@@ -13,6 +13,7 @@ function createNewTask() {
     backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];
     clearAllInputs();
+    save();
 }
 
 function getValueOfChosenColor() {
