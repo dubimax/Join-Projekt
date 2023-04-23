@@ -1,4 +1,4 @@
-function createNewTask() {
+function createNewTask(statusTag) {
     let taskTitle = document.getElementById('inputTitle').value;
     let taskDesc = document.getElementById('inputDescription').value;
     let taskCategory = selectedCategory;
@@ -8,7 +8,7 @@ function createNewTask() {
     taskPrio = taskPrio[0];
     let taskSubtasks = subtasks;
     let id = tasks.length + 1;
-    let status = 'toDos';
+    let status = statusTag;
     tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
     backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];

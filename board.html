@@ -8,25 +8,57 @@
     <title>Join Board</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="board.css">
+    <script src="./js/addTask.js"></script>
+    <script src="./js/contacts.js"></script>
+
+    <script src="./js/genHTML.js"></script>
+    <script src="./js/variables.js"></script>
+    <script src="../smallest_backend_ever/mini_backend.js"></script>
     <script src="board.js"></script>
     <script src="js/script.js"></script>
+ 
 
 </head>
 
 <body onload="updateHTML()">
-    <!-- <div w3-include-html="./templates/navs.html"></div> -->
+    <div w3-include-html="./templates/navs.html"></div>
 
+    <div id="addTaskAtContacts" class="d-none"></div>
     <div class="cardHeaders">
-        <div class="dragArea" id="toDos" ondrop="moveTo('toDos')" ondragover="allowDrop(event); highlight('toDos')">
-            To do</div>
-        <div class="dragArea" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event);highlight('inProgress')">
-            In progress</div>
-        <div class="dragArea" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')" ondragover="allowDrop(event);highlight('awaitingFeedback')">
-            Awaiting Feedback</div>
-        <div class="dragArea" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event);highlight('done')">
-        Done</div>
+        <div class="dragAreaFullContainer">
+            <div class="dragAreaTitle">
+                <label for="toDo">To do</label>
+                <img src="img/plusButtonDark.png" id="todoImg" onclick=" ">
+            </div>
+            <div class="dragArea" name="toDo" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event); highlight('toDo')">
+            </div>
+        </div>
+        <div class="dragAreaFullContainer">
+            <div class="dragAreaTitle">
+                <label for="inProgress">In Progress</label>
+                <img src="img/plusButtonDark.png">
+            </div>
+            <div class="dragArea" name="inProgress" id="inProgress" ondrop="moveTo('inProgress')"
+                ondragover="allowDrop(event);highlight('inProgress')"></div>
+        </div>
+        <div class="dragAreaFullContainer">
+            <div class="dragAreaTitle">
+                <label for="awaitingFeedback">Awaiting Feedback</label>
+                <img src="img/plusButtonDark.png">
+            </div>
+            <div class="dragArea" name="awaitingFeedback" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')"
+                ondragover="allowDrop(event);highlight('awaitingFeedback')"></div>
+        </div>
+        <div class="dragAreaFullContainer">
+            <div class="dragAreaTitle">
+                <label for="done">Done</label>
+                <img src="img/plusButtonDark.png">
+            </div>
+            <div class="dragArea" name="done" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event);highlight('done')">
+            </div>
+        </div>
     </div>
 
-</body> 
+</body>
 
 </html>

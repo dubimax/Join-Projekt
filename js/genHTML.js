@@ -1,10 +1,22 @@
+
+//UMBENENNEN
+function test() {
+    let test1 = document.getElementById('todoImg');
+    test1.onclick = function() {
+        if(test1.parentElement.firstChild.nextElementSibling.innerHTML == 'To do'){
+            showAddNewTaskAtContacts();
+            console.log('erfolgreich');
+        }
+    };
+}
+
 function generateAddTaskHTML(id) {
     includeHTML();
     load();
     if(loggedIn) {
     addContentTitle('Add Task', id);
     document.getElementById(id).innerHTML += `
-    <form onsubmit="createNewTask(); return false;" class="addTaskForm">
+    <form onsubmit="createNewTask(${id}); return false;" class="addTaskForm" >
     <div class="details">
         <div class="detailBox-left">
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}

@@ -1,9 +1,14 @@
 .cardHeaders {
     display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 89px;
+    width: calc(100% - 232px);
+    right: 0;
 }
 
 .dragArea {
-    width: 275px;
+   
     height: 100vh;
     padding: 10px;
 
