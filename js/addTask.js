@@ -7,9 +7,9 @@ function createNewTask() {
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
     let taskSubtasks = subtasks;
-    let id = tasks.length +1;
+    let id = tasks.length + 1;
     let status = 'toDos';
-    tasks.push({'title':taskTitle,'description': taskDesc,'category': taskCategory,'isAssigned':assignedTo, 'dueDate': taskDueDate,'prio': taskPrio,'subtasks': taskSubtasks, 'id': id, 'status': status });
+    tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
     backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];
     clearAllInputs();
@@ -52,11 +52,11 @@ function clearListSubtask() {
 
 function clearFields(...ids) {
     for (let i = 0; i < ids.length; i++) {
-        if(document.getElementById(ids[i])){
+        if (document.getElementById(ids[i])) {
             document.getElementById(ids[i]).value = '';
         }
         changeStyleOfLabel(ids[i]);
-        
+
     }
 }
 
@@ -111,26 +111,47 @@ function changeToInputField(id) {
     }
 }
 
-function addEventListenerToDropDown() {
-    let catBox = document.getElementById('categoryBox');
-    let selCat;
-    catBox.addEventListener('click', function () {
-        showDropDownItems('categories');
-    });
-    let userBox = document.getElementById('assignedTo');
-    let selUser;
-    userBox.addEventListener('click', function () {
-        showDropDownItems('users');
+function removeEventListenerFromDropDown(){
+    document.getElementById('categoryBox').removeEventListener('click', function(){}); 
 
-    });
+    document.getElementById('assignedTo').removeEventListener('click', function(){});
+    let selUser;
     for (let i = 0; i < categories.length; i++) {
         selCat = document.getElementById(categories[i]['name']);
-        selCat.addEventListener('click', function (e) {
-            let txt = e.currentTarget.attributes[1].textContent;
-            setOption(txt, 'category');
-            e.stopPropagation();
-        });
+        selCat.removeEventListener('click', function(){});
     }
+    for (let j = 0; j < users.length; j++) {
+        selUser = document.getElementById(users[j]['name']);
+        selUser.removeEventListener('click', function(){});
+    }
+}
+
+function addEventListenerToCategories(){
+    let catBox = document.getElementById('categoryBox');
+    let selCat;
+        catBox.addEventListener('click', function () {
+            showDropDownItems('categories');
+        });
+        for (let i = 0; i < categories.length; i++) {
+            selCat = document.getElementById(categories[i]['name']);
+            selCat.addEventListener('click', function (e) {
+                let txt = e.currentTarget.attributes[1].textContent;
+                setOption(txt, 'category');
+                e.stopPropagation();
+            });
+        }
+}
+
+function addEventListenerToDropDown() {
+    addEventListenerToCategories();
+
+    let userBox = document.getElementById('assignedTo');
+    let selUser;
+        userBox.addEventListener('click', function () {
+            showDropDownItems('users');
+        });
+    
+    
     for (let j = 0; j < users.length; j++) {
         selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
@@ -138,9 +159,9 @@ function addEventListenerToDropDown() {
         });
     }
 }
-function getAssignedContacts(){
-    for(let i= 0; i< users.length;i++){
-        if(document.getElementById(users[i]['name']).children[0].checked){
+function getAssignedContacts() {
+    for (let i = 0; i < users.length; i++) {
+        if (document.getElementById(users[i]['name']).children[0].checked) {
             assigned.push(document.getElementById(users[i]['name']).children[0].value);
         }
     }
@@ -151,6 +172,7 @@ function setOption(id, id2) {
     if (id2 == 'category') {
         document.getElementById('CategorycategoryBox').classList.add('d-none');
         document.getElementById('addNewCat').classList.add('d-none');
+        dropDownCat = false;
 
         for (let i = 0; i < categories.length; i++) {
             document.getElementById(categories[i]['name']).classList.add('d-none');

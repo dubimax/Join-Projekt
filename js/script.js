@@ -76,7 +76,6 @@ function addCategory() {
     categories.push({ 'name': newCategory, 'color': color });
     backend.setItem('categories', JSON.stringify(categories));
     cancelAddNew('addNewCat');
-    generateOptionsHTML('categoryBox', categories, 'categories');
 }
 
 function getCategory(i) {
@@ -91,14 +90,18 @@ function getUser(i) {
 }
 
 function cancelAddNew(id) {
+
     if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', 'task category');
+        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category');
         addOptionWithFunction('addNewCat');
         generateOptionsHTML('categoryBox', categories, 'categories');
-        addEventListenerToDropDown();
+        save();
+        dropDownCat = false;
+        addEventListenerToCategories();
     }
     if (id == 'addNewSubTask') {
         document.getElementById('id_addNewSubTask').innerHTML = setBackToSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png');
+
     }
 }
 
@@ -142,16 +145,12 @@ function checkDropDown() {
             document.getElementById('addNewCat').classList.remove('d-none');
             dropDownCat = true;
         } else {
-            if (document.getElementById('addNewCat').classList.contains('d-none') && document.getElementById('addNewCat').classList.contains('d-none')) {
-                document.getElementById('addNewCat').classList.remove('d-none');
-                document.getElementById('CategorycategoryBox').classList.remove('d-none');
-            } else {
                 document.getElementById('addNewCat').classList.add('d-none');
                 document.getElementById('CategorycategoryBox').classList.add('d-none');
-            }
-            dropDownCat = false;
+                dropDownCat = false;
+            } 
         }
-    }
+    
 }
 
 function showUsersItems() {

@@ -698,6 +698,14 @@ li {
     width: 100%;
     padding: 18px 21px;
     border-radius: 10px;
+}
+
+.subTaskStart {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 18px 21px;
+    border-radius: 10px;
     justify-content: space-between;
 }
 

@@ -169,20 +169,20 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
             <img src="${source}" class="selectImg">
-            <div  class="dropDownStart" id="${headline}${id}" disabled >Select ${selectionText}
+            <div class="dropDownStart" id="${headline}${id}" disabled>Select ${selectionText}
             </div>
         </div>
     </div>
     `;
 }
 
-function setBackToOptionsField(field1, headline, properties, id, selectionText) {
+function setBackToOptionsField(field1, headline, properties, id, source, selectionText) {
     return `
     <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <div class="dropDownStart"  id="${headline}${id}" value="" disabled>Select ${selectionText}
+            <img src="${source}" class="selectImg">
+            <div class="dropDownStart" id="${headline}${id}" disabled>Select ${selectionText}
             </div>
-            <img src="./img/dropdownIcon.png" class="selectImg">
         </div>
     `;
 }
@@ -190,7 +190,7 @@ function setBackToSubTaskField(field1, headline, properties, id, source) {
     return `
     <${field1}>${headline}</${field1}>
     <div class="${properties}" id="${id}">
-        <div onclick="changeToInputField('${id}')" class="dropDownStart" value="" disabled selected>Add new Subtask<img src="${source}">
+        <div onclick="changeToInputField('${id}')" class="subTaskStart" value="" disabled selected>Add new Subtask<img src="${source}">
         </div>
     </div>
     `;
