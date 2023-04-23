@@ -97,6 +97,7 @@ function hideAddNewContact() {
 
 function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
+    addEventListenerToDropDown();
 }
 
 function hideAddNewTaskAtContacts() {

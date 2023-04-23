@@ -124,11 +124,13 @@ h4 {
     display: flex;
     align-items: center;
     margin-bottom: 21px;
+    animation: myAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
 }
 
 .contactInformationContainer {
     display: flex;
     flex-direction: column;
+    animation: myAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
 }
 
 .contactInformationTitle {
@@ -251,6 +253,31 @@ h4 {
     height: 594px;
     background: #FFFFFF;
     border-radius: 30px;
+    animation: myAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
+}
+@keyframes myAnim {
+	0% {
+		opacity: 1;
+		transform: translateX(300px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes myAnim2 {
+	0% {
+		opacity: 1;
+		transform: translateY(300px);
+
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+
+	}
 }
 
 #createNewContactName,
@@ -380,6 +407,8 @@ h4 {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     justify-content: space-evenly;
+    animation: myAnim 1s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
+
 }
 
 .addTaskAtContactsContainer {
