@@ -16,6 +16,8 @@ function createNewTask() {
     save();
 }
 
+
+
 function getValueOfChosenColor() {
     for (let i = 0; i < colors.length; i++) {
         let isActive = document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');

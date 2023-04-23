@@ -2,16 +2,16 @@
 function generateContactsHTML() {
     includeHTML();
     load();
-    if(loggedIn){
+    if (loggedIn) {
         addContactCategories();
         setVisibleIfnotEmpty();
         generateContactDetailsHTML();
         generateAddTaskHTML('addTaskAtContacts');
-        addCloseBtnToAddTaskAtContacts ();
-    }else {
+        addCloseBtnToAddTaskAtContacts();
+    } else {
         window.location.href = 'login.html';
     }
-    
+
 }
 let names = [];
 
@@ -27,6 +27,25 @@ function addContactCategories() {
        </div>`;
         getContactsWith(value);
     }
+}
+
+function deleteContact(contactName) {
+    let deleteUser = users.findIndex(u => u.name == contactName);
+    users.splice(deleteUser, 1);
+    backend.setItem('users', JSON.stringify(users));
+}
+function addEventListenerToDeleButton() {
+    let deleteButton = document.getElementById('deleteButton');
+    let contactToDelete = document.getElementById('editContactName').value;
+    deleteButton.addEventListener('click', function () {
+        deleteContact(contactToDelete);
+        
+        hideEditContact();
+        addContactCategories();
+        setVisibleIfnotEmpty();
+        generateContactDetailsHTML();
+        save();
+    });
 }
 
 function getContactsWith(startLetter) {
@@ -116,6 +135,7 @@ function showEditContact() {
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
     document.getElementById('editUserAtContacts').classList.remove('d-none');
+    addEventListenerToDeleButton();
 }
 
 function createNewContact() {
@@ -123,7 +143,7 @@ function createNewContact() {
     let userEmail = document.getElementById('createNewContactEmail').value;
     let userPhone = document.getElementById('createNewContactPhone').value;
     let userColor = randomcolor();
-    users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone , 'color': userColor});
+    users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone, 'color': userColor });
     backend.setItem('users', JSON.stringify(users));
     hideAddNewContact();
     addContactCategories();
@@ -169,7 +189,7 @@ function randomcolor() {
 
 }
 
-function addCloseBtnToAddTaskAtContacts () {
+function addCloseBtnToAddTaskAtContacts() {
     document.getElementById('addTaskAtContacts').innerHTML += `
     <img onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
     `;
