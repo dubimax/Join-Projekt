@@ -83,9 +83,9 @@ function generateContactHead() {
         <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
             <h5 id="contactName">Name</h5>
-            <div class="d-flex" onclick="showAddNewTaskAtContacts()">
+            <div class="contactHeadAddTask" onclick="showAddNewTaskAtContacts()">
                 <img src="./img/plusContacts.png" class="addTaskContacts">
-                <span class="add-task-link">Add Task</span>
+                Add Task
             </div>
         </div>
         
@@ -98,19 +98,19 @@ function generateContactBody() {
     <div class="contactInformationContainer d-none" id="contactInformationContainer">
         <div class="contactInformationTitle">
             <span>Contact Information</span>
-            <div onclick="showEditContact()">
-                <img src="./img/editContactPen.png">
+            <div onclick="showEditContact()" class="showEditContainer">
+                <div class="showEditImg"></div>
                 <span>Edit Contact</span>
             </div>
         </div>
         <div class="contactInformationContent">
             <div class="contactInformationContentContainer">
                 <h5 class="contactInformationContentTitles">Email</h5>
-                <a class="contactInformationContentLink" id="contactDetailsEmail">email@email.de</a>
+                <a class="contactInformationContentLink" id="contactDetailsEmail"></a>
             </div>
             <div class="contactInformationContentContainer">
                 <h5 class="contactInformationContentTitles">Phone</h5>
-                <a class="contactInformationContentLink" id="contactDetailsPhone">+49123456789</a>
+                <a class="contactInformationContentLink" id="contactDetailsPhone"></a>
             </div>
          </div>
     </div>

@@ -30,6 +30,34 @@ body {
     align-items: center;
 }
 
+.editButtonContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.deleteButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 18px;
+    gap: 10px;
+    width: 104px;
+    height: 55px;
+    border: 1px solid #2A3647;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    color: #2A3647;
+}
+
 .inputTextStd {
     gap: 10px;
     width: 422px;
@@ -130,12 +158,7 @@ h4 {
     align-self: flex-end;
 }
 
-.contactInformationTitle div img {
-    margin-right: 6px;
-    object-fit: contain;
-    width: 25px;
-    height: 25px;
-}
+
 
 .contactInformationContent {
     display: flex;
@@ -212,6 +235,9 @@ h4 {
     cursor: pointer;
 }
 
+.contactSelect:hover {
+    font-weight: 700;
+}
 
 #createNewUserAtContacts,
 #editUserAtContacts {
@@ -319,6 +345,7 @@ h4 {
     left: 1148.82px;
     top: 49.11px;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .addNewContactProfileImgContainer,
@@ -391,6 +418,21 @@ h4 {
     color: #FFFFFF;
 }
 
+.addNewContactCreateButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 15px;
+    gap: 10px;
+    width: 218px;
+    height: 55px;
+    cursor: pointer;
+    background: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
 .addNewContactButton {
     display: flex;
     flex-direction: row;
@@ -423,14 +465,18 @@ h4 {
 }
 
 .addNewContactButton:hover,
-.createTaskBtn:hover {
+.createTaskBtn:hover,
+.addNewContactCreateButton:hover,
+.editContactButton:hover {
     background-color: #29ABE2;
     border: 1px solid #29ABE2;
 }
 
-.clearButton:hover {
+.clearButton:hover,
+.addNewContactCancelButton:hover,
+.deleteButton:hover {
     border: 1px solid #29ABE2;
-    color: #29ABE2 ;
+    color: #29ABE2;
 }
 
 .addNewContactButton::after,
@@ -459,15 +505,26 @@ h4 {
     margin-left: 13px;
 }
 
-.contactHead div {
+.contactHeadAddTask {
+    display: flex;
     align-items: center;
     cursor: pointer;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #29ABE2;
+}
+
+.contactHeadAddTask:hover {
+    font-weight: 700;
 }
 
 .addTaskContacts {
     object-fit: contain;
     width: 15px;
     height: 15px;
+    margin-right: 12px;
 }
 
 .contactHead {
@@ -501,6 +558,10 @@ h4 {
 }
 
 input[type=checkbox i] {
+    cursor: pointer;
+}
+
+input {
     cursor: pointer;
 }
 
@@ -601,6 +662,7 @@ li {
     width: 100%;
     padding: 18px 21px;
     border-radius: 10px;
+    justify-content: space-between;
 }
 
 .navigation-left {
@@ -905,7 +967,7 @@ select option:hover {
     width: 100%;
 }
 
-a{
+a {
     cursor: pointer;
 }
 
@@ -924,7 +986,7 @@ a{
     height: 61px;
     border-radius: 10px;
     margin-left: 5px;
-    border:1px solid #2A3647;
+    border: 1px solid #2A3647;
     cursor: pointer;
 }
 
@@ -965,18 +1027,46 @@ a{
     height: 61px;
 }
 
-.addNewContactCreateButton,
+.showEditContainer {
+    color: #000000;
+}
+
+.showEditContainer:hover {
+    color: #29ABE2;
+}
+
+.showEditContainer:hover .showEditImg {
+    background-image: url('./img/editContactPenBlue.png');
+}
+
+.showEditImg {
+    background-image: url('./img/editContactPen.png');
+    margin-right: 6px;
+    object-fit: cover;
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .editContactButton {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 18px 10px;
+    padding: 18px 15px;
     gap: 10px;
-    width: 208px;
-    height: 61px;
+    width: 153px;
+    height: 55px;
     background: #2A3647;
     border-radius: 10px;
+    color: #FFFFFF;
+    border: 1px solid #2A3647;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
 }
 
 .addNewContactCancelButton {
@@ -985,11 +1075,13 @@ a{
     justify-content: center;
     align-items: center;
     padding: 18px 10px;
-    gap: 10px;
+    gap: 25px;
     width: 136px;
-    height: 61px;
+    height: 55px;
+    color: #2A3647;
     border: 1px solid #2A3647;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .contactSelect:hover {

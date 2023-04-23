@@ -152,7 +152,11 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
     document.getElementById('contactDetailsLogo').style = `background:${userColor}`;
     document.getElementById('contactDetailsLogo').innerHTML = getFirstLettersOfName(userName);
     document.getElementById('contactDetailsEmail').innerHTML = userMail;
+    document.getElementById('contactDetailsEmail').href = `mailto:${userMail}`;
+
     document.getElementById('contactDetailsPhone').innerHTML = userPhone;
+    document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
+
     document.getElementById('contactHeadContainer').classList.remove('d-none');
     document.getElementById('contactInformationContainer').classList.remove('d-none');
 }
