@@ -4,7 +4,27 @@
     box-sizing: border-box;
     font-family: Inter;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+    scrollbar-color: #091931 #2a3647;
+  }
 
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border: 0px none #ffffff;
+  }
 @font-face {
     font-family: 'Inter';
     font-style: normal;
@@ -577,7 +597,6 @@ h4 {
     right: 0;
     top: 89px;
     bottom: 0;
-    /* left: 687px; */
     padding-left: 52px;
     padding-top: 82px;
     width: calc(100% - 460px);

@@ -26,6 +26,14 @@ function save() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+function setClickedColor(id){
+    document.getElementById('showSummary').style = '';
+    document.getElementById('showBoard').style = '';
+    document.getElementById('showAddTask').style = '';
+    document.getElementById('showContacts').style = '';
+    document.getElementById(id).style = `background: #091931;`;
+}
+
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
