@@ -59,7 +59,35 @@ function startDragging(id) {
 }
 
 function generateTodoHTML(element) {
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="card">${element['title']}</div>`
+    let color;
+    for(let i = 0; i < categories.length; i++){
+
+        if(categories[i]['name'] == element['category']){
+            color = categories[i]['color'];
+        }
+    }
+    return `
+    <div draggable="true" ondragstart="startDragging(${element['id']})" class="card">
+        <div style="background:${color}">
+            ${element['category']}</div>
+        <div>
+            ${element['title']}
+        </div>
+        <div>
+            ${element['description']}
+        </div>  
+        <div>
+            ${element['subtasks'].length}
+        </div>   
+        <div>
+            <div>
+                ${element['isAssigned']}
+            </div>
+            <div>
+                <img src="./img/${element['prio'].toLowerCase()}.png">
+            </div>
+        </div>  
+    </div>`
 }
 
 function allowDrop(ev) {
