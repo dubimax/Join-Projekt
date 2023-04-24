@@ -16,7 +16,7 @@
     <script src="../smallest_backend_ever/mini_backend.js"></script>
     <script src="board.js"></script>
     <script src="js/script.js"></script>
- 
+
 
 </head>
 
@@ -24,12 +24,22 @@
     <div w3-include-html="./templates/navs.html"></div>
 
     <div id="addTaskAtBoard" class="d-none"></div>
+
+    <div class="boardHeaderContainer">
+        <h1>Board</h1>
+        <div class="findAddTaskContainer">
+            <input type="search" id="suche" placeholder="Find Task">
+            <button class="AddTaskBtn">Add Task</button>
+        </div>
+    </div>
+
     <div class="cardHeaders">
         <div class="dragAreaFullContainer">
             <div class="dragAreaTitle" id="dragAreaToDoTitle">
                 <label for="toDo">To do</label>
             </div>
-            <div class="dragArea" name="toDo" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event); highlight('toDo')">
+            <div class="dragArea" name="toDo" id="toDo" ondrop="moveTo('toDo')"
+                ondragover="allowDrop(event); highlight('toDo')">
             </div>
         </div>
         <div class="dragAreaFullContainer">
@@ -50,7 +60,8 @@
             <div class="dragAreaTitle" id="dragAreaDoneTitle">
                 <label for="done">Done</label>
             </div>
-            <div class="dragArea" name="done" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event);highlight('done')">
+            <div class="dragArea" name="done" id="done" ondrop="moveTo('done')"
+                ondragover="allowDrop(event);highlight('done')">
             </div>
         </div>
     </div>
