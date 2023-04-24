@@ -4,12 +4,14 @@ let currentDraggedElement;
 async function updateHTML() {
     await includeHTML();
     load();
+    
     toDoArea();
     inProgressArea();
     awaitingFeedbackArea();
     doneArea();
-    generateAddTaskHTML('addTaskAtContacts');
-    test();
+    generateAddTaskToBoardImg();
+    generateAddTaskHTML('addTaskAtBoard');
+    setOnSubmitForm();
 }
 
 function toDoArea() {

@@ -118,6 +118,10 @@ function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
     addEventListenerToDropDown();
 }
+function showAddNewTaskAtBoard() {
+    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    addEventListenerToDropDown();
+}
 
 function hideAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.add('d-none');

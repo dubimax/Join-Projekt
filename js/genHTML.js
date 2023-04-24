@@ -1,22 +1,43 @@
 
-//UMBENENNEN
-function test() {
-    let test1 = document.getElementById('todoImg');
-    test1.onclick = function() {
-        if(test1.parentElement.firstChild.nextElementSibling.innerHTML == 'To do'){
-            showAddNewTaskAtContacts();
-            console.log('erfolgreich');
-        }
+function checkStatusToSet(id) {
+    let getStatus = document.getElementById(id);
+    let addForm = getStatus.parentElement.firstChild.nextElementSibling.innerHTML;
+    addForm.replace(/\s+/g, '');
+    showAddNewTaskAtBoard();
+    setOnSubmitForm(addForm);
+    console.log('erfolgreich');
+}
+
+function generateAddTaskToBoardImg() {
+    document.getElementById('dragAreaToDoTitle').innerHTML += `
+        <img src="img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
+    `;
+    document.getElementById('dragAreaIPTitle').innerHTML += `
+        <img src="img/plusButtonDark.png" id="ipImg" onclick="checkStatusToSet('inProgress')">
+    `;
+    document.getElementById('dragAreaAFTitle').innerHTML += `
+        <img src="img/plusButtonDark.png" id="awImg" onclick="checkStatusToSet('awaitingFeedback')">
+    `;
+    document.getElementById('dragAreaDoneTitle').innerHTML += `
+    <img src="img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
+`;
+}
+
+function setOnSubmitForm(addForm) {
+    let submitElement = document.getElementById('submitting');
+    submitElement.onsubmit = function () {
+        createNewTask(addForm);
+        return false;
     };
 }
 
 function generateAddTaskHTML(id) {
     includeHTML();
     load();
-    if(loggedIn) {
-    addContentTitle('Add Task', id);
-    document.getElementById(id).innerHTML += `
-    <form onsubmit="createNewTask(${id}); return false;" class="addTaskForm" >
+    if (loggedIn) {
+        addContentTitle('Add Task', id);
+        document.getElementById(id).innerHTML += `
+    <form id="submitting" onsubmit="" class="addTaskForm" >
     <div class="details">
         <div class="detailBox-left">
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
@@ -48,10 +69,10 @@ function generateAddTaskHTML(id) {
        
         </form>
     `;
-    generateOptionsHTML('assignedTo', users, 'users');
-    addOptionWithFunction('addNewCat');
-    generateOptionsHTML('categoryBox', categories, 'categories');
-    addEventListenerToDropDown();
+        generateOptionsHTML('assignedTo', users, 'users');
+        addOptionWithFunction('addNewCat');
+        generateOptionsHTML('categoryBox', categories, 'categories');
+        addEventListenerToDropDown();
     } else {
         window.location.href = 'login.html';
     }

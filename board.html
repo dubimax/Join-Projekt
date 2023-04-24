@@ -23,36 +23,32 @@
 <body onload="updateHTML()">
     <div w3-include-html="./templates/navs.html"></div>
 
-    <div id="addTaskAtContacts" class="d-none"></div>
+    <div id="addTaskAtBoard" class="d-none"></div>
     <div class="cardHeaders">
         <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle">
+            <div class="dragAreaTitle" id="dragAreaToDoTitle">
                 <label for="toDo">To do</label>
-                <img src="img/plusButtonDark.png" id="todoImg" onclick=" ">
             </div>
             <div class="dragArea" name="toDo" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event); highlight('toDo')">
             </div>
         </div>
         <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle">
+            <div class="dragAreaTitle" id="dragAreaIPTitle">
                 <label for="inProgress">In Progress</label>
-                <img src="img/plusButtonDark.png">
             </div>
             <div class="dragArea" name="inProgress" id="inProgress" ondrop="moveTo('inProgress')"
                 ondragover="allowDrop(event);highlight('inProgress')"></div>
         </div>
         <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle">
+            <div class="dragAreaTitle" id="dragAreaAFTitle">
                 <label for="awaitingFeedback">Awaiting Feedback</label>
-                <img src="img/plusButtonDark.png">
             </div>
             <div class="dragArea" name="awaitingFeedback" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')"
                 ondragover="allowDrop(event);highlight('awaitingFeedback')"></div>
         </div>
         <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle">
+            <div class="dragAreaTitle" id="dragAreaDoneTitle">
                 <label for="done">Done</label>
-                <img src="img/plusButtonDark.png">
             </div>
             <div class="dragArea" name="done" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event);highlight('done')">
             </div>
