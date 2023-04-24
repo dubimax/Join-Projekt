@@ -69,6 +69,7 @@ function allowDrop(ev) {
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     updateHTML();
+    save();
 }
 
 function highlight(id) {

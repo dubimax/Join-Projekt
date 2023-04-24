@@ -1,7 +1,7 @@
 
 function checkStatusToSet(id) {
     let getStatus = document.getElementById(id);
-    let addForm = getStatus.parentElement.firstChild.nextElementSibling.innerHTML;
+    let addForm = getStatus.parentElement.children[0].children[0].attributes.for.value;
     addForm.replace(/\s+/g, '');
     showAddNewTaskAtBoard();
     setOnSubmitForm(addForm);
