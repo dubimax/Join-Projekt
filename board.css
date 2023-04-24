@@ -1,22 +1,43 @@
+.boardHeaderContainer {
+    position: absolute;
+    left: 302px;
+    top: 166px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    right: 0;
+    width: calc(100% - 367px);
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+
+    color: #000000;
+}
+
+
+
 .cardHeaders {
     display: flex;
     justify-content: space-evenly;
     position: absolute;
-    top: 89px;
+    top: 267.5px;
     width: calc(100% - 232px);
     right: 0;
 }
 
 .dragArea {
-   
-    height: 100vh;
+    height: 100%;
     padding: 10px;
 
     font-weight: 700;
     font-size: 21px;
     line-height: 120%;
 
-    border: 1px solid red;
     color: #2A3647;
 }
 
@@ -35,7 +56,6 @@
 .emtyCard {
     width: 250px;
     min-height: 239px;
-    background: red;
 
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
@@ -49,7 +69,6 @@
     width: 103px;
     height: 27px;
 
-    background: #FF7A00;
     border-radius: 8px;
 
     font-weight: 400;
@@ -93,7 +112,6 @@
 }
 
 .taskProgressbar {
-    margin-top: 23px;
     font-weight: 400;
     font-size: 12px;
     line-height: 120%;
@@ -103,7 +121,14 @@
     align-items: center;
 }
 
-.taskAssignedUser2 {
+.barContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .taskAssignedUser2 {
     width: 35px;
     height: 35px;
 
@@ -113,12 +138,10 @@
     border-radius: 58px;
 
     margin-left: -10px;
-}
+} */
 .taskAssignedUser {
     width: 35px;
     height: 35px;
-
-    background: #019045;
 
     border: 1px solid #FFFFFF;
     border-radius: 58px;
@@ -128,7 +151,6 @@
     width: 32px;
     height: 32px;
 
-    background: red;
     border-radius: 10px;
 }
 

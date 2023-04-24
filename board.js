@@ -4,7 +4,7 @@ let currentDraggedElement;
 async function updateHTML() {
     await includeHTML();
     load();
-    
+
     toDoArea();
     inProgressArea();
     awaitingFeedbackArea();
@@ -12,6 +12,7 @@ async function updateHTML() {
     generateAddTaskToBoardImg();
     generateAddTaskHTML('addTaskAtBoard');
     setOnSubmitForm();
+    generateContactHead();
 }
 
 function toDoArea() {
@@ -60,30 +61,37 @@ function startDragging(id) {
 
 function generateTodoHTML(element) {
     let color;
-    for(let i = 0; i < categories.length; i++){
+    for (let i = 0; i < categories.length; i++) {
 
-        if(categories[i]['name'] == element['category']){
+        if (categories[i]['name'] == element['category']) {
             color = categories[i]['color'];
         }
     }
     return `
     <div draggable="true" ondragstart="startDragging(${element['id']})" class="card">
-        <div style="background:${color}">
+        <div style="background:${color}" class="taskStatus">
             ${element['category']}</div>
-        <div>
+        <div class="taskTitle">
             ${element['title']}
         </div>
-        <div>
+        <div class="taskDescription">
             ${element['description']}
         </div>  
-        <div>
-            ${element['subtasks'].length}
+        
+        <div class="barContainer">
+        <div class="bar">
+        </div>
+        <div class="taskProgressbar">
+            1/${element['subtasks'].length} Done         <!-- Muss geändert werden -->
         </div>   
-        <div>
-            <div>
-                ${element['isAssigned']}
+       </div>
+
+        <div class="containerUserAndPrio">
+            <div class="taskAssignedUser">
+                ${element['isAssigned']} 
             </div>
-            <div>
+            
+            <div class="taskPrio">
                 <img src="./img/${element['prio'].toLowerCase()}.png">
             </div>
         </div>  
