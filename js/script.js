@@ -34,6 +34,8 @@ function setClickedColor(id){
     document.getElementById(id).style = `background: #091931;`;
 }
 
+
+
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
