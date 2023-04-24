@@ -12,7 +12,6 @@ async function updateHTML() {
     generateAddTaskToBoardImg();
     generateAddTaskHTML('addTaskAtBoard');
     setOnSubmitForm();
-    generateContactHead();
 }
 
 function toDoArea() {
@@ -22,6 +21,7 @@ function toDoArea() {
     for (let index = 0; index < toDo.length; index++) {
         const element = tasks[index];
         document.getElementById('toDo').innerHTML += generateTodoHTML(element);
+        document.getElementById('toDo').innerHTML += generateOpenCardHTML(element);
     }
 }
 
@@ -68,13 +68,13 @@ function generateTodoHTML(element) {
         }
     }
     return `
-    <div draggable="true" ondragstart="startDragging(${element['id']})" class="card">
-        <div style="background:${color}" class="taskStatus">
+    <div draggable="true" ondragstart="startDragging(${element['id']})" class="card" id="card">
+        <div style="background:${color}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}</div>
-        <div class="taskTitle">
+        <div class="taskTitle" id="cardTaskTitle">
             ${element['title']}
         </div>
-        <div class="taskDescription">
+        <div class="taskDescription" id="cardTaskDescription">
             ${element['description']}
         </div>  
         
@@ -90,13 +90,54 @@ function generateTodoHTML(element) {
             <div class="taskAssignedUser">
                 ${element['isAssigned']} 
             </div>
-            
+
             <div class="taskPrio">
                 <img src="./img/${element['prio'].toLowerCase()}.png">
             </div>
         </div>  
     </div>`
 }
+
+function generateOpenCardHTML(element) {
+    let color;
+    for (let i = 0; i < categories.length; i++) {
+
+        if (categories[i]['name'] == element['category']) {
+            color = categories[i]['color'];
+        }
+    }
+    return `
+    <div class="openCard">
+        <div style="background:${color}" class="taskStatusOpen">
+            ${element['category']}</div>
+        <div class="taskTitleOpen" >
+            ${element['title']}
+        </div>
+        <div class="taskDescriptionOpen">
+            ${element['description']}
+        </div>  
+        <div class="taskDueDateOpen">
+            <label class="taskLabelOpen">Due date: </label>
+            ${element['dueDate']}
+        </div>
+        <div class="taskDueDateOpen">
+            <label class="taskLabelOpen">Due date: </label>
+            ${element['dueDate']}
+        </div>
+        <div class="taskPrioOpen">
+            <label class="taskLabelOpen">Priority: </label>
+            <img src="./img/${element['prio'].toLowerCase()}.png">
+        </div>
+        <div class="taskSubtasksOpen">
+            ${element['subtasks'].length}
+        </div>   
+        <div class="taskAssignedUserOpen">
+        <label class="taskLabelOpen">Assignet to: </label>
+            ${element['isAssigned']} 
+        </div>
+    </div>`
+}
+
 
 function allowDrop(ev) {
     ev.preventDefault();

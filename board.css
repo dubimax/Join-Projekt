@@ -19,7 +19,75 @@ h1 {
     color: #000000;
 }
 
+.findAddTaskContainer {
+    display: flex;
+    align-items: flex-start;
+}
 
+.searchBox {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 13px 21px;
+    gap: 10px;
+
+    width: 251px;
+    height: 51px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #A8A8A8;
+    border-radius: 10px;
+}
+
+.searchBox input {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+
+    display: flex;
+    align-items: center;
+
+    color: #D1D1D1;
+    outline: none;
+    border: none;
+}
+
+.searchVerticalLine {
+    width: 0px;
+    height: 31px;
+
+    border: 1px solid #D1D1D1;
+}
+
+.searchBox img {
+    width: 20.31px;
+    height: 20.31px;
+}
+
+.addTaskBtn {
+    display: flex;
+    margin-left: 35px;
+    box-sizing: border-box;
+    padding: 18px 10px;
+    gap: 10px;
+    height: 55px;
+    background: #2A3647;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    color: #FFFFFF;
+    align-items: center;
+}
+
+.addTaskBtn img {
+    height: 15px;
+    width: 15px;
+}
 
 .cardHeaders {
     display: flex;
@@ -41,6 +109,16 @@ h1 {
     color: #2A3647;
 }
 
+.dragAreaTitle {
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    color: #2A3647;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
 
 .card {
     width: 250px;
@@ -51,6 +129,7 @@ h1 {
     border-radius: 30px;
 
     padding: 18px;
+    cursor: pointer;
 }
 
 .emtyCard {
@@ -166,4 +245,79 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.openCard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 50px;
+    gap: 25px;
+    isolation: isolate;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 623px;
+    min-height: 760px;
+    margin-top: 80px;
+}
+
+.taskStatusOpen {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 4px 36.5px;
+    gap: 10px;
+
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 120%;
+
+    color: #FFFFFF;
+
+    border-radius: 8px;
+}
+
+.taskTitleOpen {
+    margin-top: 25px;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+
+    color: #2A3647;
+}
+
+.taskDescriptionOpen {
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+
+    color: #000000;
+}
+
+.taskDueDateOpen {
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+
+    color: #000000;
+}
+
+.taskLabelOpen {
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    color: #000000;
+}
+
+.taskAssignedUserOpen {
+    display: flex;
+    flex-direction: column;
 }
