@@ -21,7 +21,7 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: #FFFFFF;
+    background-color: #2a3647;
     border-radius: 10px;
     border: 0px none #ffffff;
   }
@@ -759,8 +759,23 @@ li {
     cursor: pointer;
 }
 
-.navigation-left-link:hover {
-    background: #091931;
+.confirmMessage {
+    position:fixed;
+    left: 50%;
+    right:50%;
+    top: 50%;
+    bottom: 50%;
+    z-index:99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    width: 326px;
+    height: 74px;  
+    background: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    color: #FFFFFF;
 }
 
 .navigation-left-link img {

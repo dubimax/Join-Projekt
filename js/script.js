@@ -26,13 +26,38 @@ function save() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function setClickedColor(id){
-    document.getElementById('showSummary').style = '';
-    document.getElementById('showBoard').style = '';
-    document.getElementById('showAddTask').style = '';
-    document.getElementById('showContacts').style = '';
-    document.getElementById(id).style = `background: #091931;`;
+function generateNavigationLinks(coloredLink , ...links) {
+    document.getElementById('navigation-left-links').innerHTML = '';
+    
+    for(let i = 0; i < links.length; i++){
+        let linkname = links[i];
+        if(coloredLink == linkname){
+            document.getElementById('navigation-left-links').innerHTML += `
+            <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
+                 <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+            `;
+        }else {
+            document.getElementById('navigation-left-links').innerHTML += `
+            <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
+                 <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+            `;
+        }
+        
+    } 
 }
+
+function firstLetterToLowerCase(string){
+    return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
+function addConfirmMessage(){
+    document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Test</div>`;
+}
+
+function removeConfirmMessage(){
+    document.getElementById('confirmMessage').remove();
+}
+
 
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 

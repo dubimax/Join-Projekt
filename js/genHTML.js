@@ -32,7 +32,6 @@ function setOnSubmitForm(addForm) {
 }
 
 function generateAddTaskHTML(id) {
-    includeHTML();
     load();
     if (loggedIn) {
         addContentTitle('Add Task', id);
@@ -239,4 +238,13 @@ function generateSubTaskField(field1, headline, properties, id, source) {
         </div>
     </div>
     `;
+}
+
+
+
+function generateNavigationLinksContacts(){
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
 }

@@ -1,6 +1,11 @@
 
-function generateContactsHTML() {
-    includeHTML();
+async function initContacts(){
+    await includeHTML();
+    generateNavigationLinks('Contacts', 'Summary','Board', 'AddTask', 'Contacts');
+    generateContactsHTML()
+}
+
+ function generateContactsHTML() {
     load();
     if (loggedIn) {
         addContactCategories();
@@ -150,9 +155,14 @@ function createNewContact() {
     users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone, 'color': userColor });
     backend.setItem('users', JSON.stringify(users));
     hideAddNewContact();
-    addContactCategories();
-    setVisibleIfnotEmpty();
-    save();
+    addConfirmMessage();
+    setTimeout(function(){
+        removeConfirmMessage();
+        addContactCategories();
+        setVisibleIfnotEmpty();
+        save();
+    },3000);
+    
 }
 
 function editContact() {

@@ -16,7 +16,11 @@ function createNewTask(statusTag) {
     save();
 }
 
-
+async function initAddTask(){
+    await includeHTML();
+    generateNavigationLinks('AddTask', 'Summary','Board', 'AddTask', 'Contacts');
+    generateAddTaskHTML('addTask');
+}
 
 function getValueOfChosenColor() {
     for (let i = 0; i < colors.length; i++) {
