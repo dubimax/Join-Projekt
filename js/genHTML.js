@@ -32,7 +32,6 @@ function setOnSubmitForm(addForm) {
 }
 
 function generateAddTaskHTML(id) {
-    includeHTML();
     load();
     if (loggedIn) {
         addContentTitle('Add Task', id);
@@ -241,23 +240,7 @@ function generateSubTaskField(field1, headline, properties, id, source) {
     `;
 }
 
-function generateNavigationLinks(color, ...links) {
-    let coloredLink = links[0];
-    for(let i = 0; i < links.length; i++){
-        if(coloredLink == links[i]){
-            document.getElementById('navigation-left-links').innerHTML += `
-            <a onclick="showLink('${linkname}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
-                 <img src="img/${linkname}.png" alt=""> ${linkname}</a>     
-            `;
-        }else {
-            document.getElementById('navigation-left-links').innerHTML += `
-            <a onclick="showLink('${linkname}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
-                 <img src="img/${linkname}.png" alt=""> ${linkname}</a>     
-            `;
-        }
-        
-    } 
-}
+
 
 function generateNavigationLinksContacts(){
     generateNavigationLinks(color, linkname);

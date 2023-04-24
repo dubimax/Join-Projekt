@@ -6,6 +6,8 @@ let taskDone = [];
 let taskUrgent = [];
 let urgentDate = [];
 
+function initSummary();
+
 function summary() {
     tasksInBoard();
     countTasks();

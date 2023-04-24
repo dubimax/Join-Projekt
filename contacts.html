@@ -7,17 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <script src="./js/addTask.js"></script>
+    <script src="../smallest_backend_ever/mini_backend.js"></script>
+    <script src="./js/contacts.js"></script>
+
+    <script src="./js/script.js"></script>
 
     <script src="./js/genHTML.js"></script>
     <script src="./js/variables.js"></script>
-    <script src="../smallest_backend_ever/mini_backend.js"></script>
 
-    <script src="./js/contacts.js"></script>
-    <script src="./js/script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="generateContactsHTML('addTaskAtContacts')">
+<body onload="initContacts()">
     <div w3-include-html="./templates/navs.html"></div>
     <div class="content" id="contactDetailsContainer">
         <div id="contacts" class="details"></div>

@@ -1,6 +1,11 @@
 
-function generateContactsHTML() {
-    includeHTML();
+async function initContacts(){
+    await includeHTML();
+    generateNavigationLinks('Contacts', 'Summary','Board', 'AddTask', 'Contacts');
+    generateContactsHTML()
+}
+
+ function generateContactsHTML() {
     load();
     if (loggedIn) {
         addContactCategories();
