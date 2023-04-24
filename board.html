@@ -21,7 +21,7 @@
 </head>
 
 <body onload="updateHTML()">
-    <div w3-include-html="./templates/navs.html"></div>
+    <div w3-include-html="./templates/navs.html"class="d-dark"></div>
 
     <div id="addTaskAtBoard" class="d-none"></div>
 
@@ -33,7 +33,7 @@
                 <div class="searchVerticalLine"></div>
                 <img src="img/search.png">
             </div>
-            <button class="addTaskBtn">Add Task<img src="img/addTaskWhite.png"></button>
+            <button class="addTaskBtn" onclick="generateAddTaskHTML('addTaskAtBoard')">Add Task<img src="img/addTaskWhite.png"></button>
         </div>
     </div>
 
