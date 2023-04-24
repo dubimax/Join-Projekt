@@ -238,7 +238,7 @@ h4 {
     cursor: pointer;
 }
 
-.contactSelect:hover > div[id="colorCircleMedium"]{
+.contactSelect:hover>div[id="colorCircleMedium"] {
     border: none;
 }
 
@@ -255,27 +255,29 @@ h4 {
     border-radius: 30px;
     animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
 }
+
 @keyframes myAnim {
-	0% {
-		opacity: 1;
-		transform: translateX(1500px);
-	}
+    0% {
+        opacity: 1;
+        transform: translateX(1500px);
+    }
 
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
-@keyframes myAnim2 {
-	0% {
-		opacity: 1;
-		transform: translateX(1000px);
-	}
 
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
+@keyframes myAnim2 {
+    0% {
+        opacity: 1;
+        transform: translateX(1000px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 #createNewContactName,
@@ -393,6 +395,7 @@ h4 {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 70px;
 }
+
 #addTaskAtBoard,
 #addTaskAtContacts {
     position: relative;
@@ -712,13 +715,13 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
     position: absolute;
     width: 232px;
     height: 100%;
     left: 0px;
     top: 0px;
     z-index: 9;
+    box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.3);
 }
 
 .prioImg {
@@ -729,12 +732,16 @@ li {
 
 .navigation-left-link {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    padding: 8px 53px;
     gap: 20px;
-    width: 150px;
+    width: 232px;
     height: 46px;
     cursor: pointer;
+}
+
+.navigation-left-link:hover {
+    background: #091931;
 }
 
 .navigation-left-link img {
@@ -770,6 +777,16 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 103px;
+}
+
+.navigation-left-linksContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 103px;
+    margin-bottom: calc(100% + 80px);
+
 }
 
 .d-none {
