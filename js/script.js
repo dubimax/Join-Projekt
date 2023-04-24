@@ -50,6 +50,13 @@ function firstLetterToLowerCase(string){
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
+function addConfirmMessage(){
+    document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Test</div>`;
+}
+
+function removeConfirmMessage(){
+    document.getElementById('confirmMessage').remove();
+}
 
 
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
