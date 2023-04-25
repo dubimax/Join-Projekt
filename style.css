@@ -44,6 +44,7 @@
 
 body {
     background-color: #F5F5F5;
+    overflow: hidden;
 }
 
 .logoutButton {
@@ -810,6 +811,24 @@ li {
 .logo-nav {
     width: 100.03px;
     height: 121.97px;
+}
+
+.legalNotice {
+    position: absolute;
+    width: calc(100% - 232px);
+    right: 0;
+    height: 100%;
+    top: 89px;
+    align-items: flex-start;
+    overflow: hidden;
+    background-color: #F5F5F5;
+    z-index: 100;
+}
+
+.noticeContainer {
+    overflow: scroll;
+    padding: 50px 120px;
+    padding-bottom: 150px;
 }
 
 .legal-notice {
