@@ -51,11 +51,25 @@ function firstLetterToLowerCase(string){
 }
 
 function addConfirmMessage(){
-    document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Test</div>`;
+    document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Contact successfully createt</div>`;
 }
 
 function removeConfirmMessage(){
     document.getElementById('confirmMessage').remove();
+}
+
+function setLogoutButton(){
+    if(document.body.lastChild.innerHTML == 'Logout'){
+        removeLogoutButton();
+    }else addLogoutButton();
+}
+
+function addLogoutButton(){
+    document.body.innerHTML += `<div class="logoutButton" id="logoutButton">Logout</div>`;
+}
+
+function removeLogoutButton(){
+    document.getElementById('logoutButton').remove();
 }
 
 
