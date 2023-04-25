@@ -7,21 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join - Summary</title>
     <link rel="icon" type="image/png" href="img/logo-dunkel.png">
-    <script src="../smallest_backend_ever/mini_backend.js"></script>
-    <link rel="stylesheet" href="./CSS/navi.css">
-
-    <link rel="stylesheet" href="summary.css">
-    <link rel="stylesheet" href="style.css">
-     
+ 
     <script src="./js/genHTML.js"></script>
     <script src="./js/variables.js"></script>
-    <script src="board.js"></script>
-    <script src="./js/script.js"></script>
+    <script src="../smallest_backend_ever/mini_backend.js"></script>
     <script src="./js/summary.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="board.js"></script>
+    <link rel="stylesheet" href="./CSS/navi.css">
+    <link rel="stylesheet" href="summary.css">
+    <link rel="stylesheet" href="style.css">
+    
+    
 
 </head>
 
-<body onload="init()">
+<body onload="initSummary()">
 
     <div w3-include-html="./templates/navs.html"></div>
 
@@ -33,15 +34,15 @@
         <div class="summeryBoxContainer">
             <div class="summaryTop">
                 <div class="summaryTopSingle" onclick="openBoardPage()">
-                    <div class="boxNumber" id="tasksInBoard">5</div>
+                    <div class="boxNumber" id="tasksInBoardBox">5</div>
                     <div class="boxText">Tasks in Board</div>
                 </div>
                 <div class="summaryTopSingle" onclick="openBoardPage()">
-                    <div class="boxNumber" id="inProgress">2</div>
+                    <div class="boxNumber" id="tasksInProgressBox">2</div>
                     <div class="boxText">Tasks in Progress</div>
                 </div>
                 <div class="summaryTopSingle" onclick="openBoardPage()">
-                    <div class="boxNumber" id="awaitingFeedback">2</div>
+                    <div class="boxNumber" id="awaitingFeedbackBox">2</div>
                     <div class="boxText">Awaiting Feedback</div>
                 </div>
             </div>
