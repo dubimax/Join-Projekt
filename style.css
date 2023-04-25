@@ -51,7 +51,7 @@ body {
     position: absolute;
     right: 120px;
     top: 50px;
-    
+
 }
 
 .backImg {
@@ -826,7 +826,8 @@ li {
     height: 121.97px;
 }
 
-.legalNotice {
+.legalNotice,
+.help {
     position: absolute;
     width: calc(100% - 232px);
     right: 0;
@@ -836,6 +837,11 @@ li {
     overflow: hidden;
     background-color: #F5F5F5;
     z-index: 100;
+}
+
+.helpContainer {
+    padding: 50px 120px;
+    padding-bottom: 150px;
 }
 
 .noticeContainer {

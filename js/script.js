@@ -76,6 +76,10 @@ function removeLegalNotice(){
     document.getElementById('legalNotice').remove();
 }
 
+function removeHelp(){
+    document.getElementById('helpContent').remove();
+}
+
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
