@@ -253,7 +253,7 @@ function generateNavigationLinksContacts() {
 function addLegalNotice() {
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
-    <img src="./img/cancelIcon.png" onlick="removeLegalNotice()">
+    <a class="back" onclick="removeLegalNotice()"><img src="./img/backIconBlack.png" class="backImg"></a>
     <div class="noticeContainer">
         <div class='impressum'>
             <h1>Impressum</h1><br>
