@@ -1,4 +1,3 @@
-
 async function initContacts(){
     await includeHTML();
     generateNavigationLinks('Contacts', 'Summary','Board', 'AddTask', 'Contacts');
@@ -74,7 +73,7 @@ function generateAlphaContainerFor(letter) {
         let userPhone = getContactWith(i, 'phone');
         let userColor = getContactWith(i, 'color')
         document.getElementById('contact' + letter.toUpperCase()).innerHTML += `
-        <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}')" class="contactSelect" id="contactAt${contactName}">
+        <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}');setColorWhenSelectet('contactAt${contactName}')" class="contactSelect" id="contactAt${contactName}">
             <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
             <div class="contactsAttributeBox">
                 <span class="contactSelectName"> ${contactName}</span>
@@ -194,6 +193,12 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
 
     document.getElementById('contactHeadContainer').classList.remove('d-none');
     document.getElementById('contactInformationContainer').classList.remove('d-none');
+}
+
+function setColorWhenSelectet(id){
+    addContactCategories();
+    setVisibleIfnotEmpty();
+    document.getElementById(id).style = `background:#2A3647;`;
 }
 
 function randomcolor() {
