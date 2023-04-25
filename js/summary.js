@@ -6,7 +6,9 @@ let taskDone = [];
 let taskUrgent = [];
 let urgentDate = [];
 
-function initSummary();
+async function initSummary() {
+    await includeHTML();
+};
 
 function summary() {
     tasksInBoard();
@@ -89,4 +91,13 @@ function greeting() {
         greet = 'Good Evening';
 
     document.getElementById('greeting').innerHTML = greet;
+}
+
+function showUserName() {
+    let currentUserGreeting = document.getElementById('currentUser');
+    currentUserGreeting.innerHTML = users.name;
+}
+
+function openBoardPage() {
+    window.location.href = 'board.html';
 }
