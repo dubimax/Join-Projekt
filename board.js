@@ -1,11 +1,17 @@
 let currentDraggedElement;
 
-async function initBoard(){
+/**
+ * Initialize the Board Page
+ */
+async function initBoard() {
     await includeHTML();
-    generateNavigationLinks('Board', 'Summary','Board', 'AddTask', 'Contacts');
+    generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     updateHTML();
 }
 
+/**
+ * Uptade the Board Page
+ */
 function updateHTML() {
     load();
 
@@ -18,6 +24,9 @@ function updateHTML() {
     setOnSubmitForm();
 }
 
+/**
+ * Show all tasks on the To do Area
+ */
 function toDoArea() {
     let toDo = tasks.filter(t => t['status'] == 'toDo');
     document.getElementById('toDo').innerHTML = '';
@@ -29,6 +38,9 @@ function toDoArea() {
     }
 }
 
+/**
+ * Show all tasks on the In Progress Area
+ */
 function inProgressArea() {
     let inProgress = tasks.filter(t => t['status'] == 'inProgress');
     document.getElementById('inProgress').innerHTML = '';
@@ -39,6 +51,9 @@ function inProgressArea() {
     }
 }
 
+/**
+ * Show all tasks on the Awaiting Feedback Area
+ */
 function awaitingFeedbackArea() {
     let awaitingFeedback = tasks.filter(t => t['status'] == 'awaitingFeedback');
     document.getElementById('awaitingFeedback').innerHTML = '';
@@ -49,6 +64,9 @@ function awaitingFeedbackArea() {
     }
 }
 
+/**
+ * Show all tasks on the Done Area
+ */
 function doneArea() {
     let done = tasks.filter(t => t['status'] == 'done');
     document.getElementById('done').innerHTML = '';
@@ -59,10 +77,19 @@ function doneArea() {
     }
 }
 
+/**
+ * Starting with dragging a card
+ * @param {*} id is the of current dragging card
+ */
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
+/**
+ * Generate a card to the To do Area
+ * @param {*} element Elements of the card
+ * @returns the card with elements
+ */
 function generateTodoHTML(element) {
     let color;
     for (let i = 0; i < categories.length; i++) {
@@ -86,7 +113,7 @@ function generateTodoHTML(element) {
         <div class="bar">
         </div>
         <div class="taskProgressbar">
-            1/${element['subtasks'].length} Done         <!-- Muss geändert werden -->
+            0/${element['subtasks'].length} Done 
         </div>   
        </div>
 
@@ -102,6 +129,11 @@ function generateTodoHTML(element) {
     </div>`
 }
 
+/**
+ * Generate a bigger card if you clicket a small card on the areas
+ * @param {*} element elemts of the card 
+ * @returns the bigger card with more information
+ */
 function generateOpenCardHTML(element) {
     let color;
     for (let i = 0; i < categories.length; i++) {
@@ -144,25 +176,40 @@ function generateOpenCardHTML(element) {
     </div>`
 }
 
+/**
+ * Remove display:none from the bigger card to see it
+ */
 function openCard() {
     document.getElementById('openCard').classList.remove('d-none');
 }
-
+/**
+ * Add display:none to close the bigger card
+ */
 function closeOpenCard() {
     document.getElementById('openCard').classList.add('d-none');
 }
 
-
+/**
+ * Allow the drop from card
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * Move the card from current area to antother area
+ * @param {*} status is To do, in Progress, Awaiting Feedback or Done (Area)
+ */
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     updateHTML();
     save();
 }
 
+/**
+ * Generate the highlight if dragged the card
+ * @param {*} id of the card
+ */
 function highlight(id) {
     document.getElementById(id).classList.add('dragAreaHighlight');
 }
@@ -185,6 +232,3 @@ function createNewTaskAtBoard(statusTag) {
     clearAllInputs();
     save();
 }
-
-
-

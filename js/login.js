@@ -1,3 +1,6 @@
+/**
+ * Initializing the Login Page
+ */
 async function initLogin() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];

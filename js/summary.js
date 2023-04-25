@@ -1,12 +1,18 @@
+/**
+ * Initialize the Summary Page
+ */
 async function initSummary() {
     await includeHTML();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
-    generateNavigationLinks('Contacts', 'Summary','Board', 'AddTask', 'Contacts');
+    generateNavigationLinks('Summary', 'Summary','Board', 'AddTask', 'Contacts');
 };
 
+/**
+ * Generate functions for the Summary Page
+ */
 function generateSummary() {
     load();
     if(loggedIn) {
@@ -16,10 +22,16 @@ function generateSummary() {
     }
 }
 
+/**
+ * Open the Board the Page if clicked on some boxes
+ */
 function openBoardPage() {
     window.location.href = 'board.html';
 }
 
+/**
+ * Show the numbers of how many tasks are in the board
+ */
 function tasksInBoardBox() {
     document.getElementById('tasksInBoardBox').innerHTML = tasks.length;
 }
