@@ -47,40 +47,6 @@ body {
     overflow: hidden;
 }
 
-.back {
-    position: absolute;
-    right: 120px;
-    top: 50px;
-
-}
-
-.backImg {
-    object-fit: contain;
-    width: 37px;
-    height: 37px;
-}
-
-.logoutButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    position: absolute;
-    width: 130px;
-    height: 53px;
-    background: #2A3647;
-    color: #CDCDCD;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 20px 0px 20px 20px;
-    right: 20px;
-    top: 90px;
-    cursor: pointer;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-}
-
 .content {
     display: flex;
     flex-direction: column;
@@ -126,30 +92,6 @@ body {
     padding: 18px 21px;
     cursor: pointer;
     outline: none;
-
-}
-
-#contactDetailsContainer {
-    position: absolute;
-    width: calc(100% - 232px);
-    right: 0;
-    height: 100%;
-}
-
-#contacts {
-    display: flex;
-    position: absolute;
-    left: 0;
-    top: 71px;
-    background-color: #FFFFFF;
-    bottom: 0;
-    width: 453px;
-    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow: scroll;
-    overflow-x: hidden;
 }
 
 .fillerDiv {
@@ -177,59 +119,13 @@ h4 {
     margin-bottom: 13px;
 }
 
-.contactHeadContainer {
-    display: flex;
-    align-items: center;
-    margin-bottom: 21px;
-    animation: myAnim2 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
-}
-
-.contactInformationContainer {
-    display: flex;
-    flex-direction: column;
-    animation: myAnim2 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
-}
-
-.contactInformationTitle {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #000000;
-    gap: 59px;
-    width: 392.85px;
-    height: 74px;
-}
-
-.contactInformationTitle div {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #2A3647;
-    cursor: pointer;
-}
-
-.contactInformationTitle div span {
-    align-self: flex-end;
-}
 
 
 
-.contactInformationContent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 22px;
-    width: 146px;
-    height: 128px;
-    margin-top: 25px;
-}
+
+
+
+
 
 .colorCircleMedium {
     width: 42px;
@@ -241,76 +137,6 @@ h4 {
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
-}
-
-.contactInformationContentTitles {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #000000;
-}
-
-.contactInformationContentLink {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #007CEE;
-}
-
-.contactSelectName {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #000000;
-}
-
-.contactSelectMail {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #007CEE;
-}
-
-.contactSelect {
-    display: flex;
-    justify-content: flex-start;
-    border-radius: 10px;
-    width: 357px;
-    height: 79px;
-    padding: 15px 25px;
-    gap: 35px;
-    margin-top: 15px;
-    cursor: pointer;
-}
-
-.contactSelect:hover>div[id="colorCircleMedium"] {
-    border: none;
-}
-
-#createNewUserAtContacts,
-#editUserAtContacts {
-    position: fixed;
-    top: 200px;
-    left: 450px;
-    right: 100px;
-    bottom: 200px;
-    width: 1212px;
-    height: 594px;
-    background: #FFFFFF;
-    border-radius: 30px;
-    animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
 }
 
 @keyframes myAnim {
@@ -337,56 +163,6 @@ h4 {
     }
 }
 
-#createNewContactName,
-#createNewContactEmail,
-#createNewContactPhone,
-#editContactName,
-#editContactEmail,
-#editContactPhone {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px;
-    gap: 10px;
-    border: none;
-    width: 380px;
-    height: 25px;
-    outline: none;
-}
-
-.createNewContactNameInput,
-.editContactNameInput {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 13px 21px;
-    gap: 10px;
-    width: 422px;
-    height: 51px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    position: relative;
-
-}
-
-.createNewUserAtContacts-left,
-.editUserAtContacts-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 66px 46px;
-    gap: 12px;
-    isolation: isolate;
-    width: 463px;
-    height: 594px;
-    background: #2A3647;
-    border-bottom-left-radius: 30px;
-    border-top-left-radius: 30px;
-}
-
 .fillDiv-w90 {
     width: 90px;
     border: 3px solid #29ABE2;
@@ -410,19 +186,7 @@ h4 {
     border-radius: 100%;
 }
 
-.addNewContactInputs,
-.editContactInputs {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 29px;
-    position: absolute;
-    width: 422px;
-    height: 271px;
-    left: 737px;
-    top: 129px;
-}
+
 
 .closeIconAtContacts {
     position: absolute;
@@ -431,26 +195,6 @@ h4 {
     top: 49.11px;
     object-fit: contain;
     cursor: pointer;
-}
-
-.addNewContactProfileImgContainer,
-.editContactProfileImgContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    gap: 10px;
-    isolation: isolate;
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    left: 533px;
-    top: 204px;
-    background: #FFFFFF;
-    border: 3px solid #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 70px;
 }
 
 #addTaskAtBoard,
@@ -467,19 +211,6 @@ h4 {
     justify-content: space-evenly;
     animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
 
-}
-
-.addTaskAtContactsContainer {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.left-side-contacts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-content: center;
 }
 
 .createNewUserAtContactsContainer,
@@ -504,45 +235,6 @@ h4 {
     font-size: 27px;
     line-height: 120%;
     color: #FFFFFF;
-}
-
-.addNewContactCreateButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 15px;
-    gap: 10px;
-    width: 218px;
-    height: 55px;
-    cursor: pointer;
-    background: #2A3647;
-    border-radius: 10px;
-    color: #FFFFFF;
-}
-
-.addNewContactButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 10px;
-    gap: 10px;
-    position: absolute;
-    width: 193px;
-    height: 53px;
-    right: 190px;
-    bottom: 100px;
-    background: #2A3647;
-    border: 1px solid #2A3647;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 120%;
 }
 
 .addNewContactIcon {
@@ -571,7 +263,6 @@ h4 {
 .createTaskBtn::after {
     background-color: #091931;
     border: 1px solid #091931;
-
 }
 
 .contactInformationContentContainer {
@@ -766,34 +457,10 @@ li {
     justify-content: space-between;
 }
 
-.navigation-left {
-    background-color: #2A3647;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    width: 232px;
-    height: 100%;
-    left: 0px;
-    top: 0px;
-    z-index: 9;
-    box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.3);
-}
-
 .prioImg {
     width: 20px;
     height: 14.51px;
     object-fit: cover;
-}
-
-.navigation-left-link {
-    display: flex;
-    align-items: center;
-    padding: 8px 53px;
-    gap: 20px;
-    width: 232px;
-    height: 46px;
-    cursor: pointer;
 }
 
 .confirmMessage {
@@ -815,46 +482,6 @@ li {
     color: #FFFFFF;
 }
 
-.navigation-left-link img {
-    width: 23px;
-    height: 23px;
-    object-fit: contain;
-}
-
-.logo-nav {
-    width: 100.03px;
-    height: 121.97px;
-}
-
-.legalNotice,
-.help {
-    position: absolute;
-    width: calc(100% - 232px);
-    right: 0;
-    height: 100%;
-    top: 89px;
-    align-items: flex-start;
-    overflow: hidden;
-    background-color: #F5F5F5;
-    z-index: 100;
-}
-
-.helpContainer {
-    padding: 50px 120px;
-    padding-bottom: 150px;
-}
-
-.noticeContainer {
-    overflow: scroll;
-    padding: 50px 120px;
-    padding-bottom: 150px;
-}
-
-.legal-notice {
-    width: 18px;
-    height: 18px;
-}
-
 a {
     color: #FFFFFF;
     text-decoration: none;
@@ -866,22 +493,6 @@ a {
 
 .align-c {
     align-items: center;
-}
-
-.navigation-left-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 103px;
-}
-
-.navigation-left-linksContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 103px;
-    margin-bottom: calc(100% + 80px);
-
 }
 
 .d-none {
@@ -907,7 +518,6 @@ a {
     justify-content: center;
     align-items: center;
     margin: 0;
-
 }
 
 .detail div label:hover {
@@ -918,7 +528,6 @@ a {
 
 .detail div {
     gap: 10px;
-
 }
 
 .navigation-top {
@@ -1013,7 +622,6 @@ select option:hover {
     align-items: center;
     padding: 0px;
     gap: 9px;
-
     position: relative;
     width: 66px;
     height: 31px;

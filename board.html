@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join - Board</title>
     <link rel="icon" type="image/png" href="img/logo-dunkel.png">
+    <link rel="stylesheet" href="./CSS/navi.css">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="board.css">
+
     <script src="./js/addTask.js"></script>
     <script src="./js/contacts.js"></script>
 
@@ -22,7 +25,7 @@
 </head>
 
 <body onload="initBoard()">
-    <div w3-include-html="./templates/navs.html"class="d-dark"></div>
+    <div w3-include-html="./templates/navs.html" class="d-dark"></div>
 
     <div id="addTaskAtBoard" class="d-none"></div>
 
@@ -34,7 +37,8 @@
                 <div class="searchVerticalLine"></div>
                 <img src="img/search.png">
             </div>
-            <button class="addTaskBtn" onclick="generateAddTaskHTML('addTaskAtBoard')">Add Task<img src="img/addTaskWhite.png"></button>
+            <button class="addTaskBtn" onclick="generateAddTaskHTML('addTaskAtBoard')">Add Task<img
+                    src="img/addTaskWhite.png"></button>
         </div>
     </div>
 
