@@ -268,6 +268,7 @@ h1 {
     width: 623px;
     min-height: 760px;
     /* margin-top: 80px; */
+    z-index: 7;
 }
 
 .taskStatusOpen {
