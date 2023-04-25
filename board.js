@@ -1,8 +1,12 @@
-
 let currentDraggedElement;
 
-async function updateHTML() {
+async function initBoard(){
     await includeHTML();
+    generateNavigationLinks('Board', 'Summary','Board', 'AddTask', 'Contacts');
+    updateHTML();
+}
+
+function updateHTML() {
     load();
 
     toDoArea();
