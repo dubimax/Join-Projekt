@@ -199,6 +199,7 @@ function setColorWhenSelectet(id){
     addContactCategories();
     setVisibleIfnotEmpty();
     document.getElementById(id).style = `background:#2A3647;`;
+    document.getElementById(id).children[1].children[0].style = 'color:#FFFFFF';
 }
 
 function randomcolor() {
