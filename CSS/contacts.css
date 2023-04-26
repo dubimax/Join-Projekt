@@ -442,7 +442,7 @@
     .closeIconAtContacts {
         background-image: url('../img/closeIconWhite.png') !important;
 
-        top: 120px !important;
+        top: 20px !important;
         right: 50px;
         left: unset !important;
         z-index: 99;
@@ -465,9 +465,10 @@
         background-color: #F5F5F5 !important;
         border-radius: 0 !important;
     }
-   
+
     .details {
         flex-direction: column !important;
+        margin-top: 0 !important;
     }
 
     .detail label {
@@ -481,18 +482,37 @@
     }
 
     .inputTextStd,
-    .dropDownMenuField  {
+    .dropDownMenuField {
         width: 300px !important;
         min-height: 41px !important;
-        height: 41px;
+        height: 41px !important;
     }
-    .inputDescriptionField{
+
+    .inputDescriptionField {
         width: 300px !important;
         height: 93px !important;
     }
 
     .border-1px-solid {
         display: none;
+    }
+
+    #id_urgent,
+    #id_medium,
+    #id_low {
+        width: 90px !important;
+        height: 41px !important;
+    }
+
+    .detail div {
+        gap: 5px;
+    }
+
+    .selectImg {
+        position: absolute;
+        left: unset !important;
+        top: 18px !important;
+        right: 10px !important;
     }
 
 }
