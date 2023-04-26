@@ -279,6 +279,10 @@
     line-height: 120%;
 }
 
+.backArrow {
+    cursor: pointer;
+}
+
 @media (max-width:350px) {
     #contactDetailsContainer {
         width: unset;
@@ -524,12 +528,18 @@
         padding: 9px 21px !important;
     }
 
-    .container-btns{
+    .container-btns {
         position: absolute !important;
         top: -152px !important;
         right: -10px !important;
         bottom: unset !important;
-        
+
+    }
+
+    .backArrow {
+        position: absolute;
+        top: 98px;
+        right: 10px;
     }
 
 

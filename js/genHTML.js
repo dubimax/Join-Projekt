@@ -105,6 +105,14 @@ function generateContactDetailsTitle() {
 `;
 }
 
+function hideContactDetailsButton(){
+    document.getElementById('contactDetails').innerHTML += `
+    <img src="./img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
+    `;
+}
+
+
+
 function generateContactHead() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="contactHeadContainer d-none" id="contactHeadContainer">

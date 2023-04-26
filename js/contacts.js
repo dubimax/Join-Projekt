@@ -1,10 +1,10 @@
-async function initContacts(){
+async function initContacts() {
     await includeHTML();
-    generateNavigationLinks('Contacts', 'Summary','Board', 'AddTask', 'Contacts');
+    generateNavigationLinks('Contacts', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateContactsHTML();
 }
 
- function generateContactsHTML() {
+function generateContactsHTML() {
     load();
     if (loggedIn) {
         addContactCategories();
@@ -43,7 +43,7 @@ function addEventListenerToDeleButton() {
     let contactToDelete = document.getElementById('editContactName').value;
     deleteButton.addEventListener('click', function () {
         deleteContact(contactToDelete);
-        
+
         hideEditContact();
         addContactCategories();
         setVisibleIfnotEmpty();
@@ -108,6 +108,7 @@ function generateContactDetailsHTML() {
     generateContactDetailsTitle();
     generateContactHead();
     generateContactBody();
+    hideContactDetailsButton();
 }
 
 function showAddNewContact() {
@@ -155,13 +156,13 @@ function createNewContact() {
     backend.setItem('users', JSON.stringify(users));
     hideAddNewContact();
     addConfirmMessage();
-    setTimeout(function(){
+    setTimeout(function () {
         removeConfirmMessage();
         addContactCategories();
         setVisibleIfnotEmpty();
         save();
-    },3000);
-    
+    }, 3000);
+
 }
 
 function editContact() {
@@ -181,12 +182,16 @@ function editContact() {
     save();
 }
 
+function hideContactDetails() {
+    document.getElementById('contactDetails').classList.add('d-none');
+}
+
 function setContactDetails(userName, userMail, userPhone, userColor) {
-    if(document.body.clientWidth <= 350){
+    if (document.body.clientWidth <= 350) {
         document.getElementById('contactDetailsContainer').children[5].classList.add('d-none');
         document.getElementById('navigation-top').children[1].classList.remove('d-none');
     }
-    if(document.getElementById('contactDetails').classList.contains('d-none')){
+    if (document.getElementById('contactDetails').classList.contains('d-none')) {
         document.getElementById('contactDetails').classList.remove('d-none');
     }
     document.getElementById('contactName').innerHTML = userName;
@@ -202,7 +207,7 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
     document.getElementById('contactInformationContainer').classList.remove('d-none');
 }
 
-function setColorWhenSelectet(id){
+function setColorWhenSelectet(id) {
     addContactCategories();
     setVisibleIfnotEmpty();
     document.getElementById(id).style = `background:#2A3647;`;
