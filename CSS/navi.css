@@ -116,6 +116,76 @@
     display: none;
 }
 
+@media (max-width:1300px) {
+    .kpmt {
+        display: block !important;
+    }
+
+
+    .profileNavContainer {
+        position: absolute;
+        right: 25px;
+    }
+
+    .logoInvertColor {
+        display: unset;
+        width: 32px;
+        height: 40px;
+        position: absolute;
+        left: 25px;
+        object-fit: contain;
+    }
+
+    .navigation-left {
+        background-color: #2A3647;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        height: 80px;
+        left: 0px;
+        top: unset;
+        z-index: 9;
+        box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        right: 0;
+        bottom: 0;
+    }
+
+    .navigation-left-link {
+        flex-direction: column;
+        justify-content: center;
+        padding-top: unset;
+        width: 25%;
+        padding: unset;
+        height: 100%;
+    }
+
+    .navigation-left-links,
+    .navigation-left-linksContainer {
+        margin-top: unset;
+        width: 100%;
+    }
+
+    .navigation-left-links {
+        flex-direction: row;
+        height: 100%;
+    }
+
+    .navigation-left-linksContainer {
+        margin-bottom: unset;
+        height: 100%;
+    }
+
+    #logoNav {
+        display: none;
+    }
+
+    #addLegal {
+        display: none;
+    }
+}
+
+
 @media (max-width:350px) {
     .kpmt {
         position: absolute;

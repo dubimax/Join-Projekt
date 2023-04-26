@@ -1,3 +1,72 @@
+@media (max-width:1500px) {
+    #addTask {
+        display: flex;
+        margin-top: 125px;
+        flex-direction: column;
+        align-items: flex-start;
+        right: 0;
+        bottom: 0;
+        top: 20px;
+        padding-left: unset;
+        width: unset;
+        position: relative;
+    }
+    
+.border-1px-solid {
+    margin:0 25px;
+}
+
+.addTaskForm {
+    align-items: center ;
+    padding-left: 100px;
+}
+
+h2{
+    text-align: center;
+}
+
+
+
+}
+
+
+@media (max-width:1000px) {
+    .kpmt {
+        padding-left: 25px;
+    }
+
+    .container-btns {
+        position: fixed !important;
+        top: 10px !important;
+        right: 10px !important;
+        bottom: unset !important;
+        z-index: 99 !important;
+    }
+
+    .newCat {
+        position: absolute !important;
+        right: 0 !important;
+        bottom: 14px !important;
+        left: unset !important;
+        top: unset !important;
+    }
+
+    .clearButton {
+        display: none !important;
+    }
+
+    .border-1px-solid {
+        display: flex !important;
+    }
+
+    .details div[class='border-1px-solid'] {
+        display: none !important;
+    }
+    .addTaskForm {
+        padding-left: unset !important;
+    }
+}
+
 @media (max-width:350px) {
     .kpmt {
         display: block !important;
@@ -16,18 +85,21 @@
         position: absolute !important;
         right: 0 !important;
         bottom: 14px !important;
-        left:unset !important;
+        left: unset !important;
         top: unset !important;
     }
 
-    .clearButton{
+    .clearButton {
         display: none !important;
     }
+
     .border-1px-solid {
         display: flex !important;
     }
 
-    .details div[class='border-1px-solid']{
+    .details div[class='border-1px-solid'] {
         display: none !important;
     }
+
+    
 }
