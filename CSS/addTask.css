@@ -11,4 +11,19 @@
         bottom: unset !important;
         z-index: 99 !important;
     }
+
+    .newCat {
+        position: absolute !important;
+        right: 0 !important;
+        bottom: 14px !important;
+        left:unset !important;
+        top: unset !important;
+    }
+
+    ..clearButton{
+        display: none !important;
+    }
+    .border-1px-solid {
+        display: flex !important;
+    }
 }
