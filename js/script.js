@@ -26,57 +26,57 @@ function save() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function generateNavigationLinks(coloredLink , ...links) {
+function generateNavigationLinks(coloredLink, ...links) {
     document.getElementById('navigation-left-links').innerHTML = '';
-    
-    for(let i = 0; i < links.length; i++){
+
+    for (let i = 0; i < links.length; i++) {
         let linkname = links[i];
-        if(coloredLink == linkname){
+        if (coloredLink == linkname) {
             document.getElementById('navigation-left-links').innerHTML += `
             <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
                  <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
             `;
-        }else {
+        } else {
             document.getElementById('navigation-left-links').innerHTML += `
             <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
                  <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
             `;
         }
-        
-    } 
+
+    }
 }
 
-function firstLetterToLowerCase(string){
+function firstLetterToLowerCase(string) {
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
-function addConfirmMessage(){
+function addConfirmMessage() {
     document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Contact successfully createt</div>`;
 }
 
-function removeConfirmMessage(){
+function removeConfirmMessage() {
     document.getElementById('confirmMessage').remove();
 }
 
-function setLogoutButton(){
-    if(document.body.lastChild.innerHTML == 'Logout'){
+function setLogoutButton() {
+    if (document.body.lastChild.innerHTML == 'Logout') {
         removeLogoutButton();
-    }else addLogoutButton();
+    } else addLogoutButton();
 }
 
-function addLogoutButton(){
+function addLogoutButton() {
     document.body.innerHTML += `<div class="logoutButton" id="logoutButton">Logout</div>`;
 }
 
-function removeLogoutButton(){
+function removeLogoutButton() {
     document.getElementById('logoutButton').remove();
 }
 
-function removeLegalNotice(){
+function removeLegalNotice() {
     document.getElementById('legalNotice').remove();
 }
 
-function removeHelp(){
+function removeHelp() {
     document.getElementById('helpContent').remove();
 }
 
@@ -187,44 +187,56 @@ function checkDropDown() {
     if (!selectedCategory) {
         if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
+            document.getElementById('categoryBox').style = `height:unset !important;`;
             document.getElementById('addNewCat').classList.remove('d-none');
             dropDownCat = true;
         } else {
             document.getElementById('addNewCat').classList.add('d-none');
+            document.getElementById('categoryBox').style = `height:41px !important;`;
+            document.getElementById('assignedTo').style = `height:41px !important;`;
             dropDownCat = false;
         }
     } else {
         if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
+            document.getElementById('categoryBox').style = `height:unset !important;`;
             document.getElementById('addNewCat').classList.remove('d-none');
+
+            document.getElementById('assignedTo').style = `height:unset !important;`;
             dropDownCat = true;
         } else {
-                document.getElementById('addNewCat').classList.add('d-none');
-                document.getElementById('CategorycategoryBox').classList.add('d-none');
-                dropDownCat = false;
-            } 
+            document.getElementById('addNewCat').classList.add('d-none');
+            document.getElementById('CategorycategoryBox').classList.add('d-none');
+            document.getElementById('categoryBox').style = `height:41px !important;`;
+            dropDownCat = false;
         }
-    
+    }
+
 }
 
 function showUsersItems() {
     if (!dropDownAssign) {
         document.getElementById('Assigned toassignedTo').classList.remove('d-none');
+        document.getElementById('assignedTo').style = `height:unset !important;`;
         dropDownAssign = true;
     } else {
         if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
             document.getElementById('Assigned toassignedTo').classList.add('d-none');
+            document.getElementById('assignedTo').style = `height:41px !important;`;
         } else {
             document.getElementById('Assigned toassignedTo').classList.remove('d-none');
+            document.getElementById('assignedTo').style = `height:unset !important;`;
         }
         dropDownAssign = false;
     }
     for (let i = 0; i < users.length; i++) {
         if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
             document.getElementById(users[i]['name']).classList.remove('d-none');
+            document.getElementById('assignedTo').style = `height:unset !important;`;
         }
         else {
             document.getElementById(users[i]['name']).classList.add('d-none');
+            document.getElementById('assignedTo').style = `height:41px !important;`;
         }
     }
 }

@@ -436,22 +436,63 @@
 
     .editButtonContainer {
         margin-left: 65px;
-        justify-content:  flex-start !important;
+        justify-content: flex-start !important;
     }
 
     .closeIconAtContacts {
         background-image: url('../img/closeIconWhite.png') !important;
-        
+
         top: 120px !important;
         right: 50px;
         left: unset !important;
         z-index: 99;
-        background-position: center; 
-        background-repeat: no-repeat; 
+        background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
         width: 30px !important;
         height: 30px !important;
     }
-    
+
+    #addTaskAtBoard,
+    #addTaskAtContacts {
+        position: absolute !important;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: unset !important;
+        height: unset !important;
+        top: 90px !important;
+        background-color: #F5F5F5 !important;
+        border-radius: 0 !important;
+    }
+   
+    .details {
+        flex-direction: column !important;
+    }
+
+    .detail label {
+        font-weight: 400 !important;
+        font-size: 16px !important;
+    }
+
+    h2 {
+        font-weight: 700;
+        font-size: 47px !important;
+    }
+
+    .inputTextStd,
+    .dropDownMenuField  {
+        width: 300px !important;
+        min-height: 41px !important;
+        height: 41px;
+    }
+    .inputDescriptionField{
+        width: 300px !important;
+        height: 93px !important;
+    }
+
+    .border-1px-solid {
+        display: none;
+    }
 
 }
