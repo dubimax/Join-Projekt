@@ -105,6 +105,14 @@ function generateContactDetailsTitle() {
 `;
 }
 
+function hideContactDetailsButton(){
+    document.getElementById('contactDetails').innerHTML += `
+    <img src="./img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
+    `;
+}
+
+
+
 function generateContactHead() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="contactHeadContainer d-none" id="contactHeadContainer">
@@ -229,7 +237,7 @@ function generateSubTaskField(field1, headline, properties, id, source) {
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <div onclick="changeToInputField('${id}')" class="dropDownStart" value="" disabled selected>Add new Subtask<img src="${source}">
+            <div onclick="changeToInputField('${id}')" class="subTaskStart" value="" disabled selected>Add new Subtask<img src="${source}">
             </div>
         </div>
     </div>
