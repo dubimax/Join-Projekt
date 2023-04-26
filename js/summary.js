@@ -16,6 +16,10 @@ function generateSummary() {
         tasksInBoardBox();
         tasksInProgressBox();
         setNumberIPBox();
+        tasksInAwaitingFeedbackBox();
+        setNumberAFBox();
+        tasksInToDoBox();
+        setNumberTDBox();
         greeting();
         showUserName();
     } else {
@@ -61,7 +65,7 @@ function tasksInBoardBox() {
 }
 
 /**
- * show the number in tasks on the board page 
+ * show the number in Prgress tasks on the board page 
  */
 function tasksInProgressBox() {
     let iPBox = [];
@@ -79,6 +83,33 @@ function setNumberIPBox() {
 }
 
 
+function tasksInAwaitingFeedbackBox() {
+    let aFBox = [];
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]['status'] == 'awaitingFeedback') {
+            aFBox.push(tasks[i]);
+        }
+    }
+    return aFBox.length;
+}
+
+function setNumberAFBox() {
+    document.getElementById('awaitingFeedbackBox').innerHTML = tasksInAwaitingFeedbackBox();
+}
+
+// function tasksInToDoBox() {
+//     let tDBox = [];
+//     for (let i = 0; i < tasks.length; i++) {
+//         if (tasks[i]['status'] == 'toDo') {
+//             tDBox.push(tasks[i]);
+//         }
+//     }
+//     return setNumberTDBox();
+// }
+
+// function setNumberTDBox() {
+//     document.getElementById('toDo').innerHTML = tasksInToDoBox();
+// }
 
 
 
