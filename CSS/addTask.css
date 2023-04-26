@@ -20,10 +20,14 @@
         top: unset !important;
     }
 
-    ..clearButton{
+    .clearButton{
         display: none !important;
     }
     .border-1px-solid {
         display: flex !important;
+    }
+
+    .details div[class='border-1px-solid']{
+        display: none !important;
     }
 }
