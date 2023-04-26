@@ -1,7 +1,7 @@
 async function initContacts(){
     await includeHTML();
     generateNavigationLinks('Contacts', 'Summary','Board', 'AddTask', 'Contacts');
-    generateContactsHTML()
+    generateContactsHTML();
 }
 
  function generateContactsHTML() {

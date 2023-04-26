@@ -4,9 +4,7 @@
 async function initSummary() {
     await includeHTML();
     await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
-    categories = JSON.parse(backend.getItem('categories')) || [];
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    load();
     generateNavigationLinks('Summary', 'Summary','Board', 'AddTask', 'Contacts');
 };
 
