@@ -3,8 +3,7 @@
  */
 async function initSummary() {
     await includeHTML();
-    await downloadFromServer();
-    load();
+    generateSummary();
     generateNavigationLinks('Summary', 'Summary','Board', 'AddTask', 'Contacts');
 };
 

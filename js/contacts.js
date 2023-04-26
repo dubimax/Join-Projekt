@@ -182,6 +182,12 @@ function editContact() {
 }
 
 function setContactDetails(userName, userMail, userPhone, userColor) {
+    if(document.body.clientWidth <= 350){
+        document.getElementById('contactDetailsContainer').children[5].classList.add('d-none');
+    }
+    if(document.getElementById('contactDetails').classList.contains('d-none')){
+        document.getElementById('contactDetails').classList.remove('d-none');
+    }
     document.getElementById('contactName').innerHTML = userName;
     document.getElementById('contactDetailsLogo').style = `background:${userColor}`;
     document.getElementById('contactDetailsLogo').innerHTML = getFirstLettersOfName(userName);

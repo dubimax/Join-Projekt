@@ -102,10 +102,6 @@ function generateContactDetailsTitle() {
         <div class="fillerDiv"></div>
         <h4>Better with a team</h4>
     </div>
-    <div onclick="showAddNewContact()" class="addNewContactButton">
-    New Contact
-    <img src="./img/addNewContactIcon.png" class="addNewContactIcon"
-    </div>
 `;
 }
 

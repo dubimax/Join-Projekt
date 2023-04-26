@@ -25,7 +25,7 @@
     <div w3-include-html="./templates/navs.html"></div>
     <div class="content" id="contactDetailsContainer">
         <div id="contacts" class="details"></div>
-        <div id="contactDetails"></div>
+        <div id="contactDetails" class="d-none"></div>
         <div id="addTaskAtContacts" class="d-none"></div>
             
         <div id="createNewUserAtContacts" class="d-none">
@@ -123,6 +123,10 @@
                 </div>
 
             </div>
+        </div>
+        <div onclick="showAddNewContact()" class="addNewContactButton">
+            New Contact
+            <img src="./img/addNewContactIcon.png" class="addNewContactIcon">
         </div>
 
     </div>
