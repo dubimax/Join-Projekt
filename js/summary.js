@@ -1,3 +1,4 @@
+
 /**
  * Initialize the Summary Page
  */
@@ -14,12 +15,7 @@ function generateSummary() {
     load();
     if (loggedIn) {
         tasksInBoardBox();
-        tasksInProgressBox();
-        setNumberIPBox();
-        tasksInAwaitingFeedbackBox();
-        setNumberAFBox();
-        tasksInToDoBox();
-        setNumberTDBox();
+        tasksNumbersInBox();
         greeting();
         showUserName();
     } else {
@@ -65,118 +61,101 @@ function tasksInBoardBox() {
 }
 
 /**
- * show the number in Prgress tasks on the board page 
+ * show the numbers of tasks in boxes  
  */
-function tasksInProgressBox() {
-    let iPBox = [];
+function tasksNumbersInBox() {
+    numberOfInPorgressBox();
+    numberOfAwaitingFeedbackBox();
+    numberOfToDoBox();
+    numberOfDoneBox();
+    numberOfUrgentTasksBox();
+    checkNextDueDate();
+}
 
+/**
+ * show the number of the in Progess Box
+ */
+function numberOfInPorgressBox() {
+    let iPBox = [];
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i]['status'] == 'inProgress') {
             iPBox.push(tasks[i]);
         }
     }
-    return iPBox.length;
+    document.getElementById('tasksInProgressBox').innerHTML = iPBox.length;
 }
 
-function setNumberIPBox() {
-    document.getElementById('tasksInProgressBox').innerHTML = tasksInProgressBox();
-}
-
-
-function tasksInAwaitingFeedbackBox() {
+/**
+ * show the number of the Awaiting Feedback Box
+ */
+function numberOfAwaitingFeedbackBox() {
     let aFBox = [];
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i]['status'] == 'awaitingFeedback') {
             aFBox.push(tasks[i]);
         }
     }
-    return aFBox.length;
+    document.getElementById('awaitingFeedbackBox').innerHTML = aFBox.length;
 }
 
-function setNumberAFBox() {
-    document.getElementById('awaitingFeedbackBox').innerHTML = tasksInAwaitingFeedbackBox();
+/**
+ * show the number of the To do Box
+ */
+function numberOfToDoBox() {
+    let tDBox = [];
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]['status'] == 'toDo') {
+            tDBox.push(tasks[i]);
+        }
+    }
+    document.getElementById('toDo').innerHTML = tDBox.length;
 }
 
-// function tasksInToDoBox() {
-//     let tDBox = [];
-//     for (let i = 0; i < tasks.length; i++) {
-//         if (tasks[i]['status'] == 'toDo') {
-//             tDBox.push(tasks[i]);
-//         }
-//     }
-//     return setNumberTDBox();
-// }
+/**
+ * show the number of the Done Box
+ */
+function numberOfDoneBox() {
+    let dBox = [];
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]['status'] == 'done') {
+            dBox.push(tasks[i]);
+        }
+    }
+    document.getElementById('done').innerHTML = dBox.length;
+}
 
-// function setNumberTDBox() {
-//     document.getElementById('toDo').innerHTML = tasksInToDoBox();
-// }
+/**
+ * show the number of the Urgent Tasks on the Box
+ */
+function numberOfUrgentTasksBox() {
+    let uBox = [];
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]['prio'] == 'Urgent') {
+            uBox.push(tasks[i]);
+        }
+    }
+    document.getElementById('urgent').innerHTML = uBox.length;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-// function displayNumbers() {
-//     document.getElementById('tasksInProgressBox').innerHTML = tasks.status.length;
-//     document.getElementById('awaitingFeedbackBox').innerHTML = tasks.status.length;
-//     document.getElementById('toDo').innerHTML = tasks.status.length;
-//     document.getElementById('done').innerHTML = tasks.status.length;
-//     document.getElementById('urgent').innerHTML = tasks.status.length;
-// }
-
-
+/**
+ * Checked the next due date
+ */
+function checkNextDueDate() {
+    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'];
+    let upcomingDeadline = document.getElementById('date');
 
 
-// function countTasks() {
-//     for (let i = 0; i < tasks.length; i++) { 
-//         const task = tasks[i];
-//         let status = task.status;
-//         if (status === 'inProgress') { 
-//             tasks.status.push(status);
-//         } else if (status === 'awaitingFeedback') {
-//             tasks.status.push(status);
-//         } else if (status === 'toDo') {
-//             tasks.status.push(status);
-//         } else if (status === 'done') {
-//             tasks.status.push(status);
-//         }
-//     }
-//     displayNumbers();
-// }
+    if (tasks.length > 0 && tasks[0] != '') {
+        let dueDate = new Date(tasks['dueDate']);
+        let month = months[dueDate.getMonth()];
+        let nextDueDate = month + ' ' + dueDate.getDate() + ', ' + dueDate.getFullYear();
+        upcomingDeadline.innerHTML = nextDueDate;
+    } else {
+        upcomingDeadline.innerHTML = `No upcoming deadline`;
+    }
+}
 
-
-// function countUrgentTasks() {
-//     for (let i = 0; i < tasks.length; i++) { 
-//         const task = tasks[i];
-//         let prio = task.prio;
-//         let date = task.date;
-//         if (prio === 'urgent') { 
-//             taskUrgent.push(prio);
-//             urgentDate.push(date);
-//         }
-//     }
-//     displayNumbers();
-// }
-
-
-// function date() {
-//     if (urgentDate.length === 0) {
-//         newDate = 'No Deadline';
-//         document.getElementById('date').innerHTML = newDate;
-//     } else {
-//         const datesArray = urgentDate.map((element) => new Date(element));
-//         const minDate = new Date(Math.min(...datesArray));
-//         newDate = minDate.toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'});
-//         document.getElementById('date').innerHTML = newDate;
-//     }
-//     }
 
 
 
