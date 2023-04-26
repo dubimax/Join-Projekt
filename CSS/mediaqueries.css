@@ -114,6 +114,7 @@
         width: 100%;
         align-items: center;
         z-index: 99 !important;
+        background: rgb(245, 245, 245,0.8);
     }
 
     .createNewUserAtContacts-left,
