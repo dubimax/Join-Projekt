@@ -6,20 +6,20 @@ let currentDraggedElement;
 async function initBoard() {
     await includeHTML();
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
-    updateHTML();
+    updateBoardHTML();
+    generateAddTaskToBoardImg();
 }
 
 /**
  * Uptade the Board Page
  */
-function updateHTML() {
+function updateBoardHTML() {
     load();
 
     toDoArea();
     inProgressArea();
     awaitingFeedbackArea();
     doneArea();
-    generateAddTaskToBoardImg();
     generateAddTaskHTML('addTaskAtBoard');
     setOnSubmitForm();
 }
@@ -202,8 +202,9 @@ function allowDrop(ev) {
  */
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
-    updateHTML();
     save();
+    updateBoardHTML();
+    backend.setItem('tasks', JSON.stringify(tasks));
 }
 
 /**
