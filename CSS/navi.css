@@ -118,8 +118,12 @@
 
 @media (max-width:350px) {
     .kpmt {
-        display: none;
+        position: absolute;
+        top: 120px;
+        left: 0;
+        padding-left: 50px;
     }
+
 
     .profileNavContainer {
         position: absolute;

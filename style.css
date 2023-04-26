@@ -185,6 +185,9 @@ h4 {
     top: 49.11px;
     object-fit: contain;
     cursor: pointer;
+    background-image: url('./img/closeIconEditUserAtContacts.png');
+    width: 40px;
+    height: 40px;
 }
 
 #addTaskAtBoard,
