@@ -471,11 +471,6 @@
         margin-top: 0 !important;
     }
 
-    .detail label {
-        font-weight: 400 !important;
-        font-size: 16px !important;
-    }
-
     h2 {
         font-weight: 700;
         font-size: 47px !important;
@@ -493,8 +488,9 @@
         height: 93px !important;
     }
 
-    .border-1px-solid {
-        display: none;
+    .border-1px-solid,
+    .clearButton {
+        display: none !important;
     }
 
     #id_urgent,
@@ -504,6 +500,11 @@
         height: 41px !important;
     }
 
+    .detail {
+        font-weight: 400;
+        font-size: 16px !important;
+    }
+
     .detail div {
         gap: 5px;
     }
@@ -511,8 +512,26 @@
     .selectImg {
         position: absolute;
         left: unset !important;
-        top: 18px !important;
+        top: 16px !important;
         right: 10px !important;
     }
+
+    .dropDownStart {
+        padding: 11px 19px !important;
+    }
+
+    .subTaskStart {
+        padding: 9px 21px !important;
+    }
+
+    .container-btns{
+        position: absolute !important;
+        top: -152px !important;
+        right: -10px !important;
+        bottom: unset !important;
+        
+    }
+
+
 
 }
