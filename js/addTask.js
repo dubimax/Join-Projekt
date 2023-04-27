@@ -268,22 +268,37 @@ function setOption(id, id2) {
         document.getElementById('CategorycategoryBox').classList.add('d-none');
         document.getElementById('addNewCat').classList.add('d-none');
         dropDownCat = false;
-
-        for (let i = 0; i < categories.length; i++) {
-            document.getElementById(categories[i]['name']).classList.add('d-none');
-            document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
-            document.getElementById(categories[i]['name']).classList.add('cl_categories');
-        }
-        if (document.getElementById(id).classList.contains('d-none')) {
-            document.getElementById(id).classList.remove('d-none');
-            document.getElementById(id).classList.add('dropDownStart');
-            document.getElementById(id).classList.remove('cl_categories');
-        } else {
-            document.getElementById(id).classList.add('d-none');
-            document.getElementById(id).classList.remove('dropDownStart');
-            document.getElementById(id).classList.add('cl_categories');
-        }
+        resetOptions();
+        setCategoryOptions(id);
         selectedCategory = id;
+    }
+}
+
+/**
+ * Sets the options for categoryItems
+ * @param {*} id 
+ */
+function setCategoryOptions(id){
+    let sID = document.getElementById(id).classList.contains('d-none');
+    if (sID) {
+        sID.classList.remove('d-none');
+        sID.classList.add('dropDownStart');
+        sID.classList.remove('cl_categories');
+    } else {
+        sID.classList.add('d-none');
+        sID.classList.remove('dropDownStart');
+        sID.classList.add('cl_categories');
+    }
+}
+
+/**
+ * Reset categoryOptions
+ */
+function resetOptions(){
+    for (let i = 0; i < categories.length; i++) {
+        document.getElementById(categories[i]['name']).classList.add('d-none');
+        document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
+        document.getElementById(categories[i]['name']).classList.add('cl_categories');
     }
 }
 
