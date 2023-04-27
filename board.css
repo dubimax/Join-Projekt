@@ -1,14 +1,7 @@
 .boardHeaderContainer {
-    position: absolute;
-    left: 302px;
-    top: 166px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    right: 0;
-    width: calc(100% - 367px);
 }
 
 h1 {
@@ -92,10 +85,6 @@ h1 {
 .cardHeaders {
     display: flex;
     justify-content: space-evenly;
-    position: absolute;
-    top: 267.5px;
-    width: calc(100% - 232px);
-    right: 0;
 }
 
 .dragArea {
@@ -348,4 +337,38 @@ h1 {
 
 .d-dark {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width:428px) {
+    .boardHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 162px;
+    margin-left: 33px;
+    }
+
+    .boardHeaderContainer h1 {
+        font-size: 47px;
+    }
+
+    .findAddTaskContainer {
+        margin-top: 30px;
+    }
+
+    .addTaskBtn {
+        font-size: 0;
+    }
+
+    .addTaskBtn img {
+        margin-right: 8px;
+    }
+
+    .cardHeaders {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 20px 33px 0px 32px;
+    }
 }

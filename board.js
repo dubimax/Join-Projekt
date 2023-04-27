@@ -241,3 +241,7 @@ function showAddNewTaskAtBoard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
     addEventListenerToDropDown();
 }
+
+// function searchTasks() {
+//     const result = 
+// }
