@@ -22,6 +22,11 @@ function updateBoardHTML() {
     doneArea();
 }
 
+function showAddNewTaskAtBoardStandard(){
+    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    generateAddTaskHTML('addTaskAtBoard');
+}
+
 /**
  * Show all tasks on the To do Area
  */
