@@ -233,3 +233,8 @@ function createNewTaskAtBoard(statusTag) {
     clearAllInputs();
     save();
 }
+
+function showAddNewTaskAtBoard() {
+    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    addEventListenerToDropDown();
+}

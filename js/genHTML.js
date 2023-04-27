@@ -338,3 +338,47 @@ function generateUnSelectedNavigationLinkHTML(linkname){
 function addLogoutButton() {
     document.body.innerHTML += `<div class="logoutButton" id="logoutButton">Logout</div>`;
 }
+
+/**
+ * Generates HTML for ContactCategories
+ * @param {*} value 
+ * @returns 
+ */
+function addContactCategoriesHTML(value){
+    return `
+    <div class="contactSegment d-none" id="contact${value}">
+         <h3 class="letter">${value}</h3>
+         <div class="contactListFillerDiv"></div>
+    </div>`;
+}
+
+function setContactsContainerHTML(contactName, userMail, userPhone, userColor){
+    return `
+    <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}');setColorWhenSelectet('contactAt${contactName}')" class="contactSelect" id="contactAt${contactName}">
+        <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
+        <div class="contactsAttributeBox">
+            <span class="contactSelectName"> ${contactName}</span>
+            <span class="contactSelectMail">${userMail}</span>
+        </div>
+    </div>
+    `;
+}
+
+/**
+ * Function for generating all ContactDetails
+ */
+function generateContactDetailsHTML() {
+    generateContactDetailsTitle();
+    generateContactHead();
+    generateContactBody();
+    hideContactDetailsButton();
+}
+
+/**
+ * Adds a close Button to AddTaskAtContacts
+ */
+function addCloseBtnToAddTaskAtContacts() {
+    document.getElementById('addTaskAtContacts').innerHTML += `
+    <img onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
+    `;
+}
