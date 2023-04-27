@@ -379,6 +379,6 @@ function generateContactDetailsHTML() {
  */
 function addCloseBtnToAddTaskAtContacts() {
     document.getElementById('addTaskAtContacts').innerHTML += `
-    <img onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts" src="img/closeIconEditUserAtContacts.png">
+    <div onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts"></div>
     `;
 }

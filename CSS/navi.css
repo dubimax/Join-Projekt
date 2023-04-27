@@ -10,6 +10,9 @@
     background-color: #F5F5F5;
     z-index: 100;
 }
+.kpmt {
+    display: unset !important;
+}
 
 .helpContainer {
     padding: 50px 120px;
@@ -119,9 +122,9 @@
 @media (max-width:1300px) {
     .kpmt {
         position: absolute;
-        top: 120px;
+        top: unset;
         left: 0;
-        padding-left: 50px;
+        padding-left: 70px;
         display: block !important;
 
     }
@@ -187,6 +190,14 @@
     #addLegal {
         display: none;
     }
+}
+
+@media (max-width:500px) {
+    .kpmt {
+        top: unset;
+        
+    }
+
 }
 
 
