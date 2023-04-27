@@ -1,12 +1,5 @@
 
-function checkStatusToSet(id) {
-    let getStatus = document.getElementById(id);
-    let addForm = getStatus.parentElement.children[0].children[0].attributes.for.value;
-    addForm.replace(/\s+/g, '');
-    showAddNewTaskAtBoard();
-    setOnSubmitForm(addForm);
-    console.log('erfolgreich');
-}
+
 
 function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaToDoTitle').innerHTML += `
@@ -21,14 +14,6 @@ function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaDoneTitle').innerHTML += `
     <img src="img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
 `;
-}
-
-function setOnSubmitForm(addForm) {
-    let submitElement = document.getElementById('submitting');
-    submitElement.onsubmit = function () {
-        createNewTask(addForm);
-        return false;
-    };
 }
 
 function generateAddTaskHTML(id) {
@@ -68,9 +53,9 @@ function generateAddTaskHTML(id) {
        
         </form>
     `;
-        generateOptionsHTML('assignedTo', users, 'users');
+        generateOptionsHTML(users, 'users');
         addOptionWithFunction('addNewCat');
-        generateOptionsHTML('categoryBox', categories, 'categories');
+        generateOptionsHTML(categories, 'categories');
         addEventListenerToDropDown();
     } else {
         window.location.href = 'login.html';
@@ -334,4 +319,25 @@ function addLegalNotice() {
             </div>
         </div>
     </div>`;
+}
+
+function generateSelectedNavigationLinkHTML(linkname){
+    return `
+    <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
+         <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+    `;
+}
+
+function generateUnSelectedNavigationLinkHTML(linkname){
+    return `
+    <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
+         <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+    `;
+}
+
+/**
+ * Adds a LogoutButton to the Body
+ */
+function addLogoutButton() {
+    document.body.innerHTML += `<div class="logoutButton" id="logoutButton">Logout</div>`;
 }

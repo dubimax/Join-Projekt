@@ -1,3 +1,7 @@
+setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
+/**
+ * Includes other HTML Files
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -11,6 +15,10 @@ async function includeHTML() {
         }
     }
 }
+
+/**
+ * Load saved variables from localstorage
+ */
 function load() {
     loggedIn = JSON.parse(localStorage.getItem("loggedIn" || false));
     users = JSON.parse(localStorage.getItem("users") || [{}]);
@@ -18,6 +26,9 @@ function load() {
     tasks = JSON.parse(localStorage.getItem("tasks") || [{}]);
 }
 
+/**
+ * Saves needed variables in localstorage
+ */
 function save() {
     localStorage.clear();
     localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
@@ -26,61 +37,76 @@ function save() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+/**
+ * Sets the selected Navigation Link
+ * @param {*} coloredLink The Link to set colored
+ * @param  {...any} links array with all navigation links
+ */
 function generateNavigationLinks(coloredLink, ...links) {
     document.getElementById('navigation-left-links').innerHTML = '';
-
     for (let i = 0; i < links.length; i++) {
         let linkname = links[i];
         if (coloredLink == linkname) {
-            document.getElementById('navigation-left-links').innerHTML += `
-            <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
-                 <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
-            `;
+            document.getElementById('navigation-left-links').innerHTML += generateSelectedNavigationLinkHTML(linkname);
         } else {
-            document.getElementById('navigation-left-links').innerHTML += `
-            <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
-                 <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
-            `;
+            document.getElementById('navigation-left-links').innerHTML += generateUnSelectedNavigationLinkHTML(linkname);
         }
-
     }
 }
 
+/**
+ * Sets only the first Letter to lowerCase
+ * @param {*} string 
+ * @returns returns the String with the first letter as lowerCase
+ */
 function firstLetterToLowerCase(string) {
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
+/**
+ * Adds a Confirmmessage
+ */
 function addConfirmMessage() {
     document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Contact successfully createt</div>`;
 }
 
+/**
+ * Removes the Confirmmessage
+ */
 function removeConfirmMessage() {
     document.getElementById('confirmMessage').remove();
 }
 
+/**
+ * add the Logout Button if not there
+ *  or removes the Logout Button if there
+ */
 function setLogoutButton() {
     if (document.body.lastChild.innerHTML == 'Logout') {
         removeLogoutButton();
     } else addLogoutButton();
 }
 
-function addLogoutButton() {
-    document.body.innerHTML += `<div class="logoutButton" id="logoutButton">Logout</div>`;
-}
-
+/**
+ * Removes the logout button from the page body
+ */
 function removeLogoutButton() {
     document.getElementById('logoutButton').remove();
 }
 
+/**
+ * Removes the legal notice from the page body
+ */
 function removeLegalNotice() {
     document.getElementById('legalNotice').remove();
 }
 
+/**
+ * Removes the help from the page body
+ */
 function removeHelp() {
     document.getElementById('helpContent').remove();
 }
-
-setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
 
 async function init() {
     await includeHTML();
@@ -124,6 +150,9 @@ function addUser() {
     showFrame('signUpConfirmFrame', 'signUpFrame');
 }
 
+/**
+ * Add a new Category 
+ */
 function addCategory() {
     let newCategory = document.getElementById('newCat').value;
     let color = getValueOfChosenColor();
@@ -132,19 +161,38 @@ function addCategory() {
     cancelAddNew('addNewCat');
 }
 
+/**
+ * Gets a Categoryname by its index
+ * @param {*} i index
+ * @returns  Categoryname
+ */
 function getCategory(i) {
     return categories[i]['name'];
 }
+
+/**
+ * Gets the color of Category by its index
+ * @param {*} i index
+ * @returns Categorycolor
+ */
 function getCategoryColor(i) {
     return categories[i]['color'];
 }
 
+/**
+ * Gets a username by its index
+ * @param {*} i index
+ * @returns Username
+ */
 function getUser(i) {
     return users[i]['name'];
 }
 
+/**
+ * Aborts the process of Adding something new
+ * @param {*} id 
+ */
 function cancelAddNew(id) {
-
     if (id == 'addNewCat') {
         document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category');
         addOptionWithFunction('addNewCat');
@@ -155,10 +203,13 @@ function cancelAddNew(id) {
     }
     if (id == 'addNewSubTask') {
         document.getElementById('id_addNewSubTask').innerHTML = setBackToSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png');
-
     }
 }
 
+/**
+ * Open the selected dropdownmenu
+ * @param {*} usedItems 
+ */
 function showDropDownItems(usedItems) {
     if (usedItems == 'categories') {
         showCategoryItems();
@@ -168,6 +219,9 @@ function showDropDownItems(usedItems) {
     }
 }
 
+/**
+ * Shows all category in Dropdown
+ */
 function showCategoryItems() {
     if (document.getElementById('CategorycategoryBox')) {
         checkDropDown();
@@ -182,6 +236,7 @@ function showCategoryItems() {
         }
     }
 }
+
 
 function checkDropDown() {
     if (!selectedCategory) {
@@ -211,9 +266,36 @@ function checkDropDown() {
             dropDownCat = false;
         }
     }
-
 }
 
+/**
+ * checks the Status to set for a Task
+ * @param {*} id 
+ */
+function checkStatusToSet(id) {
+    let getStatus = document.getElementById(id);
+    let addForm = getStatus.parentElement.children[0].children[0].attributes.for.value;
+    addForm.replace(/\s+/g, '');
+    showAddNewTaskAtBoard();
+    setOnSubmitForm(addForm);
+    console.log('erfolgreich');
+}
+
+/**
+ * Sets onsubmit to the form element
+ * @param {*} addForm formelement
+ */
+function setOnSubmitForm(addForm) {
+    let submitElement = document.getElementById('submitting');
+    submitElement.onsubmit = function () {
+        createNewTask(addForm);
+        return false;
+    };
+}
+
+/**
+ * Shows the useritems in Dropdown menu
+ */
 function showUsersItems() {
     if (!dropDownAssign) {
         document.getElementById('Assigned toassignedTo').classList.remove('d-none');
@@ -241,6 +323,9 @@ function showUsersItems() {
     }
 }
 
+/**
+ * Creates CheckboxItems for Subtasks
+ */
 function generateCheckboxItem() {
     document.getElementById('list-subtask').innerHTML += `
     <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
@@ -248,11 +333,20 @@ function generateCheckboxItem() {
     subtasks.push(getItemFromInput());
 }
 
+/**
+ * Gets the inputfield Value for Subtasks
+ * @returns rrturns the value from the input at subtasks
+ */
 function getItemFromInput() {
     return document.getElementById('newSubtasks').value;
 }
 
-function generateOptionsHTML(id, array, nameOfArray) {
+/**
+ * generates the option for dropdown
+ * @param {*} array items to set
+ * @param {*} nameOfArray array for rendering items
+ */
+function generateOptionsHTML(array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
         if (nameOfArray == 'users') {
             document.getElementById('assignedTo').innerHTML += `
