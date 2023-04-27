@@ -20,8 +20,6 @@ function updateBoardHTML() {
     inProgressArea();
     awaitingFeedbackArea();
     doneArea();
-    generateAddTaskHTML('addTaskAtBoard');
-    setOnSubmitForm();
 }
 
 /**
