@@ -14,6 +14,13 @@ function createNewTask(statusTag) {
     let id = tasks.length + 1;
     let status = statusTag;
     tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
+    pushTasksToDatabase();
+}
+
+/**
+ * Pushes the Tasks to the Backend, clear all Inputs and Save
+ */
+function pushTasksToDatabase(){
     backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];
     clearAllInputs();
@@ -83,7 +90,45 @@ function clearFields(...ids) {
             document.getElementById(ids[i]).value = '';
         }
         changeStyleOfLabel(ids[i]);
+    }
+}
 
+function resetAllLabelContainer(){
+    document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('urgentImgID').src = 'img/urgentIcon.png';
+    document.getElementById('mediumImgID').src = 'img/mediumIcon.png';
+    document.getElementById('lowImgID').src = 'img/lowIcon.png';
+}
+
+function setStyleOfUrgent(id){
+    if (id == 'id_urgent') {
+        document.getElementById(id).style = urgentColor;
+        document.getElementById('urgentImgID').src = 'img/urgentWhiteIcon.png';
+        activeID = id;
+        activeImg = 'urgentImgID';
+        return;
+    }
+}
+
+function setStyleOfMedium(id){
+    if (id == 'id_medium') {
+        document.getElementById(id).style = mediumColor;
+        document.getElementById('mediumImgID').src = 'img/mediumWhiteIcon.png';
+        activeID = id;
+        activeImg = 'mediumImgID';
+        return;
+    }
+}
+
+function setStyleOfLow(id){
+    if (id == 'id_low') {
+        document.getElementById(id).style = lowColor;
+        document.getElementById('lowImgID').src = 'img/lowWhiteIcon.png';
+        activeID = id;
+        activeImg = 'lowImgID';
+        return;
     }
 }
 
@@ -93,42 +138,27 @@ function clearFields(...ids) {
  * @returns 
  */
 function changeStyleOfLabel(id) {
-    document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('urgentImgID').src = 'img/urgentIcon.png';
-    document.getElementById('mediumImgID').src = 'img/mediumIcon.png';
-    document.getElementById('lowImgID').src = 'img/lowIcon.png';
+    resetAllLabelContainer();
     if (activeID.length == 0) {
-        if (id == 'id_urgent') {
-            document.getElementById(id).style = urgentColor;
-            document.getElementById('urgentImgID').src = 'img/urgentWhiteIcon.png';
-            activeID = id;
-            activeImg = 'urgentImgID';
-            return;
-        }
-        if (id == 'id_medium') {
-            document.getElementById(id).style = mediumColor;
-            document.getElementById('mediumImgID').src = 'img/mediumWhiteIcon.png';
-            activeID = id;
-            activeImg = 'mediumImgID';
-            return;
-        }
-        if (id == 'id_low') {
-            document.getElementById(id).style = lowColor;
-            document.getElementById('lowImgID').src = 'img/lowWhiteIcon.png';
-            activeID = id;
-            activeImg = 'lowImgID';
-            return;
-        }
+        setStyleOfUrgent(id);
+        setStyleOfMedium(id);
+        setStyleOfLow(id);
     } else {
-        if (activeID == id) {
-            document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
-        } else {
-            activeID = '';
-            activeImg = '';
-            changeStyleOfLabel(id);
-        }
+        refreshStyleOfSelectedLabel(id);
+    }
+}
+
+/**
+ * resets style when label already is selected
+ * @param {*} id 
+ */
+function refreshStyleOfSelectedLabel(id){
+    if (activeID == id) {
+        document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
+    } else {
+        activeID = '';
+        activeImg = '';
+        changeStyleOfLabel(id);
     }
 }
 
@@ -152,7 +182,6 @@ function changeToInputField(id) {
  */
 function removeEventListenerFromDropDown() {
     document.getElementById('categoryBox').removeEventListener('click', function () { });
-
     document.getElementById('assignedTo').removeEventListener('click', function () { });
     let selUser;
     for (let i = 0; i < categories.length; i++) {
@@ -170,12 +199,18 @@ function removeEventListenerFromDropDown() {
  */
 function addEventListenerToCategories() {
     let catBox = document.getElementById('categoryBox');
-    let selCat;
     catBox.addEventListener('click', function () {
         showDropDownItems('categories');
     });
+    addEvenListenerToSelectCategories();
+}
+
+/**
+ * Add an Eventlistener to select categories in dropdown
+ */
+function addEvenListenerToSelectCategories(){
     for (let i = 0; i < categories.length; i++) {
-        selCat = document.getElementById(categories[i]['name']);
+        let selCat = document.getElementById(categories[i]['name']);
         selCat.addEventListener('click', function (e) {
             let txt = e.currentTarget.attributes[1].textContent;
             setOption(txt, 'category');
@@ -189,15 +224,20 @@ function addEventListenerToCategories() {
  */
 function addEventListenerToDropDown() {
     addEventListenerToCategories();
+    addEventListenerToSelectUserBox();
+}
 
+function addEventListenerToSelectUserBox(){
     let userBox = document.getElementById('assignedTo');
-    let selUser;
     userBox.addEventListener('click', function () {
         showDropDownItems('users');
     });
+    addEventListenerToSelectUser();   
+}
 
-
+function addEventListenerToSelectUser(){
     for (let j = 0; j < users.length; j++) {
+        let selUser;
         selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
             e.stopPropagation();
