@@ -1,3 +1,7 @@
+/**
+ * Creates a new Task by given statusTag
+ * @param {*} statusTag 
+ */
 function createNewTask(statusTag) {
     let taskTitle = document.getElementById('inputTitle').value;
     let taskDesc = document.getElementById('inputDescription').value;
@@ -16,12 +20,19 @@ function createNewTask(statusTag) {
     save();
 }
 
-async function initAddTask(){
+/**
+ * initialises AddTask Site
+ */
+async function initAddTask() {
     await includeHTML();
-    generateNavigationLinks('AddTask', 'Summary','Board', 'AddTask', 'Contacts');
+    generateNavigationLinks('AddTask', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskHTML('addTask');
 }
 
+/**
+ * Return the Value of the Chosen color
+ * @returns 
+ */
 function getValueOfChosenColor() {
     for (let i = 0; i < colors.length; i++) {
         let isActive = document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');
@@ -31,6 +42,10 @@ function getValueOfChosenColor() {
     }
 }
 
+/**
+ * Sets color active by its id
+ * @param {*} id 
+ */
 function setActiveColor(id) {
     document.getElementById('8AA4FF').classList.remove('colorCircleisActive');
     document.getElementById('FF0000').classList.remove('colorCircleisActive');
@@ -38,11 +53,12 @@ function setActiveColor(id) {
     document.getElementById('FF8A00').classList.remove('colorCircleisActive');
     document.getElementById('E200BE').classList.remove('colorCircleisActive');
     document.getElementById('0038FF').classList.remove('colorCircleisActive');
-
     document.getElementById(id).classList.add('colorCircleisActive');
-
 }
 
+/**
+ * Resets all inputFields
+ */
 function clearAllInputs() {
     clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
     clearListSubtask();
@@ -50,10 +66,17 @@ function clearAllInputs() {
     cancelAddNew('addNewSubTask');
 }
 
+/**
+ * Resets added Subtasks
+ */
 function clearListSubtask() {
     document.getElementById('list-subtask').innerHTML = '';
 }
 
+/**
+ * resets value of given elements and set back the Style of LabelsFields
+ * @param  {...any} ids elemnts to reset
+ */
 function clearFields(...ids) {
     for (let i = 0; i < ids.length; i++) {
         if (document.getElementById(ids[i])) {
@@ -64,6 +87,11 @@ function clearFields(...ids) {
     }
 }
 
+/**
+ * Change the Style of LabelField
+ * @param {*} id 
+ * @returns 
+ */
 function changeStyleOfLabel(id) {
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
@@ -104,6 +132,10 @@ function changeStyleOfLabel(id) {
     }
 }
 
+/**
+ * changes to an Inputfield
+ * @param {*} id 
+ */
 function changeToInputField(id) {
     if (id == 'addNewCat') {
         document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
@@ -115,47 +147,56 @@ function changeToInputField(id) {
     }
 }
 
-function removeEventListenerFromDropDown(){
-    document.getElementById('categoryBox').removeEventListener('click', function(){}); 
+/**
+ * removes event listener from DropDownMenus
+ */
+function removeEventListenerFromDropDown() {
+    document.getElementById('categoryBox').removeEventListener('click', function () { });
 
-    document.getElementById('assignedTo').removeEventListener('click', function(){});
+    document.getElementById('assignedTo').removeEventListener('click', function () { });
     let selUser;
     for (let i = 0; i < categories.length; i++) {
         selCat = document.getElementById(categories[i]['name']);
-        selCat.removeEventListener('click', function(){});
+        selCat.removeEventListener('click', function () { });
     }
     for (let j = 0; j < users.length; j++) {
         selUser = document.getElementById(users[j]['name']);
-        selUser.removeEventListener('click', function(){});
+        selUser.removeEventListener('click', function () { });
     }
 }
 
-function addEventListenerToCategories(){
+/**
+ * adds event listener to DropDown Categories
+ */
+function addEventListenerToCategories() {
     let catBox = document.getElementById('categoryBox');
     let selCat;
-        catBox.addEventListener('click', function () {
-            showDropDownItems('categories');
+    catBox.addEventListener('click', function () {
+        showDropDownItems('categories');
+    });
+    for (let i = 0; i < categories.length; i++) {
+        selCat = document.getElementById(categories[i]['name']);
+        selCat.addEventListener('click', function (e) {
+            let txt = e.currentTarget.attributes[1].textContent;
+            setOption(txt, 'category');
+            e.stopPropagation();
         });
-        for (let i = 0; i < categories.length; i++) {
-            selCat = document.getElementById(categories[i]['name']);
-            selCat.addEventListener('click', function (e) {
-                let txt = e.currentTarget.attributes[1].textContent;
-                setOption(txt, 'category');
-                e.stopPropagation();
-            });
-        }
+    }
 }
 
+/**
+ * Add eventlisteners
+ */
 function addEventListenerToDropDown() {
     addEventListenerToCategories();
 
     let userBox = document.getElementById('assignedTo');
     let selUser;
-        userBox.addEventListener('click', function () {
-            showDropDownItems('users');
-        });
-    
-    
+    userBox.addEventListener('click', function () {
+        showDropDownItems('users');
+    });
+
+
     for (let j = 0; j < users.length; j++) {
         selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
@@ -163,6 +204,11 @@ function addEventListenerToDropDown() {
         });
     }
 }
+
+/**
+ * Return the Assigned Contacts array
+ * @returns 
+ */
 function getAssignedContacts() {
     for (let i = 0; i < users.length; i++) {
         if (document.getElementById(users[i]['name']).children[0].checked) {
@@ -172,6 +218,11 @@ function getAssignedContacts() {
     return assigned;
 }
 
+/**
+ * Sets the selected option of dropdown Categories
+ * @param {*} id 
+ * @param {*} id2 
+ */
 function setOption(id, id2) {
     if (id2 == 'category') {
         document.getElementById('CategorycategoryBox').classList.add('d-none');

@@ -1,6 +1,3 @@
-
-
-
 function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaToDoTitle').innerHTML += `
         <img src="img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
