@@ -114,7 +114,7 @@
         width: 100%;
         align-items: center;
         z-index: 99 !important;
-        background: rgb(245, 245, 245,0.8);
+        background: rgba(245, 245, 245,0.8);
     }
 
     .createNewUserAtContacts-left,
@@ -177,18 +177,6 @@
         width: unset;
     }
 
-    .closeIconAtContacts {
-        background-image: url('../img/closeIconWhite.png') !important;
-        right: 50px !important;
-        top: 20px !important;
-        left: unset !important;
-        z-index: 99;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        width: 30px !important;
-        height: 30px !important;
-    }
 
     #addTaskAtBoard,
     #addTaskAtContacts {
@@ -304,6 +292,17 @@
         top: unset !important;
         position: unset !important;
     }
+    .closeIconAtContacts {
+        right: 50px !important;
+        top: 20px !important;
+        left: unset !important;
+        z-index: 99;
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-size: cover;
+        width: 30px !important;
+        height: 30px !important;
+    }
 
     /* ===== Scrollbar CSS ===== */
     /* Firefox */
@@ -325,5 +324,39 @@
         background-color: #2a3647;
         border-radius: 0px;
         border: 0px none #ffffff;
+    }
+}
+
+@media (max-width:600px) {
+    #createNewUserAtContacts,
+    #editUserAtContacts {
+        background: rgba(245, 245, 245,1) !important;
+    }
+    .closeIconAtContacts {
+        right: 5px !important;
+        top: 20px !important;
+        left: unset !important;
+        z-index: 99;
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-size: cover;
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
+
+@media (max-width:350px) {
+    
+    .closeIconAtContacts {
+        background-image: url('../img/closeIconWhite.png') !important;
+        right: 50px !important;
+        top: 20px !important;
+        left: unset !important;
+        z-index: 99;
+        background-position: center;
+        background-repeat: no-repeat !important;
+        background-size: cover;
+        width: 30px !important;
+        height: 30px !important;
     }
 }
