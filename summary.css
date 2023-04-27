@@ -2,29 +2,36 @@
     margin: 0;
     padding: 0;
 }
+.leftRightContainers{
+    display: flex;
+    align-items: center;
+}
 
+.summaryPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 171px;
+    margin-left: 355px;
+}
+
+.navHeaderSummary {
+    display: none;
+}
 
 .summaryHeader {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-
-    position: absolute;
-    width: 679px;
-    height: 73px;
-    left: 355px;
-    top: 171px;
 }
 
 .summaryHeader h1 {
-    width: 315px;
-    height: 73px;
-
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
 
     color: #000000;
+    margin-right: 50px;
 }
 
 .verticalLine {
@@ -37,9 +44,6 @@
 }
 
 .summaryHeader span {
-    width: auto;
-    height: 32px;
-
     font-weight: 400;
     font-size: 27px;
     line-height: 120%;
@@ -48,11 +52,13 @@
 }
 
 .summeryBoxContainer {
-    position: absolute;
-    width: 580px;
-    height: 540px;
-    left: 355px;
-    top: 331px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+    max-width: 580px;
+    max-height: 540px;
+    margin-top: 87px;
 }
 
 .summaryTop {
@@ -64,7 +70,7 @@
 .summaryTopSingle {
     width: 170px;
     height: 170px;
-
+    margin-left: 35px;
     background: #FFFFFF;
 
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
@@ -312,17 +318,11 @@
     justify-content: center;
     align-items: flex-start;
     gap: 3px;
-
-    position: absolute;
-    width: auto;
-    height: 136px;
-    left: 1002px;
-    top: 533px;
+    margin-left: 67px;
+    margin-top: 350px;
 }
 
 .summaryGreeting {
-    height: 56px;
-
     font-weight: 500;
     font-size: 47px;
     line-height: 120%;
@@ -331,7 +331,6 @@
 }
 
 .summaryContactName {
-    height: 77px;
     font-weight: 700;
     font-size: 64px;
     line-height: 120%;
@@ -341,3 +340,167 @@
 }
 
 /* **************** RESPONSIVE DESIGN **************** */
+
+@media (max-width:1325px) {
+    .summaryWelcomeText {
+        display: none;
+    }
+}
+
+@media (max-width:1300px) {
+    .leftRightContainers {
+        justify-content: center;
+    }
+    .summaryPageContainer {
+        margin-left: 0;
+    }
+    
+}
+
+@media (max-width:428px) {
+    .summaryHeader {
+        left: 220px;
+    }
+
+    .summaryHeader h1 {
+        font-weight: 700;
+        font-size: 47px;
+        line-height: 120%;
+    }
+
+    .summaryHeader span {
+        font-weight: 400;
+        font-size: 21px;
+        line-height: 120%;
+    }
+
+    .summeryBoxContainer {
+        max-width: 363px;
+        max-height: 378px;
+        margin: 0 32px;
+    }
+
+    .summaryTopSingle {
+        width: 110px;
+        height: 110px;
+        margin-right: 15px !important;
+    }
+
+    .summaryTopSingle:hover {
+        width: 110px;
+        height: 110px;
+    }
+
+    .boxNumber {
+        font-weight: 600;
+        font-size: 47px;
+        line-height: 120%;
+    }
+
+    .boxText {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+    }
+
+    .summaryCenter {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 28px 0px;
+        gap: 20px;
+
+        width: 360px;
+        height: 110px;
+    }
+
+    .prioContainer {
+        margin-right: -18px;
+    }
+
+    .prioImg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .prioNumber {
+        font-weight: 600;
+        font-size: 47px;
+        line-height: 120%;
+    }
+
+    .prioText {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+    }
+
+    .prioVerticalLine {
+        height: 68px;
+        margin-left: 18px;
+    }
+
+    .upcomingDate {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 120%;
+    }
+
+    .upcomingDateText {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+    }
+
+    .summaryCenter:hover {
+        width: 360px;
+        height: 110px;
+    }
+
+    .summaryBottom {
+        width: 363px;
+        height: 110px;
+    }
+
+    .summaryBottomSingle {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 38px 19px;
+        gap: 10px;
+
+        width: 177.5px;
+        height: 110px;
+        margin-right: 15px;
+    }
+
+    .todoPencilImg {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .todoDoneImg {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .todoNumber {
+        font-weight: 600;
+        font-size: 47px;
+        line-height: 120%;
+    }
+
+    .todoText {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+    }
+
+    .summaryBottomSingle:hover {
+        width: 177.5px;
+        height: 110px;
+    }
+
+}

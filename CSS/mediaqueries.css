@@ -1,3 +1,9 @@
+@media (max-width:1370px) {
+    .summaryContactName {
+        margin-top: 50px;
+    }
+}
+
 @media (max-width:1300px) {
     #contactDetailsContainer {
         width: unset;
@@ -328,6 +334,7 @@
         border-radius: 0px;
         border: 0px none #ffffff;
     }
+
     .deleteButtonContent {
         display: flex !important;
         position: absolute;
@@ -353,6 +360,14 @@
         line-height: 120%;
         color: #2A3647;
     }
+
+    .summaryGreeting {
+        display: none;
+    }
+
+    .summaryContactName {
+        display: none;
+    }
 }
 
 @media (max-width:600px) {
@@ -373,7 +388,9 @@
         width: 30px !important;
         height: 30px !important;
     }
+
 }
+
 
 @media (max-width:350px) {
 
@@ -390,5 +407,4 @@
         height: 30px !important;
     }
 
-   
 }
