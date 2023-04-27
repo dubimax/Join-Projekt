@@ -150,6 +150,7 @@ function generateContactBody() {
             </div>
          </div>
     </div>
+    <div class="deleteButtonContent" id="deleteButtonContent">
     `;
 }
 

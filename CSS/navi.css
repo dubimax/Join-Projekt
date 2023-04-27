@@ -118,9 +118,13 @@
 
 @media (max-width:1300px) {
     .kpmt {
+        position: absolute;
+        top: 120px;
+        left: 0;
+        padding-left: 50px;
         display: block !important;
-    }
 
+    }
 
     .profileNavContainer {
         position: absolute;
@@ -187,12 +191,7 @@
 
 
 @media (max-width:350px) {
-    .kpmt {
-        position: absolute;
-        top: 120px;
-        left: 0;
-        padding-left: 50px;
-    }
+    
 
 
     .profileNavContainer {

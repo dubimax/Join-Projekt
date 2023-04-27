@@ -24,7 +24,10 @@
 h2{
     text-align: center;
 }
-
+.kpmt {
+    display: block !important;
+    padding-left: 25px;
+}
 
 
 }
@@ -68,10 +71,7 @@ h2{
 }
 
 @media (max-width:350px) {
-    .kpmt {
-        display: block !important;
-        padding-left: 25px;
-    }
+   
 
     .container-btns {
         position: fixed !important;
