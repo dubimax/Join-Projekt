@@ -347,8 +347,8 @@ function addLogoutButton() {
 
     if(clientWidth < 1300){
         document.getElementById('optionsMenu').innerHTML += `
-        <div>Help</div>
-        <div>Legal Notice</div>`;
+        <div>Legal Notice</div>
+        <div>Help</div>`;
     }
 }
 

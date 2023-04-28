@@ -10,6 +10,7 @@
     background-color: #F5F5F5;
     z-index: 100;
 }
+
 .kpmt {
     display: unset !important;
 }
@@ -113,6 +114,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
+    flex-direction: column-reverse;
 }
 
 .logoInvertColor {
@@ -120,6 +122,12 @@
 }
 
 @media (max-width:1300px) {
+    .logoutButton {
+        gap: 5px;
+        align-items: flex-start;
+        height: unset;
+    }
+
     .kpmt {
         position: absolute;
         top: unset;
@@ -195,14 +203,14 @@
 @media (max-width:500px) {
     .kpmt {
         top: unset;
-        
+
     }
 
 }
 
 
 @media (max-width:350px) {
-    
+
 
 
     .profileNavContainer {
