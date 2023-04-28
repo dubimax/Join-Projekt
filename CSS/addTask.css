@@ -25,18 +25,16 @@ h2{
     text-align: center;
 }
 .kpmt {
-    display: block !important;
     padding-left: 25px;
-}
+    top:120px !important;
 
+}
 
 }
 
 
 @media (max-width:1000px) {
-    .kpmt {
-        padding-left: 25px;
-    }
+    
 
     .container-btns {
         position: fixed !important;

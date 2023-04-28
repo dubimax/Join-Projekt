@@ -224,6 +224,7 @@ function editContact() {
  */
 function hideContactDetails() {
     document.getElementById('contactDetails').classList.add('d-none');
+    hideKPMT();
 }
 
 /**
@@ -250,6 +251,8 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
     document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
     document.getElementById('contactHeadContainer').classList.remove('d-none');
     document.getElementById('contactInformationContainer').classList.remove('d-none');
+
+    showKPMT();
 }
 
 /**
@@ -272,4 +275,20 @@ function randomcolor() {
     console.log('#' + ('00000' + random.toString(16)).slice(-6).toUpperCase());
     return '#' + ('00000' + random.toString(16)).slice(-6).toUpperCase();
 
+}
+
+function showKPMT(){
+    let clientWidth = document.body.clientWidth;
+    let kpmt = document.getElementById('kpmt');
+    if(clientWidth <=350){
+        kpmt.style = `display:unset !important;top:120px !important;padding-left:25px !important;`;
+    }
+}
+
+function hideKPMT(){
+    let clientWidth = document.body.clientWidth;
+    let kpmt = document.getElementById('kpmt');
+    if(clientWidth <=350){
+        kpmt.style = `display:none !important;`;
+    }
 }
