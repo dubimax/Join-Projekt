@@ -225,6 +225,7 @@ function editContact() {
 function hideContactDetails() {
     document.getElementById('contactDetails').classList.add('d-none');
     hideKPMT();
+    showAddNewContactButton();
 }
 
 /**
@@ -253,6 +254,7 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
     document.getElementById('contactInformationContainer').classList.remove('d-none');
 
     showKPMT();
+    hideAddNewContactButton();
 }
 
 /**
@@ -280,7 +282,7 @@ function randomcolor() {
 function showKPMT(){
     let clientWidth = document.body.clientWidth;
     let kpmt = document.getElementById('kpmt');
-    if(clientWidth <=350){
+    if(clientWidth <=1000){
         kpmt.style = `display:unset !important;top:120px !important;padding-left:25px !important;`;
     }
 }
@@ -288,7 +290,23 @@ function showKPMT(){
 function hideKPMT(){
     let clientWidth = document.body.clientWidth;
     let kpmt = document.getElementById('kpmt');
-    if(clientWidth <=350){
+    if(clientWidth <=1000){
         kpmt.style = `display:none !important;`;
+    }
+}
+
+function showAddNewContactButton(){
+    let clientWidth = document.body.clientWidth;
+    let hideButton = document.getElementById('addNewContactButton');
+    if(clientWidth <=1000){
+        hideButton.style = '';
+    }
+}
+
+function hideAddNewContactButton(){
+    let clientWidth = document.body.clientWidth;
+    let hideButton = document.getElementById('addNewContactButton');
+    if(clientWidth <=1000){
+        hideButton.style = `display:none !important;`;
     }
 }

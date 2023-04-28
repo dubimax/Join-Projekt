@@ -282,10 +282,18 @@
 
 .backArrow {
     cursor: pointer;
+    display: none;
+}
+
+@media (max-width:1300px) {
+    .backArrow{
+        display: unset !important;
+    }
 }
 
 @media (max-width:1000px) {
     .kpmt {
         display: none !important;
     }
+    
 }

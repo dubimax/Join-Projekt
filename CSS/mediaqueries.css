@@ -311,8 +311,12 @@
     }
 
     .closeIconAtContacts {
-        right: 50px !important;
-        top: 20px !important;
+        position: fixed !important;
+        margin-left: 250px;
+        margin-top: 26px;
+        background-image: url('../img/closeIconWhite.png') !important;
+        right: unset !important;
+        top: unset !important;
         left: unset !important;
         z-index: 99;
         background-position: center;
@@ -386,17 +390,7 @@
         background: rgba(245, 245, 245, 1) !important;
     }
 
-    .closeIconAtContacts {
-        right: 5px !important;
-        top: 20px !important;
-        left: unset !important;
-        z-index: 99;
-        background-position: center;
-        background-repeat: no-repeat !important;
-        background-size: cover;
-        width: 30px !important;
-        height: 30px !important;
-    }
+
 
 }
 
