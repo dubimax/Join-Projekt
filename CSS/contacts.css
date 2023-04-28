@@ -133,14 +133,15 @@
 #editUserAtContacts {
     position: fixed;
     top: 200px;
-    left: 450px;
-    right: 100px;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 200px;
     width: 1212px;
     height: 594px;
     background: #FFFFFF;
     border-radius: 30px;
     animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
+    z-index: 10;
 }
 
 #createNewContactName,
@@ -284,8 +285,7 @@
 }
 
 @media (max-width:1000px) {
-    .kpmt{
+    .kpmt {
         display: none !important;
     }
 }
-

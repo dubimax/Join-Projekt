@@ -5,6 +5,14 @@
 }
 
 @media (max-width:1300px) {
+
+    #addTaskAtBoard,
+    #addTaskAtContacts {
+        position: relative !important;
+        transform: unset !important;
+        left: 0 !important;
+    }
+
     #contactDetailsContainer {
         width: unset;
         left: 0;
@@ -111,6 +119,7 @@
     #createNewUserAtContacts,
     #editUserAtContacts {
         position: absolute;
+        transform: unset !important;
         top: 90px;
         left: 0;
         right: 0;

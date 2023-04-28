@@ -193,7 +193,9 @@ h4 {
 
 #addTaskAtBoard,
 #addTaskAtContacts {
-    position: relative;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     width: 1200px;
     height: 850px;
     z-index: 99;
