@@ -15,7 +15,6 @@ async function initBoard() {
  */
 function updateBoardHTML() {
     load();
-
     toDoArea();
     inProgressArea();
     awaitingFeedbackArea();
