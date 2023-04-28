@@ -122,6 +122,10 @@
 }
 
 @media (max-width:1300px) {
+    #helpContainer {
+        display: none;
+    }
+
     .logoutButton {
         gap: 5px;
         align-items: flex-start;
