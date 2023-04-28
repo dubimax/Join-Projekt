@@ -336,7 +336,20 @@ function generateUnSelectedNavigationLinkHTML(linkname){
  * Adds a LogoutButton to the Body
  */
 function addLogoutButton() {
-    document.body.innerHTML += `<div class="logoutButton" id="logoutButton">Logout</div>`;
+    let clientWidth = document.body.clientWidth;
+
+    document.body.innerHTML += `
+    <div class="logoutButton" id="optionsMenu">
+        <div  id="logoutButton">
+            Logout
+        </div>
+    </div>`;
+
+    if(clientWidth < 1300){
+        document.getElementById('optionsMenu').innerHTML += `
+        <div>Help</div>
+        <div>Legal Notice</div>`;
+    }
 }
 
 /**

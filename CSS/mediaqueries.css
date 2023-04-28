@@ -5,6 +5,12 @@
 }
 
 @media (max-width:1300px) {
+    .legalNotice, .help {
+        width: unset !important;
+    }
+    #helpContainer{
+
+    }
 
     #addTaskAtBoard,
     #addTaskAtContacts {

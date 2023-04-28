@@ -82,7 +82,7 @@ function removeConfirmMessage() {
  *  or removes the Logout Button if there
  */
 function setLogoutButton() {
-    if (document.body.lastChild.innerHTML == 'Logout') {
+    if (document.body.lastChild.id == 'optionsMenu') {
         removeLogoutButton();
     } else addLogoutButton();
 }
@@ -91,7 +91,7 @@ function setLogoutButton() {
  * Removes the logout button from the page body
  */
 function removeLogoutButton() {
-    document.getElementById('logoutButton').remove();
+    document.getElementById('optionsMenu').remove();
 }
 
 /**
