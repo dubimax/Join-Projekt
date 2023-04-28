@@ -101,7 +101,7 @@ function generateContactHead() {
         <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
             <h5 id="contactName">Name</h5>
-            <div class="contactHeadAddTask" onclick="showAddNewTaskAtContacts()">
+            <div class="contactHeadAddTask" onclick="showAddNewTaskAtContacts();setStyleOfCloseIconAtContacts()">
                 <img src="./img/plusContacts.png" class="addTaskContacts">
                 Add Task
             </div>
@@ -379,6 +379,15 @@ function generateContactDetailsHTML() {
  */
 function addCloseBtnToAddTaskAtContacts() {
     document.getElementById('addTaskAtContacts').innerHTML += `
-    <div onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts"></div>
+    <div onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
     `;
+}
+
+function setStyleOfCloseIconAtContacts(){
+    let clientWidth = document.body.clientWidth;
+    let hideButton = document.getElementById('closeIconAtContacts');
+    if(clientWidth <= 1300){
+        hideButton.style = `background-image:url('./img/closeIconEditUserAtContacts.png') !important;top: 108px !important;right: 50px !important;`;
+    }
+
 }

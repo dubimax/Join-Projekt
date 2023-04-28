@@ -130,7 +130,7 @@
         width: 100%;
         align-items: center;
         z-index: 99 !important;
-        background: rgba(245, 245, 245, 0.8);
+        background: rgb(245, 245, 245);
     }
 
     .createNewUserAtContacts-left,
