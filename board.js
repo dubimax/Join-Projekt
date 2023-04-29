@@ -21,7 +21,7 @@ function updateBoardHTML() {
     doneArea();
 }
 
-function showAddNewTaskAtBoardStandard(){
+function showAddNewTaskAtBoardStandard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
     generateAddTaskHTML('addTaskAtBoard');
 }
@@ -241,6 +241,32 @@ function showAddNewTaskAtBoard() {
     addEventListenerToDropDown();
 }
 
-// function searchTasks() {
-//     const result = 
-// }
+/**
+ * reset the board and deletes all tasks from the html code
+ */
+function resetBoard() {
+    document.getElementById('toDo').innerHTML = '';
+    document.getElementById('inProgress').innerHTML = '';
+    document.getElementById('awaitingFeedback').innerHTML = '';
+    document.getElementById('done').innerHTML = '';
+}
+
+/**
+ * Search the tasks and filter by title or description
+ */
+function searchTasks() {
+    let search = document.getElementById('search').value;
+    search = search.toLowerCase();
+    console.log(search);
+    for (let i = 0; i < tasks.length; i++) {
+        let taskTitle = tasks[i]['title'];
+        let tDescription = tasks[i]['description'];
+        if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
+            console.log('gefunden');
+            updateBoardHTML()
+        } else {
+            console.log('nichts gefunden');
+            resetBoard();
+        }
+    }
+} 
