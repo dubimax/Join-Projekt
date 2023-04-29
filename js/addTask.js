@@ -279,8 +279,8 @@ function setOption(id, id2) {
  * @param {*} id 
  */
 function setCategoryOptions(id){
-    let sID = document.getElementById(id).classList.contains('d-none');
-    if (sID) {
+    let sID = document.getElementById(id);
+    if (sID.classList.contains('d-none')) {
         sID.classList.remove('d-none');
         sID.classList.add('dropDownStart');
         sID.classList.remove('cl_categories');
