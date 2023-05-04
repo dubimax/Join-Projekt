@@ -16,10 +16,6 @@
     margin-left: 355px;
 }
 
-.navHeaderSummary {
-    display: none;
-}
-
 .summaryHeader {
     display: flex;
     justify-content: center;
@@ -185,9 +181,6 @@
     height: 102.02px;
 
     border: 2px solid #D1D1D1;
-
-    /* margin-left: 62px;
-    margin-right: 61px; */
 }
 
 .upcomingDate {

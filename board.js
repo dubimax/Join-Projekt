@@ -8,6 +8,7 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     updateBoardHTML();
     generateAddTaskToBoardImg();
+    getFirstLettersOfNameCard();
 }
 
 /**
@@ -120,7 +121,7 @@ function generateTodoHTML(element) {
        </div>
 
         <div class="containerUserAndPrio">
-            <div class="taskAssignedUser">
+            <div class="taskAssignedUser" id="assignedUserLogo">
                 ${element['isAssigned']} 
             </div>
 
@@ -206,6 +207,7 @@ function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     save();
     updateBoardHTML();
+    getFirstLettersOfNameCard();
     backend.setItem('tasks', JSON.stringify(tasks));
 }
 
@@ -236,6 +238,18 @@ function createNewTaskAtBoard(statusTag) {
     save();
 }
 
+/**
+ * Gets the First letters of given username
+ * @param {*} username 
+ * @returns Acronyms of username (Surname Name)
+ */
+function getFirstLettersOfNameCard() {
+    let str = document.getElementById('assignedUserLogo').innerText;
+    let matches = str.match(/\b(\w)/g);
+    let acronym = matches.join('');
+    return document.getElementById('assignedUserLogo').innerHTML = acronym;
+}
+
 function showAddNewTaskAtBoard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
     addEventListenerToDropDown();
@@ -263,7 +277,8 @@ function searchTasks() {
         let tDescription = tasks[i]['description'];
         if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
             console.log('gefunden');
-            updateBoardHTML()
+            updateBoardHTML();
+            getFirstLettersOfNameCard();
         } else {
             console.log('nichts gefunden');
             resetBoard();

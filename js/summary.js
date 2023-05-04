@@ -49,8 +49,7 @@ function greeting() {
 }
 
 function showUserName() {
-    let currentUserGreeting = document.getElementById('currentUser');
-    currentUserGreeting.innerHTML = users.name;
+    //TODO
 }
 
 /**
@@ -143,16 +142,16 @@ function numberOfUrgentTasksBox() {
 function checkNextDueDate() {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'];
-    let upcomingDeadline = document.getElementById('date');
 
-
-    if (tasks.length > 0 && tasks[0] != '') {
-        let dueDate = new Date(tasks['dueDate']);
-        let month = months[dueDate.getMonth()];
-        let nextDueDate = month + ' ' + dueDate.getDate() + ', ' + dueDate.getFullYear();
-        upcomingDeadline.innerHTML = nextDueDate;
-    } else {
-        upcomingDeadline.innerHTML = `No upcoming deadline`;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks.length > 0 && tasks[0] != '') {
+            let dueDate = new Date(tasks[i]['dueDate']);
+            let month = months[dueDate.getMonth()];
+            let nextDueDate = month + ' ' + dueDate.getDate() + ', ' + dueDate.getFullYear();
+            document.getElementById('date').innerHTML = nextDueDate;
+        } else {
+            upcomingDeadline.innerHTML = `No upcoming deadline`;
+        }
     }
 }
 

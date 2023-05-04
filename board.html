@@ -29,52 +29,53 @@
 
     <div id="addTaskAtBoard" class="d-none"></div>
 
-    <div class="boardHeaderContainer">
-        <h1>Board</h1>
-        <div class="findAddTaskContainer">
-            <div class="searchBox">
-                <input type="text" id="search" onkeyup="searchTasks()" placeholder="Find Task">
-                <div class="searchVerticalLine"></div>
-                <img src="img/search.png">
+    <div class="boardContainer">
+        <div class="boardHeaderContainer">
+            <h1>Board</h1>
+            <div class="findAddTaskContainer">
+                <div class="searchBox">
+                    <input type="text" id="search" onkeyup="searchTasks()" placeholder="Find Task">
+                    <div class="searchVerticalLine"></div>
+                    <img src="img/search.png">
+                </div>
+                <button class="addTaskBtn" onclick="showAddNewTaskAtBoardStandard()">Add Task<img
+                        src="img/addTaskWhite.png"></button>
             </div>
-            <button class="addTaskBtn" onclick="showAddNewTaskAtBoardStandard()">Add Task<img
-                    src="img/addTaskWhite.png"></button>
+        </div>
+
+        <div class="cardHeaders">
+            <div class="dragAreaFullContainer">
+                <div class="dragAreaTitle" id="dragAreaToDoTitle">
+                    <label for="toDo">To do</label>
+                </div>
+                <div class="dragArea" name="toDo" id="toDo" ondrop="moveTo('toDo')"
+                    ondragover="allowDrop(event); highlight('toDo')">
+                </div>
+            </div>
+            <div class="dragAreaFullContainer">
+                <div class="dragAreaTitle" id="dragAreaIPTitle">
+                    <label for="inProgress">In Progress</label>
+                </div>
+                <div class="dragArea" name="inProgress" id="inProgress" ondrop="moveTo('inProgress')"
+                    ondragover="allowDrop(event);highlight('inProgress')"></div>
+            </div>
+            <div class="dragAreaFullContainer">
+                <div class="dragAreaTitle" id="dragAreaAFTitle">
+                    <label for="awaitingFeedback">Awaiting Feedback</label>
+                </div>
+                <div class="dragArea" name="awaitingFeedback" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')"
+                    ondragover="allowDrop(event);highlight('awaitingFeedback')"></div>
+            </div>
+            <div class="dragAreaFullContainer">
+                <div class="dragAreaTitle" id="dragAreaDoneTitle">
+                    <label for="done">Done</label>
+                </div>
+                <div class="dragArea" name="done" id="done" ondrop="moveTo('done')"
+                    ondragover="allowDrop(event);highlight('done')">
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="cardHeaders">
-        <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle" id="dragAreaToDoTitle">
-                <label for="toDo">To do</label>
-            </div>
-            <div class="dragArea" name="toDo" id="toDo" ondrop="moveTo('toDo')"
-                ondragover="allowDrop(event); highlight('toDo')">
-            </div>
-        </div>
-        <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle" id="dragAreaIPTitle">
-                <label for="inProgress">In Progress</label>
-            </div>
-            <div class="dragArea" name="inProgress" id="inProgress" ondrop="moveTo('inProgress')"
-                ondragover="allowDrop(event);highlight('inProgress')"></div>
-        </div>
-        <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle" id="dragAreaAFTitle">
-                <label for="awaitingFeedback">Awaiting Feedback</label>
-            </div>
-            <div class="dragArea" name="awaitingFeedback" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')"
-                ondragover="allowDrop(event);highlight('awaitingFeedback')"></div>
-        </div>
-        <div class="dragAreaFullContainer">
-            <div class="dragAreaTitle" id="dragAreaDoneTitle">
-                <label for="done">Done</label>
-            </div>
-            <div class="dragArea" name="done" id="done" ondrop="moveTo('done')"
-                ondragover="allowDrop(event);highlight('done')">
-            </div>
-        </div>
-    </div>
-
 </body>
 
 </html>

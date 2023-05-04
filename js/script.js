@@ -145,7 +145,8 @@ function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('userMail').value;
     let password = document.getElementById('userPassword').value;
-    users.push({ 'name': name, 'email': email, 'pwd': password });
+    let userColor = randomcolor();
+    users.push({ 'name': name, 'email': email, 'pwd': password, 'color': userColor });
     backend.setItem('users', JSON.stringify(users));
     showFrame('signUpConfirmFrame', 'signUpFrame');
 }
