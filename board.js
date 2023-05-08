@@ -184,12 +184,14 @@ function generateOpenCardHTML(element) {
  */
 function openCard() {
     document.getElementById('openCard').classList.remove('d-none');
+    document.getElementById('overlay').style.display = "block";
 }
 /**
  * Add display:none to close the bigger card
  */
 function closeOpenCard() {
     document.getElementById('openCard').classList.add('d-none');
+    document.getElementById('overlay').style.display = "none";
 }
 
 /**
@@ -285,3 +287,5 @@ function searchTasks() {
         }
     }
 } 
+
+
