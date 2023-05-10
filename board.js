@@ -173,8 +173,8 @@ function generateOpenCardHTML(element) {
             ${element['isAssigned']} 
         </div>
         <div class="editDeleteBtnOpen">
-            <img src="img/deleteBtn.png">
-            <img src="img/editBtn.png">
+            <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask()">
+            <img class="editBtnOpenCard" src="img/editBtn.png">
         </div>
     </div>`
 }
@@ -287,5 +287,4 @@ function searchTasks() {
         }
     }
 } 
-
 
