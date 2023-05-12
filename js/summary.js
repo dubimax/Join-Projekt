@@ -49,8 +49,10 @@ function greeting() {
 }
 
 function showUserName() {
-    //TODO
+    let nameOfCurrentUser = document.getElementById('currentUser');
+    nameOfCurrentUser.innerHTML = indexOfEmail.name;
 }
+
 
 /**
  * Show the numbers of how many tasks are in the board
@@ -154,6 +156,7 @@ function checkNextDueDate() {
         }
     }
 }
+
 
 
 

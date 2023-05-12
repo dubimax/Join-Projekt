@@ -24,6 +24,8 @@ function load() {
     users = JSON.parse(localStorage.getItem("users") || [{}]);
     categories = JSON.parse(localStorage.getItem("categories") || [{}]);
     tasks = JSON.parse(localStorage.getItem("tasks") || [{}]);
+    indexOfEmail = JSON.parse(localStorage.getItem("indexOfEmail") || [{}]);
+
 }
 
 /**
@@ -35,7 +37,9 @@ function save() {
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("categories", JSON.stringify(categories));
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("indexOfEmail", JSON.stringify(indexOfEmail));
 }
+
 
 /**
  * Sets the selected Navigation Link
@@ -124,17 +128,20 @@ function login() {
 }
 
 function checkUserData(userEmail, userPassword) {
-    let indexOfEmail = users.findIndex(u => u.email == userEmail);
-    let indexOfPassword = users.findIndex(u => u.pwd == userPassword);
-    if (indexOfEmail == -1 || indexOfPassword == -1) {
-        let dataCheck = document.getElementById('dataCheck');
-        dataCheck.classList.remove('d-none');
-    } else {
-        loggedIn = true;
-        save();
-        window.location.href = 'summary.html';
-    }
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+
+        if (user.email == userEmail && user.pwd == userPassword) {
+            indexOfEmail = users.find(u => u.email == userEmail);
+            loggedIn = true;
+            save();
+            window.location.href = 'summary.html';
+        }
+    } 
+    let dataCheck = document.getElementById('dataCheck');
+    dataCheck.classList.remove('d-none');
 }
+
 
 function guestLogin() {
     checkUserData('guest@guest.de', 'guest');
