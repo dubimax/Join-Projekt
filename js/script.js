@@ -154,6 +154,15 @@ function logout() {
     window.location.href = './login.html';
 }
 
+/**
+ * Pushes the Tasks to the Backend, clear all Inputs and Save
+ */
+async function pushToDatabase(){
+    await backend.setItem('users', JSON.stringify(users));
+    await backend.setItem('categories', JSON.stringify(categories));
+    await backend.setItem('tasks', JSON.stringify(tasks));
+    save();
+}
 
 function addUser() {
     let name = document.getElementById('name').value;
@@ -161,7 +170,7 @@ function addUser() {
     let password = document.getElementById('userPassword').value;
     let userColor = randomcolor();
     users.push({ 'name': name, 'email': email, 'pwd': password, 'color': userColor });
-    backend.setItem('users', JSON.stringify(users));
+    pushToDatabase();
     save();
     showFrame('signUpConfirmFrame', 'signUpFrame');
 }
@@ -174,7 +183,7 @@ function addCategory() {
     let newCategory = document.getElementById('newCat').value;
     let color = getValueOfChosenColor();
     categories.push({ 'name': newCategory, 'color': color });
-    backend.setItem('categories', JSON.stringify(categories));
+    pushToDatabase();
     cancelAddNew('addNewCat');
 }
 

@@ -14,18 +14,12 @@ function createNewTask(statusTag) {
     let id = tasks.length + 1;
     let status = statusTag;
     tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
-    pushTasksToDatabase();
-}
-
-/**
- * Pushes the Tasks to the Backend, clear all Inputs and Save
- */
-async function pushTasksToDatabase(){
-    await backend.setItem('tasks', JSON.stringify(tasks));
+    pushToDatabase();
     subtasks = [];
     clearAllInputs();
-    save();
 }
+
+
 
 /**
  * initialises AddTask Site

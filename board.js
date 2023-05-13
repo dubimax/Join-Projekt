@@ -135,34 +135,35 @@ function generateTodoHTML(element, index, status) {
                 <img src="./img/${element['prio'].toLowerCase()}.png">
             </div>
         </div>  
-    </div>`
+    </div>`;
 }
 /**
  * Remove display:none from the bigger card to see it
  */
 function openCard(index, status) {
-    document.getElementById('openCard'+ status + index).classList.remove('d-none');
+    document.getElementById('openCard' + status + index).classList.remove('d-none');
     document.getElementById('overlay').style.display = "block";
 }
 
 function addUserAcronyms(id) {
-    let assigned = [];
     for (let i = 0; i < tasks.length; i++) {
         let index = tasks.indexOf(tasks[i])
-        assigned.push(tasks[i]);
-        for (let j = 0; j < assigned.length; j++) {
-            document.getElementById(id + assigned[i]['status'] + index).innerHTML += generateAssignedUserHTML(assigned[i]['isAssigned'][j]);
+        for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
+            console.log(tasks[i]['status']);
+            if (document.getElementById(id + tasks[i]['status'] + index)) {
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j]);
+            }
         }
     }
 }
 
 function generateAssignedUserHTML(username) {
     let color;
-    users.find((user) =>{
-        if(user.name == username){
+    users.find((user) => {
+        if (user.name == username) {
             color = user.color;
         }
-    } );
+    });
     return `
     <div class="colorCircleMedium boardCircle" style="background:${color}">
         ${getFirstLettersOfName(username)}
@@ -301,7 +302,7 @@ function searchTasks() {
     }
 }
 
-function deleteTask(task) {   
+function deleteTask(task) {
     let index = tasks.indexOf(task);
     tasks.splice(index, 1);
 }
