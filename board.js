@@ -35,7 +35,7 @@ function toDoArea() {
     document.getElementById('toDo').innerHTML = '';
 
     for (let index = 0; index < toDo.length; index++) {
-        const element = tasks[index];
+        const element = toDo[index];
         document.getElementById('toDo').innerHTML += generateTodoHTML(element);
         document.getElementById('toDo').innerHTML += generateOpenCardHTML(element);
     }
