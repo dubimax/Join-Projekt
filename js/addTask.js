@@ -20,8 +20,8 @@ function createNewTask(statusTag) {
 /**
  * Pushes the Tasks to the Backend, clear all Inputs and Save
  */
-function pushTasksToDatabase(){
-    backend.setItem('tasks', JSON.stringify(tasks));
+async function pushTasksToDatabase(){
+    await backend.setItem('tasks', JSON.stringify(tasks));
     subtasks = [];
     clearAllInputs();
     save();

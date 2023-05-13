@@ -137,7 +137,7 @@ function checkUserData(userEmail, userPassword) {
             save();
             window.location.href = 'summary.html';
         }
-    } 
+    }
     let dataCheck = document.getElementById('dataCheck');
     dataCheck.classList.remove('d-none');
 }
@@ -147,6 +147,13 @@ function guestLogin() {
     checkUserData('guest@guest.de', 'guest');
     console.log('gast user angemeldet');
 }
+
+function logout() {
+    localStorage.removeItem(indexOfEmail);
+    localStorage.removeItem(loggedIn);
+    window.location.href = './login.html';
+}
+
 
 function addUser() {
     let name = document.getElementById('name').value;
@@ -158,6 +165,7 @@ function addUser() {
     save();
     showFrame('signUpConfirmFrame', 'signUpFrame');
 }
+
 
 /**
  * Add a new Category 

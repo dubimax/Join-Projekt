@@ -19,7 +19,8 @@ function updateBoardHTML() {
     inProgressArea();
     awaitingFeedbackArea();
     doneArea();
-    addUserAcronyms();
+    addUserAcronyms('assignedUserLogo');
+    addUserAcronyms('assignedUserLogoOpen');
 }
 
 function showAddNewTaskAtBoardStandard() {
@@ -36,8 +37,8 @@ function toDoArea() {
 
     for (let index = 0; index < toDo.length; index++) {
         const element = toDo[index];
-        document.getElementById('toDo').innerHTML += generateTodoHTML(element);
-        document.getElementById('toDo').innerHTML += generateOpenCardHTML(element);
+        document.getElementById('toDo').innerHTML += generateTodoHTML(element, index, 'toDo');
+        document.getElementById('toDo').innerHTML += generateOpenCardHTML(element, index, 'toDo');
     }
 }
 
@@ -50,7 +51,7 @@ function inProgressArea() {
 
     for (let index = 0; index < inProgress.length; index++) {
         const element = inProgress[index];
-        document.getElementById('inProgress').innerHTML += generateTodoHTML(element);
+        document.getElementById('inProgress').innerHTML += generateTodoHTML(element, index, 'inProgress');
     }
 }
 
@@ -63,7 +64,7 @@ function awaitingFeedbackArea() {
 
     for (let index = 0; index < awaitingFeedback.length; index++) {
         const element = awaitingFeedback[index];
-        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element);
+        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, index, 'awaitingFeedback');
     }
 }
 
@@ -76,7 +77,7 @@ function doneArea() {
 
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
-        document.getElementById('done').innerHTML += generateTodoHTML(element);
+        document.getElementById('done').innerHTML += generateTodoHTML(element, index, 'done');
     }
 }
 
@@ -104,11 +105,11 @@ function getColor(element) {
  * @param {*} element Elements of the card
  * @returns the card with elements
  */
-function generateTodoHTML(element) {
+function generateTodoHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
 
     return `
-    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card" onclick="openCard()">
+    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${index}" onclick="openCard('${index}','${status}')">
         <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}</div>
         <div class="taskTitle" id="cardTaskTitle">
@@ -136,14 +137,21 @@ function generateTodoHTML(element) {
         </div>  
     </div>`
 }
+/**
+ * Remove display:none from the bigger card to see it
+ */
+function openCard(index, status) {
+    document.getElementById('openCard'+ status + index).classList.remove('d-none');
+    document.getElementById('overlay').style.display = "block";
+}
 
-function addUserAcronyms() {
+function addUserAcronyms(id) {
     let assigned = [];
     for (let i = 0; i < tasks.length; i++) {
         let index = tasks.indexOf(tasks[i])
         assigned.push(tasks[i]);
         for (let j = 0; j < assigned.length; j++) {
-            document.getElementById('assignedUserLogo' + assigned[i]['status'] + index).innerHTML += generateAssignedUserHTML(assigned[i]['isAssigned'][j]);
+            document.getElementById(id + assigned[i]['status'] + index).innerHTML += generateAssignedUserHTML(assigned[i]['isAssigned'][j]);
         }
     }
 }
@@ -167,19 +175,13 @@ function generateAssignedUserHTML(username) {
  * @param {*} element elemts of the card 
  * @returns the bigger card with more information
  */
-function generateOpenCardHTML(element) {
-    let color;
-    for (let i = 0; i < categories.length; i++) {
-
-        if (categories[i]['name'] == element['category']) {
-            color = categories[i]['color'];
-        }
-    }
+function generateOpenCardHTML(element, index, status) {
+    let elementIndex = tasks.indexOf(element);
     return `
-    <div class="openCard d-none" id="openCard">
+    <div class="openCard d-none" id="openCard${status}${index}">
             <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard()">
 
-        <div style="background:${color}" class="taskStatusOpen">
+        <div style="background:${getColor(element)}" class="taskStatusOpen">
             ${element['category']}</div>
         <div class="taskTitleOpen" >
             ${element['title']}
@@ -199,8 +201,8 @@ function generateOpenCardHTML(element) {
             ${element['subtasks'].length}
         </div>   
         <div class="taskAssignedUserOpen">
-        <label class="taskLabelOpen">Assignet to: </label>
-            ${element['isAssigned']} 
+        <label class="taskLabelOpen" id="assignedUserLogoOpen${element['status']}${elementIndex}">Assignet to: </label>
+            
         </div>
         <div class="editDeleteBtnOpen">
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask(${element})">
@@ -209,13 +211,7 @@ function generateOpenCardHTML(element) {
     </div>`
 }
 
-/**
- * Remove display:none from the bigger card to see it
- */
-function openCard() {
-    document.getElementById('openCard').classList.remove('d-none');
-    document.getElementById('overlay').style.display = "block";
-}
+
 /**
  * Add display:none to close the bigger card
  */

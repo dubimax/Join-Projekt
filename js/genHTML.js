@@ -340,7 +340,7 @@ function addLogoutButton() {
 
     document.body.innerHTML += `
     <div class="logoutButton" id="optionsMenu">
-        <div  id="logoutButton">
+        <div  id="logoutButton" onclick="logout()">
             Logout
         </div>
     </div>`;
