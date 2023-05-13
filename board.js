@@ -156,7 +156,7 @@ function generateAssignedUserHTML(username) {
         }
     } );
     return `
-    <div class="colorCircle" style="background:${color}">
+    <div class="colorCircleMedium boardCircle" style="background:${color}">
         ${getFirstLettersOfName(username)}
     </div>
     `;

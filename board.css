@@ -231,11 +231,15 @@ h1 {
     margin-left: -10px;
 } */
 .taskAssignedUser {
-    width: 35px;
-    height: 35px;
-
+    display: flex;
     border: 1px solid #FFFFFF;
     border-radius: 58px;
+}
+.taskAssignedUser div {
+    margin-left:-7px;
+}
+.taskAssignedUser:first-child {
+    margin:0 !important;
 }
 
 .taskPrio {
