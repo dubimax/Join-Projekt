@@ -34,6 +34,7 @@ async function initAddTask() {
     await includeHTML();
     generateNavigationLinks('AddTask', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskHTML('addTask');
+    setOnSubmitForm('toDo');
 }
 
 /**

@@ -94,6 +94,7 @@ function startDragging(id) {
  * @returns the card with elements
  */
 function generateTodoHTML(element) {
+    let elementIndex = tasks.indexOf(element);
     let color;
     for (let i = 0; i < categories.length; i++) {
 
@@ -102,7 +103,7 @@ function generateTodoHTML(element) {
         }
     }
     return `
-    <div draggable="true" ondragstart="startDragging(${element['id']})" class="card" id="card" onclick="openCard()">
+    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card" onclick="openCard()">
         <div style="background:${color}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}</div>
         <div class="taskTitle" id="cardTaskTitle">
