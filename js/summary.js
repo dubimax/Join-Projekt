@@ -50,7 +50,11 @@ function greeting() {
 
 function showUserName() {
     let nameOfCurrentUser = document.getElementById('currentUser');
+    if (indexOfEmail.name == 'Guest Guest') {
+        nameOfCurrentUser.innerHTML = '';
+    } else {
     nameOfCurrentUser.innerHTML = indexOfEmail.name;
+    }
 }
 
 
