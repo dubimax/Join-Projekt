@@ -20,6 +20,7 @@ function updateBoardHTML() {
     awaitingFeedbackArea();
     doneArea();
     addUserAcronyms('assignedUserLogo');
+    taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
 }
 
@@ -38,7 +39,14 @@ function toDoArea() {
     for (let index = 0; index < toDo.length; index++) {
         const element = toDo[index];
         document.getElementById('toDo').innerHTML += generateTodoHTML(element, index, 'toDo');
-        document.getElementById('toDo').innerHTML += generateOpenCardHTML(element, index, 'toDo');
+    }
+}
+
+function taskDetails(){
+
+    for(let i = 0; i < tasks.length;i++){
+        const element = tasks[i];
+        document.getElementById('boardContainer').innerHTML += generateOpenCardHTML(element, i, tasks[i]['status']);
     }
 }
 
@@ -109,7 +117,7 @@ function generateTodoHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
 
     return `
-    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${index}" onclick="openCard('${index}','${status}')">
+    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
         <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}</div>
         <div class="taskTitle" id="cardTaskTitle">
@@ -141,7 +149,9 @@ function generateTodoHTML(element, index, status) {
  * Remove display:none from the bigger card to see it
  */
 function openCard(index, status) {
-    document.getElementById('openCard' + status + index).classList.remove('d-none');
+    if(document.getElementById('openCard' + status + index)){
+        document.getElementById('openCard' + status + index).classList.remove('d-none');
+    }
     document.getElementById('overlay').style.display = "block";
 }
 
@@ -178,7 +188,7 @@ function generateAssignedUserHTML(username) {
 function generateOpenCardHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
     return `
-    <div class="openCard d-none" id="openCard${status}${index}">
+    <div class="openCard d-none" id="openCard${status}${elementIndex}">
             <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard()">
 
         <div style="background:${getColor(element)}" class="taskStatusOpen">
@@ -201,7 +211,7 @@ function generateOpenCardHTML(element, index, status) {
             ${element['subtasks'].length}
         </div>   
         <div class="taskAssignedUserOpen">
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${element['status']}${elementIndex}">Assignet to: </label>
+        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}">Assignet to: </label>
             
         </div>
         <div class="editDeleteBtnOpen">
