@@ -88,7 +88,7 @@ function startDragging(id) {
     currentDraggedElement = id;
 }
 
-function getColor(element){
+function getColor(element) {
     for (let i = 0; i < categories.length; i++) {
 
         if (categories[i]['name'] == element['category']) {
@@ -106,7 +106,7 @@ function getColor(element){
  */
 function generateTodoHTML(element) {
     let elementIndex = tasks.indexOf(element);
-    
+
     return `
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card" onclick="openCard()">
         <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
@@ -137,15 +137,29 @@ function generateTodoHTML(element) {
     </div>`
 }
 
-function addUserAcronyms(){
+function addUserAcronyms() {
     let assigned = [];
-    for(let i = 0;i < tasks.length ; i++){
+    for (let i = 0; i < tasks.length; i++) {
         let index = tasks.indexOf(tasks[i])
         assigned.push(tasks[i]);
-        for(let j = 0; j < assigned.length;j++){
-            document.getElementById('assignedUserLogo'+ assigned[i]['status']+index).innerHTML += getFirstLettersOfName(assigned[i]['isAssigned'][j]);
+        for (let j = 0; j < assigned.length; j++) {
+            document.getElementById('assignedUserLogo' + assigned[i]['status'] + index).innerHTML += generateAssignedUserHTML(assigned[i]['isAssigned'][j]);
         }
     }
+}
+
+function generateAssignedUserHTML(username) {
+    let color;
+    users.find((user) =>{
+        if(user.name == username){
+            color = user.color;
+        }
+    } );
+    return `
+    <div class="colorCircle" style="background:${color}">
+        ${getFirstLettersOfName(username)}
+    </div>
+    `;
 }
 
 /**
@@ -289,12 +303,12 @@ function searchTasks() {
             resetBoard();
         }
     }
-} 
+}
 
 function deleteTasks() {
     for (let i = 0; i < tasks.length; i++) {
         let deleteTheTask = tasks[i];
-  
+
         deleteTheTask.splice(i, 1);
     }
 
