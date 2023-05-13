@@ -155,6 +155,7 @@ function addUser() {
     let userColor = randomcolor();
     users.push({ 'name': name, 'email': email, 'pwd': password, 'color': userColor });
     backend.setItem('users', JSON.stringify(users));
+    save();
     showFrame('signUpConfirmFrame', 'signUpFrame');
 }
 

@@ -203,7 +203,7 @@ function generateOpenCardHTML(element) {
             ${element['isAssigned']} 
         </div>
         <div class="editDeleteBtnOpen">
-            <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTasks()">
+            <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask(${element})">
             <img class="editBtnOpenCard" src="img/editBtn.png">
         </div>
     </div>`
@@ -305,12 +305,8 @@ function searchTasks() {
     }
 }
 
-function deleteTasks() {
-    for (let i = 0; i < tasks.length; i++) {
-        let deleteTheTask = tasks[i];
-
-        deleteTheTask.splice(i, 1);
-    }
-
+function deleteTask(task) {   
+    let index = tasks.indexOf(task);
+    tasks.splice(index, 1);
 }
 
