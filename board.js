@@ -8,7 +8,6 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     updateBoardHTML();
     generateAddTaskToBoardImg();
-    getFirstLettersOfNameCard();
 }
 
 /**
@@ -20,6 +19,7 @@ function updateBoardHTML() {
     inProgressArea();
     awaitingFeedbackArea();
     doneArea();
+    addUserAcronyms();
 }
 
 function showAddNewTaskAtBoardStandard() {
@@ -88,6 +88,17 @@ function startDragging(id) {
     currentDraggedElement = id;
 }
 
+function getColor(element){
+    for (let i = 0; i < categories.length; i++) {
+
+        if (categories[i]['name'] == element['category']) {
+            return categories[i]['color'];
+        }
+    }
+}
+
+
+
 /**
  * Generate a card to the To do Area
  * @param {*} element Elements of the card
@@ -95,21 +106,15 @@ function startDragging(id) {
  */
 function generateTodoHTML(element) {
     let elementIndex = tasks.indexOf(element);
-    let color;
-    for (let i = 0; i < categories.length; i++) {
-
-        if (categories[i]['name'] == element['category']) {
-            color = categories[i]['color'];
-        }
-    }
+    
     return `
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card" onclick="openCard()">
-        <div style="background:${color}" class="taskStatus" id="cardTaskStatus">
+        <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}</div>
         <div class="taskTitle" id="cardTaskTitle">
             ${element['title']}
         </div>
-        <div class="taskDescription" id="cardTaskDescription">
+        <div class="taskDescription" id="cardTaskDescription${element['status']}${elementIndex}">
             ${element['description']}
         </div>  
         
@@ -122,8 +127,7 @@ function generateTodoHTML(element) {
        </div>
 
         <div class="containerUserAndPrio">
-            <div class="taskAssignedUser" id="assignedUserLogo">
-                ${element['isAssigned']} 
+            <div class="taskAssignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
             </div>
 
             <div class="taskPrio">
@@ -131,6 +135,17 @@ function generateTodoHTML(element) {
             </div>
         </div>  
     </div>`
+}
+
+function addUserAcronyms(){
+    let assigned = [];
+    for(let i = 0;i < tasks.length ; i++){
+        let index = tasks.indexOf(tasks[i])
+        assigned.push(tasks[i]);
+        for(let j = 0; j < assigned.length;j++){
+            document.getElementById('assignedUserLogo'+ assigned[i]['status']+index).innerHTML += getFirstLettersOfName(assigned[i]['isAssigned'][j]);
+        }
+    }
 }
 
 /**
@@ -210,7 +225,6 @@ function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     save();
     updateBoardHTML();
-    getFirstLettersOfNameCard();
     backend.setItem('tasks', JSON.stringify(tasks));
 }
 
@@ -239,18 +253,6 @@ function createNewTaskAtBoard(statusTag) {
     subtasks = [];
     clearAllInputs();
     save();
-}
-
-/**
- * Gets the First letters of given username
- * @param {*} username 
- * @returns Acronyms of username (Surname Name)
- */
-function getFirstLettersOfNameCard() {
-    let str = document.getElementById('assignedUserLogo').innerText;
-    let matches = str.match(/\b(\w)/g);
-    let acronym = matches.join('');
-    return document.getElementById('assignedUserLogo').innerHTML = acronym;
 }
 
 function showAddNewTaskAtBoard() {
