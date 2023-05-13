@@ -204,7 +204,7 @@ function cancelAddNew(id) {
     if (id == 'addNewCat') {
         document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category');
         addOptionWithFunction('addNewCat');
-        generateOptionsHTML('categoryBox', categories, 'categories');
+        generateOptionsHTML(categories, 'categories');
         save();
         dropDownCat = false;
         addEventListenerToCategories();
