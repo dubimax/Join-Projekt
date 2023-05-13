@@ -149,7 +149,6 @@ function addUserAcronyms(id) {
     for (let i = 0; i < tasks.length; i++) {
         let index = tasks.indexOf(tasks[i])
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
-            console.log(tasks[i]['status']);
             if (document.getElementById(id + tasks[i]['status'] + index)) {
                 document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j]);
             }
@@ -236,7 +235,7 @@ function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
     save();
     updateBoardHTML();
-    backend.setItem('tasks', JSON.stringify(tasks));
+    pushToDatabase();
 }
 
 /**
@@ -260,10 +259,9 @@ function createNewTaskAtBoard(statusTag) {
     let id = tasks.length + 1;
     let status = statusTag;
     tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
-    backend.setItem('tasks', JSON.stringify(tasks));
+    pushToDatabase();
     subtasks = [];
     clearAllInputs();
-    save();
 }
 
 function showAddNewTaskAtBoard() {
