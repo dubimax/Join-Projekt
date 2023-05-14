@@ -153,7 +153,7 @@ function generatesTextareaFieldHTML(field1, field2, headline, placeholder) {
     return `
     <div class="detail">
         <${field1}>${headline}</${field1}>
-        <${field2} class="inputDescriptionField" type="text" id="inputDescription" placeholder="${placeholder}"></${field2}>
+        <${field2} class="inputDescriptionField" type="text" id="inputDescription" placeholder="${placeholder}" required></${field2}>
     </div>
     `;
 }
@@ -162,7 +162,7 @@ function generatesInputFieldHTML(field1, field2, headline, properties, type, id,
     return `
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
-        <${field2} class="${properties}" type="${type}" id="${id}" placeholder="${placeholder}" >
+        <${field2} class="${properties}" type="${type}" id="${id}" placeholder="${placeholder}" required>
     </div>
     `;
 }

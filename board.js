@@ -5,6 +5,7 @@ let currentDraggedElement;
  */
 async function initBoard() {
     await includeHTML();
+    load();
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     updateBoardHTML();
     generateAddTaskToBoardImg();
@@ -14,7 +15,6 @@ async function initBoard() {
  * Uptade the Board Page
  */
 function updateBoardHTML() {
-    load();
     toDoArea();
     inProgressArea();
     awaitingFeedbackArea();
@@ -189,7 +189,7 @@ function generateOpenCardHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
     return `
     <div class="openCard d-none" id="openCard${status}${elementIndex}">
-            <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard()">
+            <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
 
         <div style="background:${getColor(element)}" class="taskStatusOpen">
             ${element['category']}</div>
@@ -215,7 +215,7 @@ function generateOpenCardHTML(element, index, status) {
             
         </div>
         <div class="editDeleteBtnOpen">
-            <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask(${element})">
+            <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
             <img class="editBtnOpenCard" src="img/editBtn.png">
         </div>
     </div>`
@@ -225,8 +225,8 @@ function generateOpenCardHTML(element, index, status) {
 /**
  * Add display:none to close the bigger card
  */
-function closeOpenCard() {
-    document.getElementById('openCard').classList.add('d-none');
+function closeOpenCard(status, index) {
+    document.getElementById('openCard'+status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
 }
 
@@ -310,8 +310,17 @@ function searchTasks() {
     }
 }
 
-function deleteTask(task) {
-    let index = tasks.indexOf(task);
-    tasks.splice(index, 1);
+function deleteTask(task, status , ind) {
+    let index = -1;
+    tasks.forEach((t) => {
+        if(t.title == task){
+          index = tasks.indexOf(t);
+          tasks.splice(index, 1);
+        }
+    });
+    closeOpenCard(status,ind);
+    pushToDatabase();
+    updateBoardHTML();
+
 }
 

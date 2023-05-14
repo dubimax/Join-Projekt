@@ -358,6 +358,7 @@ function generateCheckboxItem() {
     <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
     `;
     subtasks.push(getItemFromInput());
+    document.getElementById('newSubtasks').value = '';
 }
 
 /**
