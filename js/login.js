@@ -8,3 +8,6 @@ async function initLogin() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
 }
 
+function showForgotMyPasswordPage() {
+    window.location.href = 'forgotpassword.html';
+}
