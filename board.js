@@ -194,21 +194,21 @@ function generateOpenCardHTML(element, index, status) {
         <div style="background:${getColor(element)}" class="taskStatusOpen">
             ${element['category']}</div>
         <div class="taskTitleOpen" >
-            ${element['title']}
+            <input id="editTitle" readonly value="${element['title']}"/>
         </div>
         <div class="taskDescriptionOpen">
-            ${element['description']}
+            <textarea id="editDescription" readonly>${element['description']}</textarea>
         </div>  
         <div class="taskDueDateOpen">
             <label class="taskLabelOpen">Due date: </label>
-            ${element['dueDate']}
+            <input id="editDate" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
-        <div class="taskPrioOpen">
+        <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
             <label class="taskLabelOpen">Priority: </label>
             <img src="./img/${element['prio'].toLowerCase()}.png">
         </div>
         <div class="taskSubtasksOpen">
-            ${element['subtasks'].length}
+            <input id="editSubtasks" readonly value="${element['subtasks']}"/>
         </div>   
         <div class="taskAssignedUserOpen">
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}">Assignet to: </label>
@@ -216,11 +216,19 @@ function generateOpenCardHTML(element, index, status) {
         </div>
         <div class="editDeleteBtnOpen">
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
-            <img class="editBtnOpenCard" src="img/editBtn.png">
+            <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex})">
         </div>
     </div>`
 }
 
+function editCard(status, elementIndex){
+    document.getElementById('taskPrioOpen'+ status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
+    document.getElementById('editTitle').removeAttribute('readonly');
+    document.getElementById('editDescription').removeAttribute('readonly');
+    document.getElementById('editDate').removeAttribute('readonly');
+    document.getElementById('editSubtasks').removeAttribute('readonly');
+    
+}
 
 /**
  * Add display:none to close the bigger card
