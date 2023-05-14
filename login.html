@@ -58,7 +58,7 @@
                         <input type="checkbox">
                         <p>Remember me</p>
                     </div>
-                    <button onclick="showForgotMyPasswordPage()">Forgot my
+                    <button onclick="showFrame('forgotMyPasswordFrame','notJoinUserContainer','loginFrame')">Forgot my
                         password</button>
                 </div>
 
@@ -110,7 +110,7 @@
         <button class="btnLoginAndSignUp" onclick="window.location.href='login.html'">Log in</button>
     </div>
 <!-- Reset Password Page-->
-    <!-- <div class="frameStyle d-none" id="forgotMyPasswordFrame">
+    <div class="frameStyle d-none" id="forgotMyPasswordFrame">
         <img src="img/backBtn.png" onclick="showFrame('loginFrame','notJoinUserContainer','forgotMyPasswordFrame')"
             class="backBtn">
         <h1 class="headerForgotMyPassword">I forgot my password</h1>
@@ -124,7 +124,7 @@
             </div>
             <button class="btnSendMeMail">Send me the mail</button>
         </form>
-    </div> -->
+    </div>
 
 
 </body>
