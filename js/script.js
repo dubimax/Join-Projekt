@@ -299,27 +299,22 @@ function checkDropDown() {
     if (!selectedCategory) {
         if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
-            document.getElementById('categoryBox').style = `height:unset !important;`;
             document.getElementById('addNewCat').classList.remove('d-none');
             dropDownCat = true;
         } else {
             document.getElementById('addNewCat').classList.add('d-none');
-            document.getElementById('categoryBox').style = `height:41px !important;`;
-            document.getElementById('assignedTo').style = `height:41px !important;`;
             dropDownCat = false;
         }
     } else {
         if (!dropDownCat) {
             document.getElementById('CategorycategoryBox').classList.remove('d-none');
-            document.getElementById('categoryBox').style = `height:unset !important;`;
             document.getElementById('addNewCat').classList.remove('d-none');
 
-            document.getElementById('assignedTo').style = `height:unset !important;`;
             dropDownCat = true;
         } else {
             document.getElementById('addNewCat').classList.add('d-none');
             document.getElementById('CategorycategoryBox').classList.add('d-none');
-            document.getElementById('categoryBox').style = `height:41px !important;`;
+
             dropDownCat = false;
         }
     }
@@ -357,19 +352,18 @@ function setOnSubmitForm(addForm) {
 function showUsersItems() {
     if (!dropDownAssign) {
         document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-        document.getElementById('assignedTo').style = `height:unset !important;`;
+        document.getElementById('assignedTo').style = `height:unset;`;
         document.getElementById('invite').classList.remove('d-none');
         dropDownAssign = true;
     } else {
+
         if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
             document.getElementById('Assigned toassignedTo').classList.add('d-none');
             document.getElementById('invite').classList.remove('d-none');
 
-            document.getElementById('assignedTo').style = `height:41px !important;`;
         } else {
             document.getElementById('Assigned toassignedTo').classList.remove('d-none');
             document.getElementById('invite').classList.add('d-none');
-            document.getElementById('assignedTo').style = `height:unset !important;`;
         }
         dropDownAssign = false;
     }
@@ -380,7 +374,6 @@ function showUsersItems() {
         }
         else {
             document.getElementById(users[i]['name']).classList.add('d-none');
-            document.getElementById('assignedTo').style = `height:41px !important;`;
         }
     }
 }
