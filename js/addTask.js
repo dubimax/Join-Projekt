@@ -70,6 +70,12 @@ function clearAllInputs() {
     cancelAddNew('addNewCat');
     cancelAddNew('assignedTo');
     cancelAddNew('addNewSubTask');
+    clearListAssigned();
+}
+
+function clearListAssigned(){
+    document.getElementById('list-assigned-user').innerHTML = '';
+    assignedTo = [];
 }
 
 /**
@@ -244,7 +250,7 @@ function addEventListenerToSelectUser() {
             if (!usersAssignedTo.includes(users[j]['name'])) {
                 usersAssignedTo.push(users[j]['name']);
                 setAssignedCircle(users[j]);
-            }else if (usersAssignedTo.includes(users[j]['name'])) {
+            } else if (usersAssignedTo.includes(users[j]['name'])) {
                 document.getElementById('colorCircleMedium' + users[j]['name']).remove();
                 let index = usersAssignedTo.indexOf(users[j]['name']);
                 usersAssignedTo.splice(index, 1);
@@ -254,15 +260,9 @@ function addEventListenerToSelectUser() {
 }
 
 function setAssignedCircle(username) {
-    
-
-
-            document.getElementById('list-assigned-user').innerHTML += `
-            <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
-            `;
-
-    
-
+    document.getElementById('list-assigned-user').innerHTML += `
+        <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
+     `;
 }
 
 /**

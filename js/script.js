@@ -342,6 +342,12 @@ function setOnSubmitForm(addForm) {
     let submitElement = document.getElementById('submitting');
     submitElement.onsubmit = function () {
         createNewTask(addForm);
+        document.body.innerHTML += `
+            <div class="confirmMessage" id="submitted">Task successfully created</div>
+        `;
+        setTimeout(()=>{
+            document.getElementById('submitted').remove();
+        },1000);
         return false;
     };
 }
