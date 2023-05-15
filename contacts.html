@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="createNewUserAtContacts-right">
-                    <form onsubmit="createNewContact(); return false;">
+                    <form action="https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php" method="POST" onsubmit="createNewContact(); return false;">
                         <div class="addNewContactProfileImgContainer">
                             <img class="profileDummy" src="img/profileDummy.png">
                             <img class="profileDummyInside" src="img/profileDummyInside.png">
@@ -58,7 +58,7 @@
                             </div>
                             <div class="createNewContactNameInput">
 
-                                <input type="email" required placeholder="Email" id="createNewContactEmail">
+                                <input name="email" type="email" required placeholder="Email" id="createNewContactEmail">
                                 <img class="createNewContactNameImg" src="img/miniMailIcon.png">
 
                             </div>

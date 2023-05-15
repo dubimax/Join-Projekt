@@ -8,6 +8,10 @@ async function initSummary() {
     generateNavigationLinks('Summary', 'Summary', 'Board', 'AddTask', 'Contacts');
 };
 
+function show(){
+    
+}
+
 /**
  * Generate functions for the Summary Page
  */

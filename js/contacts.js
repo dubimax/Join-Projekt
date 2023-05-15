@@ -43,8 +43,9 @@ function addContactCategories() {
  * @param {*} contactName 
  */
 function deleteContact(contactName) {
-    let deleteUser = users.findIndex(u => u.name == contactName);
-    users.splice(deleteUser, 1);
+    let deleteUser = users.find(u => u.name == contactName);
+    let index = users.indexOf(deleteUser);
+    users.splice(index, 1);
     pushToDatabase();
 }
 
