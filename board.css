@@ -223,17 +223,6 @@ h1 {
     align-items: center;
 }
 
-/* .taskAssignedUser2 {
-    width: 35px;
-    height: 35px;
-
-    background: #0190E0;
-
-    border: 1px solid #FFFFFF;
-    border-radius: 58px;
-
-    margin-left: -10px;
-} */
 .taskAssignedUser {
     display: flex;
     border: 1px solid #FFFFFF;
@@ -335,7 +324,7 @@ h1 {
     font-size: 21px;
     line-height: 120%;
     width: 500px;
-    height: 151px;
+    height: fit-content;
 
     color: #000000;
     background-color: none;
@@ -382,7 +371,7 @@ h1 {
 }
 
 .boardCircle{
-    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .closeBtnOpen {
