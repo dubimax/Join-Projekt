@@ -50,10 +50,13 @@ function generateAddTaskHTML(id) {
        
         </form>
     `;
+        addInviteNewContact();
+
         generateOptionsHTML(users, 'users');
         addOptionWithFunction('addNewCat');
         generateOptionsHTML(categories, 'categories');
         addEventListenerToDropDown();
+
     } else {
         window.location.href = 'login.html';
     }
@@ -87,7 +90,7 @@ function generateContactDetailsTitle() {
 `;
 }
 
-function hideContactDetailsButton(){
+function hideContactDetailsButton() {
     document.getElementById('contactDetails').innerHTML += `
     <img src="./img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
     `;
@@ -192,6 +195,12 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
             </div>
         </div>
     </div>
+    `;
+}
+
+function addInviteNewContact() {
+    document.getElementById('assignedTo').innerHTML += `
+        <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">Invite Contact</div>
     `;
 }
 
@@ -318,14 +327,14 @@ function addLegalNotice() {
     </div>`;
 }
 
-function generateSelectedNavigationLinkHTML(linkname){
+function generateSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
          <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
     `;
 }
 
-function generateUnSelectedNavigationLinkHTML(linkname){
+function generateUnSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
          <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
@@ -345,7 +354,7 @@ function addLogoutButton() {
         </div>
     </div>`;
 
-    if(clientWidth < 1300){
+    if (clientWidth < 1300) {
         document.getElementById('optionsMenu').innerHTML += `
         <div>Legal Notice</div>
         <div>Help</div>`;
@@ -357,7 +366,7 @@ function addLogoutButton() {
  * @param {*} value 
  * @returns 
  */
-function addContactCategoriesHTML(value){
+function addContactCategoriesHTML(value) {
     return `
     <div class="contactSegment d-none" id="contact${value}">
          <h3 class="letter">${value}</h3>
@@ -365,7 +374,7 @@ function addContactCategoriesHTML(value){
     </div>`;
 }
 
-function setContactsContainerHTML(contactName, userMail, userPhone, userColor){
+function setContactsContainerHTML(contactName, userMail, userPhone, userColor) {
     return `
     <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}');setColorWhenSelectet('contactAt${contactName}')" class="contactSelect" id="contactAt${contactName}">
         <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
@@ -396,10 +405,10 @@ function addCloseBtnToAddTaskAtContacts() {
     `;
 }
 
-function setStyleOfCloseIconAtContacts(){
+function setStyleOfCloseIconAtContacts() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('closeIconAtContacts');
-    if(clientWidth <= 1300){
+    if (clientWidth <= 1300) {
         hideButton.style = `background-image:url('./img/closeIconEditUserAtContacts.png') !important;top: 108px !important;right: 50px !important;`;
     }
 
