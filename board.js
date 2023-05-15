@@ -225,9 +225,46 @@ function generateOpenCardHTML(element, index, status) {
 function editCard(status, elementIndex) {
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
     document.getElementById('editTitle').removeAttribute('readonly');
-    document.getElementById('editTitle').style.cursor = "pointer";
+    document.getElementById('editTitle').style.cssText = `
+    cursor:pointer; 
+    width: 422px;
+    box-sizing: border-box;
+    padding: 13px 21px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size:21px;
+    font-weight: 400;
+    `;
     document.getElementById('editDescription').removeAttribute('readonly');
+    document.getElementById('editDescription').style.cssText = `
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    cursor:pointer; 
+    box-sizing: border-box;
+    padding: 18px 21px;
+    isolation: isolate;
+    width: 422px;
+    height: 119px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size:21px;
+    font-weight: 400;
+    `;
     document.getElementById('editDate').removeAttribute('readonly');
+    document.getElementById('editDate').style.cssText = `
+    margin-left: 0;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 18px 21px;
+    isolation: isolate;
+    width: 422px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    `;
     document.getElementById('editSubtasks').removeAttribute('readonly');
     document.getElementById('taskStatusCategory').classList.add('d-none');
 
