@@ -215,6 +215,8 @@ function addEvenListenerToSelectCategories(){
     }
 }
 
+
+
 /**
  * Add eventlisteners
  */
@@ -233,12 +235,18 @@ function addEventListenerToSelectUserBox(){
 
 function addEventListenerToSelectUser(){
     for (let j = 0; j < users.length; j++) {
-        let selUser;
-        selUser = document.getElementById(users[j]['name']);
+        let selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
             e.stopPropagation();
+            setAssignedCircle(users[j]);
         });
     }
+}
+
+function setAssignedCircle(user){
+    document.getElementById('assignedTo').innerHTML += `
+    <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
+    `;
 }
 
 /**

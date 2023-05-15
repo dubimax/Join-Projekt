@@ -433,6 +433,7 @@ li {
     align-items: center;
     padding: 0px 21px;
     min-height: unset !important;
+    justify-content: space-between;
 }
 
 
@@ -734,7 +735,6 @@ select option:hover {
 .addTaskForm {
     position: relative;
     display: flex;
-    flex-direction: column;
     width: 100%;
 }
 

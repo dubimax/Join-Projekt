@@ -25,6 +25,12 @@ function generateAddTaskHTML(id) {
             ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
             ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
             ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
+            <div class="p-relative d-flex align-c">
+
+                <list class="" id="list-assigned-user">
+                </list>
+            </div>
+        </div>
         </div>
         <div class="border-1px-solid"></div>
         <div class="detailBox-right">
@@ -51,11 +57,11 @@ function generateAddTaskHTML(id) {
         </form>
     `;
         addInviteNewContact();
-
         generateOptionsHTML(users, 'users');
         addOptionWithFunction('addNewCat');
         generateOptionsHTML(categories, 'categories');
         addEventListenerToDropDown();
+
 
     } else {
         window.location.href = 'login.html';
@@ -200,7 +206,12 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
 
 function addInviteNewContact() {
     document.getElementById('assignedTo').innerHTML += `
-        <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">Invite Contact</div>
+        <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">
+            <span>
+                Invite Contact
+            </span>
+            <img src="./img/invite.png" style="width: 15px;height: 15px;object-fit: contain;">
+        </div>
     `;
 }
 
