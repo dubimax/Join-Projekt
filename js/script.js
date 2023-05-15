@@ -41,6 +41,17 @@ function save() {
 }
 
 
+
+function action(formData) {
+    const input = 'https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php';
+    const requestInit = {
+        method: 'post',
+        body: formData
+    };
+    return fetch(input, requestInit);
+}
+
+
 /**
  * Sets the selected Navigation Link
  * @param {*} coloredLink The Link to set colored
@@ -157,7 +168,7 @@ function logout() {
 /**
  * Pushes the Tasks to the Backend, clear all Inputs and Save
  */
-async function pushToDatabase(){
+async function pushToDatabase() {
     await backend.setItem('users', JSON.stringify(users));
     await backend.setItem('categories', JSON.stringify(categories));
     await backend.setItem('tasks', JSON.stringify(tasks));

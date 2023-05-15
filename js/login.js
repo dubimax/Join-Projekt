@@ -11,3 +11,9 @@ async function initLogin() {
 function showForgotMyPasswordPage() {
     window.location.href = 'forgotpassword.html';
 }
+async function onSubmitRQPassword(event) {
+    event.preventDefault();
+    let formData = new FormData(event.target);
+    let response = await action(formData);
+    if (response.ok) window.location.href = './login.html';
+}

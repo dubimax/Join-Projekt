@@ -14,6 +14,7 @@
 
     <script src="./js/script.js"></script>
     <script src="./js/contacts.js"></script>
+    <link rel="" href="send_mail.php">
 
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="style.css">
@@ -117,12 +118,12 @@
         <div class= "lineForgotMyPassword headerLine">
         </div>
         <p class="forgotMyPasswordText">Don't worry! We will send you an email with the instructions to reset your password.</p>
-        <form >
+        <form method="POST" onsubmit="onSubmitRQPassword(event)">
             <div class="inputField inputEmailForgotPassword">
-                <input id="userMailResetPassword" type="email" placeholder="Email" autocomplete="off" required>
+                <input name="email" id="userMailResetPassword" type="email"  placeholder="Email" autocomplete="off" required>
                 <img src="img/emailVector.png" alt="email symbol">
             </div>
-            <button class="btnSendMeMail">Send me the mail</button>
+            <button type="submit" class="btnSendMeMail">Send me the mail</button>
         </form>
     </div>
 
