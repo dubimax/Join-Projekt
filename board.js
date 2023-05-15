@@ -116,7 +116,7 @@ function getColor(element) {
 function generateTodoHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
 
-    return `
+    return /*html*/`
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
         <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}</div>
@@ -160,11 +160,11 @@ function addUserAcronyms(id) {
         let index = tasks.indexOf(tasks[i])
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
             if (document.getElementById(id + tasks[i]['status'] + index)) {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j]);
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j])};
             }
         }
     }
-}
+
 
 function generateAssignedUserHTML(username) {
     let color;
@@ -173,9 +173,14 @@ function generateAssignedUserHTML(username) {
             color = user.color;
         }
     });
-    return `
-    <div class="colorCircleMedium boardCircle" style="background:${color}">
-        ${getFirstLettersOfName(username)}
+    return /*html*/`
+    <div class="assignedToContainer">
+        <div class="colorCircleMedium boardCircle" style="background:${color}">
+            ${getFirstLettersOfName(username)} 
+        </div>
+        <div id="isAssignedUsername" style="display:none;"> 
+            ${username}
+        </div>
     </div>
     `;
 }
@@ -213,7 +218,7 @@ function generateOpenCardHTML(element, index, status) {
             <input class="taskSubtasksOpen" id="editSubtasks${status}${elementIndex}" readonly value="${element['subtasks']}"/>
         </div>  
         <span class="taskLabelOpen">Assigned to: </span> 
-        <div class="taskAssignedUserOpen">
+        <div class="taskAssignedUserOpen"> 
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
         </div>
         <div class="editDeleteBtnOpen">
@@ -225,17 +230,18 @@ function generateOpenCardHTML(element, index, status) {
 
 function editCard(status, elementIndex) {
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
-    document.getElementById('editSubtasks'+ status + elementIndex).removeAttribute('readonly');
-    document.getElementById('taskStatusCategory'+ status + elementIndex).classList.add('d-none');
+    document.getElementById('editSubtasks' + status + elementIndex).removeAttribute('readonly');
+    document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
+    document.getElementById('isAssignedUsername').style.display = "block";
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);
     generateEditDate(status, elementIndex);
 
 }
 
-function generateEditTitle(status, elementIndex){
-    document.getElementById('editTitle'+ status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editTitle'+ status + elementIndex).style.cssText = `
+function generateEditTitle(status, elementIndex) {
+    document.getElementById('editTitle' + status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editTitle' + status + elementIndex).style.cssText = `
     cursor:pointer; 
     width: 422px;
     box-sizing: border-box;
@@ -247,9 +253,9 @@ function generateEditTitle(status, elementIndex){
     `;
 }
 
-function generateEditDescription(status,elementIndex) {
-    document.getElementById('editDescription'+ status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDescription'+ status + elementIndex).style.cssText = `
+function generateEditDescription(status, elementIndex) {
+    document.getElementById('editDescription' + status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editDescription' + status + elementIndex).style.cssText = `
     font-weight: 400;
     font-size: 21px;
     line-height: 120%;
@@ -266,9 +272,9 @@ function generateEditDescription(status,elementIndex) {
     `;
 }
 
-function generateEditDate(status, elementIndex){
-    document.getElementById('editDate'+ status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDate'+ status + elementIndex).style.cssText = `
+function generateEditDate(status, elementIndex) {
+    document.getElementById('editDate' + status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editDate' + status + elementIndex).style.cssText = `
     margin-left: 0;
     font-weight: 400;
     font-size: 21px;
@@ -364,7 +370,7 @@ function searchTasks() {
         if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
             console.log('gefunden');
             updateBoardHTML();
-            getFirstLettersOfNameCard();
+
         } else {
             console.log('nichts gefunden');
             resetBoard();
