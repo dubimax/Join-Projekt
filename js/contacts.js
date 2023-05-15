@@ -43,9 +43,27 @@ function addContactCategories() {
  * @param {*} contactName 
  */
 function deleteContact(contactName) {
-    let deleteUser = users.findIndex(u => u.name == contactName);
-    users.splice(deleteUser, 1);
+    let deleteUser = users.find(u => u.name == contactName);
+    let index = users.indexOf(deleteUser);
+    users.splice(index, 1);
     pushToDatabase();
+}
+
+async function onSubmitting(event){
+    event.preventDefault();
+    let formData = new FormData(event.target);
+    let response = await action(formData);
+    if(response.ok) createNewContact();
+
+}
+
+function action(formData){
+    const input = 'https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php';
+    const requestInit = {
+        method: 'post',
+        body: formData
+    };
+    return fetch(input,requestInit);
 }
 
 /**
