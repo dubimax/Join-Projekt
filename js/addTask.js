@@ -65,6 +65,7 @@ function clearAllInputs() {
     clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
     clearListSubtask();
     cancelAddNew('addNewCat');
+    cancelAddNew('assignedTo');
     cancelAddNew('addNewSubTask');
 }
 

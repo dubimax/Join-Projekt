@@ -241,6 +241,14 @@ function cancelAddNew(id) {
     if (id == 'addNewSubTask') {
         document.getElementById('id_addNewSubTask').innerHTML = setBackToSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png');
     }
+    if(id == 'assignedTo'){
+        for(let i = 0;i < document.getElementById('assignedTo').children.length;i++){
+            if(i > 1){
+                document.getElementById('assignedTo').children[i].children[0].checked =false;
+            }         
+
+        }
+    }
 }
 
 /**
