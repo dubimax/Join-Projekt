@@ -193,25 +193,26 @@ function generateOpenCardHTML(element, index, status) {
 
         <div style="background:${getColor(element)}" class="taskStatusOpen">
             ${element['category']}</div>
-        <div class="taskTitleOpen" >
-            <input id="editTitle" readonly value="${element['title']}"/>
+        <div>
+            <input class="taskTitleOpen" id="editTitle" readonly value="${element['title']}"/>
         </div>
-        <div class="taskDescriptionOpen">
-            <textarea id="editDescription" readonly>${element['description']}</textarea>
+        <div >
+            <textarea class="taskDescriptionOpen" id="editDescription" readonly>${element['description']}</textarea>
         </div>  
-        <div class="taskDueDateOpen">
+        <div>
             <label class="taskLabelOpen">Due date: </label>
-            <input id="editDate" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
+            <input  class="taskDueDateOpen" id="editDate" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
         <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
             <label class="taskLabelOpen">Priority: </label>
-            <img src="./img/${element['prio'].toLowerCase()}.png">
+            <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
         </div>
-        <div class="taskSubtasksOpen">
-            <input id="editSubtasks" readonly value="${element['subtasks']}"/>
-        </div>   
+        <div>
+            <input class="taskSubtasksOpen" id="editSubtasks" readonly value="${element['subtasks']}"/>
+        </div>  
+        <label class="taskLabelOpen">Assignet to: </label> 
         <div class="taskAssignedUserOpen">
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}">Assignet to: </label>
+        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
             
         </div>
         <div class="editDeleteBtnOpen">
