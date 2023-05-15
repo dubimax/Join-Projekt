@@ -42,9 +42,9 @@ function toDoArea() {
     }
 }
 
-function taskDetails(){
+function taskDetails() {
 
-    for(let i = 0; i < tasks.length;i++){
+    for (let i = 0; i < tasks.length; i++) {
         const element = tasks[i];
         document.getElementById('boardContainer').innerHTML += generateOpenCardHTML(element, i, tasks[i]['status']);
     }
@@ -149,7 +149,7 @@ function generateTodoHTML(element, index, status) {
  * Remove display:none from the bigger card to see it
  */
 function openCard(index, status) {
-    if(document.getElementById('openCard' + status + index)){
+    if (document.getElementById('openCard' + status + index)) {
         document.getElementById('openCard' + status + index).classList.remove('d-none');
     }
     document.getElementById('overlay').style.display = "block";
@@ -191,8 +191,9 @@ function generateOpenCardHTML(element, index, status) {
     <div class="openCard d-none" id="openCard${status}${elementIndex}">
             <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
 
-        <div style="background:${getColor(element)}" class="taskStatusOpen">
-            ${element['category']}</div>
+        <div id="taskStatusCategory" style="background:${getColor(element)}" class="taskStatusOpen">
+            ${element['category']}
+        </div>
         <div>
             <input class="taskTitleOpen" id="editTitle" readonly value="${element['title']}"/>
         </div>
@@ -200,7 +201,7 @@ function generateOpenCardHTML(element, index, status) {
             <textarea class="taskDescriptionOpen" id="editDescription" readonly>${element['description']}</textarea>
         </div>  
         <div>
-            <label class="taskLabelOpen">Due date: </label>
+            <label class="taskLabelOpen" for="editDate">Due date: </label>
             <input  class="taskDueDateOpen" id="editDate" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
         <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
@@ -210,10 +211,9 @@ function generateOpenCardHTML(element, index, status) {
         <div>
             <input class="taskSubtasksOpen" id="editSubtasks" readonly value="${element['subtasks']}"/>
         </div>  
-        <label class="taskLabelOpen">Assignet to: </label> 
+        <span class="taskLabelOpen">Assigned to: </span> 
         <div class="taskAssignedUserOpen">
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
-            
         </div>
         <div class="editDeleteBtnOpen">
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
@@ -222,20 +222,59 @@ function generateOpenCardHTML(element, index, status) {
     </div>`
 }
 
-function editCard(status, elementIndex){
-    document.getElementById('taskPrioOpen'+ status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
+function editCard(status, elementIndex) {
+    document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
     document.getElementById('editTitle').removeAttribute('readonly');
+    document.getElementById('editTitle').style.cssText = `
+    cursor:pointer; 
+    width: 422px;
+    box-sizing: border-box;
+    padding: 13px 21px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size:21px;
+    font-weight: 400;
+    `;
     document.getElementById('editDescription').removeAttribute('readonly');
+    document.getElementById('editDescription').style.cssText = `
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    cursor:pointer; 
+    box-sizing: border-box;
+    padding: 18px 21px;
+    isolation: isolate;
+    width: 422px;
+    height: 119px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size:21px;
+    font-weight: 400;
+    `;
     document.getElementById('editDate').removeAttribute('readonly');
+    document.getElementById('editDate').style.cssText = `
+    margin-left: 0;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 18px 21px;
+    isolation: isolate;
+    width: 422px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    `;
     document.getElementById('editSubtasks').removeAttribute('readonly');
-    
+    document.getElementById('taskStatusCategory').classList.add('d-none');
+
 }
 
 /**
  * Add display:none to close the bigger card
  */
 function closeOpenCard(status, index) {
-    document.getElementById('openCard'+status + index).classList.add('d-none');
+    document.getElementById('openCard' + status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
 }
 
@@ -319,15 +358,15 @@ function searchTasks() {
     }
 }
 
-function deleteTask(task, status , ind) {
+function deleteTask(task, status, ind) {
     let index = -1;
     tasks.forEach((t) => {
-        if(t.title == task){
-          index = tasks.indexOf(t);
-          tasks.splice(index, 1);
+        if (t.title == task) {
+            index = tasks.indexOf(t);
+            tasks.splice(index, 1);
         }
     });
-    closeOpenCard(status,ind);
+    closeOpenCard(status, ind);
     pushToDatabase();
     updateBoardHTML();
 
