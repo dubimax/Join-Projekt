@@ -16,7 +16,7 @@
     <script src="./js/genHTML.js"></script>
     <script src="./js/variables.js"></script>
     <link rel="stylesheet" href="./CSS/navi.css">
-
+    <link rel="" href="send_mail.php">
     <link rel="stylesheet" href="./CSS/contacts.css">
     <link rel="stylesheet" href="./CSS/mediaqueries.css">
 
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="createNewUserAtContacts-right">
-                    <form action="https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php" method="POST" onsubmit="createNewContact(); return false;">
+                    <form method="POST" onsubmit="onSubmitting(event)">
                         <div class="addNewContactProfileImgContainer">
                             <img class="profileDummy" src="img/profileDummy.png">
                             <img class="profileDummyInside" src="img/profileDummyInside.png">
@@ -70,7 +70,7 @@
                             </div>
                             <div class="addNewContactsButtonContainer">
                                 <div onclick="hideAddNewContact()" class="addNewContactCancelButton">Cancel</div>
-                                <button class="addNewContactCreateButton">Create Contact<img
+                                <button type="submit" class="addNewContactCreateButton">Create Contact<img
                                         src="./img/checkIconWhite.png"></button>
                             </div>
                         </div>

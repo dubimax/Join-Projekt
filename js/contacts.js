@@ -49,6 +49,23 @@ function deleteContact(contactName) {
     pushToDatabase();
 }
 
+async function onSubmitting(event){
+    event.preventDefault();
+    let formData = new FormData(event.target);
+    let response = await action(formData);
+    if(response.ok) createNewContact();
+
+}
+
+function action(formData){
+    const input = 'https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php';
+    const requestInit = {
+        method: 'post',
+        body: formData
+    };
+    return fetch(input,requestInit);
+}
+
 /**
  * Adds an Eventlistener to DeleteButton
  */

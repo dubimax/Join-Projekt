@@ -2,8 +2,7 @@
 
 ########### CONFIG ###############
 
-$recipient = $_POST['email'];
-$redirect = './login.html';
+$recipient = 'your@email.com';
 
 ########### CONFIG END ###########
 
@@ -38,13 +37,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
         exit;
     case ("POST"): //Send the email;
         header("Access-Control-Allow-Origin: *");
+        $email = $_POST['email'];
+        $message = "Hello,\n
+        \nFollow this link to reset your JOIN password for " . $email . " .\n
+        \nhttps://gruppe-527.developerakademie.net/Join-Projekt/resetpassword.html?email=" . $email . "\n
+        \nIf it is not your request, you can ignore this email.\n
+        \nYour Join Team\n";
+        $recipient = $email;
+        $subject = "JOIN - Reset your password";
+        $headers = "From: noreply@https://gruppe-527.developerakademie.net";
 
-        $subject = "Contact From " . $_POST['name'];
-        $headers = "From:  noreply@developerakademie.com";
-
-        mail($recipient, $subject, $_POST['message'], $headers);
-        header("Location: " . $redirect); 
-
+        $result = mail($recipient, $subject, $message, $headers);
+        print($result);
         break;
     default: //Reject any non POST or OPTIONS requests.
         header("Allow: POST", true, 405);
