@@ -27,7 +27,7 @@ function generateAddTaskHTML(id) {
             ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
             <div class="p-relative d-flex align-c">
 
-                <list class="" id="list-assigned-user">
+                <list class="d-flex" id="list-assigned-user">
                 </list>
             </div>
         </div>

@@ -127,17 +127,7 @@ function setVisibleIfnotEmpty() {
     }
 }
 
-/**
- * Gets the First letters of given username
- * @param {*} username 
- * @returns Acronyms of username (Surname Name)
- */
-function getFirstLettersOfName(username) {
-    let str = username;
-    let matches = str.match(/\b(\w)/g);
-    let acronym = matches.join('');
-    return acronym;
-}
+
 
 /**
  * Removes the class "d-none" to show AddNewContact

@@ -17,6 +17,18 @@ async function includeHTML() {
 }
 
 /**
+ * Gets the First letters of given username
+ * @param {*} username 
+ * @returns Acronyms of username (Surname Name)
+ */
+function getFirstLettersOfName(username) {
+    let str = username;
+    let matches = str.match(/\b(\w)/g);
+    let acronym = matches.join('');
+    return acronym;
+}
+
+/**
  * Load saved variables from localstorage
  */
 function load() {
@@ -351,12 +363,12 @@ function showUsersItems() {
     } else {
         if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
             document.getElementById('Assigned toassignedTo').classList.add('d-none');
-            document.getElementById('invite').classList.add('d-none');
+            document.getElementById('invite').classList.remove('d-none');
 
             document.getElementById('assignedTo').style = `height:41px !important;`;
         } else {
             document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-            document.getElementById('invite').classList.remove('d-none');
+            document.getElementById('invite').classList.add('d-none');
             document.getElementById('assignedTo').style = `height:unset !important;`;
         }
         dropDownAssign = false;

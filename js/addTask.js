@@ -1,3 +1,6 @@
+usersAssignedTo = [];
+usersAssignedToShown = [];
+
 /**
  * Creates a new Task by given statusTag
  * @param {*} statusTag 
@@ -89,7 +92,7 @@ function clearFields(...ids) {
     }
 }
 
-function resetAllLabelContainer(){
+function resetAllLabelContainer() {
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
@@ -98,7 +101,7 @@ function resetAllLabelContainer(){
     document.getElementById('lowImgID').src = 'img/lowIcon.png';
 }
 
-function setStyleOfUrgent(id){
+function setStyleOfUrgent(id) {
     if (id == 'id_urgent') {
         document.getElementById(id).style = urgentColor;
         document.getElementById('urgentImgID').src = 'img/urgentWhiteIcon.png';
@@ -108,7 +111,7 @@ function setStyleOfUrgent(id){
     }
 }
 
-function setStyleOfMedium(id){
+function setStyleOfMedium(id) {
     if (id == 'id_medium') {
         document.getElementById(id).style = mediumColor;
         document.getElementById('mediumImgID').src = 'img/mediumWhiteIcon.png';
@@ -118,7 +121,7 @@ function setStyleOfMedium(id){
     }
 }
 
-function setStyleOfLow(id){
+function setStyleOfLow(id) {
     if (id == 'id_low') {
         document.getElementById(id).style = lowColor;
         document.getElementById('lowImgID').src = 'img/lowWhiteIcon.png';
@@ -148,7 +151,7 @@ function changeStyleOfLabel(id) {
  * resets style when label already is selected
  * @param {*} id 
  */
-function refreshStyleOfSelectedLabel(id){
+function refreshStyleOfSelectedLabel(id) {
     if (activeID == id) {
         document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
     } else {
@@ -204,7 +207,7 @@ function addEventListenerToCategories() {
 /**
  * Add an Eventlistener to select categories in dropdown
  */
-function addEvenListenerToSelectCategories(){
+function addEvenListenerToSelectCategories() {
     for (let i = 0; i < categories.length; i++) {
         let selCat = document.getElementById(categories[i]['name']);
         selCat.addEventListener('click', function (e) {
@@ -225,28 +228,41 @@ function addEventListenerToDropDown() {
     addEventListenerToSelectUserBox();
 }
 
-function addEventListenerToSelectUserBox(){
+function addEventListenerToSelectUserBox() {
     let userBox = document.getElementById('assignedTo');
     userBox.addEventListener('click', function () {
         showDropDownItems('users');
     });
-    addEventListenerToSelectUser();   
+    addEventListenerToSelectUser();
 }
 
-function addEventListenerToSelectUser(){
+function addEventListenerToSelectUser() {
     for (let j = 0; j < users.length; j++) {
         let selUser = document.getElementById(users[j]['name']);
         selUser.addEventListener('click', function (e) {
             e.stopPropagation();
-            setAssignedCircle(users[j]);
+            if (!usersAssignedTo.includes(users[j]['name'])) {
+                usersAssignedTo.push(users[j]['name']);
+                setAssignedCircle(users[j]);
+            }else if (usersAssignedTo.includes(users[j]['name'])) {
+                document.getElementById('colorCircleMedium' + users[j]['name']).remove();
+                let index = usersAssignedTo.indexOf(users[j]['name']);
+                usersAssignedTo.splice(index, 1);
+            }
         });
     }
 }
 
-function setAssignedCircle(user){
-    document.getElementById('assignedTo').innerHTML += `
-    <div class="colorCircleMedium" id="colorCircleMedium" style="background:${userColor}">${getFirstLettersOfName(contactName)}</div>
-    `;
+function setAssignedCircle(username) {
+    
+
+
+            document.getElementById('list-assigned-user').innerHTML += `
+            <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
+            `;
+
+    
+
 }
 
 /**
@@ -282,7 +298,7 @@ function setOption(id, id2) {
  * Sets the options for categoryItems
  * @param {*} id 
  */
-function setCategoryOptions(id){
+function setCategoryOptions(id) {
     let sID = document.getElementById(id);
     if (sID.classList.contains('d-none')) {
         sID.classList.remove('d-none');
@@ -298,7 +314,7 @@ function setCategoryOptions(id){
 /**
  * Reset categoryOptions
  */
-function resetOptions(){
+function resetOptions() {
     for (let i = 0; i < categories.length; i++) {
         document.getElementById(categories[i]['name']).classList.add('d-none');
         document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
