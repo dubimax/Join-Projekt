@@ -187,29 +187,30 @@ function generateAssignedUserHTML(username) {
  */
 function generateOpenCardHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
-    return `
+    return /*html*/`
     <div class="openCard d-none" id="openCard${status}${elementIndex}">
             <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
 
-        <div id="taskStatusCategory" style="background:${getColor(element)}" class="taskStatusOpen">
+        <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
             ${element['category']}
         </div>
+        
         <div>
-            <input class="taskTitleOpen" id="editTitle" readonly value="${element['title']}"/>
+            <input class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly value="${element['title']}"/>
         </div>
         <div >
-            <textarea class="taskDescriptionOpen" id="editDescription" readonly>${element['description']}</textarea>
+            <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
         </div>  
         <div>
             <label class="taskLabelOpen" for="editDate">Due date: </label>
-            <input  class="taskDueDateOpen" id="editDate" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
+            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
         <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
             <label class="taskLabelOpen">Priority: </label>
             <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
         </div>
         <div>
-            <input class="taskSubtasksOpen" id="editSubtasks" readonly value="${element['subtasks']}"/>
+            <input class="taskSubtasksOpen" id="editSubtasks${status}${elementIndex}" readonly value="${element['subtasks']}"/>
         </div>  
         <span class="taskLabelOpen">Assigned to: </span> 
         <div class="taskAssignedUserOpen">
@@ -224,8 +225,17 @@ function generateOpenCardHTML(element, index, status) {
 
 function editCard(status, elementIndex) {
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
-    document.getElementById('editTitle').removeAttribute('readonly');
-    document.getElementById('editTitle').style.cssText = `
+    document.getElementById('editSubtasks'+ status + elementIndex).removeAttribute('readonly');
+    document.getElementById('taskStatusCategory'+ status + elementIndex).classList.add('d-none');
+    generateEditTitle(status, elementIndex);
+    generateEditDescription(status, elementIndex);
+    generateEditDate(status, elementIndex);
+
+}
+
+function generateEditTitle(status, elementIndex){
+    document.getElementById('editTitle'+ status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editTitle'+ status + elementIndex).style.cssText = `
     cursor:pointer; 
     width: 422px;
     box-sizing: border-box;
@@ -235,8 +245,11 @@ function editCard(status, elementIndex) {
     font-size:21px;
     font-weight: 400;
     `;
-    document.getElementById('editDescription').removeAttribute('readonly');
-    document.getElementById('editDescription').style.cssText = `
+}
+
+function generateEditDescription(status,elementIndex) {
+    document.getElementById('editDescription'+ status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editDescription'+ status + elementIndex).style.cssText = `
     font-weight: 400;
     font-size: 21px;
     line-height: 120%;
@@ -251,8 +264,11 @@ function editCard(status, elementIndex) {
     font-size:21px;
     font-weight: 400;
     `;
-    document.getElementById('editDate').removeAttribute('readonly');
-    document.getElementById('editDate').style.cssText = `
+}
+
+function generateEditDate(status, elementIndex){
+    document.getElementById('editDate'+ status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editDate'+ status + elementIndex).style.cssText = `
     margin-left: 0;
     font-weight: 400;
     font-size: 21px;
@@ -265,10 +281,8 @@ function editCard(status, elementIndex) {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     `;
-    document.getElementById('editSubtasks').removeAttribute('readonly');
-    document.getElementById('taskStatusCategory').classList.add('d-none');
-
 }
+
 
 /**
  * Add display:none to close the bigger card
