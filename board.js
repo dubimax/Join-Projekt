@@ -205,11 +205,11 @@ function generateOpenCardHTML(element, index, status) {
             <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
             <input class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly value="${element['title']}"/>
         </div>
-        <div >
+        <div>
             <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
             <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
         </div>  
-        <div >
+        <div id="dateContainer${status}${elementIndex}" style="display:flex;">
             <label class="taskLabelOpen editcard" >Due date: </label>
             <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
@@ -250,6 +250,7 @@ function editCard(status, elementIndex, aID) {
     document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
+    document.getElementById('dateContainer'+ status + elementIndex).style = "display:block;"
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
