@@ -230,13 +230,14 @@ function generateOpenCardHTML(element, index, status) {
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
             <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')">
         </div>
-        <div class="editDeleteBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask()">
+        <div class="editDeleteBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
             Save
         </div>
     </div>`
 }
 
 function editCard(status, elementIndex, aID) {
+    let task = tasks[elementIndex];
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
     document.getElementById('editSubtasks' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
@@ -254,13 +255,36 @@ function editCard(status, elementIndex, aID) {
     addInviteNewContact();
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
+    setActiveCheckbox(task);
     addEventListenerToSelectUserBox();
     setStyleOfBoardLabel(aID);
     document.getElementById('isAssignedUsername').style.display = "block";
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);
     generateEditDate(status, elementIndex);
+}
 
+function setActiveCheckbox(task){
+    for(let i = 0; i < task['isAssigned'].length;i++ ){
+        document.getElementById(task['isAssigned'][i]).children[0].checked = true;
+
+    }
+}
+
+function editThisTask(index,stati){
+    let taskTitle = document.getElementById('editTitle'+ stati + index).value;
+    let taskDesc = document.getElementById('editDescription'+stati + index).value;
+
+    let taskCategory = document.getElementById('taskStatusCategory'+ stati + index).innerHTML;
+    let assignedTo = getAssignedContacts();
+    let taskDueDate = document.getElementById('editDate'+ stati + index).value;
+    let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
+    taskPrio = taskPrio[0];
+    let taskSubtasks = tasks[index]['subtasks'];
+    let id = tasks[index]['id'];
+    let status = tasks[index]['status'];
+
+    console.log(taskTitle,taskDesc,taskCategory,assignedTo,taskDueDate,taskPrio,taskSubtasks,id,status);
 }
 
 function setStyleOfBoardLabel(aID) {
