@@ -250,6 +250,7 @@ function editCard(status, elementIndex, aID) {
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
+    document.getElementById('taskAssignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
