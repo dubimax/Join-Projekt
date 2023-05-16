@@ -134,6 +134,7 @@ function setVisibleIfnotEmpty() {
  */
 function showAddNewContact() {
     document.getElementById('createNewUserAtContacts').classList.remove('d-none');
+    document.getElementById('overlay').style.display = "block";
 }
 
 /**
@@ -141,6 +142,7 @@ function showAddNewContact() {
  */
 function hideAddNewContact() {
     document.getElementById('createNewUserAtContacts').classList.add('d-none');
+    document.getElementById('overlay').style.display = "none";
 }
 
 /**
@@ -148,6 +150,7 @@ function hideAddNewContact() {
  */
 function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
+    document.getElementById('overlay').style.display = "block";
     addEventListenerToDropDown();
 }
 
@@ -156,12 +159,14 @@ function showAddNewTaskAtContacts() {
  */
 function hideAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.add('d-none');
+    document.getElementById('overlay').style.display = "none";
 }
 /**
  * Adds the class "d-none" to hide editUserAtContacts page
  */
 function hideEditContact() {
     document.getElementById('editUserAtContacts').classList.add('d-none');
+    document.getElementById('overlay').style.display = "none";
 }
 
 /**
@@ -176,6 +181,7 @@ function showEditContact() {
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
     document.getElementById('editUserAtContacts').classList.remove('d-none');
+    document.getElementById('overlay').style.display = "block";
     addEventListenerToDeleButton();
 }
 
