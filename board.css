@@ -19,6 +19,11 @@
     margin-left: 302px;
 }
 
+.editcard{
+    display: flex;
+    flex-direction: column;
+}
+
 h1 {
     font-weight: 700;
     font-size: 61px;
@@ -264,7 +269,7 @@ h1 {
     align-items: flex-start;
 
     padding: 50px;
-    gap: 25px;
+    gap: 15px;
     isolation: isolate;
 
     background: #FFFFFF;
