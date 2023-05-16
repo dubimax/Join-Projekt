@@ -230,7 +230,7 @@ function generateOpenCardHTML(element, index, status) {
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
             <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')">
         </div>
-        <div class="editDeleteBtnOpen d-flex" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask()">
+        <div class="editDeleteBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask()">
             Save
         </div>
     </div>`
