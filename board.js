@@ -268,24 +268,28 @@ function editCard(status, elementIndex, aID) {
 function setActiveCheckbox(task){
     for(let i = 0; i < task['isAssigned'].length;i++ ){
         document.getElementById(task['isAssigned'][i]).children[0].checked = true;
-
     }
 }
 
 function editThisTask(index,stati){
-    let taskTitle = document.getElementById('editTitle'+ stati + index).value;
-    let taskDesc = document.getElementById('editDescription'+stati + index).value;
+    tasks[index]['title'] = document.getElementById('editTitle'+ stati + index).value;
+    tasks[index]['description'] = document.getElementById('editDescription'+stati + index).value;
 
-    let taskCategory = document.getElementById('taskStatusCategory'+ stati + index).innerHTML;
-    let assignedTo = getAssignedContacts();
-    let taskDueDate = document.getElementById('editDate'+ stati + index).value;
+    tasks[index]['category'] = tasks[index]['category'];
+    tasks[index]['isAssigned'] = getAssignedContacts();
+    tasks[index]['dueDate'] = document.getElementById('editDate'+ stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
-    taskPrio = taskPrio[0];
-    let taskSubtasks = tasks[index]['subtasks'];
-    let id = tasks[index]['id'];
-    let status = tasks[index]['status'];
+    tasks[index]['prio'] = taskPrio[0];
+    tasks[index]['subtasks'] = tasks[index]['subtasks'];
+    tasks[index]['id'] = tasks[index]['id'];
+    tasks[index]['status'] = tasks[index]['status'];
 
-    console.log(taskTitle,taskDesc,taskCategory,assignedTo,taskDueDate,taskPrio,taskSubtasks,id,status);
+    document.getElementById('openCard'+ stati + index).classList.add('d-none');
+    document.getElementById('overlay').classList.add('d-none');
+    save();
+    updateBoardHTML();
+    pushToDatabase();
+    
 }
 
 function setStyleOfBoardLabel(aID) {
