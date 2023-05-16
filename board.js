@@ -226,17 +226,23 @@ function generateOpenCardHTML(element, index, status) {
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
         </div>
         
-        <div class="editDeleteBtnOpen">
+        <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
-            <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex})">
+            <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')">
+        </div>
+        <div class="editDeleteBtnOpen d-flex" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask()">
+            Save
         </div>
     </div>`
 }
 
-function editCard(status, elementIndex) {
+function editCard(status, elementIndex, aID) {
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
     document.getElementById('editSubtasks' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
+    document.getElementById('editDeleteBtnOpen' + status + elementIndex).classList.add('d-none');
+    document.getElementById('editSaveBtnOpen' + status + elementIndex).classList.remove('d-none');
+
     document.getElementById('openCardTitle' + status + elementIndex).classList.remove('d-none');
     document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
     document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
@@ -247,7 +253,7 @@ function editCard(status, elementIndex) {
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
     addEventListenerToSelectUserBox();
-
+    setStyleOfBoardLabel(aID);
     document.getElementById('isAssignedUsername').style.display = "block";
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);
@@ -255,8 +261,14 @@ function editCard(status, elementIndex) {
 
 }
 
-function addAssignedUsersList(status,elementIndex) {
-    document.getElementById('taskAssignedUserOpen'+status+elementIndex).innerHTML += `
+function setStyleOfBoardLabel(aID) {
+    if (aID == 'id_urgent') setStyleOfUrgent(aID);
+    if(aID == 'id_medium') setStyleOfMedium(aID);
+    if(aID == 'id_low') setStyleOfLow(aID);
+}
+
+function addAssignedUsersList(status, elementIndex) {
+    document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML += `
     <div class="p-relative d-flex align-c">
         <list class="d-flex" id="list-assigned-user">
         </list>
