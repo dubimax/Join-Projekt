@@ -46,7 +46,6 @@ h1 {
     padding: 13px 21px;
     gap: 10px;
 
-    width: 251px;
     height: 51px;
 
     background: #FFFFFF;
@@ -96,6 +95,13 @@ h1 {
     color: #FFFFFF;
     align-items: center;
     margin-right: 65px;
+    cursor: pointer;
+}
+
+
+.addTaskBtn:hover {
+    background-color: #29ABE2;
+    border: 1px solid #29ABE2;
 }
 
 .addTaskBtn img {

@@ -249,9 +249,12 @@ function addEventListenerToSelectUser() {
             e.stopPropagation();
             if (!usersAssignedTo.includes(users[j]['name'])) {
                 usersAssignedTo.push(users[j]['name']);
+                document.getElementById(users[j]['name']).children[0].checked = true;
                 setAssignedCircle(users[j]);
             } else if (usersAssignedTo.includes(users[j]['name'])) {
                 document.getElementById('colorCircleMedium' + users[j]['name']).remove();
+                document.getElementById(users[j]['name']).children[0].checked = false;
+
                 let index = usersAssignedTo.indexOf(users[j]['name']);
                 usersAssignedTo.splice(index, 1);
             }
