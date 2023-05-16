@@ -201,13 +201,15 @@ function generateOpenCardHTML(element, index, status) {
         </div>
         
         <div>
+            <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
             <input class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly value="${element['title']}"/>
         </div>
         <div >
+            <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
             <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
         </div>  
-        <div>
-            <label class="taskLabelOpen" for="editDate">Due date: </label>
+        <div >
+            <label class="taskLabelOpen editcard" >Due date: </label>
             <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
         <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
@@ -217,8 +219,9 @@ function generateOpenCardHTML(element, index, status) {
         <div>
             <input class="taskSubtasksOpen" id="editSubtasks${status}${elementIndex}" readonly value="${element['subtasks']}"/>
         </div>  
+        <div class="taskAssignedUserOpen" id="taskAssignedUserOpen${status}${elementIndex}"> 
         <span class="taskLabelOpen">Assigned to: </span> 
-        <div class="taskAssignedUserOpen"> 
+
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
         </div>
         <div class="editDeleteBtnOpen">
@@ -232,6 +235,15 @@ function editCard(status, elementIndex) {
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
     document.getElementById('editSubtasks' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
+    document.getElementById('openCardTitle' + status + elementIndex).classList.remove('d-none');
+    document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
+    document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
+    document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
+    document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
+    document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
+    addInviteNewContact();
+    generateOptionsHTML(users, 'users');
+    addEventListenerToSelectUserBox();
     document.getElementById('isAssignedUsername').style.display = "block";
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);

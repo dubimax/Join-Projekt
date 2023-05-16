@@ -19,6 +19,11 @@
     margin-left: 302px;
 }
 
+.editcard{
+    display: flex;
+    flex-direction: column;
+}
+
 h1 {
     font-weight: 700;
     font-size: 61px;
