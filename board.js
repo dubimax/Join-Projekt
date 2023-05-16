@@ -217,7 +217,7 @@ function generateOpenCardHTML(element, index, status) {
             <label class="taskLabelOpen">Priority: </label>
             <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
         </div>
-        <div>
+        <div id="editSubtasksContainer${status}${elementIndex}">
             <input class="taskSubtasksOpen" id="editSubtasks${status}${elementIndex}" readonly value="${element['subtasks']}"/>
         </div>  
         <div class="taskAssignedUserOpen" id="taskAssignedUserOpen${status}${elementIndex}"> 
@@ -242,6 +242,7 @@ function editCard(status, elementIndex, aID) {
     document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
     document.getElementById('editDeleteBtnOpen' + status + elementIndex).classList.add('d-none');
     document.getElementById('editSaveBtnOpen' + status + elementIndex).classList.remove('d-none');
+    document.getElementById('editSubtasksContainer' + status + elementIndex).classList.add('d-none');
 
     document.getElementById('openCardTitle' + status + elementIndex).classList.remove('d-none');
     document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
