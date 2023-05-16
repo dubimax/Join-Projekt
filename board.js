@@ -160,10 +160,11 @@ function addUserAcronyms(id) {
         let index = tasks.indexOf(tasks[i])
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
             if (document.getElementById(id + tasks[i]['status'] + index)) {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j])};
-            }
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j])
+            };
         }
     }
+}
 
 
 function generateAssignedUserHTML(username) {
@@ -224,6 +225,7 @@ function generateOpenCardHTML(element, index, status) {
 
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
         </div>
+        
         <div class="editDeleteBtnOpen">
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
             <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex})">
@@ -243,12 +245,23 @@ function editCard(status, elementIndex) {
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
     addInviteNewContact();
     generateOptionsHTML(users, 'users');
+    addAssignedUsersList(status, elementIndex);
     addEventListenerToSelectUserBox();
+
     document.getElementById('isAssignedUsername').style.display = "block";
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);
     generateEditDate(status, elementIndex);
 
+}
+
+function addAssignedUsersList(status,elementIndex) {
+    document.getElementById('taskAssignedUserOpen'+status+elementIndex).innerHTML += `
+    <div class="p-relative d-flex align-c">
+        <list class="d-flex" id="list-assigned-user">
+        </list>
+    </div>
+    `;
 }
 
 function generateEditTitle(status, elementIndex) {
