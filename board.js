@@ -279,6 +279,14 @@ function editCard(status, elementIndex, aID) {
     generateEditDate(status, elementIndex);
 }
 
+function resetEditCard(index, status){
+    document.getElementById('editTitle' + status + index).readOnly = true;
+    document.getElementById('editDescription' + status + index).readOnly = true;
+    document.getElementById('editDate' + status + index).readOnly = true;
+
+
+}
+
 function setActiveCheckbox(task) {
     for (let i = 0; i < task['isAssigned'].length; i++) {
         document.getElementById(task['isAssigned'][i]).children[0].checked = true;
@@ -300,6 +308,10 @@ function editThisTask(index, stati) {
 
     document.getElementById('openCard' + stati + index).classList.add('d-none');
     document.getElementById('overlay').classList.add('d-none');
+
+
+    resetEditCard(index,stati);
+
     save();
     updateBoardHTML();
     pushToDatabase();
@@ -378,7 +390,6 @@ function generateEditDate(status, elementIndex) {
 function closeOpenCard(status, index) {
     document.getElementById('openCard' + status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
-
     updateBoardHTML();
 }
 
