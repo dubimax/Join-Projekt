@@ -251,7 +251,7 @@ h1 {
 }
 
 .taskAssignedUser:first-child {
-    margin: 0 !important;
+    margin: 7px !important;
 }
 
 .taskPrio {
