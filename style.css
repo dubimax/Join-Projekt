@@ -29,17 +29,11 @@
 
 @font-face {
     font-family: 'Inter';
-    font-style: normal;
-    src: local('Inter'), local('Inter-Regular'),
-        url(/fonts/Inter/static/Inter-Regular.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-Black.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-Bold.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-ExtraBold.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-ExtraLight.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-Light.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-Medium.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-SemiBold.ttf) format('ttf'),
-        url(/fonts/Inter/static/Inter-Thin.ttf) format('ttf');
+    src: url('font/Inter/Inter-Regular.eot'); /* IE9 Compat Modes */
+    src: url('font/Inter/Inter-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('fonts/Inter/Inter-Regular.woff') format('woff'), /* Modern Browsers */
+         url('fonts/Inter/Inter-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('fonts/Iner/Inter-Regular.svg#svgInterRegular') format('svg'); /* Legacy iOS */
 }
 
 body {

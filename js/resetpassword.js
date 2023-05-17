@@ -33,10 +33,8 @@ function onSubmit() {
             if (users[i].email == email) {
                 users[i].pwd = changedPassword;
                 pushToDatabase();
-                getEmailUrlParameter()
-                console.log(email);
                 showResetPwText();
-                setTimeout(backToLogin, 3000);
+                setTimeout(backToLogin(), 3000);
             }
         }
     }
