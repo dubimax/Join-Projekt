@@ -230,8 +230,9 @@ function generateOpenCardHTML(element, index, status) {
             <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
             <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')">
         </div>
-        <div class="editDeleteBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
-            Save
+        <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
+                Ok<img src="img/okWhite.png">
+            </button>
         </div>
     </div>`
 }
@@ -438,18 +439,16 @@ function searchTasks() {
         let tDescription = tasks[i]['description'];
         if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
             console.log('gefunden');
-            if(document.getElementById('card'+ tasks[i]['status'] + taskIndex).classList.contains('d-none')){
-                document.getElementById('card'+ tasks[i]['status'] + taskIndex).classList.remove('d-none');
+            if (document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.contains('d-none')) {
+                document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.remove('d-none');
             }
         }
         else {
-            document.getElementById('card'+ tasks[i]['status'] + taskIndex).classList.add('d-none');
+            document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.add('d-none');
 
         }
     }
 }
-
-
 
 function deleteTask(task, status, ind) {
     let index = -1;

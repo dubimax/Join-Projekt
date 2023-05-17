@@ -19,7 +19,7 @@
     margin-left: 302px;
 }
 
-.editcard{
+.editcard {
     display: flex;
     flex-direction: column;
 }
@@ -370,10 +370,7 @@ h1 {
 .taskPrioOpen {
     display: flex;
     align-items: center;
-}
-
-.taskPrioOpen img {
-    margin-left: 35px;
+    gap: 35px;
 }
 
 .taskSubtasksOpen {
@@ -414,6 +411,36 @@ h1 {
     height: 50px;
     width: 50px;
     cursor: pointer;
+}
+
+.editSaveBtnOpenContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.editSaveBtnOpen {
+    background: #2A3647;
+    border-radius: 10px;
+    width: 93px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 15px;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.editSaveBtnOpen img {
+    width: 16px;
+    height: 12px;
 }
 
 
