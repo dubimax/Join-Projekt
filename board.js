@@ -250,7 +250,7 @@ function editCard(status, elementIndex, aID) {
     document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
-    document.getElementById('dateContainer'+ status + elementIndex).style = "display:block;"
+    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;"
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
@@ -265,37 +265,37 @@ function editCard(status, elementIndex, aID) {
     generateEditDate(status, elementIndex);
 }
 
-function setActiveCheckbox(task){
-    for(let i = 0; i < task['isAssigned'].length;i++ ){
+function setActiveCheckbox(task) {
+    for (let i = 0; i < task['isAssigned'].length; i++) {
         document.getElementById(task['isAssigned'][i]).children[0].checked = true;
     }
 }
 
-function editThisTask(index,stati){
-    tasks[index]['title'] = document.getElementById('editTitle'+ stati + index).value;
-    tasks[index]['description'] = document.getElementById('editDescription'+stati + index).value;
+function editThisTask(index, stati) {
+    tasks[index]['title'] = document.getElementById('editTitle' + stati + index).value;
+    tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
 
     tasks[index]['category'] = tasks[index]['category'];
     tasks[index]['isAssigned'] = getAssignedContacts();
-    tasks[index]['dueDate'] = document.getElementById('editDate'+ stati + index).value;
+    tasks[index]['dueDate'] = document.getElementById('editDate' + stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     tasks[index]['prio'] = taskPrio[0];
     tasks[index]['subtasks'] = tasks[index]['subtasks'];
     tasks[index]['id'] = tasks[index]['id'];
     tasks[index]['status'] = tasks[index]['status'];
 
-    document.getElementById('openCard'+ stati + index).classList.add('d-none');
+    document.getElementById('openCard' + stati + index).classList.add('d-none');
     document.getElementById('overlay').classList.add('d-none');
     save();
     updateBoardHTML();
     pushToDatabase();
-    
+
 }
 
 function setStyleOfBoardLabel(aID) {
     if (aID == 'id_urgent') setStyleOfUrgent(aID);
-    if(aID == 'id_medium') setStyleOfMedium(aID);
-    if(aID == 'id_low') setStyleOfLow(aID);
+    if (aID == 'id_medium') setStyleOfMedium(aID);
+    if (aID == 'id_low') setStyleOfLow(aID);
 }
 
 function addAssignedUsersList(status, elementIndex) {
@@ -434,14 +434,22 @@ function searchTasks() {
     console.log(search);
     for (let i = 0; i < tasks.length; i++) {
         let taskTitle = tasks[i]['title'];
+        let taskIndex = tasks.indexOf(tasks[i]);
         let tDescription = tasks[i]['description'];
         if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
             console.log('gefunden');
-            updateBoardHTML();
+            if(document.getElementById('card'+ tasks[i]['status'] + taskIndex).classList.contains('d-none')){
+                document.getElementById('card'+ tasks[i]['status'] + taskIndex).classList.remove('d-none');
+            }
+        }
+        else {
+            document.getElementById('card'+ tasks[i]['status'] + taskIndex).classList.add('d-none');
 
-        } 
+        }
     }
 }
+
+
 
 function deleteTask(task, status, ind) {
     let index = -1;
