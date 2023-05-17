@@ -115,7 +115,6 @@ function getColor(element) {
  */
 function generateTodoHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
-
     return /*html*/`
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
         <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
@@ -151,6 +150,7 @@ function generateTodoHTML(element, index, status) {
 function openCard(index, status) {
     if (document.getElementById('openCard' + status + index)) {
         document.getElementById('openCard' + status + index).classList.remove('d-none');
+        document.getElementById('isAssignedUsername').classList.remove('d-none');
     }
     document.getElementById('overlay').style.display = "block";
 }
@@ -179,7 +179,7 @@ function generateAssignedUserHTML(username) {
         <div class="colorCircleMedium boardCircle" style="background:${color}">
             ${getFirstLettersOfName(username)} 
         </div>
-        <div id="isAssignedUsername" style="display:none;"> 
+        <div id="isAssignedUsername" class="d-none"> 
             ${username}
         </div>
     </div>
@@ -365,6 +365,7 @@ function generateEditDate(status, elementIndex) {
 function closeOpenCard(status, index) {
     document.getElementById('openCard' + status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
+    updateBoardHTML();
 }
 
 /**
