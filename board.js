@@ -22,6 +22,7 @@ function updateBoardHTML() {
     addUserAcronyms('assignedUserLogo');
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
+    
 }
 
 function showAddNewTaskAtBoardStandard() {
@@ -149,41 +150,54 @@ function generateTodoHTML(element, index, status) {
  */
 function openCard(index, status) {
     if (document.getElementById('openCard' + status + index)) {
+
         document.getElementById('openCard' + status + index).classList.remove('d-none');
-        document.getElementById('isAssignedUsername').classList.remove('d-none');
     }
+    document.getElementById('assignedUserLogoOpen' + status + index).innerHTML = '';
+    addUserAcronyms('assignedUserLogoOpen',index,status);
     document.getElementById('overlay').style.display = "block";
 }
 
 function addUserAcronyms(id) {
     for (let i = 0; i < tasks.length; i++) {
-        let index = tasks.indexOf(tasks[i])
+        let index = tasks.indexOf(tasks[i]);
+        let status = tasks[i]['status'];
+
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
-            if (document.getElementById(id + tasks[i]['status'] + index)) {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j])
-            };
+            if (document.getElementById(id + tasks[i]['status'] + index) && id == 'assignedUserLogoOpen') {
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j],index,status,'assignedToContainerOpen');
+                setAssignedNames(tasks[i]['status'],index,tasks[i]['isAssigned'][j],'assignedToContainerOpen');
+            }else {
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j],index,status,'assignedToContainer');
+
+            }
         }
     }
 }
 
 
-function generateAssignedUserHTML(username) {
+function generateAssignedUserHTML(username,index,status,id) {
     let color;
     users.find((user) => {
         if (user.name == username) {
             color = user.color;
         }
     });
+    let category = tasks[index]['category'];
     return /*html*/`
-    <div class="assignedToContainer">
+    <div class="assignedToContainer" id="${category}${id}${username}${status}${index}">
         <div class="colorCircleMedium boardCircle" style="background:${color}">
             ${getFirstLettersOfName(username)} 
         </div>
-        <div id="isAssignedUsername" class="d-none"> 
-            ${username}
-        </div>
     </div>
     `;
+}
+
+function setAssignedNames(status,index,username,id){
+    let category = tasks[index]['category'];
+
+        document.getElementById(category + id + username + status + index).innerHTML += `<div>${username}</div>`;
+
 }
 
 /**
@@ -251,7 +265,7 @@ function editCard(status, elementIndex, aID) {
     document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
-    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;"
+    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
     document.getElementById('taskAssignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
@@ -260,7 +274,6 @@ function editCard(status, elementIndex, aID) {
     setActiveCheckbox(task);
     addEventListenerToSelectUserBox();
     setStyleOfBoardLabel(aID);
-    document.getElementById('isAssignedUsername').style.display = "block";
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);
     generateEditDate(status, elementIndex);
@@ -365,6 +378,7 @@ function generateEditDate(status, elementIndex) {
 function closeOpenCard(status, index) {
     document.getElementById('openCard' + status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
+
     updateBoardHTML();
 }
 

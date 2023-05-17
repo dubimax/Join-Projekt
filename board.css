@@ -276,25 +276,17 @@ h1 {
 }
 
 .openCard {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
     padding: 50px;
-    gap: 15px;
     isolation: isolate;
-
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 623px;
     max-height: 824px;
-    /* margin-top: 80px; */
     z-index: 10;
 }
 
@@ -304,7 +296,7 @@ h1 {
     align-items: flex-start;
     padding: 4px 36.5px;
     gap: 10px;
-
+    width: 43%;
     font-weight: 400;
     font-size: 27px;
     line-height: 120%;
@@ -325,7 +317,7 @@ h1 {
 }
 
 .taskTitleOpen {
-    margin-top: 25px;
+    margin: 15px 0px;
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
@@ -365,6 +357,7 @@ h1 {
     font-size: 21px;
     line-height: 120%;
     color: #000000;
+    margin: 15px 0;
 }
 
 .taskPrioOpen {
