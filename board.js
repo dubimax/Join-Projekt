@@ -439,10 +439,7 @@ function searchTasks() {
             console.log('gefunden');
             updateBoardHTML();
 
-        } else {
-            console.log('nichts gefunden');
-            resetBoard();
-        }
+        } 
     }
 }
 
