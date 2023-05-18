@@ -286,6 +286,7 @@ function resetEditCard(index, status) {
     document.getElementById('assignedUserOpen' + status + index).innerHTML = '';
     document.getElementById('editDeleteBtnOpen' + status + index).classList.remove('d-none');
     document.getElementById('editSaveBtnOpen' + status + index).classList.add('d-none');
+    document.getElementById('editSubtasksContainer' + status + index).classList.remove('d-none');
     resetAssigned(status, index);
     resetTaskPrio(status, index);
     addUserAcronyms('assignedUserOpen', index, status);
