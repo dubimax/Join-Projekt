@@ -284,14 +284,25 @@ function resetEditCard(index, status) {
     document.getElementById('editDescription' + status + index).readOnly = true;
     document.getElementById('editDate' + status + index).readOnly = true;
     document.getElementById('assignedUserOpen' + status + index).innerHTML = '';
-    resetAssigned(status,index);
+    document.getElementById('editDeleteBtnOpen' + status + index).classList.remove('d-none');
+    document.getElementById('editSaveBtnOpen' + status + index).classList.add('d-none');
+    resetAssigned(status, index);
+    resetTaskPrio(status, index);
     addUserAcronyms('assignedUserOpen', index, status);
 
     addAssignedUsersList(status, index);
 }
 
-function resetAssigned(status,index) {
-    document.getElementById('assignedUserOpen'+status + index).innerHTML = `
+function resetTaskPrio(status, index) {
+    let element = tasks[index];
+    document.getElementById('taskPrioOpen' + status + index).innerHTML = `
+        <label class="taskLabelOpen">Priority: </label>
+        <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
+    `;
+}
+
+function resetAssigned(status, index) {
+    document.getElementById('assignedUserOpen' + status + index).innerHTML = `
     <span class="taskLabelOpen">Assigned to: </span> 
 
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${index}"></label>
@@ -309,6 +320,7 @@ function editThisTask(index, stati) {
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
 
     tasks[index]['category'] = tasks[index]['category'];
+    assigned = [];
     tasks[index]['isAssigned'] = getAssignedContacts();
     tasks[index]['dueDate'] = document.getElementById('editDate' + stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
@@ -346,52 +358,17 @@ function addAssignedUsersList(status, elementIndex) {
 
 function generateEditTitle(status, elementIndex) {
     document.getElementById('editTitle' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editTitle' + status + elementIndex).style.cssText = `
-    cursor:pointer; 
-    width: 422px;
-    box-sizing: border-box;
-    padding: 13px 21px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    font-size:21px;
-    font-weight: 400;
-    `;
+    
 }
 
 function generateEditDescription(status, elementIndex) {
     document.getElementById('editDescription' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDescription' + status + elementIndex).style.cssText = `
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    cursor:pointer; 
-    box-sizing: border-box;
-    padding: 18px 21px;
-    isolation: isolate;
-    width: 422px;
-    height: 119px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    font-size:21px;
-    font-weight: 400;
-    `;
+   
 }
 
 function generateEditDate(status, elementIndex) {
     document.getElementById('editDate' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDate' + status + elementIndex).style.cssText = `
-    margin-left: 0;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    box-sizing: border-box;
-    align-items: center;
-    padding: 18px 21px;
-    isolation: isolate;
-    width: 422px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    `;
+   
 }
 
 
