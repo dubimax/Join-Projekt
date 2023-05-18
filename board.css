@@ -257,16 +257,20 @@ h1 {
 .taskPrio {
     width: 32px;
     height: 32px;
-
     border-radius: 10px;
 }
 
 .containerUserAndPrio {
     margin-top: 33.5px;
-
+    margin-left: 7px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.assignedUser{
+    display: flex;
+    margin-left: -7px;
 }
 
 .allUsers {
@@ -381,8 +385,12 @@ h1 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 25px;
-    gap: 10px;
+
+    gap: 17px;
+}
+
+.boardCircle{
+    margin-right: -7px;
 }
 
 .closeBtnOpen {
