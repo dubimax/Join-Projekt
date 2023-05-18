@@ -254,23 +254,25 @@ function generateOpenCardHTML(element, index, status) {
 function addSubtasksToCardOpen(status, index) {
     document.getElementById('editSubtasksContainer' + status + index).innerHTML = '';
     for (let i = 0; i < tasks[index]['subtasks'].length; i++) {
-
         document.getElementById('editSubtasksContainer' + status + index).innerHTML += `
-      <div> ${tasks[index]['subtasks'][i]['item']} <input type="checkbox"class="taskSubtasksOpen" id="editSubtasks${tasks[index]['subtasks'][i]['item']}" value="${tasks[index]['subtasks'][i]['item']}"/></div>
-    `;
-
-       
-    }
-    for(let j = 0; j < tasks[index]['subtasks'].length;j++){
+      <div> ${tasks[index]['subtasks'][i]['item']} <input type="checkbox"class="taskSubtasksOpen" onchange="setSubtaskChecked('${status}', ${index}, ${i})" id="editSubtasks${tasks[index]['subtasks'][i]['item']}${status}${index}" value="${tasks[index]['subtasks'][i]['item']}"/></div>
+    `;}
+    for (let j = 0; j < tasks[index]['subtasks'].length; j++) {
         if (tasks[index]['subtasks'][j]['checked'] == true) {
-            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item']).checked = true;
-
-        }else {
-            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item']).checked = false;
-
+            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = true;
+        } else {
+            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = false;
         }
     }
+}
 
+function setSubtaskChecked(status, index, i){
+    if(document.getElementById('editSubtasks' + tasks[index]['subtasks'][i]['item'] + status + index).checked == true){
+        tasks[index]['subtasks'][i]['checked'] = true;
+    }else {
+        tasks[index]['subtasks'][i]['checked'] = false;
+    }
+    pushToDatabase();
 }
 
 function editCard(status, elementIndex, aID) {
