@@ -13,6 +13,8 @@ function createNewTask(statusTag) {
     let taskDueDate = document.getElementById('inputDate').value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
+    getSubtasks();
+
     let taskSubtasks = subtasks;
     let id = tasks.length + 1;
     let status = statusTag;
@@ -21,6 +23,16 @@ function createNewTask(statusTag) {
     subtasks = [];
     clearAllInputs();
 }
+
+function getSubtasks(){
+    for(let i = 0; i < subtasks.length; i++){
+        if(document.getElementById('list-subtask-' + subtasks[i]['item']).checked == true)
+        subtasks[i]['checked'] = true;
+
+    }
+}
+
+
 
 
 
