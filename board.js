@@ -276,7 +276,6 @@ function addSubtasksToCardOpen(status, index) {
 function editCard(status, elementIndex, aID) {
     let task = tasks[elementIndex];
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
-    document.getElementById('editSubtasks' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
     document.getElementById('editDeleteBtnOpen' + status + elementIndex).classList.add('d-none');
     document.getElementById('editSaveBtnOpen' + status + elementIndex).classList.remove('d-none');
