@@ -22,6 +22,8 @@ function updateBoardHTML() {
     addUserAcronyms('assignedUserLogo');
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
+    setStyleProgressbar();
+    
 
 }
 
@@ -40,6 +42,7 @@ function toDoArea() {
     for (let index = 0; index < toDo.length; index++) {
         const element = toDo[index];
         document.getElementById('toDo').innerHTML += generateTodoHTML(element, 'toDo');
+
     }
 }
 
@@ -61,6 +64,7 @@ function inProgressArea() {
     for (let index = 0; index < inProgress.length; index++) {
         const element = inProgress[index];
         document.getElementById('inProgress').innerHTML += generateTodoHTML(element, 'inProgress');
+
     }
 }
 
@@ -74,6 +78,7 @@ function awaitingFeedbackArea() {
     for (let index = 0; index < awaitingFeedback.length; index++) {
         const element = awaitingFeedback[index];
         document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, 'awaitingFeedback');
+
     }
 }
 
@@ -87,6 +92,7 @@ function doneArea() {
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
         document.getElementById('done').innerHTML += generateTodoHTML(element, 'done');
+
     }
 }
 
@@ -128,10 +134,10 @@ function generateTodoHTML(element, status) {
         </div>  
         
         <div class="barContainer">
-        <div class="bar">
+        <div class="bar" id="progressbar${element['status']}${elementIndex}">
         </div>
         <div class="taskProgressbar">
-            0/${element['subtasks'].length} Done 
+            ${getCheckedSubtasks(elementIndex)}/${element['subtasks'].length} Done 
         </div>   
        </div>
 
@@ -144,7 +150,37 @@ function generateTodoHTML(element, status) {
             </div>
         </div>  
     </div>`;
+
 }
+
+function setStyleProgressbar(){
+    for(let i = 0; i < tasks.length;i++){
+        let progress = getProgressOfSubtasks(i);
+        let difference = 100 - progress;
+
+        if(document.getElementById('progressbar' + tasks[i]['status'] + i)){
+            document.getElementById('progressbar' + tasks[i]['status'] + i).style = `background:linear-gradient(to right,green ${progress}%,#F4F4F4 ${difference}%);`;
+        }
+    }
+    
+}
+
+function getProgressOfSubtasks(index){
+    let progress = getCheckedSubtasks(index);
+    let size = tasks[index]['subtasks'].length;
+    return 100/size*progress;
+}
+
+function getCheckedSubtasks(elementIndex){
+    let count = 0;
+    for(let i = 0; i < tasks[elementIndex]['subtasks'].length;i++){
+        if(tasks[elementIndex]['subtasks'][i]['checked'] == true){
+            count++;
+        }
+    }
+    return count;
+}
+
 /**
  * Remove display:none from the bigger card to see it
  */
