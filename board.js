@@ -287,6 +287,16 @@ function resetEditCard(index, status) {
     document.getElementById('editDeleteBtnOpen' + status + index).classList.remove('d-none');
     document.getElementById('editSaveBtnOpen' + status + index).classList.add('d-none');
     document.getElementById('editSubtasksContainer' + status + index).classList.remove('d-none');
+    document.getElementById('editDate' + status + index).classList.remove('inputTextStd');
+    document.getElementById('editDescription' + status + index).classList.remove('inputDescriptionField');
+    document.getElementById('editTitle' + status + index).classList.remove('inputTextStd');
+    document.getElementById('editTitle' + status + index).classList.add('taskTitleOpen');
+    document.getElementById('openCardTitle' + status + index).classList.add('d-none');
+    document.getElementById('openCardDescription' + status + index).classList.add('d-none');
+    document.getElementById('editDescription' + status + index).classList.add('taskDescriptionOpen');
+    document.getElementById('editDate' + status + index).classList.add('taskDueDateOpen');
+    document.getElementById('dateContainer' + status + index).style = "display:flex;";
+
     resetAssigned(status, index);
     resetTaskPrio(status, index);
     addUserAcronyms('assignedUserOpen', index, status);
@@ -359,17 +369,20 @@ function addAssignedUsersList(status, elementIndex) {
 
 function generateEditTitle(status, elementIndex) {
     document.getElementById('editTitle' + status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editTitle' + status + elementIndex).classList.add('inputTextStd');
     
 }
 
 function generateEditDescription(status, elementIndex) {
     document.getElementById('editDescription' + status + elementIndex).removeAttribute('readonly');
+    document.getElementById('editDescription' + status + elementIndex).classList.add('inputDescriptionField');
+
    
 }
 
 function generateEditDate(status, elementIndex) {
     document.getElementById('editDate' + status + elementIndex).removeAttribute('readonly');
-   
+    document.getElementById('editDate' + status + elementIndex).classList.add('inputTextStd');
 }
 
 
