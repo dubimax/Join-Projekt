@@ -22,7 +22,7 @@ function updateBoardHTML() {
     addUserAcronyms('assignedUserLogo');
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
-    
+
 }
 
 function showAddNewTaskAtBoardStandard() {
@@ -136,7 +136,7 @@ function generateTodoHTML(element, index, status) {
        </div>
 
         <div class="containerUserAndPrio">
-            <div class="taskAssignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
+            <div class="assignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
             </div>
 
             <div class="taskPrio">
@@ -154,7 +154,7 @@ function openCard(index, status) {
         document.getElementById('openCard' + status + index).classList.remove('d-none');
     }
     document.getElementById('assignedUserLogoOpen' + status + index).innerHTML = '';
-    addUserAcronyms('assignedUserLogoOpen',index,status);
+    addUserAcronyms('assignedUserLogoOpen');
     document.getElementById('overlay').style.display = "block";
 }
 
@@ -164,11 +164,11 @@ function addUserAcronyms(id) {
         let status = tasks[i]['status'];
 
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
-            if (document.getElementById(id + tasks[i]['status'] + index) && id == 'assignedUserLogoOpen') {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j],index,status,'assignedToContainerOpen');
-                setAssignedNames(tasks[i]['status'],index,tasks[i]['isAssigned'][j],'assignedToContainerOpen');
-            }else {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j],index,status,'assignedToContainer');
+            if (id == 'assignedUserLogoOpen') {
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen');
+                setAssignedNames(tasks[i]['status'], index, tasks[i]['isAssigned'][j], 'assignedToContainerOpen');
+            } else if (id == 'assignedUserLogo') {
+                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer');
 
             }
         }
@@ -176,7 +176,7 @@ function addUserAcronyms(id) {
 }
 
 
-function generateAssignedUserHTML(username,index,status,id) {
+function generateAssignedUserHTML(username, index, status, id) {
     let color;
     users.find((user) => {
         if (user.name == username) {
@@ -193,10 +193,10 @@ function generateAssignedUserHTML(username,index,status,id) {
     `;
 }
 
-function setAssignedNames(status,index,username,id){
+function setAssignedNames(status, index, username, id) {
     let category = tasks[index]['category'];
 
-        document.getElementById(category + id + username + status + index).innerHTML += `<div>${username}</div>`;
+    document.getElementById(category + id + username + status + index).innerHTML += `<div>${username}</div>`;
 
 }
 
@@ -234,7 +234,7 @@ function generateOpenCardHTML(element, index, status) {
         <div id="editSubtasksContainer${status}${elementIndex}">
             <input class="taskSubtasksOpen" id="editSubtasks${status}${elementIndex}" readonly value="${element['subtasks']}"/>
         </div>  
-        <div class="taskAssignedUserOpen" id="taskAssignedUserOpen${status}${elementIndex}"> 
+        <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
         <span class="taskLabelOpen">Assigned to: </span> 
 
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
@@ -266,8 +266,8 @@ function editCard(status, elementIndex, aID) {
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
     document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
-    document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
-    document.getElementById('taskAssignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
+    document.getElementById('assignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
+    document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
@@ -279,12 +279,23 @@ function editCard(status, elementIndex, aID) {
     generateEditDate(status, elementIndex);
 }
 
-function resetEditCard(index, status){
+function resetEditCard(index, status) {
     document.getElementById('editTitle' + status + index).readOnly = true;
     document.getElementById('editDescription' + status + index).readOnly = true;
     document.getElementById('editDate' + status + index).readOnly = true;
+    document.getElementById('assignedUserOpen' + status + index).innerHTML = '';
+    resetAssigned(status,index);
+    addUserAcronyms('assignedUserOpen', index, status);
 
+    addAssignedUsersList(status, index);
+}
 
+function resetAssigned(status,index) {
+    document.getElementById('assignedUserOpen'+status + index).innerHTML = `
+    <span class="taskLabelOpen">Assigned to: </span> 
+
+        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${index}"></label>
+    `;
 }
 
 function setActiveCheckbox(task) {
@@ -310,7 +321,7 @@ function editThisTask(index, stati) {
     document.getElementById('overlay').classList.add('d-none');
 
 
-    resetEditCard(index,stati);
+    resetEditCard(index, stati);
 
     save();
     updateBoardHTML();
@@ -325,7 +336,7 @@ function setStyleOfBoardLabel(aID) {
 }
 
 function addAssignedUsersList(status, elementIndex) {
-    document.getElementById('taskAssignedUserOpen' + status + elementIndex).innerHTML += `
+    document.getElementById('assignedUserOpen' + status + elementIndex).innerHTML += `
     <div class="p-relative d-flex align-c">
         <list class="d-flex" id="list-assigned-user">
         </list>
