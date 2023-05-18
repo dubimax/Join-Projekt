@@ -388,12 +388,20 @@ function showUsersItems() {
  * Creates CheckboxItems for Subtasks
  */
 function generateCheckboxItem() {
+    let isChecked;
     document.getElementById('list-subtask').innerHTML += `
     <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
     `;
-    subtasks.push(getItemFromInput());
+    if(document.getElementById('list-subtask-'+ getItemFromInput()).checked == true){
+        isChecked = true;
+    }else {
+        isChecked = false;
+    }
+    subtasks.push({'item':getItemFromInput(),'checked': isChecked});
     document.getElementById('newSubtasks').value = '';
 }
+
+
 
 /**
  * Gets the inputfield Value for Subtasks

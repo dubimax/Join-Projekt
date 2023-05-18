@@ -39,7 +39,7 @@ function toDoArea() {
 
     for (let index = 0; index < toDo.length; index++) {
         const element = toDo[index];
-        document.getElementById('toDo').innerHTML += generateTodoHTML(element, index, 'toDo');
+        document.getElementById('toDo').innerHTML += generateTodoHTML(element, 'toDo');
     }
 }
 
@@ -60,7 +60,7 @@ function inProgressArea() {
 
     for (let index = 0; index < inProgress.length; index++) {
         const element = inProgress[index];
-        document.getElementById('inProgress').innerHTML += generateTodoHTML(element, index, 'inProgress');
+        document.getElementById('inProgress').innerHTML += generateTodoHTML(element, 'inProgress');
     }
 }
 
@@ -73,7 +73,7 @@ function awaitingFeedbackArea() {
 
     for (let index = 0; index < awaitingFeedback.length; index++) {
         const element = awaitingFeedback[index];
-        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, index, 'awaitingFeedback');
+        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, 'awaitingFeedback');
     }
 }
 
@@ -86,7 +86,7 @@ function doneArea() {
 
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
-        document.getElementById('done').innerHTML += generateTodoHTML(element, index, 'done');
+        document.getElementById('done').innerHTML += generateTodoHTML(element, 'done');
     }
 }
 
@@ -114,7 +114,7 @@ function getColor(element) {
  * @param {*} element Elements of the card
  * @returns the card with elements
  */
-function generateTodoHTML(element, index, status) {
+function generateTodoHTML(element, status) {
     let elementIndex = tasks.indexOf(element);
     return /*html*/`
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
@@ -155,6 +155,7 @@ function openCard(index, status) {
     }
     document.getElementById('assignedUserLogoOpen' + status + index).innerHTML = '';
     addUserAcronyms('assignedUserLogoOpen');
+    addSubtasksToCardOpen(status, index);
     document.getElementById('overlay').style.display = "block";
 }
 
@@ -232,7 +233,6 @@ function generateOpenCardHTML(element, index, status) {
             <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
         </div>
         <div id="editSubtasksContainer${status}${elementIndex}">
-            <input class="taskSubtasksOpen" id="editSubtasks${status}${elementIndex}" readonly value="${element['subtasks']}"/>
         </div>  
         <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
         <span class="taskLabelOpen">Assigned to: </span> 
@@ -251,10 +251,31 @@ function generateOpenCardHTML(element, index, status) {
     </div>`
 }
 
+function addSubtasksToCardOpen(status, index) {
+    document.getElementById('editSubtasksContainer' + status + index).innerHTML = '';
+    for (let i = 0; i < tasks[index]['subtasks'].length; i++) {
+
+        document.getElementById('editSubtasksContainer' + status + index).innerHTML += `
+      <div> ${tasks[index]['subtasks'][i]['item']} <input type="checkbox"class="taskSubtasksOpen" id="editSubtasks${tasks[index]['subtasks'][i]['item']}" value="${tasks[index]['subtasks'][i]['item']}"/></div>
+    `;
+
+       
+    }
+    for(let j = 0; j < tasks[index]['subtasks'].length;j++){
+        if (tasks[index]['subtasks'][j]['checked'] == true) {
+            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item']).checked = true;
+
+        }else {
+            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item']).checked = false;
+
+        }
+    }
+
+}
+
 function editCard(status, elementIndex, aID) {
     let task = tasks[elementIndex];
     document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
-    document.getElementById('editSubtasks' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
     document.getElementById('editDeleteBtnOpen' + status + elementIndex).classList.add('d-none');
     document.getElementById('editSaveBtnOpen' + status + elementIndex).classList.remove('d-none');
@@ -372,14 +393,14 @@ function addAssignedUsersList(status, elementIndex) {
 function generateEditTitle(status, elementIndex) {
     document.getElementById('editTitle' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('editTitle' + status + elementIndex).classList.add('inputTextStd');
-    
+
 }
 
 function generateEditDescription(status, elementIndex) {
     document.getElementById('editDescription' + status + elementIndex).removeAttribute('readonly');
     document.getElementById('editDescription' + status + elementIndex).classList.add('inputDescriptionField');
 
-   
+
 }
 
 function generateEditDate(status, elementIndex) {
