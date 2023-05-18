@@ -491,6 +491,7 @@ function createNewTaskAtBoard(statusTag) {
     let taskDueDate = document.getElementById('inputDate').value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
+    getSubtasks();
     let taskSubtasks = subtasks;
     let id = tasks.length + 1;
     let status = statusTag;
