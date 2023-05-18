@@ -296,6 +296,8 @@ function resetEditCard(index, status) {
     document.getElementById('editDescription' + status + index).classList.add('taskDescriptionOpen');
     document.getElementById('editDate' + status + index).classList.add('taskDueDateOpen');
     document.getElementById('dateContainer' + status + index).style = "display:flex;";
+    document.getElementById('taskStatusCategory' + status + index).classList.remove('d-none');
+
 
     resetAssigned(status, index);
     resetTaskPrio(status, index);
