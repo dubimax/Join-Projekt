@@ -174,7 +174,7 @@ function guestLogin() {
 function logout() {
     localStorage.removeItem(indexOfEmail);
     localStorage.removeItem(loggedIn);
-    window.location.href = './login.html';
+    window.location.href = '../login.html';
 }
 
 /**
