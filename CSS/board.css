@@ -18,7 +18,13 @@
     margin-top: 135px;
     margin-left: 175px;
 }
+.details {
+    overflow: overlay;
+}
 
+.detailBox {
+    height: 550px;
+}
 .boardContainer{
     width: calc(100% - 232px);
     position: absolute;
