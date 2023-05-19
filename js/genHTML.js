@@ -259,26 +259,33 @@ function generateNavigationLinksContacts() {
 }
 
 function addHelp() {
-    document.body.innerHTML += `
+    document.body.innerHTML += /*html*/`
     <div class="help content" id="helpContent">
         <a class="back" onclick="removeHelp()"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="helpContainer">
-            <h2>Help</h2>
-            <div>
+            <h2 class="helpHeader">Help</h2>
+            <div class="helpDescriptionContainer">
                 <h3>What is Join?</h3>
-                <p>Description of Join</p>
+                    <p>Join is a project management tool that includes a kanban system, enabling team collaboration and task management.<br>With Join, your team can easily track tasks assigned to each team member, view their progress, and identify completed tasks. The intuitive drag and drop functionality makes it simple to move task cards across different stages.<br>Join is a valuable tool that supports your daily work.</p>
                 <h3>How to use it</h3>
-              <p>
-              What is Join?
-    Join is a project management tool that includes a kanban system, enabling team collaboration and task management. With Join, your team can easily track tasks assigned to each team member, view their progress, and identify completed tasks. The intuitive drag and drop functionality makes it simple to move task cards across different stages. Join is a valuable tool that supports your daily work.
-
-How to use Join:
-
-1. Click on the "Create Task" button and fill in the required fields such as title, description, category, date, and priority. You can assign tasks to existing team members from your contacts or add new contacts through the "Contacts" menu.
-2. Access the "Board" menu to view the added tasks. This is where the kanban system comes into play. Use drag and drop to move task cards into the appropriate columns, such as "To Do," "In Progress," "Awaiting Feedback," or "Done."
-3. The "Summary" menu provides an overview of all tasks. You can quickly identify tasks in progress and those with approaching deadlines, which is crucial for urgent tasks. Additionally, you can easily track completed tasks.
-4. In the "Contacts" section, you can invite new contacts and manage existing ones. Invite team members by entering their contact information and sending them an invitation to join your project. You can also manage your contacts by editing their details or removing them when necessary. This allows you to maintain an organized and up-to-date contact list for efficient collaboration within your team.
-              </p>
+                    <div class="howToContainer">
+                        <div class="howToNumbersAndTextContainer">
+                            <div class="howToNumbers">1.</div> 
+                            <div class="howToText">Click on the "Create Task" button and fill in the required fields such as title, description, category, date, and priority.<br>You can assign tasks to existing team members from your contacts or add new contacts through the "Contacts" menu.</div>
+                        </div>
+                        <div class="howToNumbersAndTextContainer">
+                            <div class="howToNumbers">2.</div> 
+                            <div class="howToText">Access the "Board" menu to view the added tasks. This is where the kanban system comes into play.<br>Use drag and drop to move task cards into the appropriate columns, such as "To Do," "In Progress," "Awaiting Feedback," or "Done."</div>
+                        </div>
+                            <div class="howToNumbersAndTextContainer">
+                            <div class="howToNumbers">3.</div> 
+                            <div class="howToText">The "Summary" menu provides an overview of all tasks.<br>You can quickly identify tasks in progress and those with approaching deadlines, which is crucial for urgent tasks. Additionally, you can easily track completed tasks.</div>
+                        </div>
+                        <div class="howToNumbersAndTextContainer">
+                            <div class="howToNumbers">4.</div> 
+                            <div class="howToText">In the "Contacts" section, you can invite new contacts and manage existing ones.<br>Invite team members by entering their contact information and sending them an invitation to join your project. You can also manage your contacts by editing their details or removing them when necessary. This allows you to maintain an organized and up-to-date contact list for efficient collaboration within your team.</div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

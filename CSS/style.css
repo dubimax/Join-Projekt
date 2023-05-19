@@ -870,3 +870,36 @@ a {
     width: 453px;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
 }
+.helpHeader{
+    margin-bottom: 30px;
+}
+
+.helpDescriptionContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.howToContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.howToNumbersAndTextContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.howToNumbers {
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 120%;
+}
+
+#helpContent {
+    z-index: 8;
+}
