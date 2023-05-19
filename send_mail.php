@@ -40,7 +40,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $email = $_POST['email'];
         $message = "Hello,\n
         \nFollow this link to reset your JOIN password for " . $email . " .\n
-        \nhttps://gruppe-527.developerakademie.net/Join-Projekt/resetpassword.html?email=" . $email . "\n
+        \nhttps://gruppe-527.developerakademie.net/Join-Projekt/html/resetpassword.html?email=" . $email . "\n
         \nIf it is not your request, you can ignore this email.\n
         \nYour Join Team\n";
         $recipient = $email;
