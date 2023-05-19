@@ -46,7 +46,7 @@ function generateAddTaskHTML(id) {
             <div class="clearButton" onclick="clearAllInputs()">
                 Clear
             </div>
-            <button class="createTaskBtn">
+            <button type="submit" class="createTaskBtn">
                 Create Task  
                 <img class="" src="../img/checkIconWhite.png">
             </button>

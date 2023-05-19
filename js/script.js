@@ -345,10 +345,24 @@ function setOnSubmitForm(addForm) {
         document.body.innerHTML += `
             <div class="confirmMessage" id="submitted">Task successfully created</div>
         `;
-        setTimeout(()=>{
-            document.getElementById('submitted').remove();
-        },1000);
-        return false;
+        if(document.getElementById('addTask')){
+            document.getElementById('addTask').remove();
+            setTimeout(()=>{
+                document.getElementById('submitted').remove();
+                
+            },1000);
+            return false;
+
+        }else if(document.getElementById('addTaskAtContacts')){
+            document.getElementById('addTaskAtContacts').remove();
+            setTimeout(()=>{
+                document.getElementById('submitted').remove();
+                
+            },1000);
+            return false;
+        }
+        
+        
     };
 }
 

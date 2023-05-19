@@ -7,6 +7,7 @@ async function initContacts() {
     await includeHTML();
     generateNavigationLinks('Contacts', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateContactsHTML();
+
 }
 
 /**
@@ -20,6 +21,8 @@ function generateContactsHTML() {
         generateContactDetailsHTML();
         generateAddTaskHTML('addTaskAtContacts');
         addCloseBtnToAddTaskAtContacts();
+        setOnSubmitForm('toDo');
+
     } else {
         window.location.href = 'login.html';
     }
@@ -189,14 +192,15 @@ function createNewContact() {
     let userColor = randomcolor();
     users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone, 'color': userColor });
     pushToDatabase();
-    hideAddNewContact();
+    
     addConfirmMessage();
+    hideAddNewContact();
     setTimeout(function () {
         removeConfirmMessage();
         addContactCategories();
         setVisibleIfnotEmpty();
         save();
-    }, 3000);
+    }, 1000);
 }
 
 /**
