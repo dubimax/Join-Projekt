@@ -7,8 +7,9 @@ async function initBoard() {
     await includeHTML();
     load();
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
-    updateBoardHTML();
     generateAddTaskToBoardImg();
+    updateBoardHTML();
+
 }
 
 /**
@@ -23,13 +24,13 @@ function updateBoardHTML() {
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
     setStyleProgressbar();
+    generateAddTaskHTML('addTaskAtBoard');
     addCloseBtnToAddTaskAtBoard();
-
+    addEventListenerToDropDown();
 }
 
 function showAddNewTaskAtBoardStandard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
-    generateAddTaskHTML('addTaskAtBoard');
     setOnSubmitForm('toDo');
 }
 
@@ -457,7 +458,6 @@ function generateEditDate(status, elementIndex) {
 function closeOpenCard(status, index) {
     document.getElementById('openCard' + status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
-    updateBoardHTML();
 }
 
 /**
@@ -546,12 +546,10 @@ function searchTasks() {
 
 function deleteTask(task, status, ind) {
     let index = -1;
-    tasks.forEach((t) => {
-        if (t.title == task) {
-            index = tasks.indexOf(t);
-            tasks.splice(index, 1);
-        }
-    });
+    
+            
+    tasks.splice(ind, 1);
+      
     closeOpenCard(status, ind);
     pushToDatabase();
     updateBoardHTML();

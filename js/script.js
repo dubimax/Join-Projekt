@@ -181,10 +181,10 @@ function logout() {
  * Pushes the Tasks to the Backend, clear all Inputs and Save
  */
 async function pushToDatabase() {
+    save();
     await backend.setItem('users', JSON.stringify(users));
     await backend.setItem('categories', JSON.stringify(categories));
     await backend.setItem('tasks', JSON.stringify(tasks));
-    save();
 }
 
 function addUser() {
@@ -346,7 +346,7 @@ function setOnSubmitForm(addForm) {
             <div class="confirmMessage" id="submitted">Task successfully created</div>
         `;
         if(document.getElementById('addTask')){
-            document.getElementById('addTask').remove();
+            document.getElementById('addTask').classList.add('d-none');
             setTimeout(()=>{
                 document.getElementById('submitted').remove();
                 
@@ -354,7 +354,14 @@ function setOnSubmitForm(addForm) {
             return false;
 
         }else if(document.getElementById('addTaskAtContacts')){
-            document.getElementById('addTaskAtContacts').remove();
+            document.getElementById('addTaskAtContacts').classList.add('d-none');
+            setTimeout(()=>{
+                document.getElementById('submitted').remove();
+                
+            },1000);
+            return false;
+        }else if(document.getElementById('addTaskAtBoard')){
+            document.getElementById('addTaskAtBoard').classList.add('d-none');
             setTimeout(()=>{
                 document.getElementById('submitted').remove();
                 
