@@ -15,8 +15,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 172px;
-    margin-left: 302px;
+    margin-top: 135px;
+    margin-left: 324px;
 }
 
 .editcard {
@@ -112,7 +112,7 @@ h1 {
 .cardHeaders {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 101.5px;
+    margin-top: 40px;
     margin-left: 232px;
     overflow-y: scroll;
 }
@@ -130,7 +130,21 @@ h1 {
 }
 
 .dragArea::-webkit-scrollbar-track {
-    background: none;
+    width: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 0px !important;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #2a3647;
+    border-radius: 0px;
+    border: 0px none #ffffff;
 }
 
 .dragAreaTitle {

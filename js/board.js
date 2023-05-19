@@ -24,18 +24,22 @@ function updateBoardHTML() {
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
     setStyleProgressbar();
-    generateAddTaskHTML('addTaskAtBoard');
-    addCloseBtnToAddTaskAtBoard();
-    addEventListenerToDropDown();
+   
+
 }
 
 function showAddNewTaskAtBoardStandard() {
+    if(document.getElementById('addTaskAtBoard')) document.getElementById('addTaskAtBoard').innerHTML = '';
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    generateAddTaskHTML('addTaskAtBoard');
+    addCloseBtnToAddTaskAtBoard();
     setOnSubmitForm('toDo');
+    addEventListenerToDropDown();
 }
 
 function hideAddNewTaskAtBoard() {
     document.getElementById('addTaskAtBoard').classList.add('d-none');
+
 }
 
 /**
@@ -84,7 +88,6 @@ function awaitingFeedbackArea() {
     for (let index = 0; index < awaitingFeedback.length; index++) {
         const element = awaitingFeedback[index];
         document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, 'awaitingFeedback');
-
     }
 }
 
@@ -336,11 +339,11 @@ function editCard(status, elementIndex, aID) {
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
     setActiveCheckbox(task);
-    addEventListenerToSelectUserBox();
     setStyleOfBoardLabel(aID);
     generateEditTitle(status, elementIndex);
     generateEditDescription(status, elementIndex);
     generateEditDate(status, elementIndex);
+    addEventListenerToSelectUserBox();
 }
 
 function resetEditCard(index, status) {
@@ -506,7 +509,11 @@ function createNewTaskAtBoard(statusTag) {
 }
 
 function showAddNewTaskAtBoard() {
+    if(document.getElementById('addTaskAtBoard')) document.getElementById('addTaskAtBoard').innerHTML = '';
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    generateAddTaskHTML('addTaskAtBoard');
+    addCloseBtnToAddTaskAtBoard();
+    removeEventListenerFromDropDown();
     addEventListenerToDropDown();
 }
 
