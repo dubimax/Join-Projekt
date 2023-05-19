@@ -299,11 +299,11 @@
 }
 
 .summaryBottomSingle:hover>.todoPencilImg {
-    content: url("img/todoPencilWhite.png");
+    content: url("../img/todoPencilWhite.png");
 }
 
 .summaryBottomSingle:hover>.todoDoneImg {
-    content: url("img/todoDoneWhite.png");
+    content: url("../img/todoDoneWhite.png");
 }
 
 .summaryWelcomeText {
