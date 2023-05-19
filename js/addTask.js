@@ -254,6 +254,16 @@ function addEventListenerToSelectUserBox() {
     addEventListenerToSelectUser();
 }
 
+function removeEventlistenerFromSelectUserBox(){
+    let userBox = document.getElementById('assignedTo');
+
+    userBox.removeEventListener('click',function (){});
+    for(let i = 0; i < users.length;i++){
+        let selUser = document.getElementById(users[i]['name']);
+        selUser.removeEventListener('click',function () {});
+    }
+}
+
 function addEventListenerToSelectUser() {
     for (let j = 0; j < users.length; j++) {
         let selUser = document.getElementById(users[j]['name']);
