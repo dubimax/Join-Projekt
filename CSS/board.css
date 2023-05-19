@@ -114,7 +114,9 @@ h1 {
     justify-content: space-evenly;
     margin-top: 101.5px;
     margin-left: 232px;
+    overflow-y: scroll;
 }
+
 
 .dragArea {
     height: 60vh;
@@ -125,8 +127,6 @@ h1 {
     line-height: 120%;
 
     color: #2A3647;
-
-    overflow-y: scroll;
 }
 
 .dragArea::-webkit-scrollbar-track {

@@ -47,6 +47,7 @@
 
         <div class="cardHeaders">
             <div class="dragAreaFullContainer">
+
                 <div class="dragAreaTitle" id="dragAreaToDoTitle">
                     <label for="toDo">To do</label>
                 </div>
@@ -66,7 +67,8 @@
                     <label for="awaitingFeedback">Awaiting Feedback</label>
                 </div>
                 <div class="dragArea" name="awaitingFeedback" id="awaitingFeedback" ondrop="moveTo('awaitingFeedback')"
-                    ondragover="allowDrop(event);highlight('awaitingFeedback')"></div>
+                    ondragover="allowDrop(event);highlight('awaitingFeedback')">
+                </div>
             </div>
             <div class="dragAreaFullContainer">
                 <div class="dragAreaTitle" id="dragAreaDoneTitle">
@@ -76,6 +78,7 @@
                     ondragover="allowDrop(event);highlight('done')">
                 </div>
             </div>
+
         </div>
     </div>
 </body>
