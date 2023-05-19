@@ -160,7 +160,7 @@ function setStyleProgressbar(){
         let difference = 100 - progress;
 
         if(document.getElementById('progressbar' + tasks[i]['status'] + i) && progress != 0){
-            document.getElementById('progressbar' + tasks[i]['status'] + i).style = `background:linear-gradient(to right,green ${progress}%,#F4F4F4 ${difference}%);`;
+            document.getElementById('progressbar' + tasks[i]['status'] + i).style = `background:linear-gradient(to right,#29ABE2 ${progress}%,#F4F4F4 ${difference}%);`;
         }
     } 
 }
