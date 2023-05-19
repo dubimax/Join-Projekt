@@ -1,15 +1,15 @@
 function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaToDoTitle').innerHTML += `
-        <img src="../img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
+        <img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
     `;
     document.getElementById('dragAreaIPTitle').innerHTML += `
-        <img src="../img/plusButtonDark.png" id="ipImg" onclick="checkStatusToSet('inProgress')">
+        <img class="cursor" src="../img/plusButtonDark.png" id="ipImg" onclick="checkStatusToSet('inProgress')">
     `;
     document.getElementById('dragAreaAFTitle').innerHTML += `
-        <img src="../img/plusButtonDark.png" id="awImg" onclick="checkStatusToSet('awaitingFeedback')">
+        <img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="checkStatusToSet('awaitingFeedback')">
     `;
     document.getElementById('dragAreaDoneTitle').innerHTML += `
-    <img src="../img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
+    <img class="cursor" src="../img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
 `;
 }
 
