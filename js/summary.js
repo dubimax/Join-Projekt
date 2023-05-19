@@ -23,7 +23,7 @@ function generateSummary() {
         greeting();
         showUserName();
     } else {
-        window.location.href = 'login.html';
+        window.location.href = '../login.html';
     }
 }
 

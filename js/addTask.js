@@ -114,15 +114,15 @@ function resetAllLabelContainer() {
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('urgentImgID').src = 'img/urgentIcon.png';
-    document.getElementById('mediumImgID').src = 'img/mediumIcon.png';
-    document.getElementById('lowImgID').src = 'img/lowIcon.png';
+    document.getElementById('urgentImgID').src = '../img/urgentIcon.png';
+    document.getElementById('mediumImgID').src = '../img/mediumIcon.png';
+    document.getElementById('lowImgID').src = '../img/lowIcon.png';
 }
 
 function setStyleOfUrgent(id) {
     if (id == 'id_urgent') {
         document.getElementById(id).style = urgentColor;
-        document.getElementById('urgentImgID').src = 'img/urgentWhiteIcon.png';
+        document.getElementById('urgentImgID').src = '../img/urgentWhiteIcon.png';
         activeID = id;
         activeImg = 'urgentImgID';
         return;
@@ -132,7 +132,7 @@ function setStyleOfUrgent(id) {
 function setStyleOfMedium(id) {
     if (id == 'id_medium') {
         document.getElementById(id).style = mediumColor;
-        document.getElementById('mediumImgID').src = 'img/mediumWhiteIcon.png';
+        document.getElementById('mediumImgID').src = '../img/mediumWhiteIcon.png';
         activeID = id;
         activeImg = 'mediumImgID';
         return;
@@ -142,7 +142,7 @@ function setStyleOfMedium(id) {
 function setStyleOfLow(id) {
     if (id == 'id_low') {
         document.getElementById(id).style = lowColor;
-        document.getElementById('lowImgID').src = 'img/lowWhiteIcon.png';
+        document.getElementById('lowImgID').src = '../img/lowWhiteIcon.png';
         activeID = id;
         activeImg = 'lowImgID';
         return;

@@ -1,15 +1,15 @@
 function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaToDoTitle').innerHTML += `
-        <img src="img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
+        <img src="../img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
     `;
     document.getElementById('dragAreaIPTitle').innerHTML += `
-        <img src="img/plusButtonDark.png" id="ipImg" onclick="checkStatusToSet('inProgress')">
+        <img src="../img/plusButtonDark.png" id="ipImg" onclick="checkStatusToSet('inProgress')">
     `;
     document.getElementById('dragAreaAFTitle').innerHTML += `
-        <img src="img/plusButtonDark.png" id="awImg" onclick="checkStatusToSet('awaitingFeedback')">
+        <img src="../img/plusButtonDark.png" id="awImg" onclick="checkStatusToSet('awaitingFeedback')">
     `;
     document.getElementById('dragAreaDoneTitle').innerHTML += `
-    <img src="img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
+    <img src="../img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
 `;
 }
 
@@ -49,7 +49,7 @@ function generateAddTaskHTML(id) {
         </div>
         <button class="createTaskBtn">
             Create Task  
-            <img class="" src="./img/checkIconWhite.png">
+            <img class="" src="../img/checkIconWhite.png">
         </button>
     </div>
         </div>
@@ -98,7 +98,7 @@ function generateContactDetailsTitle() {
 
 function hideContactDetailsButton() {
     document.getElementById('contactDetails').innerHTML += `
-    <img src="./img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
+    <img src="../img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
     `;
 }
 
@@ -111,7 +111,7 @@ function generateContactHead() {
         <div class="contactHead">
             <h5 id="contactName">Name</h5>
             <div class="contactHeadAddTask" onclick="showAddNewTaskAtContacts();setStyleOfCloseIconAtContacts()">
-                <img src="./img/plusContacts.png" class="addTaskContacts">
+                <img src="../img/plusContacts.png" class="addTaskContacts">
                 Add Task
             </div>
         </div>
@@ -150,9 +150,9 @@ function generateLabelsHTML(field, headline) {
     <div class="detail">
         <${field}>${headline}</${field}>
         <div class="d-flex">
-            <${field} id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
-            <${field} id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
-            <${field} id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img src="img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
+            <${field} id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="../img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
+            <${field} id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="../img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
+            <${field} id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img src="../img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
         </div>
     </div>
     `;
@@ -183,9 +183,9 @@ function generatesChangedInputFieldHTML(field1, field2, headline, properties, ty
     <${field2} class="${properties}" type="${type}" id="${id}" >
     <div class="newCat">
 
-        <a onclick="cancelAddNew('${restoreID}')"><img src="img/cancelIcon.png"></a>
+        <a onclick="cancelAddNew('${restoreID}')"><img src="../img/cancelIcon.png"></a>
         <div class="border-1px-solid margin0px width0-height31px"></div>
-        <a onclick="${atClick}"><img src="img/checkIcon.png"></a>
+        <a onclick="${atClick}"><img src="../img/checkIcon.png"></a>
     </div>  
     `;
 }
@@ -196,7 +196,7 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <img src="${source}" class="selectImg">
+            <img src="../${source}" class="selectImg">
             <div class="dropDownStart" id="${headline}${id}" disabled>Select ${selectionText}
             </div>
         </div>
@@ -210,7 +210,7 @@ function addInviteNewContact() {
             <span>
                 Invite Contact
             </span>
-            <img src="./img/invite.png" style="width: 15px;height: 15px;object-fit: contain;">
+            <img src="../img/invite.png" style="width: 15px;height: 15px;object-fit: contain;">
         </div>
     `;
 }
@@ -219,7 +219,7 @@ function setBackToOptionsField(field1, headline, properties, id, source, selecti
     return `
     <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <img src="${source}" class="selectImg">
+            <img src="../${source}" class="selectImg">
             <div class="dropDownStart" id="${headline}${id}" disabled>Select ${selectionText}
             </div>
         </div>
@@ -229,7 +229,7 @@ function setBackToSubTaskField(field1, headline, properties, id, source) {
     return `
     <${field1}>${headline}</${field1}>
     <div class="${properties}" id="${id}">
-        <div onclick="changeToInputField('${id}')" class="subTaskStart" value="" disabled selected>Add new Subtask<img src="${source}">
+        <div onclick="changeToInputField('${id}')" class="subTaskStart" value="" disabled selected>Add new Subtask<img src="../${source}">
         </div>
     </div>
     `;
@@ -240,7 +240,7 @@ function generateSubTaskField(field1, headline, properties, id, source) {
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
         <div class="${properties}" id="${id}">
-            <div onclick="changeToInputField('${id}')" class="subTaskStart" value="" disabled selected>Add new Subtask<img src="${source}">
+            <div onclick="changeToInputField('${id}')" class="subTaskStart" value="" disabled selected>Add new Subtask<img src="../${source}">
             </div>
         </div>
     </div>
@@ -259,20 +259,24 @@ function generateNavigationLinksContacts() {
 function addHelp() {
     document.body.innerHTML += `
     <div class="help content" id="helpContent">
-        <a class="back" onclick="removeHelp()"><img src="./img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeHelp()"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="helpContainer">
             <h2>Help</h2>
             <div>
                 <h3>What is Join?</h3>
                 <p>Description of Join</p>
                 <h3>How to use it</h3>
-                <list>
-                    <ol>
-                        <li>Nummer 1</li>
-                        <li>Nummer 2</li>
-                        <li>Nummer 3</li>
-                    </ol>
-                </list>
+              <p>
+              What is Join?
+    Join is a project management tool that includes a kanban system, enabling team collaboration and task management. With Join, your team can easily track tasks assigned to each team member, view their progress, and identify completed tasks. The intuitive drag and drop functionality makes it simple to move task cards across different stages. Join is a valuable tool that supports your daily work.
+
+How to use Join:
+
+1. Click on the "Create Task" button and fill in the required fields such as title, description, category, date, and priority. You can assign tasks to existing team members from your contacts or add new contacts through the "Contacts" menu.
+2. Access the "Board" menu to view the added tasks. This is where the kanban system comes into play. Use drag and drop to move task cards into the appropriate columns, such as "To Do," "In Progress," "Awaiting Feedback," or "Done."
+3. The "Summary" menu provides an overview of all tasks. You can quickly identify tasks in progress and those with approaching deadlines, which is crucial for urgent tasks. Additionally, you can easily track completed tasks.
+4. In the "Contacts" section, you can invite new contacts and manage existing ones. Invite team members by entering their contact information and sending them an invitation to join your project. You can also manage your contacts by editing their details or removing them when necessary. This allows you to maintain an organized and up-to-date contact list for efficient collaboration within your team.
+              </p>
             </div>
         </div>
     </div>
@@ -282,7 +286,7 @@ function addHelp() {
 function addLegalNotice() {
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
-        <a class="back" onclick="removeLegalNotice()"><img src="./img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeLegalNotice()"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="noticeContainer">
             <div class='impressum'>
                 <h1>Impressum</h1><br>
@@ -341,14 +345,14 @@ function addLegalNotice() {
 function generateSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
-         <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+         <img src="../img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
     `;
 }
 
 function generateUnSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
-         <img src="img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+         <img src="../img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
     `;
 }
 
@@ -420,7 +424,7 @@ function setStyleOfCloseIconAtContacts() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('closeIconAtContacts');
     if (clientWidth <= 1300) {
-        hideButton.style = `background-image:url('./img/closeIconEditUserAtContacts.png') !important;top: 108px !important;right: 50px !important;`;
+        hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;top: 108px !important;right: 50px !important;`;
     }
 
 }

@@ -146,7 +146,7 @@ function generateTodoHTML(element, status) {
             </div>
 
             <div class="taskPrio">
-                <img src="./img/${element['prio'].toLowerCase()}.png">
+                <img src="../img/${element['prio'].toLowerCase()}.png">
             </div>
         </div>  
     </div>`;
@@ -246,7 +246,7 @@ function generateOpenCardHTML(element, index, status) {
     let elementIndex = tasks.indexOf(element);
     return /*html*/`
     <div class="openCard d-none" id="openCard${status}${elementIndex}">
-            <img src="img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
+            <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
 
         <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
             ${element['category']}
@@ -266,7 +266,7 @@ function generateOpenCardHTML(element, index, status) {
         </div>
         <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
             <label class="taskLabelOpen">Priority: </label>
-            <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
+            <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
         </div>
         <div id="editSubtasksContainer${status}${elementIndex}">
         </div>  
@@ -277,11 +277,11 @@ function generateOpenCardHTML(element, index, status) {
         </div>
         
         <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
-            <img class="deleteBtnOpenCard" src="img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
-            <img class="editBtnOpenCard" src="img/editBtn.png" onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')">
+            <img class="deleteBtnOpenCard" src="../img/deleteBtn.png" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})">
+            <img class="editBtnOpenCard" src="../img/editBtn.png" onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')">
         </div>
         <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
-                Ok<img src="img/okWhite.png">
+                Ok<img src="../img/okWhite.png">
             </button>
         </div>
     </div>`
@@ -369,7 +369,7 @@ function resetTaskPrio(status, index) {
     let element = tasks[index];
     document.getElementById('taskPrioOpen' + status + index).innerHTML = `
         <label class="taskLabelOpen">Priority: </label>
-        <img src="./img/${element['prio'].toLowerCase()}AllinOne.png">
+        <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
     `;
 }
 

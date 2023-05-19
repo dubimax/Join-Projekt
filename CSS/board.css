@@ -502,7 +502,7 @@ h1 {
     }
 
     .closeBtnOpen {
-        content: url('img/backIconBlack.png');
+        content: url('../img/backIconBlack.png');
         left: 0;
         top: 0;
         margin-top: 52px;
@@ -536,14 +536,14 @@ h1 {
     }
 
     .deleteBtnOpenCard {
-        content: url('img/deleteBtnOpenCard.png');
+        content: url('../img/deleteBtnOpenCard.png');
         width: 40px !important;
         height: 40px !important;
         margin-bottom: 24px;
     }
 
     .editBtnOpenCard {
-        content: url('img/editBtnOpenCard.png');
+        content: url('../img/editBtnOpenCard.png');
     }
 
     .editDeleteBtnOpen {

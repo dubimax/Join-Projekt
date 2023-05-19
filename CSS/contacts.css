@@ -258,13 +258,10 @@
 
 .addNewContactButton {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
     padding: 18px 10px;
     gap: 10px;
     position: absolute;
-    width: 193px;
     height: 53px;
     right: 190px;
     bottom: 100px;

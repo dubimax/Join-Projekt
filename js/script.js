@@ -158,7 +158,7 @@ function checkUserData(userEmail, userPassword) {
             indexOfEmail = users.find(u => u.email == userEmail);
             loggedIn = true;
             save();
-            window.location.href = 'summary.html';
+            window.location.href = './html/summary.html';
         }
     }
     let dataCheck = document.getElementById('dataCheck');
@@ -455,7 +455,7 @@ function addContentTitle(title, id) {
  */
 async function showLink(id) {
     await save();
-    location.href = id;
+    location.href =  id;
 }
 
 

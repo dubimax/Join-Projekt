@@ -6,28 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join - Board</title>
-    <link rel="icon" type="image/png" href="img/logo-dunkel.png">
-    <link rel="stylesheet" href="./CSS/navi.css">
+    <link rel="icon" type="image/png" href="../img/logo-dunkel.png">
+    <link rel="stylesheet" href="../CSS/navi.css">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="board.css">
-    <link rel="stylesheet" href="./CSS/mediaqueries.css">
-    <link rel="stylesheet" href="./CSS/addTask.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/board.css">
+    <link rel="stylesheet" href="../CSS/mediaqueries.css">
+    <link rel="stylesheet" href="../CSS/addTask.css">
 
-    <script src="./js/addTask.js"></script>
-    <script src="./js/contacts.js"></script>
+    <script src="../js/addTask.js"></script>
+    <script src="../js/contacts.js"></script>
 
-    <script src="./js/genHTML.js"></script>
-    <script src="./js/variables.js"></script>
-    <script src="../smallest_backend_ever/mini_backend.js"></script>
-    <script src="board.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../js/genHTML.js"></script>
+    <script src="../js/variables.js"></script>
+    <script src="../../smallest_backend_ever/mini_backend.js"></script>
+    <script src="../js/board.js"></script>
+    <script src="../js/script.js"></script>
 
 
 </head>
 
 <body onload="initBoard()">
-    <div w3-include-html="./templates/navs.html" class="d-dark"></div>
+    <div w3-include-html="../templates/navs.html" class="d-dark"></div>
 
     <div id="addTaskAtBoard" class="d-none"></div>
     <div id="overlay" class="overlay"></div>
@@ -38,10 +38,10 @@
                 <div class="searchBox">
                     <input type="text" id="search" onchange="searchTasks()" placeholder="Find Task">
                     <div class="searchVerticalLine"></div>
-                    <img src="img/search.png">
+                    <img src="../img/search.png">
                 </div>
                 <button class="addTaskBtn" onclick="showAddNewTaskAtBoardStandard()">Add Task<img
-                        src="img/addTaskWhite.png"></button>
+                        src="../img/addTaskWhite.png"></button>
             </div>
         </div>
 

@@ -29,11 +29,11 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url('font/Inter/Inter-Regular.eot'); /* IE9 Compat Modes */
-    src: url('font/Inter/Inter-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('fonts/Inter/Inter-Regular.woff') format('woff'), /* Modern Browsers */
-         url('fonts/Inter/Inter-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('fonts/Iner/Inter-Regular.svg#svgInterRegular') format('svg'); /* Legacy iOS */
+    src: url('../font/Inter/Inter-Regular.eot'); /* IE9 Compat Modes */
+    src: url('../font/Inter/Inter-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/Inter/Inter-Regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/Inter/Inter-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/Iner/Inter-Regular.svg#svgInterRegular') format('svg'); /* Legacy iOS */
 }
 
 body {
@@ -179,7 +179,7 @@ h4 {
     top: 49.11px;
     object-fit: contain;
     cursor: pointer;
-    background-image: url('./img/closeIconEditUserAtContacts.png');
+    background-image: url('../img/closeIconEditUserAtContacts.png');
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
@@ -357,7 +357,7 @@ input {
 }
 
 .inputTextStd::-webkit-calendar-picker-indicator {
-    background: url('img/calendarIcon.png') no-repeat;
+    background: url('../img/calendarIcon.png') no-repeat;
     opacity: 1;
     object-fit: contain;
     width: 23px;
@@ -795,11 +795,11 @@ a {
 }
 
 .showEditContainer:hover .showEditImg {
-    background-image: url('./img/editContactPenBlue.png');
+    background-image: url('../img/editContactPenBlue.png');
 }
 
 .showEditImg {
-    background-image: url('./img/editContactPen.png');
+    background-image: url('../img/editContactPen.png');
     margin-right: 6px;
     object-fit: cover;
     width: 25px;
