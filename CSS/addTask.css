@@ -3,7 +3,7 @@
         display: flex;
         margin-top: 125px;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         right: 0;
         bottom: 0;
         top: 20px;
@@ -11,38 +11,39 @@
         width: unset;
         position: relative;
     }
-    
-.border-1px-solid {
-    margin:0 25px;
-}
 
-.addTaskForm {
-    align-items: center ;
-    padding-left: 100px;
-}
+    .border-1px-solid {
+        margin: 0 25px;
+    }
 
-h2{
-    text-align: center;
-}
-.kpmt {
-    padding-left: 25px;
-    top:120px !important;
+    .addTaskForm {
+        align-items: center;
+        padding-left: 100px;
+    }
 
-}
+    h2 {
+        text-align: center;
+    }
 
-}
+    .kpmt {
+        padding-left: 25px;
+        top: 120px !important;
 
-
-@media (max-width:1000px) {
-    
-
+    }
     .container-btns {
         position: fixed !important;
-        top: 10px !important;
+        top: -110px !important;
         right: 10px !important;
         bottom: unset !important;
         z-index: 99 !important;
     }
+}
+
+
+@media (max-width:1000px) {
+
+  
+   
 
     .newCat {
         position: absolute !important;
@@ -63,21 +64,16 @@ h2{
     .details div[class='border-1px-solid'] {
         display: none !important;
     }
+
     .addTaskForm {
         padding-left: unset !important;
     }
 }
 
 @media (max-width:350px) {
-   
 
-    .container-btns {
-        position: fixed !important;
-        top: 10px !important;
-        right: 10px !important;
-        bottom: unset !important;
-        z-index: 99 !important;
-    }
+
+
 
     .newCat {
         position: absolute !important;
@@ -99,5 +95,5 @@ h2{
         display: none !important;
     }
 
-    
+
 }

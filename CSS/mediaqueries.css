@@ -229,7 +229,7 @@
     .dropDownMenuField {
         width: 300px !important;
         min-height: 41px !important;
-        height: 41px !important;
+        height: unset !important;
     }
 
     .inputDescriptionField {
@@ -273,13 +273,7 @@
         padding: 9px 21px !important;
     }
 
-    .container-btns {
-        position: absolute !important;
-        top: -167px !important;
-        right: -10px !important;
-        bottom: unset !important;
-
-    }
+    
 
     .backArrow {
         position: absolute;
