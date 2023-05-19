@@ -21,10 +21,11 @@
     overflow-x: hidden;
 }
 
-.details{
+.details {
     overflow: overlay;
 }
-.detailBox{
+
+.detailBox {
     height: 550px;
 }
 
@@ -213,6 +214,7 @@
     height: 271px;
     left: 737px;
     top: 129px;
+    margin-top: 34px;
 }
 
 .addNewContactProfileImgContainer,
@@ -290,7 +292,7 @@
 }
 
 @media (max-width:1300px) {
-    .backArrow{
+    .backArrow {
         display: unset !important;
     }
 }
@@ -299,5 +301,5 @@
     .kpmt {
         display: none !important;
     }
-    
+
 }
