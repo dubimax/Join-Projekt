@@ -29,8 +29,8 @@ function updateBoardHTML() {
 
 function showAddNewTaskAtBoardStandard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
-    checkStatusToSet('addTaskAtBoard');
-    updateBoardHTML();
+    generateAddTaskHTML('addTaskAtBoard');
+    setOnSubmitForm('toDo');
 }
 
 /**
