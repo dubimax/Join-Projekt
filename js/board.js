@@ -23,7 +23,7 @@ function updateBoardHTML() {
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
     setStyleProgressbar();
-    
+    addCloseBtnToAddTaskAtBoard();
 
 }
 
@@ -31,6 +31,10 @@ function showAddNewTaskAtBoardStandard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
     generateAddTaskHTML('addTaskAtBoard');
     setOnSubmitForm('toDo');
+}
+
+function hideAddNewTaskAtBoard() {
+    document.getElementById('addTaskAtBoard').classList.add('d-none');
 }
 
 /**

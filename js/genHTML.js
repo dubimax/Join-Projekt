@@ -429,11 +429,16 @@ function addCloseBtnToAddTaskAtContacts() {
     `;
 }
 
+function addCloseBtnToAddTaskAtBoard() {
+    document.getElementById('addTaskAtBoard').innerHTML += `
+    <div onclick="hideAddNewTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
+    `;
+}
+
 function setStyleOfCloseIconAtContacts() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('closeIconAtContacts');
     if (clientWidth <= 1300) {
         hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;top: 108px !important;right: 50px !important;`;
     }
-
 }
