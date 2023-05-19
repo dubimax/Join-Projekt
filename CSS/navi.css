@@ -76,7 +76,7 @@
     display: flex;
     align-items: center;
     padding: 8px 53px;
-    gap: 20px;
+    gap: 10px;
     width: 232px;
     height: 46px;
     cursor: pointer;
@@ -86,7 +86,7 @@
     position: absolute;
     right: 120px;
     top: 50px;
-
+    z-index: 10;
 }
 
 .backImg {
