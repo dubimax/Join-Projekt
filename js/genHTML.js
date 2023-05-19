@@ -19,7 +19,7 @@ function generateAddTaskHTML(id) {
         addContentTitle('Add Task', id);
         document.getElementById(id).innerHTML += `
     <form id="submitting" onsubmit="" class="addTaskForm" >
-    <div class="details">
+    <div class="details detailBox">
         <div class="detailBox-left">
             ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
             ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
@@ -31,28 +31,30 @@ function generateAddTaskHTML(id) {
                 </list>
             </div>
         </div>
-        </div>
+        
         <div class="border-1px-solid"></div>
         <div class="detailBox-right">
         ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
         ${generateLabelsHTML('label', 'Prio')} 
         ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
-        <div class="p-relative d-flex align-c">
+            <div class="p-relative d-flex align-c">
 
                 <list class="" id="list-subtask">
                 </list>
             </div>
+            <div class="d-flex align-c container-btns">
+            <div class="clearButton" onclick="clearAllInputs()">
+                Clear
+            </div>
+            <button class="createTaskBtn">
+                Create Task  
+                <img class="" src="../img/checkIconWhite.png">
+            </button>
+    
         </div>
-        <div class="d-flex align-c container-btns">
-        <div class="clearButton" onclick="clearAllInputs()">
-            Clear
         </div>
-        <button class="createTaskBtn">
-            Create Task  
-            <img class="" src="../img/checkIconWhite.png">
-        </button>
     </div>
-        </div>
+       
        
         </form>
     `;
@@ -345,14 +347,14 @@ function addLegalNotice() {
 function generateSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
-         <img src="../img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+         <img src="../img/${linkname.toLowerCase()}.png" alt=""> ${linkname}</a>     
     `;
 }
 
 function generateUnSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
-         <img src="../img/${firstLetterToLowerCase(linkname)}.png" alt=""> ${linkname}</a>     
+         <img src="../img/${linkname.toLowerCase()}.png" alt=""> ${linkname}</a>     
     `;
 }
 

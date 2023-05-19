@@ -21,6 +21,13 @@
     overflow-x: hidden;
 }
 
+.details{
+    overflow: overlay;
+}
+.detailBox{
+    height: 550px;
+}
+
 .contactHeadContainer {
     display: flex;
     align-items: center;

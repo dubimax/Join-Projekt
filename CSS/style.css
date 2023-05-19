@@ -175,11 +175,11 @@ h4 {
 .closeIconAtContacts {
     position: absolute;
     height: 21.65px;
-    left: 1148.82px;
-    top: 49.11px;
+    left: 1101.82px;
+    top: 32.11px;
     object-fit: contain;
     cursor: pointer;
-    background-image: url('../img/closeIconEditUserAtContacts.png');
+    background-image: url(../img/closeIconEditUserAtContacts.png);
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
@@ -187,20 +187,28 @@ h4 {
 
 #addTaskAtBoard,
 #addTaskAtContacts {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1200px;
-    height: 850px;
+    position: absolute;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* width: 1200px; */
     z-index: 99;
     background: #FFFFFF;
-    top: 45px;
+    top: 50%;
+    transform: translateY(-50%);
     padding: 20px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     justify-content: space-evenly;
     animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
 
+}
+
+.addTaskForm:first-of-type [div] {
+    height: 550px;
+}
+
+#addTaskAtBoard::-webkit-scrollbar,#addTaskAtContacts::-webkit-scrollbar {
+    width:0px;
 }
 
 .createNewUserAtContactsContainer,
@@ -512,8 +520,6 @@ a {
 }
 
 .detail div label:hover {
-    width: 141px;
-    height: 61px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -544,7 +550,6 @@ a {
 
 h2 {
     font-size: 61px;
-    position: relative;
     width: 100%;
 }
 
@@ -720,16 +725,17 @@ select option:hover {
 }
 
 .container-btns {
-    right: calc(100% - 1220px + 125px);
-    position: absolute;
-    bottom: -70px;
+    align-self: flex-end;
     cursor: pointer;
+    /* justify-content: space-around; */
+    margin-top: 125px;
+
 }
 
 .addTaskForm {
-    position: relative;
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    top: 50px;
 }
 
 a {
