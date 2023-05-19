@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 171px;
+    margin-top: 135px;
     margin-left: 355px;
 }
 
@@ -53,9 +53,9 @@
     align-items: flex-end;
     padding: 0px;
     max-width: 580px;
-    max-height: 540px;
-    margin-top: 87px;
-    margin-left: -55px;
+    max-height: 500px;
+    margin-top: 56px;
+    margin-left: -65px;
 }
 
 .summaryTop {
@@ -313,7 +313,7 @@
     align-items: flex-start;
     gap: 3px;
     margin-left: 67px;
-    margin-top: 350px;
+    margin-top: 323px;
 }
 
 .summaryGreeting {

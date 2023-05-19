@@ -29,7 +29,8 @@ function updateBoardHTML() {
 
 function showAddNewTaskAtBoardStandard() {
     document.getElementById('addTaskAtBoard').classList.remove('d-none');
-    generateAddTaskHTML('addTaskAtBoard');
+    checkStatusToSet('addTaskAtBoard');
+    updateBoardHTML();
 }
 
 /**
