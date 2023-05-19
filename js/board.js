@@ -159,11 +159,10 @@ function setStyleProgressbar(){
         let progress = getProgressOfSubtasks(i);
         let difference = 100 - progress;
 
-        if(document.getElementById('progressbar' + tasks[i]['status'] + i)){
+        if(document.getElementById('progressbar' + tasks[i]['status'] + i) && progress != 0){
             document.getElementById('progressbar' + tasks[i]['status'] + i).style = `background:linear-gradient(to right,green ${progress}%,#F4F4F4 ${difference}%);`;
         }
-    }
-    
+    } 
 }
 
 function getProgressOfSubtasks(index){
