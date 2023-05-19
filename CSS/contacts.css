@@ -202,6 +202,10 @@
     border-top-left-radius: 30px;
 }
 
+.createNewUserAtContacts-right {
+    width: 340px;
+}
+
 .addNewContactInputs,
 .editContactInputs {
     display: flex;
@@ -211,7 +215,6 @@
     gap: 29px;
     position: absolute;
     width: 422px;
-    height: 271px;
     left: 737px;
     top: 129px;
     margin-top: 34px;
@@ -295,11 +298,23 @@
     .backArrow {
         display: unset !important;
     }
+    .addNewContactTitle {
+        font-weight: 700 !important;
+        font-size: 47px !important;
+    }
 }
 
 @media (max-width:1000px) {
     .kpmt {
         display: none !important;
     }
+    .addNewContactTitle {
+        font-weight: 900 !important;
+        font-size: 40px !important;
+    }
+    .addNewContactSubTitle{
+        font-size: 20px !important;
+    }
 
 }
+

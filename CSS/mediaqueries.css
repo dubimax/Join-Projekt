@@ -25,6 +25,10 @@
         display: none !important;
     }
 
+    .createNewUserAtContacts-right {
+        background: white;
+        border-radius: 30px;
+    }
     .editUserAtContacts-right form,
     .createNewUserAtContacts-right form {
         display: flex;
@@ -164,10 +168,7 @@
         display: none;
     }
 
-    .addNewContactTitle {
-        font-weight: 700 !important;
-        font-size: 47px !important;
-    }
+    
 
     .addNewContactInputs,
     .editContactInputs {
@@ -312,6 +313,7 @@
         right: unset !important;
         top: unset !important;
         position: unset !important;
+        width: 340px;
     }
 
     .closeIconAtContacts {
@@ -393,25 +395,9 @@
     #editUserAtContacts {
         background: rgba(245, 245, 245, 1) !important;
     }
-
+    
 
 
 }
 
 
-@media (max-width:350px) {
-
-    .closeIconAtContacts {
-        background-image: url('../img/closeIconWhite.png') !important;
-        right: 50px !important;
-        top: 20px !important;
-        left: unset !important;
-        z-index: 99;
-        background-position: center;
-        background-repeat: no-repeat !important;
-        background-size: cover;
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-}
