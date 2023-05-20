@@ -5,7 +5,7 @@
 }
 
 @media (max-width:1300px) {
-
+   
     .legalNotice,
     .help {
         width: unset !important;
@@ -357,6 +357,7 @@
     .summaryContactName {
         display: none;
     }
+    
 }
 
 @media (max-width:600px) {

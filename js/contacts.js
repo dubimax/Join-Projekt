@@ -22,6 +22,7 @@ function generateContactsHTML() {
         generateAddTaskHTML('addTaskAtContacts');
         addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
         setOnSubmitForm('toDo');
+        addEventListenerToDropDown();
 
     } else {
         window.location.href = '../login.html';
@@ -162,7 +163,7 @@ function hideAddNewContact() {
 function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
     setStyleOfCloseIconAtContacts();
-    addEventListenerToDropDown();
+    
 }
 
 /**

@@ -368,13 +368,33 @@
         margin-top: 43px !important;
     }
     .container-btns {
-        position: absolute;
-        top: -76px !important;
+        position: fixed;
+        top: 15px !important;
         right: 15px !important;
         margin-top: unset !important;
     }
     .clearButton {
         display: none !important;
+    }
+    .newCat {
+        position: relative !important;
+        left: unset !important;
+        top: unset !important;
+    }
+    .newCategoriesField{
+        top: -41px !important;
+        right: -72% !important;
+    }
+    .newSubtasksField{
+        bottom: -75px !important;
+        right: 40px !important;
+
+    }
+    #addTaskAtContacts h2 {
+        margin-top: 80px !important;
+    }
+    #addTaskAtContacts {
+        overflow: overlay !important;
     }
 }
 

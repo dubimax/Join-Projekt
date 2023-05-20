@@ -1,21 +1,13 @@
 @media (max-width:1500px) {
    
-
     .border-1px-solid {
         margin: 0 25px;
     }
 
-    
-
-    
-
     .kpmt {
         padding-left: 25px;
         top: 120px !important;
-
     }
-   
-    
 }
 
 
@@ -40,34 +32,28 @@
         position: relative;
     }
     
-
-    .newCat {
-        position: absolute !important;
-        right: 40px !important;
-        left: unset !important;
-        top: unset !important;
-    }
-    .newCategoriesField{
-        bottom: 306px !important
-    }
-    .newSubtasksField{
-        right: 40px !important;
-        bottom: -75px !important;
-    }
-
-   
-
     .border-1px-solid {
         display: flex !important;
     }
-
- 
 
     .addTaskForm {
         padding-left: unset !important;
     }
     h2{
         text-align: center !important;
+    }
+    .newCat {
+        position: relative !important;
+        left: unset !important;
+        top: unset !important;
+    }
+    .newCategoriesField{
+        top: -41px !important;
+        right: -72% !important;
+    }
+    .newSubtasksField{
+        bottom: 41px !important;
+        right: -72% !important;
     }
 }
 @media (max-width:700px) {
@@ -87,6 +73,7 @@
     .clearButton {
         display: none !important;
     }
+    
 }
 
 @media (max-width:420px) {
@@ -96,13 +83,8 @@
     }
 
 
-    .newCat {
-        position: absolute !important;
-        right: 0 !important;
-        bottom: 14px !important;
-        left: unset !important;
-        top: unset !important;
-    }
+    
+    
 
     .clearButton {
         display: none !important;
