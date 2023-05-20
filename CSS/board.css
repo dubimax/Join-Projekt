@@ -75,10 +75,14 @@ h1 {
     display: flex;
     align-items: center;
 
-    color: #D1D1D1;
+    color: #2A3647;
     outline: none;
     border: none;
 }
+
+.cursor:hover {
+    content: url("../img/plusButtonBlue.png");
+} 
 
 .searchVerticalLine {
     width: 0px;
@@ -124,7 +128,7 @@ h1 {
 
 .cardHeaders {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-top: 40px;
     overflow-y: scroll;
 }
@@ -176,7 +180,6 @@ h1 {
 
 .card {
     width: 250px;
-    min-height: 239px;
     background: #FFFFFF;
 
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
