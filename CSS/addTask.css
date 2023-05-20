@@ -1,4 +1,32 @@
 @media (max-width:1500px) {
+   
+
+    .border-1px-solid {
+        margin: 0 25px;
+    }
+
+    
+
+    
+
+    .kpmt {
+        padding-left: 25px;
+        top: 120px !important;
+
+    }
+   
+    
+}
+
+
+@media (max-width:1300px) {
+    .addTaskForm {
+        align-items: center;
+        padding-left: 100px;
+    }
+    .details {
+        flex-direction: row !important;
+    }
     #addTask {
         display: flex;
         margin-top: 125px;
@@ -11,25 +39,6 @@
         width: unset;
         position: relative;
     }
-
-    .border-1px-solid {
-        margin: 0 25px;
-    }
-
-    .addTaskForm {
-        align-items: center;
-        padding-left: 100px;
-    }
-
-    h2 {
-        text-align: center;
-    }
-
-    .kpmt {
-        padding-left: 25px;
-        top: 120px !important;
-
-    }
     .container-btns {
         position: fixed !important;
         top: -110px !important;
@@ -37,14 +46,6 @@
         bottom: unset !important;
         z-index: 99 !important;
     }
-    
-}
-
-
-@media (max-width:1000px) {
-
-  
-   
 
     .newCat {
         position: absolute !important;
@@ -68,18 +69,30 @@
         display: flex !important;
     }
 
-    .details div[class='border-1px-solid'] {
-        display: none !important;
-    }
+ 
 
     .addTaskForm {
         padding-left: unset !important;
     }
+    h2{
+        text-align: center !important;
+    }
+}
+@media (max-width:700px) {
+    .details div[class='border-1px-solid'] {
+        display: none !important;
+    }
+    .details {
+        flex-direction: column !important;
+    }
+   
 }
 
-@media (max-width:350px) {
+@media (max-width:420px) {
 
-
+    h2{
+        text-align: left !important;
+    }
 
 
     .newCat {
