@@ -313,6 +313,7 @@
     #addTasksAtContacts{
         overflow: scroll !important;
     }
+    .createNewUserAtContacts-right,
     .editUserAtContacts-right{
         background-color: #FFFFFF;
         border-bottom-right-radius: 30px;
@@ -366,6 +367,15 @@
     .addNewContactsButtonContainer{
         margin-top: 43px !important;
     }
+    .container-btns {
+        position: absolute;
+        top: -76px !important;
+        right: 15px !important;
+        margin-top: unset !important;
+    }
+    .clearButton {
+        display: none !important;
+    }
 }
 
 
@@ -379,7 +389,10 @@
 }
 @media (max-width:420px) {
     
-    
+    .createNewUserAtContactsContainer{
+        width: 340px !important;
+        
+    }
     .addUserCloseBtn{
         position: absolute !important;
         background-image: url('../img/closeIconWhite.png') !important;
@@ -393,7 +406,7 @@
         border-top-right-radius: 30px !important;
         padding: 66px 33px !important;
     }
-    .editUserAtContacts-right{
+    .editUserAtContacts-right, .createNewUserAtContacts-right{
         width: 340px !important;
     }
 }

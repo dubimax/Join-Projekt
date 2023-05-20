@@ -5,16 +5,13 @@
 }
 
 @media (max-width:1300px) {
-    .legalNotice, .help {
+
+    .legalNotice,
+    .help {
         width: unset !important;
     }
 
-    #addTaskAtBoard,
-    #addTaskAtContacts {
-        position: relative !important;
-        transform: unset !important;
-        left: 0 !important;
-    }
+
 
     #contactDetailsContainer {
         width: unset;
@@ -25,7 +22,7 @@
         display: none !important;
     }
 
-    
+
     .editUserAtContacts-right form,
     .createNewUserAtContacts-right form {
         display: flex;
@@ -137,7 +134,7 @@
         background: rgb(245, 245, 245);
     }
 
-   
+
 
     .addNewContactProfileImgContainer,
     .editContactProfileImgContainer {
@@ -158,7 +155,7 @@
         display: none;
     }
 
-    
+
 
     .addNewContactInputs,
     .editContactInputs {
@@ -191,17 +188,22 @@
 
     #addTaskAtBoard,
     #addTaskAtContacts {
-        position: absolute !important;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: unset !important;
+        position: relative !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
         height: unset !important;
         top: 90px !important;
         background-color: #F5F5F5 !important;
         border-radius: 0 !important;
         z-index: 8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: unset !important;
     }
+
 
     .details {
         flex-direction: column !important;
@@ -211,7 +213,7 @@
     h2 {
         font-weight: 700;
         font-size: 47px !important;
-        text-align: unset !important;
+        text-align: center !important;
         margin-top: 15px !important;
     }
 
@@ -226,8 +228,7 @@
         height: 93px !important;
     }
 
-    .border-1px-solid,
-    .clearButton {
+    .border-1px-solid {
         display: none !important;
     }
 
@@ -262,7 +263,7 @@
         padding: 9px 21px !important;
     }
 
-    
+
 
     .backArrow {
         position: absolute;
@@ -299,7 +300,7 @@
         width: 340px;
     }
 
-    
+
 
     /* ===== Scrollbar CSS ===== */
     /* Firefox */
@@ -364,9 +365,15 @@
     #editUserAtContacts {
         background: rgba(245, 245, 245, 1) !important;
     }
-    
-
 
 }
 
+@media (max-width:420px) {
 
+    h2 {
+        font-weight: 700;
+        font-size: 47px !important;
+        text-align: left !important;
+        margin-top: 15px !important;
+    }
+}

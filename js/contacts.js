@@ -20,6 +20,7 @@ function generateContactsHTML() {
         setVisibleIfnotEmpty();
         generateContactDetailsHTML();
         generateAddTaskHTML('addTaskAtContacts');
+        addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
         setOnSubmitForm('toDo');
 
     } else {
@@ -160,7 +161,7 @@ function hideAddNewContact() {
  */
 function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
-    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
+    setStyleOfCloseIconAtContacts();
     addEventListenerToDropDown();
 }
 

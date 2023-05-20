@@ -112,7 +112,7 @@ function generateContactHead() {
         <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
             <h5 id="contactName">Name</h5>
-            <div class="contactHeadAddTask" onclick="showAddNewTaskAtContacts();setStyleOfCloseIconAtContacts()">
+            <div class="contactHeadAddTask" onclick="showAddNewTaskAtContacts()">
                 <img src="../img/plusContacts.png" class="addTaskContacts">
                 Add Task
             </div>

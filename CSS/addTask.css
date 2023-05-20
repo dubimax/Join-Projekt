@@ -39,13 +39,7 @@
         width: unset;
         position: relative;
     }
-    .container-btns {
-        position: fixed !important;
-        top: -110px !important;
-        right: 10px !important;
-        bottom: unset !important;
-        z-index: 99 !important;
-    }
+    
 
     .newCat {
         position: absolute !important;
@@ -61,9 +55,7 @@
         bottom: -75px !important;
     }
 
-    .clearButton {
-        display: none !important;
-    }
+   
 
     .border-1px-solid {
         display: flex !important;
@@ -85,7 +77,16 @@
     .details {
         flex-direction: column !important;
     }
-   
+    .container-btns {
+        position: fixed !important;
+        top: -110px !important;
+        right: 10px !important;
+        bottom: unset !important;
+        z-index: 99 !important;
+    }
+    .clearButton {
+        display: none !important;
+    }
 }
 
 @media (max-width:420px) {
