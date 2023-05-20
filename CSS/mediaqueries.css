@@ -140,14 +140,7 @@
         background: rgb(245, 245, 245);
     }
 
-    .createNewUserAtContacts-left,
-    .editUserAtContacts-left {
-        width: 340px;
-        height: 351px;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 30px;
-        padding: 66px 33px;
-    }
+   
 
     .addNewContactProfileImgContainer,
     .editContactProfileImgContainer {
@@ -229,7 +222,6 @@
     .dropDownMenuField {
         width: 300px !important;
         min-height: 41px !important;
-        height: unset !important;
     }
 
     .inputDescriptionField {
@@ -310,21 +302,7 @@
         width: 340px;
     }
 
-    .closeIconAtContacts {
-        position: fixed !important;
-        margin-left: 250px;
-        margin-top: 26px;
-        background-image: url('../img/closeIconWhite.png') !important;
-        right: unset !important;
-        top: unset !important;
-        left: unset !important;
-        z-index: 99;
-        background-position: center;
-        background-repeat: no-repeat !important;
-        background-size: cover;
-        width: 30px !important;
-        height: 30px !important;
-    }
+    
 
     /* ===== Scrollbar CSS ===== */
     /* Firefox */

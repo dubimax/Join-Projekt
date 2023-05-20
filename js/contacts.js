@@ -20,7 +20,6 @@ function generateContactsHTML() {
         setVisibleIfnotEmpty();
         generateContactDetailsHTML();
         generateAddTaskHTML('addTaskAtContacts');
-        addCloseBtnToAddTaskAtContacts();
         setOnSubmitForm('toDo');
 
     } else {
@@ -179,6 +178,8 @@ function showEditContact() {
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
     document.getElementById('editUserAtContacts').classList.remove('d-none');
+    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
+
     addEventListenerToDeleButton();
 }
 

@@ -178,12 +178,12 @@ function generatesInputFieldHTML(field1, field2, headline, properties, type, id,
     `;
 }
 
-function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick) {
+function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick,newclass) {
     return `
     <${field1}>${headline}</${field1}>
 
     <${field2} class="${properties}" type="${type}" id="${id}" >
-    <div class="newCat">
+    <div class="${newclass} newCat">
 
         <a onclick="cancelAddNew('${restoreID}')"><img src="../img/cancelIcon.png"></a>
         <div class="border-1px-solid margin0px width0-height31px"></div>
@@ -423,9 +423,9 @@ function generateContactDetailsHTML() {
 /**
  * Adds a close Button to AddTaskAtContacts
  */
-function addCloseBtnToAddTaskAtContacts() {
+function addCloseBtnToAddTaskAtContacts(overlay) {
     document.getElementById('addTaskAtContacts').innerHTML += `
-    <div onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
+    <div onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>
     `;
 }
 
@@ -439,6 +439,6 @@ function setStyleOfCloseIconAtContacts() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('closeIconAtContacts');
     if (clientWidth <= 1300) {
-        hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;top: 108px !important;right: 50px !important;`;
+        hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`;
     }
 }

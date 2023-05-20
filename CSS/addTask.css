@@ -37,6 +37,7 @@
         bottom: unset !important;
         z-index: 99 !important;
     }
+    
 }
 
 
@@ -47,10 +48,16 @@
 
     .newCat {
         position: absolute !important;
-        right: 0 !important;
-        bottom: 14px !important;
+        right: 40px !important;
         left: unset !important;
         top: unset !important;
+    }
+    .newCategoriesField{
+        bottom: 306px !important
+    }
+    .newSubtasksField{
+        right: 40px !important;
+        bottom: -75px !important;
     }
 
     .clearButton {
