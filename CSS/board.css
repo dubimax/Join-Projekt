@@ -16,7 +16,19 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 135px;
-    margin-left: 324px;
+    margin-left: 175px;
+}
+.details {
+    overflow: overlay;
+}
+
+.detailBox {
+    height: 550px;
+}
+.boardContainer{
+    width: calc(100% - 232px);
+    position: absolute;
+    right: 0;
 }
 
 .editcard {
@@ -35,6 +47,7 @@ h1 {
 .findAddTaskContainer {
     display: flex;
     align-items: flex-start;
+    margin-right: 100px;
 }
 
 .searchBox {
@@ -113,7 +126,6 @@ h1 {
     display: flex;
     justify-content: space-evenly;
     margin-top: 40px;
-    margin-left: 232px;
     overflow-y: scroll;
 }
 
@@ -174,6 +186,7 @@ h1 {
     cursor: pointer;
     margin-bottom: 35px;
 }
+
 
 .emtyCard {
     width: 250px;

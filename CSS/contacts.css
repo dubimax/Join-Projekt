@@ -202,6 +202,10 @@
     border-top-left-radius: 30px;
 }
 
+.createNewUserAtContacts-right {
+    width: 340px;
+}
+
 .addNewContactInputs,
 .editContactInputs {
     display: flex;
@@ -211,7 +215,6 @@
     gap: 29px;
     position: absolute;
     width: 422px;
-    height: 271px;
     left: 737px;
     top: 129px;
     margin-top: 34px;
@@ -295,11 +298,101 @@
     .backArrow {
         display: unset !important;
     }
-}
-
-@media (max-width:1000px) {
+    .addNewContactTitle {
+        font-weight: 700 !important;
+        font-size: 47px !important;
+    }
+    .detailBox {
+        height: 100vh !important;
+        overflow: scroll !important;
+    }
+    #addTasksAtContacts{
+        overflow: scroll !important;
+    }
+    .editUserAtContacts-right{
+        background-color: #FFFFFF;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+    .createNewUserAtContacts-left,
+    .editUserAtContacts-left {
+        width: 100% !important;
+        border-bottom-left-radius: unset !important;
+        border-top-right-radius: 30px !important;
+        padding: 66px 33px !important;
+        height: 380px !important;
+    }
+    .closeIconAtContacts{
+        left:unset !important;
+    }
     .kpmt {
         display: none !important;
     }
+    .addNewContactTitle {
+        font-weight: 900 !important;
+        font-size: 40px !important;
+    }
+    .addNewContactSubTitle{
+        font-size: 20px !important;
+    }
+    
+    .editUserAtContacts-right, .createNewUserAtContacts-right{
+        width: 100% !important;
+    }
+    .editUserAtContactsContainer,.createNewUserAtContactsContainer {
+        width: 80% !important;
+    }
+    .editContactNameInput {
+        width: 90% !important;
+    }
+    .addNewContactInputs, .editContactInputs {
+        width: 90% !important;
+    }
+    .editUserCloseBtn,.addUserCloseBtn{
+        background-image: url('../img/closeIconWhite.png') !important;
+        z-index: 10;
+        right: 15% !important;
+    }
+  
+    #createNewContactName, #createNewContactEmail, #createNewContactPhone, #editContactName, #editContactEmail, #editContactPhone {
+        width: 95% !important;
+    }
+
+    .editContactsButtonContainer,
+    .addNewContactsButtonContainer{
+        margin-top: 43px !important;
+    }
+}
+
+
+@media (max-width:1000px) {
+   
 
 }
+@media (max-width:700px) {
+    
+  
+}
+@media (max-width:420px) {
+    
+    
+    .addUserCloseBtn{
+        position: absolute !important;
+        background-image: url('../img/closeIconWhite.png') !important;
+        top: 25px !important;
+        right: 40px !important;
+    }
+    .createNewUserAtContacts-left,
+    .editUserAtContacts-left {
+        width: 340px !important;
+        border-bottom-left-radius: unset !important;
+        border-top-right-radius: 30px !important;
+        padding: 66px 33px !important;
+    }
+    .editUserAtContacts-right{
+        width: 340px !important;
+    }
+}
+
+
+

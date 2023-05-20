@@ -2,7 +2,7 @@ let email = "";
 
 
 function backToLogin() {
-    window.location.href = './login.html';
+    window.location.href = '../login.html';
 }
 async function onPageLoad() {
     email = getEmailUrlParameter();
@@ -41,6 +41,6 @@ function onSubmit() {
 }
 
 function showResetPwText() {
-    document.getElementById('forgotMyPasswordText').innerHTML = 'Password changed!<br>You will now be redirected back to login.<br>If not, please click <a class="clickHereLink" href="./login.html">here</a>!';
+    document.getElementById('forgotMyPasswordText').innerHTML = 'Password changed!<br>You will now be redirected back to login.<br>If not, please click <a class="clickHereLink" href="../login.html">here</a>!';
     document.getElementById('formResetPassword').style.display = "none";
 }

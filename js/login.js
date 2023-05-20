@@ -20,7 +20,7 @@ async function onSubmitRQPassword(event) {
     let formData = new FormData(event.target);
     let response = await action(formData);
     if (response.ok) 
-    document.getElementById('forgotMyPasswordText').innerHTML = 'We have successfully sent the email.<br>You will now be redirected back to login.<br>If not please click <a class="clickHereLink" href="./login.html">here</a>!';
+    document.getElementById('forgotMyPasswordText').innerHTML = 'We have successfully sent the email.<br>You will now be redirected back to login.<br>If not please click <a class="clickHereLink" href="../login.html">here</a>!';
     document.getElementById('forgotPwForm').style.display = "none";
     setTimeout(goToLogin, 3000);
 }

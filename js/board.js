@@ -39,7 +39,7 @@ function showAddNewTaskAtBoardStandard() {
 
 function hideAddNewTaskAtBoard() {
     document.getElementById('addTaskAtBoard').classList.add('d-none');
-
+    removeEventListenerFromDropDown();
 }
 
 /**
@@ -461,6 +461,7 @@ function generateEditDate(status, elementIndex) {
 function closeOpenCard(status, index) {
     document.getElementById('openCard' + status + index).classList.add('d-none');
     document.getElementById('overlay').style.display = "none";
+    resetEditCard(index,status);
 }
 
 /**
@@ -556,7 +557,7 @@ function deleteTask(task, status, ind) {
     
             
     tasks.splice(ind, 1);
-      
+    removeEventlistenerFromSelectUserBox();
     closeOpenCard(status, ind);
     pushToDatabase();
     updateBoardHTML();

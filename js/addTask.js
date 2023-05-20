@@ -185,12 +185,12 @@ function refreshStyleOfSelectedLabel(id) {
  */
 function changeToInputField(id) {
     if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()');
+        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()','newCategoriesField');
         addColorChoser();
         dropDown = false;
     }
     if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()');
+        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()','newSubtasksField');
     }
 }
 
@@ -252,6 +252,16 @@ function addEventListenerToSelectUserBox() {
         showDropDownItems('users');
     });
     addEventListenerToSelectUser();
+}
+
+function removeEventlistenerFromSelectUserBox(){
+    let userBox = document.getElementById('assignedTo');
+
+    userBox.removeEventListener('click',function (){});
+    for(let i = 0; i < users.length;i++){
+        let selUser = document.getElementById(users[i]['name']);
+        selUser.removeEventListener('click',function () {});
+    }
 }
 
 function addEventListenerToSelectUser() {

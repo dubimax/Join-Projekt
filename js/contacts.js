@@ -20,11 +20,10 @@ function generateContactsHTML() {
         setVisibleIfnotEmpty();
         generateContactDetailsHTML();
         generateAddTaskHTML('addTaskAtContacts');
-        addCloseBtnToAddTaskAtContacts();
         setOnSubmitForm('toDo');
 
     } else {
-        window.location.href = 'login.html';
+        window.location.href = '../login.html';
     }
 }
 
@@ -64,15 +63,25 @@ function deleteContact(contactName) {
 /**
  * Adds an Eventlistener to DeleteButton
  */
-function addEventListenerToDeleButton() {
-    let deleteButton = document.getElementById('deleteButton');
-    let contactToDelete = document.getElementById('editContactName').value;
+function addEventListenerToDeleButton(id) {
+    let deleteButton = document.getElementById(id);
+    let contactToDelete;
+    if(id == 'deleteButtonContent'){
+        contactToDelete = document.getElementById('contactDetailsEmail').innerHTML;
+    }else if(id == 'deleteButton'){
+        contactToDelete = document.getElementById('editContactName').value;
+
+    }
+
+
+
     deleteButton.addEventListener('click', function () {
         deleteContact(contactToDelete);
         hideEditContact();
         addContactCategories();
         setVisibleIfnotEmpty();
         generateContactDetailsHTML();
+        document.getElementById('contactDetails').classList.add('d-none');
         save();
     });
 }
@@ -179,7 +188,8 @@ function showEditContact() {
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
     document.getElementById('editUserAtContacts').classList.remove('d-none');
-    addEventListenerToDeleButton();
+    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
+    addEventListenerToDeleButton('deleteButton');
 }
 
 /**
@@ -259,6 +269,7 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
 
     showKPMT();
     hideAddNewContactButton();
+    addEventListenerToDeleButton('deleteButtonContent');
 }
 
 /**

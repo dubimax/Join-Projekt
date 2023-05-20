@@ -25,6 +25,7 @@
         display: none !important;
     }
 
+    
     .editUserAtContacts-right form,
     .createNewUserAtContacts-right form {
         display: flex;
@@ -129,21 +130,14 @@
         bottom: 90px;
         display: flex;
         flex-direction: column !important;
-        height: unset;
+        height: 759px !important;
         width: 100%;
         align-items: center;
         z-index: 99 !important;
         background: rgb(245, 245, 245);
     }
 
-    .createNewUserAtContacts-left,
-    .editUserAtContacts-left {
-        width: 340px;
-        height: 351px;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 30px;
-        padding: 66px 33px;
-    }
+   
 
     .addNewContactProfileImgContainer,
     .editContactProfileImgContainer {
@@ -164,10 +158,7 @@
         display: none;
     }
 
-    .addNewContactTitle {
-        font-weight: 700 !important;
-        font-size: 47px !important;
-    }
+    
 
     .addNewContactInputs,
     .editContactInputs {
@@ -228,7 +219,6 @@
     .dropDownMenuField {
         width: 300px !important;
         min-height: 41px !important;
-        height: 41px !important;
     }
 
     .inputDescriptionField {
@@ -272,13 +262,7 @@
         padding: 9px 21px !important;
     }
 
-    .container-btns {
-        position: absolute !important;
-        top: -167px !important;
-        right: -10px !important;
-        bottom: unset !important;
-
-    }
+    
 
     .backArrow {
         position: absolute;
@@ -312,23 +296,10 @@
         right: unset !important;
         top: unset !important;
         position: unset !important;
+        width: 340px;
     }
 
-    .closeIconAtContacts {
-        position: fixed !important;
-        margin-left: 250px;
-        margin-top: 26px;
-        background-image: url('../img/closeIconWhite.png') !important;
-        right: unset !important;
-        top: unset !important;
-        left: unset !important;
-        z-index: 99;
-        background-position: center;
-        background-repeat: no-repeat !important;
-        background-size: cover;
-        width: 30px !important;
-        height: 30px !important;
-    }
+    
 
     /* ===== Scrollbar CSS ===== */
     /* Firefox */
@@ -359,7 +330,7 @@
         bottom: 160px;
         background-image: url('../img/trashIcon.png');
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: 60% 65%;
         background-position: center;
         width: 30px;
         height: 30px;
@@ -393,25 +364,9 @@
     #editUserAtContacts {
         background: rgba(245, 245, 245, 1) !important;
     }
-
+    
 
 
 }
 
 
-@media (max-width:350px) {
-
-    .closeIconAtContacts {
-        background-image: url('../img/closeIconWhite.png') !important;
-        right: 50px !important;
-        top: 20px !important;
-        left: unset !important;
-        z-index: 99;
-        background-position: center;
-        background-repeat: no-repeat !important;
-        background-size: cover;
-        width: 30px !important;
-        height: 30px !important;
-    }
-
-}
