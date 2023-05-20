@@ -293,7 +293,11 @@
     cursor: pointer;
     display: none;
 }
-
+@media (max-width:1500px) {
+    .border-1px-solid {
+        margin: 0 25px !important;
+    }
+}
 @media (max-width:1300px) {
     .backArrow {
         display: unset !important;
