@@ -160,6 +160,7 @@ function hideAddNewContact() {
  */
 function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
+    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
     addEventListenerToDropDown();
 }
 
@@ -188,7 +189,7 @@ function showEditContact() {
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
     document.getElementById('editUserAtContacts').classList.remove('d-none');
-    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
+    
     addEventListenerToDeleButton('deleteButton');
 }
 
