@@ -133,7 +133,7 @@
         bottom: 90px;
         display: flex;
         flex-direction: column !important;
-        height: unset;
+        height: 759px !important;
         width: 100%;
         align-items: center;
         z-index: 99 !important;
@@ -333,7 +333,7 @@
         bottom: 160px;
         background-image: url('../img/trashIcon.png');
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: 60% 65%;
         background-position: center;
         width: 30px;
         height: 30px;
