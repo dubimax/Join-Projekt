@@ -6,35 +6,36 @@ usersAssignedToShown = [];
  * @param {*} statusTag 
  */
 function createNewTask(statusTag) {
-    let taskTitle = document.getElementById('inputTitle').value;
-    let taskDesc = document.getElementById('inputDescription').value;
-    let taskCategory = selectedCategory;
-    let assignedTo = getAssignedContacts();
-    let taskDueDate = document.getElementById('inputDate').value;
-    let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
-    taskPrio = taskPrio[0];
-    getSubtasks();
-
-    let taskSubtasks = subtasks;
-    let id = tasks.length + 1;
-    let status = statusTag;
-    tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
+    tasks.push({
+        'title': getValue('inputTitle'), 'description': getValue('inputDescription'),
+        'category': selectedCategory, 'isAssigned': getAssignedContacts(), 'dueDate': getValue('inputDate'),
+        'prio': getTasksPrio(), 'subtasks': getSubtasks(), 'id': setTaskID(), 'status': statusTag
+    });
     pushToDatabase();
-    subtasks = [];
     clearAllInputs();
 }
 
-function getSubtasks(){
-    for(let i = 0; i < subtasks.length; i++){
-        if(document.getElementById('list-subtask-' + subtasks[i]['item']).checked == true)
-        subtasks[i]['checked'] = true;
-
-    }
+function getTasksPrio() {
+    let taskPrio = getValue(activeID).innerHTML.split(' ');
+    taskPrio = taskPrio[0];
+    return taskPrio;
 }
 
+function setTaskID() {
+    return tasks.length + 1;
+}
 
+function getValue(id) {
+    return document.getElementById(id).value;
+}
 
+function getSubtasks() {
+    for (let i = 0; i < subtasks.length; i++) { if (isSubtaskChecked(i)) subtasks[i]['checked'] = true; }
+}
 
+function isSubtaskChecked(i) {
+    return document.getElementById('list-subtask-' + subtasks[i]['item']).checked == true;
+}
 
 /**
  * initialises AddTask Site
@@ -51,12 +52,11 @@ async function initAddTask() {
  * @returns 
  */
 function getValueOfChosenColor() {
-    for (let i = 0; i < colors.length; i++) {
-        let isActive = document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');
-        if (isActive) {
-            return colors[i];
-        }
-    }
+    for (let i = 0; i < colors.length; i++) { if (isActiveColor(i)) return colors[i]; }
+}
+
+function isActiveColor(i) {
+    return document.getElementById(colors[i].slice(1)).classList.contains('colorCircleisActive');
 }
 
 /**
@@ -85,7 +85,7 @@ function clearAllInputs() {
     clearListAssigned();
 }
 
-function clearListAssigned(){
+function clearListAssigned() {
     document.getElementById('list-assigned-user').innerHTML = '';
     assignedTo = [];
 }
@@ -95,6 +95,7 @@ function clearListAssigned(){
  */
 function clearListSubtask() {
     document.getElementById('list-subtask').innerHTML = '';
+    subtasks = [];
 }
 
 /**
@@ -102,12 +103,16 @@ function clearListSubtask() {
  * @param  {...any} ids elemnts to reset
  */
 function clearFields(...ids) {
-    for (let i = 0; i < ids.length; i++) {
-        if (document.getElementById(ids[i])) {
-            document.getElementById(ids[i]).value = '';
-        }
-        changeStyleOfLabel(ids[i]);
-    }
+    for (let i = 0; i < ids.length; i++) changeStyleIfExistent();
+}
+
+function changeStyleIfExistent() {
+    if (isElementExistent(ids[i])) document.getElementById(ids[i]).value = '';
+    changeStyleOfLabel(ids[i]);
+}
+
+function isElementExistent(id) {
+    return document.getElementById(id);
 }
 
 function resetAllLabelContainer() {
@@ -119,34 +124,32 @@ function resetAllLabelContainer() {
     document.getElementById('lowImgID').src = '../img/lowIcon.png';
 }
 
+
+
+function setStyle(id, color, name) {
+    document.getElementById(id).style = color;
+    document.getElementById(name + 'ImgID').src = `../img/${name}WhiteIcon.png`;
+    activeID = id;
+    activeImg = name + 'ImgID';
+    return;
+}
+
 function setStyleOfUrgent(id) {
-    if (id == 'id_urgent') {
-        document.getElementById(id).style = urgentColor;
-        document.getElementById('urgentImgID').src = '../img/urgentWhiteIcon.png';
-        activeID = id;
-        activeImg = 'urgentImgID';
-        return;
-    }
+    if (id == 'id_urgent') setStyle(id, urgentColor, 'urgent');
 }
 
 function setStyleOfMedium(id) {
-    if (id == 'id_medium') {
-        document.getElementById(id).style = mediumColor;
-        document.getElementById('mediumImgID').src = '../img/mediumWhiteIcon.png';
-        activeID = id;
-        activeImg = 'mediumImgID';
-        return;
-    }
+    if (id == 'id_medium') setStyle(id, mediumColor, 'medium');
 }
 
 function setStyleOfLow(id) {
-    if (id == 'id_low') {
-        document.getElementById(id).style = lowColor;
-        document.getElementById('lowImgID').src = '../img/lowWhiteIcon.png';
-        activeID = id;
-        activeImg = 'lowImgID';
-        return;
-    }
+    if (id == 'id_low') setStyle(id, lowColor, 'low');
+}
+
+function setStyles(id) {
+    setStyleOfUrgent(id);
+    setStyleOfMedium(id);
+    setStyleOfLow(id);
 }
 
 /**
@@ -156,13 +159,8 @@ function setStyleOfLow(id) {
  */
 function changeStyleOfLabel(id) {
     resetAllLabelContainer();
-    if (activeID.length == 0) {
-        setStyleOfUrgent(id);
-        setStyleOfMedium(id);
-        setStyleOfLow(id);
-    } else {
-        refreshStyleOfSelectedLabel(id);
-    }
+    if (activeID.length == 0) setStyles(id);
+    else refreshStyleOfSelectedLabel(id);
 }
 
 /**
@@ -170,13 +168,14 @@ function changeStyleOfLabel(id) {
  * @param {*} id 
  */
 function refreshStyleOfSelectedLabel(id) {
-    if (activeID == id) {
-        document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
-    } else {
-        activeID = '';
-        activeImg = '';
-        changeStyleOfLabel(id);
-    }
+    if (activeID == id) document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
+    else changeStyleOfLabels(id)
+}
+
+function changeStyleOfLabels(id) {
+    activeID = '';
+    activeImg = '';
+    changeStyleOfLabel(id);
 }
 
 /**
@@ -184,14 +183,22 @@ function refreshStyleOfSelectedLabel(id) {
  * @param {*} id 
  */
 function changeToInputField(id) {
-    if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()','newCategoriesField');
-        addColorChoser();
-        dropDown = false;
-    }
-    if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text', 'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()','newSubtasksField');
-    }
+    if (id == 'addNewCat') changeToAddNewCat();
+    if (id == 'addNewSubTask') changeToAddNewSubtask();
+}
+
+function changeToAddNewCat() {
+    document.getElementById('id_categoryBox').innerHTML =
+        generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text',
+            'newCat', 'addNewCat', 'addCategory()', 'newCategoriesField');
+    addColorChoser();
+    dropDown = false;
+}
+
+function changeToAddNewSubtask() {
+    document.getElementById('id_addNewSubTask').innerHTML =
+        generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text',
+            'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()', 'newSubtasksField');
 }
 
 /**
@@ -200,14 +207,23 @@ function changeToInputField(id) {
 function removeEventListenerFromDropDown() {
     document.getElementById('categoryBox').removeEventListener('click', function () { });
     document.getElementById('assignedTo').removeEventListener('click', function () { });
+    removeEventlistenerFromSelectCategories();
+    removeEventlistenerFromSelectUsers();
+}
+
+function removeEventlistenerFromSelectUsers() {
     let selUser;
-    for (let i = 0; i < categories.length; i++) {
-        selCat = document.getElementById(categories[i]['name']);
-        selCat.removeEventListener('click', function () { });
-    }
     for (let j = 0; j < users.length; j++) {
         selUser = document.getElementById(users[j]['name']);
         selUser.removeEventListener('click', function () { });
+    }
+}
+
+function removeEventlistenerFromSelectCategories() {
+    let selCat;
+    for (let i = 0; i < categories.length; i++) {
+        selCat = document.getElementById(categories[i]['name']);
+        selCat.removeEventListener('click', function () { });
     }
 }
 
@@ -216,9 +232,7 @@ function removeEventListenerFromDropDown() {
  */
 function addEventListenerToCategories() {
     let catBox = document.getElementById('categoryBox');
-    catBox.addEventListener('click', function () {
-        showDropDownItems('categories');
-    });
+    catBox.addEventListener('click', function () { showDropDownItems('categories')});
     addEvenListenerToSelectCategories();
 }
 
@@ -226,17 +240,20 @@ function addEventListenerToCategories() {
  * Add an Eventlistener to select categories in dropdown
  */
 function addEvenListenerToSelectCategories() {
-    for (let i = 0; i < categories.length; i++) {
-        let selCat = document.getElementById(categories[i]['name']);
-        selCat.addEventListener('click', function (e) {
-            let txt = e.currentTarget.attributes[1].textContent;
-            setOption(txt, 'category');
-            e.stopPropagation();
-        });
-    }
+    for (let i = 0; i < categories.length; i++) addEvenListenerToSelectCategory(i);
 }
 
+function addEvenListenerToSelectCategory(i) {
+    let selCat = document.getElementById(categories[i]['name']);
+    selCat.addEventListener('click', function (e) {
+        setEventListenerToSelectCategory(e)});
+}
 
+function setEventListenerToSelectCategory(e) {
+    let txt = e.currentTarget.attributes[1].textContent;
+    setOption(txt, 'category');
+    e.stopPropagation();
+}
 
 /**
  * Add eventlisteners
@@ -248,40 +265,52 @@ function addEventListenerToDropDown() {
 
 function addEventListenerToSelectUserBox() {
     let userBox = document.getElementById('assignedTo');
-    userBox.addEventListener('click', function () {
-        showDropDownItems('users');
-    });
-    addEventListenerToSelectUser();
+    userBox.addEventListener('click', function () { showDropDownItems('users')});
+    addEventListenerToSelectUsers();
 }
 
-function removeEventlistenerFromSelectUserBox(){
+function removeEventlistenerFromSelectUserBox() {
     let userBox = document.getElementById('assignedTo');
-
-    userBox.removeEventListener('click',function (){});
-    for(let i = 0; i < users.length;i++){
-        let selUser = document.getElementById(users[i]['name']);
-        selUser.removeEventListener('click',function () {});
-    }
+    userBox.removeEventListener('click', function () { });
+    for (let i = 0; i < users.length; i++) removeListenerFromSelectUserBox(i);
 }
 
-function addEventListenerToSelectUser() {
-    for (let j = 0; j < users.length; j++) {
-        let selUser = document.getElementById(users[j]['name']);
-        selUser.addEventListener('click', function (e) {
-            e.stopPropagation();
-            if (!usersAssignedTo.includes(users[j]['name'])) {
-                usersAssignedTo.push(users[j]['name']);
-                document.getElementById(users[j]['name']).children[0].checked = true;
-                setAssignedCircle(users[j]);
-            } else if (usersAssignedTo.includes(users[j]['name'])) {
-                document.getElementById('colorCircleMedium' + users[j]['name']).remove();
-                document.getElementById(users[j]['name']).children[0].checked = false;
+function removeListenerFromSelectUserBox(i) {
+    let selUser = document.getElementById(users[i]['name']);
+    selUser.removeEventListener('click', function () { });
+}
 
-                let index = usersAssignedTo.indexOf(users[j]['name']);
-                usersAssignedTo.splice(index, 1);
-            }
-        });
-    }
+function addEventListenerToSelectUsers() {
+    for (let j = 0; j < users.length; j++) addEventListenerToSelectUser(j);
+}
+
+function addEventListenerToSelectUser(j) {
+    let selUser = document.getElementById(users[j]['name']);
+    selUser.addEventListener('click', function (e) {
+         setChecked(j, e)});
+}
+
+function setChecked(j, e) {
+    e.stopPropagation();
+    if (!isUserAssigned(j)) setCheckedToSelectUser(j);
+    else if (isUserAssigned(j)) setUnCheckedToSelectUser(j);
+}
+
+function setUnCheckedToSelectUser(j) {
+    document.getElementById('colorCircleMedium' + users[j]['name']).remove();
+    document.getElementById(users[j]['name']).children[0].checked = false;
+    let index = usersAssignedTo.indexOf(users[j]['name']);
+    usersAssignedTo.splice(index, 1);
+}
+
+function setCheckedToSelectUser(j) {
+    usersAssignedTo.push(users[j]['name']);
+    document.getElementById(users[j]['name']).children[0].checked = true;
+    setAssignedCircle(users[j]);
+}
+
+function isUserAssigned(j) {
+    return usersAssignedTo.includes(users[j]['name']);
 }
 
 function setAssignedCircle(username) {
@@ -295,12 +324,16 @@ function setAssignedCircle(username) {
  * @returns 
  */
 function getAssignedContacts() {
-    for (let i = 0; i < users.length; i++) {
-        if (document.getElementById(users[i]['name']).children[0].checked) {
-            assigned.push(document.getElementById(users[i]['name']).children[0].value);
-        }
-    }
+    for (let i = 0; i < users.length; i++) { if (checkIfCOntactIsAssigned(i)) addAssignedUser(i) }
     return assigned;
+}
+
+function addAssignedUser(i) {
+    assigned.push(document.getElementById(users[i]['name']).children[0].value);
+}
+
+function checkIfCOntactIsAssigned(i) {
+    return document.getElementById(users[i]['name']).children[0].checked;
 }
 
 /**
@@ -325,15 +358,24 @@ function setOption(id, id2) {
  */
 function setCategoryOptions(id) {
     let sID = document.getElementById(id);
-    if (sID.classList.contains('d-none')) {
-        sID.classList.remove('d-none');
-        sID.classList.add('dropDownStart');
-        sID.classList.remove('cl_categories');
-    } else {
-        sID.classList.add('d-none');
-        sID.classList.remove('dropDownStart');
-        sID.classList.add('cl_categories');
-    }
+    if (isContainingClass(sID)) resetCategoryOptions(sID);
+    else changeCategoryOptions(sID);
+}
+
+function changeCategoryOptions(sID) {
+    sID.classList.add('d-none');
+    sID.classList.remove('dropDownStart');
+    sID.classList.add('cl_categories');
+}
+
+function isContainingClass(sID) {
+    return sID.classList.contains('d-none');
+}
+
+function resetCategoryOptions(sID) {
+    sID.classList.remove('d-none');
+    sID.classList.add('dropDownStart');
+    sID.classList.remove('cl_categories');
 }
 
 /**
@@ -346,6 +388,3 @@ function resetOptions() {
         document.getElementById(categories[i]['name']).classList.add('cl_categories');
     }
 }
-
-
-

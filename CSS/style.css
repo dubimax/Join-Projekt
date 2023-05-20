@@ -180,7 +180,7 @@ h4 {
     top: 32.11px;
     object-fit: contain;
     cursor: pointer;
-    background-image: url(../img/closeIconEditUserAtContacts.png) !important;
+    background-image: url(../img/closeIconEditUserAtContacts.png);
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
