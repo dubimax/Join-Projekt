@@ -25,10 +25,7 @@
         display: none !important;
     }
 
-    .createNewUserAtContacts-right {
-        background: white;
-        border-radius: 30px;
-    }
+    
     .editUserAtContacts-right form,
     .createNewUserAtContacts-right form {
         display: flex;
