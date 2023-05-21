@@ -2,12 +2,8 @@ usersAssignedTo = [];
 usersAssignedToShown = [];
 
 /**
- * Creates a new task with the provided status tag.
- * Retrieves the necessary values from input fields and other data sources.
- * Adds the new task to the 'tasks' array.
- * Pushes the task data to the database.
- * Clears all input fields.
- * @param {string} statusTag - The status tag of the new task.
+ * Creates a new task and adds it to the tasks array.
+ * @param {string} statusTag - The status tag of the task.
  */
 function createNewTask(statusTag) {
     setSubtasksCheckedIf();
@@ -21,10 +17,8 @@ function createNewTask(statusTag) {
 }
 
 /**
- * Retrieves the priority of the active task.
- * Extracts the priority value from the HTML content of the active task element.
- * Returns the priority value.
- * @returns {string} - The priority of the active task.
+ * Retrieves the priority value of the active task.
+ * @returns {string} The priority value of the active task.
  */
 function getTasksPrio() {
     let taskPrio = getValue(activeID).innerHTML.split(' ');
@@ -43,7 +37,6 @@ function setTaskID() {
 
 /**
  * Retrieves the value of an input element with the specified ID.
- *
  * @param {string} id - The ID of the input element.
  * @returns {string} - The value of the input element.
  */
@@ -52,9 +45,7 @@ function getValue(id) {
 }
 
 /**
- * Sets the 'checked' property of subtasks based on their checked status.
- * Iterates through the subtasks array and checks if each subtask is checked.
- * If a subtask is checked, its 'checked' property is set to true.
+ * Sets the 'checked' property of subtasks based on their current checked state.
  */
 function setSubtasksCheckedIf() {
     for (let i = 0; i < subtasks.length; i++) { if (isSubtaskChecked(i)) subtasks[i]['checked'] = true; }
@@ -70,9 +61,8 @@ function isSubtaskChecked(i) {
 }
 
 /**
- * Initializes the add task functionality.
- * Includes HTML files, generates navigation links, generates add task HTML,
- * and sets the onsubmit event for the form.
+ * Initializes the Add Task functionality.
+ * This function includes the HTML content, generates navigation links, generates Add Task HTML, and sets the onSubmit form.
  * @returns {Promise<void>}
  */
 async function initAddTask() {
@@ -83,10 +73,8 @@ async function initAddTask() {
 }
 
 /**
- * Retrieves the value of the chosen color.
- * Iterates through the colors array and checks if each color is active.
- * If an active color is found, its value is returned.
- * @returns {*} - The value of the chosen color.
+ * Retrieves the value of the chosen color from the active color options.
+ * @returns {string} The value of the chosen color.
  */
 function getValueOfChosenColor() {
     for (let i = 0; i < colors.length; i++) { if (isActiveColor(i)) return colors[i]; }
@@ -236,10 +224,8 @@ function changeStyleOfLabel(id) {
 }
 
 /**
- * Refreshes the style of the selected label based on the specified element ID.
- * If the provided ID matches the active ID, it sets the style properties to the default values.
- * Otherwise, it calls the changeStyleOfLabels() function to update the style of the labels.
- * @param {string} id - The ID of the label element to refresh the style.
+ * Refreshes the style of the selected label based on the specified ID.
+ * @param {string} id - The ID of the label.
  */
 function refreshStyleOfSelectedLabel(id) {
     if (activeID == id) document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
@@ -247,9 +233,8 @@ function refreshStyleOfSelectedLabel(id) {
 }
 
 /**
- * Changes the style of the labels based on the specified element ID.
- * Resets the active ID and active image, then calls the changeStyleOfLabel() function for the provided ID.
- * @param {string} id - The ID of the label element to change the style.
+ * Changes the style of labels based on the specified ID.
+ * @param {string} id - The ID of the label.
  */
 function changeStyleOfLabels(id) {
     activeID = '';
@@ -258,10 +243,8 @@ function changeStyleOfLabels(id) {
 }
 
 /**
- * Changes the specified element ID to an input field based on the provided ID.
- * If the ID matches 'addNewCat', it calls the changeToAddNewCat() function.
- * If the ID matches 'addNewSubTask', it calls the changeToAddNewSubtask() function.
- * @param {string} id - The ID of the element to change to an input field.
+ * Changes the specified input field to the corresponding input field type.
+ * @param {string} id - The ID of the input field.
  */
 function changeToInputField(id) {
     if (id == 'addNewCat') changeToAddNewCat();
@@ -269,9 +252,7 @@ function changeToInputField(id) {
 }
 
 /**
- * Changes the category box to add a new category.
- * Modifies the HTML content of the 'id_categoryBox' element by generating a changed input field.
- * Adds a color chooser and sets the dropDown flag to false.
+ * Changes the category dropdown box to the "Add New Category" input field.
  */
 function changeToAddNewCat() {
     document.getElementById('id_categoryBox').innerHTML =
@@ -317,7 +298,6 @@ function removeEventlistenerFromSelectUsers() {
  * Removes the event listeners from the select categories.
  * Iterates through the 'categories' array and removes the 'click' event listener from each corresponding element.
  */
-
 function removeEventlistenerFromSelectCategories() {
     let selCat;
     for (let i = 0; i < categories.length; i++) {
@@ -327,9 +307,7 @@ function removeEventlistenerFromSelectCategories() {
 }
 
 /**
- * Adds event listeners to the categories.
- * Adds a 'click' event listener to the 'categoryBox' element to show the drop-down items for categories.
- * Calls the 'addEvenListenerToSelectCategories()' function to add event listeners to select categories.
+ * Adds the event listener to the categories dropdown box.
  */
 function addEventListenerToCategories() {
     let catBox = document.getElementById('categoryBox');
@@ -345,10 +323,8 @@ function addEvenListenerToSelectCategories() {
 }
 
 /**
- * Adds an event listener to select a specific category based on the provided index.
- * Gets the element by ID from the 'categories' array using the provided index.
- * Adds a 'click' event listener to the element to call the 'setEventListenerToSelectCategory()' function.
- * @param {number} i - The index of the category to add the event listener.
+ * Adds the event listener to the select category element.
+ * @param {number} i - The index of the category.
  */
 function addEvenListenerToSelectCategory(i) {
     let selCat = document.getElementById(categories[i]['name']);
@@ -357,12 +333,8 @@ function addEvenListenerToSelectCategory(i) {
     });
 }
 
-
 /**
- * Sets the event listener to select a category.
- * Extracts the text content from the current target of the event.
- * Calls the 'setOption()' function with the extracted text and 'category' as parameters.
- * Stops the event from propagating further.
+ * Sets the event listener to the select category element.
  * @param {Event} e - The event object.
  */
 function setEventListenerToSelectCategory(e) {
@@ -372,9 +344,7 @@ function setEventListenerToSelectCategory(e) {
 }
 
 /**
- * Adds event listeners to the drop-down menu.
- * Calls the 'addEventListenerToCategories()' function to add event listeners to categories.
- * Calls the 'addEventListenerToSelectUserBox()' function to add event listeners to the select user box.
+ * Adds the event listeners to the dropdown elements, such as categories and select user box.
  */
 function addEventListenerToDropDown() {
     addEventListenerToCategories();
@@ -382,10 +352,7 @@ function addEventListenerToDropDown() {
 }
 
 /**
- * Adds event listeners to the select user box.
- * Gets the 'assignedTo' element by its ID.
- * Adds a 'click' event listener to the element to show the drop-down items for users using the `showDropDownItems()` function.
- * Calls the `addEventListenerToSelectUsers()` function to add event listeners to select users.
+ * Adds the event listener to the select user box and calls the function to add event listeners to user elements.
  */
 function addEventListenerToSelectUserBox() {
     let userBox = document.getElementById('assignedTo');
@@ -394,9 +361,7 @@ function addEventListenerToSelectUserBox() {
 }
 
 /**
- * Removes the event listeners from the select user box and its corresponding options.
- * Gets the 'assignedTo' element by its ID and removes the 'click' event listener from it.
- * Iterates through the 'users' array and calls the 'removeListenerFromSelectUserBox()' function to remove event listeners from each corresponding option.
+ * Removes the event listener from the select user box and all user elements.
  */
 function removeEventlistenerFromSelectUserBox() {
     let userBox = document.getElementById('assignedTo');
@@ -405,10 +370,8 @@ function removeEventlistenerFromSelectUserBox() {
 }
 
 /**
- * Removes the event listener from the select user option based on the provided index.
- * Gets the element by ID from the 'users' array using the provided index.
- * Removes the 'click' event listener from the element.
- * @param {number} i - The index of the user option to remove the event listener.
+ * Removes the event listener from the select user element.
+ * @param {number} i - The index of the user in the "users" array.
  */
 function removeListenerFromSelectUserBox(i) {
     let selUser = document.getElementById(users[i]['name']);
@@ -424,10 +387,8 @@ function addEventListenerToSelectUsers() {
 }
 
 /**
- * Adds an event listener to select a specific user based on the provided index.
- * Gets the element by ID from the 'users' array using the provided index.
- * Adds a 'click' event listener to the element to call the 'setChecked()' function.
- * @param {number} j - The index of the user to add the event listener.
+ * Adds an event listener to the select user element.
+ * @param {number} j - The index of the user in the "users" array.
  */
 function addEventListenerToSelectUser(j) {
     let selUser = document.getElementById(users[j]['name']);
@@ -437,12 +398,8 @@ function addEventListenerToSelectUser(j) {
 }
 
 /**
- * Sets the checked state of a specific user based on the provided index.
- * Stops the event from propagating further using `e.stopPropagation()`.
- * Checks if the user is not assigned by calling the 'isUserAssigned()' function with the provided index.
- * If the user is not assigned, calls the 'setCheckedToSelectUser()' function with the provided index.
- * If the user is assigned, calls the 'setUnCheckedToSelectUser()' function with the provided index.
- * @param {number} j - The index of the user to set the checked state.
+ * Sets the checkbox of a user to checked or unchecked based on its current state.
+ * @param {number} j - The index of the user in the "users" array.
  * @param {Event} e - The event object.
  */
 function setChecked(j, e) {
@@ -452,11 +409,9 @@ function setChecked(j, e) {
 }
 
 /**
- * Sets the unchecked state of a specific user based on the provided index.
- * Removes the color circle element associated with the user.
- * Sets the 'checked' property of the user's checkbox to false.
- * Removes the user from the 'usersAssignedTo' array.
- * @param {number} j - The index of the user to set the unchecked state.
+ * Sets the checkbox of a user to unchecked and removes the assigned circle for the user.
+ * Also removes the user's name from the "usersAssignedTo" array.
+ * @param {number} j - The index of the user in the "users" array.
  */
 function setUnCheckedToSelectUser(j) {
     document.getElementById('colorCircleMedium' + users[j]['name']).remove();
@@ -466,11 +421,9 @@ function setUnCheckedToSelectUser(j) {
 }
 
 /**
- * Sets the checked state of a specific user based on the provided index.
- * Adds the user's name to the 'usersAssignedTo' array.
- * Sets the 'checked' property of the user's checkbox to true.
- * Calls the 'setAssignedCircle()' function with the provided user object to set the assigned circle.
- * @param {number} j - The index of the user to set the checked state.
+ * Sets the checkbox of a user to checked and adds the user's name to the "usersAssignedTo" array.
+ * Also sets the assigned circle for the user.
+ * @param {number} j - The index of the user in the "users" array.
  */
 function setCheckedToSelectUser(j) {
     usersAssignedTo.push(users[j]['name']);
@@ -498,11 +451,8 @@ function setAssignedCircle(username) {
 }
 
 /**
- * Retrieves the assigned contacts.
- * Iterates through the 'users' array and checks if each contact is assigned by calling the 'checkIfContactIsAssigned()' function with the provided index.
- * If a contact is assigned, calls the 'addAssignedUser()' function with the provided index.
- * Returns the 'assigned' array.
- * @returns {Array} - The array of assigned contacts.
+ * Retrieves the list of assigned contacts based on the "assigned" array.
+ * @returns {Array} - The list of assigned contacts.
  */
 function getAssignedContacts() {
     for (let i = 0; i < users.length; i++) { if (checkIfCOntactIsAssigned(i)) addAssignedUser(i) }
@@ -510,10 +460,8 @@ function getAssignedContacts() {
 }
 
 /**
- * Adds an assigned user to the 'assigned' array.
- * Retrieves the value of the first child element of the element with the ID matching the user's name from the 'users' array.
- * Pushes the retrieved value to the 'assigned' array.
- * @param {number} i - The index of the user to add as assigned.
+ * Adds an assigned user to the "assigned" array based on the given index.
+ * @param {number} i - The index of the user.
  */
 function addAssignedUser(i) {
     assigned.push(document.getElementById(users[i]['name']).children[0].value);
@@ -530,24 +478,17 @@ function checkIfCOntactIsAssigned(i) {
 }
 
 /**
- * Sets the selected option of the dropdown for categories.
- * Checks if the provided `id2` parameter is equal to 'category'.
- * Calls the `setOptionNow()` function with the provided `id` parameter if the condition is true.
- * @param {string} id - The ID of the option to set as selected.
- * @param {string} id2 - The ID parameter for comparison.
+ * Sets the specified option based on the given ID and category type.
+ * @param {string} id - The ID of the option to be set.
+ * @param {string} id2 - The category type.
  */
 function setOption(id, id2) {
     if (id2 == 'category') setOptionNow(id);
 }
 
 /**
- * Sets the selected option for the category dropdown.
- * Adds the 'd-none' class to hide the 'CategorycategoryBox' and 'addNewCat' elements.
- * Sets the 'dropDownCat' variable to false.
- * Calls the 'resetOptions()' function to reset the options.
- * Calls the 'setCategoryOptions()' function with the provided 'id' parameter to set the category options.
- * Updates the 'selectedCategory' variable with the provided 'id' parameter.
- * @param {string} id - The ID of the option to set as selected.
+ * Sets the specified option by modifying the class of the corresponding elements.
+ * @param {string} id - The ID of the option to be set.
  */
 function setOptionNow(id) {
     document.getElementById('CategorycategoryBox').classList.add('d-none');
@@ -559,10 +500,8 @@ function setOptionNow(id) {
 }
 
 /**
- * Sets the category options based on the provided ID.
- * If the element with the given ID contains a specific class, the category options are reset using the 'resetCategoryOptions()' function.
- * Otherwise, the category options are changed using the 'changeCategoryOptions()' function.
- * @param {string} id - The ID of the element to retrieve and process the category options.
+ * Sets the category options by resetting or changing the class of the specified element.
+ * @param {string} id - The ID of the target element.
  */
 function setCategoryOptions(id) {
     let sID = document.getElementById(id);
@@ -571,10 +510,9 @@ function setCategoryOptions(id) {
 }
 
 /**
- * Changes the category options for the provided element.
- * Adds the 'd-none' and 'cl_categories' classes to hide and style the element.
- * Removes the 'dropDownStart' class from the element.
- * @param {HTMLElement} sID - The element to change the category options for.
+ * Changes the category options by adding the "d-none" class, removing the "dropDownStart" class,
+ * and adding the "cl_categories" class to the specified element.
+ * @param {HTMLElement} sID - The target element to change the category options.
  */
 function changeCategoryOptions(sID) {
     sID.classList.add('d-none');
@@ -592,11 +530,9 @@ function isContainingClass(sID) {
 }
 
 /**
- * Resets the category options for the provided element.
- * Removes the 'd-none' class to display the element.
- * Adds the 'dropDownStart' class to restore the default styling of the element.
- * Removes the 'cl_categories' class from the element.
- * @param {HTMLElement} sID - The element to reset the category options for.
+ * Resets the category options by removing the "d-none" class, adding the "dropDownStart" class,
+ * and removing the "cl_categories" class from the specified element.
+ * @param {HTMLElement} sID - The target element to reset the category options.
  */
 function resetCategoryOptions(sID) {
     sID.classList.remove('d-none');
@@ -605,9 +541,8 @@ function resetCategoryOptions(sID) {
 }
 
 /**
- * Resets the options for all categories.
- * Adds the 'd-none' and 'cl_categories' classes to hide and style the category elements.
- * Removes the 'dropDownStart' class from the category elements.
+ * Resets the category options to their initial state.
+ * @param {HTMLElement} sID - The category options container element.
  */
 function resetOptions() {
     for (let i = 0; i < categories.length; i++) {
