@@ -31,7 +31,7 @@
         <div id="addTaskAtContacts" class="d-none"></div>
 
         <div id="createNewUserAtContacts" class="d-none">
-            <div onclick="hideAddNewContact()" class="closeIconAtContacts addUserCloseBtn"></div>
+            <div onclick="addDisplayNone('createNewUserAtContacts')" class="closeIconAtContacts addUserCloseBtn"></div>
             <div class="createNewUserAtContactsContainer">
                 <div class="createNewUserAtContacts-left">
                     <div class="left-side-Contacts">
@@ -69,7 +69,7 @@
 
                             </div>
                             <div class="addNewContactsButtonContainer">
-                                <div onclick="hideAddNewContact()" class="addNewContactCancelButton">Cancel</div>
+                                <div onclick="addDisplayNone('createNewUserAtContacts')" class="addNewContactCancelButton">Cancel</div>
                                 <button type="submit" class="addNewContactCreateButton">Create Contact<img
                                         src="../img/checkIconWhite.png"></button>
                             </div>
@@ -80,7 +80,7 @@
             </div>
         </div>
         <div id="editUserAtContacts" class="d-none">
-            <div onclick="hideEditContact()" class="closeIconAtContacts editUserCloseBtn"></div>
+            <div onclick="addDisplayNone('editUserAtContacts')" class="closeIconAtContacts editUserCloseBtn"></div>
             <div class="editUserAtContactsContainer">
                 <div class="editUserAtContacts-left">
                     <div class="left-side-Contacts">
@@ -127,7 +127,7 @@
 
             </div>
         </div>
-        <div onclick="showAddNewContact()" class="addNewContactButton" id="addNewContactButton">
+        <div onclick="removeDisplayNone('createNewUserAtContacts')" class="addNewContactButton" id="addNewContactButton">
             New Contact
             <img src="../img/addNewContactIcon.png" class="addNewContactIcon">
         </div>
