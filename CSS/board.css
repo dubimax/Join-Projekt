@@ -367,7 +367,7 @@ h1 {
     font-size: 61px;
     line-height: 120%;
     width: 500px;
-    height: fit-content;
+    min-height: fit-content;
     color: #2A3647;
     background-color: none;
     border: none;

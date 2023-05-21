@@ -61,6 +61,7 @@ function taskDetails() {
     for (let i = 0; i < tasks.length; i++) {
         const element = tasks[i];
         document.getElementById('boardContainer').innerHTML += generateOpenCardHTML(element, i, tasks[i]['status']);
+        setRowCount(tasks[i]['status'], i);
     }
 }
 
@@ -197,9 +198,11 @@ function openCard(index, status) {
 
         document.getElementById('openCard' + status + index).classList.remove('d-none');
     }
+    
     document.getElementById('assignedUserLogoOpen' + status + index).innerHTML = '';
     addUserAcronyms('assignedUserLogoOpen');
     addSubtasksToCardOpen(status, index);
+
     document.getElementById('overlay').style.display = "block";
 }
 
@@ -245,6 +248,15 @@ function setAssignedNames(status, index, username, id) {
 
 }
 
+function setRowCount(status, elementIndex) {
+    let textAreaField = document.getElementById('editTitle'+ status + elementIndex);
+    if (textAreaField.cols >= "20") {
+        textAreaField.rows = "2";
+    } else {
+        textAreaField.rows = "1";
+    }
+}
+
 /**
  * Generate a bigger card if you clicket a small card on the areas
  * @param {*} element elemts of the card 
@@ -262,7 +274,7 @@ function generateOpenCardHTML(element, index, status) {
         
         <div>
             <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
-            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly >${element['title']}</textarea>
+            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
         </div>
         <div>
             <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
