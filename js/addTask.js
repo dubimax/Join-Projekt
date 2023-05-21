@@ -178,7 +178,6 @@ function resetAllLabelContainer() {
  * @param {string} id - The ID of the element to set the style properties.
  * @param {string} color - The style property value to set for the element.
  * @param {string} name - The name used to construct the image source.
- * @returns {void}
  */
 function setStyle(id, color, name) {
     document.getElementById(id).style = color;
