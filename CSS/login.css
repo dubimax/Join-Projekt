@@ -470,7 +470,7 @@ p {
 
     .headerForgotMyPassword {
         font-size: 40px;
-        width: 315px;
+        width: 315px !important;
         height: 96px;
     }
 
@@ -493,4 +493,5 @@ p {
         width: 180px;
         font-size: 16px;
     }
+
 }
