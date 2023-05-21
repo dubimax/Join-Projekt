@@ -434,6 +434,11 @@ function addCloseBtnToAddTaskAtBoard() {
     <div onclick="hideAddNewTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
     `;
 }
+function setAssignedCircleHTML(username) {
+    return `
+    <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
+ `;
+}
 
 function setStyleOfCloseIconAtContacts() {
     let clientWidth = document.body.clientWidth;
