@@ -426,7 +426,7 @@ p {
     }
 
     .inputField input{
-        font-size: 18px;
+        font-size: 14px !important;
     }
 
     .containerRememberAndForgot {
@@ -483,7 +483,7 @@ p {
     }
 
     .forgotMyPasswordText {
-        font-size: 16px !important;
+        font-size: 16px;
         width: 322px;
         height: 75px;
         margin-bottom: 0;

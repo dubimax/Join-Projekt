@@ -538,6 +538,14 @@ h1 {
     .logoutButton {
         z-index: 9;
     }
+
+    .card {
+        width: 300px;
+    }
+
+    .taskDescription {
+        width: 270px;
+    }
     
     .boardContainer {
         display: flex;
@@ -722,6 +730,10 @@ h1 {
         width: 18px;
         height: 13.51px;
         object-fit: cover;
+    }
+
+    #addTaskAtBoard {
+        height: 835px !important;
     }
 
 }
