@@ -312,7 +312,7 @@
     justify-content: center;
     align-items: flex-start;
     gap: 3px;
-    margin-left: 67px;
+    margin-left: 32px;
     margin-top: 323px;
 }
 
@@ -335,13 +335,11 @@
 
 /* **************** RESPONSIVE DESIGN **************** */
 
-@media (max-width:1325px) {
+@media (max-width:1300px) {
     .summaryWelcomeText {
         display: none;
     }
-}
 
-@media (max-width:1300px) {
     .leftRightContainers {
         justify-content: center;
         margin-top: 124px;
@@ -514,5 +512,119 @@
 
     .navHeaderSummary {
         display: flex;
+    }
+}
+
+@media (max-width:500px){
+    .summaryHeader {
+        margin-left: 55px;
+    }
+
+    .summaryHeader h1{
+        font-size: 40px;
+    }
+
+    .summaryHeader span {
+        font-size: 18px;
+    }
+
+    .verticalLine{
+        top: 180px;
+    }
+
+    .summaryTopSingle {
+        width: 90px;
+        height: 90px;
+        gap: 3px;
+    }
+
+    .summaryTopSingle:hover {
+        width: 100px;
+        height: 100px;
+    }
+
+    .boxNumber {
+        font-size: 30px;
+    }
+
+    .boxText {
+        font-size: 13px;
+    }
+
+    .summaryTop {
+        margin-right: 30px;
+    }
+
+    .summaryCenter {
+        gap: 10px;
+        width: 300px;
+        margin-right: 30px;
+        height: 90px;
+    }
+
+    .summaryCenter:hover {
+        width: 310px;
+        height: 100px;
+    }
+
+    .prioImg {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .prioNumber {
+        font-size: 30px;
+    }
+
+    .prioText {
+        font-size: 13px;
+    }
+
+    .upcomingDate {
+        font-size: 13px;
+    }
+
+    .upcomingDateText {
+        font-size: 13px;
+    }
+
+    .prioVerticalLine {
+        height: 58px;
+    }
+
+    .summaryBottom{
+        gap: 0;
+        width: 335px;
+        height: 90px;
+        margin-right: 30px;
+    }
+
+    .summaryBottomSingle{
+        width: 137.5px;
+        height: 90px;
+        margin-left: 35px;
+    }
+
+    .summaryBottomSingle:hover{
+        width: 147.5px;
+        height: 100px;
+    }
+
+    .todoPencilImg {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .todoNumber {
+        font-size: 30px;
+    }
+
+    .todoText {
+        font-size: 13px;
+    }
+
+    .todoDoneImg {
+        width: 35px !important;
+        height: 35px !important;
     }
 }
