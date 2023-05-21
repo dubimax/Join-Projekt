@@ -8,9 +8,6 @@ async function initSummary() {
     generateNavigationLinks('Summary', 'Summary', 'Board', 'AddTask', 'Contacts');
 };
 
-function show(){
-    
-}
 
 /**
  * Generate functions for the Summary Page
@@ -22,6 +19,7 @@ function generateSummary() {
         tasksNumbersInBox();
         greeting();
         showUserName();
+        greetingMobile();
     } else {
         window.location.href = '../login.html';
     }
@@ -50,17 +48,39 @@ function greeting() {
         greet = 'Good Evening,';
 
     document.getElementById('greeting').innerHTML = greet;
+    document.getElementById('greetingMobile').innerHTML = greet;
 }
 
 function showUserName() {
     let nameOfCurrentUser = document.getElementById('currentUser');
+    let nameOfCurrentUserMobile = document.getElementById('currentUserMobile');
     if (indexOfEmail.name == 'Guest Guest') {
         nameOfCurrentUser.innerHTML = '';
+        nameOfCurrentUserMobile.innerHTML = '';
     } else {
     nameOfCurrentUser.innerHTML = indexOfEmail.name;
+    nameOfCurrentUserMobile.innerHTML = indexOfEmail.name;
     }
 }
 
+function greetingMobile() {
+    if (window.innerWidth <= 1300) {
+        let greetMobileContainer = document.getElementById("summaryWelcomeTextMobile");
+        let mainContainer = document.getElementById('mainContainer');
+        let navContainer = document.getElementById('nav');
+        if (document.referrer.includes("login.html")) {
+            greetMobileContainer.classList.remove('d-none');
+            mainContainer.classList.add('d-none');
+            navContainer.classList.add('d-none');
+            showUserName();
+            setTimeout(function() {
+                greetMobileContainer.classList.add('d-none');
+                mainContainer.classList.remove('d-none');
+                navContainer.classList.remove('d-none');
+            }, 2500);
+        }
+    }
+}
 
 /**
  * Show the numbers of how many tasks are in the board
@@ -164,6 +184,7 @@ function checkNextDueDate() {
         }
     }
 }
+
 
 
 
