@@ -8,11 +8,8 @@ async function includeHTML() {
         const element = includeElements[i];
         file = element.getAttribute("w3-include-html");
         let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = 'Page not found';
-        }
+        if (resp.ok) element.innerHTML = await resp.text();
+        else element.innerHTML = 'Page not found';
     }
 }
 
@@ -63,6 +60,18 @@ function action(formData) {
     return fetch(input, requestInit);
 }
 
+/**
+ * Sets the inner HTML content of an element with the provided text.
+ * @param {string} id - The ID of the element.
+ * @param {string} text - The text to set as the inner HTML content.
+ */
+function setInnerHTML(id, text) {
+    document.getElementById(id).innerHTML = text;
+}
+
+function addInnerHTML(id, text) {
+    document.getElementById(id).innerHTML += text;
+}
 
 /**
  * Sets the selected Navigation Link
@@ -71,14 +80,13 @@ function action(formData) {
  */
 function generateNavigationLinks(coloredLink, ...links) {
     document.getElementById('navigation-left-links').innerHTML = '';
-    for (let i = 0; i < links.length; i++) {
-        let linkname = links[i];
-        if (coloredLink == linkname) {
-            document.getElementById('navigation-left-links').innerHTML += generateSelectedNavigationLinkHTML(linkname);
-        } else {
-            document.getElementById('navigation-left-links').innerHTML += generateUnSelectedNavigationLinkHTML(linkname);
-        }
-    }
+    for (let i = 0; i < links.length; i++) addNavigationLink(coloredLink, i);
+}
+
+function addNavigationLink(coloredLink, i) {
+    let linkname = links[i];
+    if (coloredLink == linkname) addInnerHTML('navigation-left-links', generateSelectedNavigationLinkHTML(linkname));
+    else addInnerHTML('navigation-left-links', generateUnSelectedNavigationLinkHTML(linkname));
 }
 
 /**
@@ -94,7 +102,11 @@ function firstLetterToLowerCase(string) {
  * Adds a Confirmmessage
  */
 function addConfirmMessage() {
-    document.body.innerHTML += `<div class="confirmMessage" id="confirmMessage">Contact successfully createt</div>`;
+    document.body.innerHTML += setConfirmMessage();
+}
+
+function setConfirmMessage() {
+    return `<div class="confirmMessage" id="confirmMessage">Contact successfully createt</div>`;
 }
 
 /**
@@ -109,9 +121,12 @@ function removeConfirmMessage() {
  *  or removes the Logout Button if there
  */
 function setLogoutButton() {
-    if (document.body.lastChild.id == 'optionsMenu') {
-        removeLogoutButton();
-    } else addLogoutButton();
+    if (isLogoutButtonShown()) removeLogoutButton();
+    else addLogoutButton();
+}
+
+function isLogoutButtonShown() {
+    return document.body.lastChild.id == 'optionsMenu';
 }
 
 /**
@@ -147,28 +162,34 @@ async function init() {
 function login() {
     let userEmail = document.getElementById('userMailLogIn').value;
     let userPassword = document.getElementById('userPasswordLogIn').value;
-    checkUserData(userEmail, userPassword)
+    checkUserData(userEmail, userPassword);
 }
 
 function checkUserData(userEmail, userPassword) {
     for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-
-        if (user.email == userEmail && user.pwd == userPassword) {
-            indexOfEmail = users.find(u => u.email == userEmail);
-            loggedIn = true;
-            save();
-            window.location.href = './html/summary.html';
-        }
+        checkUserDataForUser(i, userEmail, userPassword);
     }
-    let dataCheck = document.getElementById('dataCheck');
-    dataCheck.classList.remove('d-none');
+    removeDisplayNone('dataCheck');
 }
 
+function checkUserDataForUser(i, userEmail, userPassword) {
+    const user = users[i];
+    if (isUserAndMailCorrect(user, userEmail, userPassword)) setLoggedIn(userEmail);
+}
+
+function isUserAndMailCorrect(user, userEmail, userPassword) {
+    return user.email == userEmail && user.pwd == userPassword;
+}
+
+function setLoggedIn(userEmail) {
+    indexOfEmail = users.find(u => u.email == userEmail);
+    loggedIn = true;
+    save();
+    window.location.href = './html/summary.html';
+}
 
 function guestLogin() {
     checkUserData('guest@guest.de', 'guest');
-    console.log('gast user angemeldet');
 }
 
 function logout() {
@@ -242,25 +263,28 @@ function getUser(i) {
  * @param {*} id 
  */
 function cancelAddNew(id) {
-    if (id == 'addNewCat') {
-        document.getElementById('id_categoryBox').innerHTML = setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category');
-        addOptionWithFunction('addNewCat');
-        generateOptionsHTML(categories, 'categories');
-        save();
-        dropDownCat = false;
-        addEventListenerToCategories();
-    }
-    if (id == 'addNewSubTask') {
-        document.getElementById('id_addNewSubTask').innerHTML = setBackToSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png');
-    }
-    if(id == 'assignedTo'){
-        for(let i = 0;i < document.getElementById('assignedTo').children.length;i++){
-            if(i > 1){
-                document.getElementById('assignedTo').children[i].children[0].checked =false;
-            }         
+    if (id == 'addNewCat') cancelAddNewCat();
+    if (id == 'addNewSubTask') setInnerHTML(id + 'addNewSubTask', setBackToSubTaskField('label', 'Subtasks',
+        'dropDownMenuField', 'addNewSubTask', './img/addIcon.png'));
+    if (id == 'assignedTo') cancelAssignedTo();
+}
 
-        }
-    }
+function cancelAssignedTo() {
+    let children = document.getElementById('assignedTo').children;
+    for (let i = 0; i < children.length; i++) setCheckBoxFalse(i);
+}
+
+function setCheckBoxFalse(i) {
+    if (i > 1) document.getElementById('assignedTo').children[i].children[0].checked = false;
+}
+
+function cancelAddNewCat() {
+    setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
+    addOptionWithFunction('addNewCat');
+    generateOptionsHTML(categories, 'categories');
+    save();
+    dropDownCat = false;
+    addEventListenerToCategories();
 }
 
 /**
@@ -268,12 +292,8 @@ function cancelAddNew(id) {
  * @param {*} usedItems 
  */
 function showDropDownItems(usedItems) {
-    if (usedItems == 'categories') {
-        showCategoryItems();
-    }
-    if (usedItems == 'users') {
-        showUsersItems();
-    }
+    if (usedItems == 'categories') showCategoryItems();
+    if (usedItems == 'users') showUsersItems();
 }
 
 /**
@@ -283,14 +303,10 @@ function showCategoryItems() {
     if (document.getElementById('CategorycategoryBox')) {
         checkDropDown();
         for (let i = 0; i < categories.length; i++) {
-            if (document.getElementById(categories[i]['name']).classList.contains('d-none')) {
-                document.getElementById(categories[i]['name']).classList.remove('d-none');
-            } else {
-                document.getElementById(categories[i]['name']).classList.add('d-none');
-            }
-        } if (selectedCategory) {
-            document.getElementById(selectedCategory).classList.remove('d-none');
+            if (isContainingClassDnone(categories[i]['name'])) removeDisplayNone(categories[i]['name']);
+            else addDisplayNone(categories[i]['name']);
         }
+        if (selectedCategory) removeDisplayNone(selectedCategory);
     }
 }
 
@@ -344,31 +360,31 @@ function setOnSubmitForm(addForm) {
         document.body.innerHTML += `
             <div class="confirmMessage" id="submitted">Task successfully created</div>
         `;
-        if(document.getElementById('addTask')){
+        if (document.getElementById('addTask')) {
             document.getElementById('addTask').classList.add('d-none');
-            setTimeout(()=>{
+            setTimeout(() => {
                 document.getElementById('submitted').remove();
-                
-            },1000);
+
+            }, 1000);
             return false;
 
-        }else if(document.getElementById('addTaskAtContacts')){
+        } else if (document.getElementById('addTaskAtContacts')) {
             document.getElementById('addTaskAtContacts').classList.add('d-none');
-            setTimeout(()=>{
+            setTimeout(() => {
                 document.getElementById('submitted').remove();
-                
-            },1000);
+
+            }, 1000);
             return false;
-        }else if(document.getElementById('addTaskAtBoard')){
+        } else if (document.getElementById('addTaskAtBoard')) {
             document.getElementById('addTaskAtBoard').classList.add('d-none');
-            setTimeout(()=>{
+            setTimeout(() => {
                 document.getElementById('submitted').remove();
-                
-            },1000);
+
+            }, 1000);
             return false;
         }
-        
-        
+
+
     };
 }
 
@@ -412,12 +428,12 @@ function generateCheckboxItem() {
     document.getElementById('list-subtask').innerHTML += `
     <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
     `;
-    if(document.getElementById('list-subtask-'+ getItemFromInput()).checked == true){
+    if (document.getElementById('list-subtask-' + getItemFromInput()).checked == true) {
         isChecked = true;
-    }else {
+    } else {
         isChecked = false;
     }
-    subtasks.push({'item':getItemFromInput(),'checked': isChecked});
+    subtasks.push({ 'item': getItemFromInput(), 'checked': isChecked });
     document.getElementById('newSubtasks').value = '';
 }
 
@@ -475,9 +491,17 @@ function addContentTitle(title, id) {
  */
 async function showLink(id) {
     await save();
-    location.href =  id;
+    location.href = id;
 }
 
+/**
+ * Checks if an element contains the 'd-none' class.
+ * @param {string} id - The ID of the element.
+ * @returns {boolean} True if the element contains the 'd-none' class, false otherwise.
+ */
+function isContainingClassDnone(id) {
+    return document.getElementById(id).classList.contains('d-none');
+}
 
 function showFrame(...ids) {
     let element1 = ids[0];
@@ -493,4 +517,18 @@ function showFrame(...ids) {
     }
 }
 
+/**
+ * Adds the 'd-none' class to an element to hide it by setting its display property to 'none'.
+ * @param {string} id - The ID of the element.
+ */
+function addDisplayNone(id) {
+    document.getElementById(id).classList.add('d-none');
+}
 
+/**
+ * Removes the 'd-none' class from an element to show it by restoring its display property.
+ * @param {string} id - The ID of the element.
+ */
+function removeDisplayNone(id) {
+    document.getElementById(id).classList.remove('d-none');
+}

@@ -425,7 +425,7 @@ function generateContactDetailsHTML() {
  */
 function addCloseBtnToAddTaskAtContacts(overlay) {
     document.getElementById('addTaskAtContacts').innerHTML += `
-    <div onclick="hideAddNewTaskAtContacts()" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>
+    <div onclick="addDisplayNone('addTaskAtContacts')" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>
     `;
 }
 
