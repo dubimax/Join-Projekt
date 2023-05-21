@@ -1,3 +1,7 @@
+/**
+ * Generates the "Add Task" images for each section in the board.
+ * Clicking on the image triggers the checkStatusToSet function with the specified status.
+ */
 function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaToDoTitle').innerHTML += `
         <img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
@@ -53,63 +57,60 @@ function generateCategoryOptionHTML(nameOfArray, i){
     `;
 }
 
+/**
+ * Generates the HTML for the "Add Task" section.
+ * @param {string} id - The ID of the element to append the HTML content.
+ */
 function generateAddTaskHTML(id) {
     load();
     if (loggedIn) {
         addContentTitle('Add Task', id);
         document.getElementById(id).innerHTML += `
-    <form id="submitting" onsubmit="" class="addTaskForm" >
-    <div class="details detailBox">
-        <div class="detailBox-left">
-            ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
-            ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
-            ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
-            ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
-            <div class="p-relative d-flex align-c">
-
-                <list class="d-flex" id="list-assigned-user">
-                </list>
+        <form id="submitting" onsubmit="" class="addTaskForm" >
+            <div class="details detailBox">
+                <div class="detailBox-left">
+                    ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
+                    ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
+                    ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
+                    ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
+                    <div class="p-relative d-flex align-c">
+                        <list class="d-flex" id="list-assigned-user">
+                        </list>
+                    </div>
+                </div>
+                <div class="border-1px-solid"></div>
+                <div class="detailBox-right">
+                    ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
+                    ${generateLabelsHTML('label', 'Prio')} 
+                    ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
+                    <div class="p-relative d-flex align-c">
+                        <list class="" id="list-subtask">
+                        </list>
+                    </div>
+                    <div class="d-flex align-c container-btns">
+                        <div class="clearButton" onclick="clearAllInputs()">
+                            Clear
+                        </div>
+                        <button type="submit" class="createTaskBtn">
+                            Create Task  
+                            <img class="" src="../img/checkIconWhite.png">
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="border-1px-solid"></div>
-        <div class="detailBox-right">
-        ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-        ${generateLabelsHTML('label', 'Prio')} 
-        ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
-            <div class="p-relative d-flex align-c">
-
-                <list class="" id="list-subtask">
-                </list>
-            </div>
-            <div class="d-flex align-c container-btns">
-            <div class="clearButton" onclick="clearAllInputs()">
-                Clear
-            </div>
-            <button type="submit" class="createTaskBtn">
-                Create Task  
-                <img class="" src="../img/checkIconWhite.png">
-            </button>
-    
-        </div>
-        </div>
-    </div>
-       
-       
         </form>
     `;
-        addInviteNewContact();
-        generateOptionsHTML(users, 'users');
-        addOptionWithFunction('addNewCat');
-        generateOptionsHTML(categories, 'categories');
-        addEventListenerToDropDown();
-
-
-    } else {
-        window.location.href = '../login.html';
-    }
+    addInviteNewContact();
+    generateOptionsHTML(users, 'users');
+    addOptionWithFunction('addNewCat');
+    generateOptionsHTML(categories, 'categories');
+    addEventListenerToDropDown();
+    } else window.location.href = '../login.html';
 }
 
+/**
+ * Adds color choices to the category box in the "Add Task" form.
+ */
 function addColorChoser() {
     document.getElementById('id_categoryBox').innerHTML += `
     <div class="d-flex">
@@ -123,11 +124,10 @@ function addColorChoser() {
     `;
 }
 
-function addOptionWithFunction(id) {
-    document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
-}
-
+/**
+ * Adds a new category option with a corresponding function to the category dropdown menu.
+ * @param {string} id - The ID of the new category option.
+ */
 function generateContactDetailsTitle() {
     document.getElementById('contactDetails').innerHTML = `
     <div class="contactsTitleContainer">
@@ -138,14 +138,19 @@ function generateContactDetailsTitle() {
 `;
 }
 
+/**
+ * Adds a back arrow button to the contact details section and attaches an event listener to hide the contact details.
+ */
 function hideContactDetailsButton() {
     document.getElementById('contactDetails').innerHTML += `
-    <img src="../img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
+        <img src="../img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
     `;
 }
 
-
-
+/**
+ * Generates the contact head section in the contact details.
+ * It includes the contact's logo, name, and an option to add a new task for the contact.
+ */
 function generateContactHead() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="contactHeadContainer d-none" id="contactHeadContainer">
@@ -157,11 +162,14 @@ function generateContactHead() {
                 Add Task
             </div>
         </div>
-        
     </div>
     `;
 }
 
+/**
+ * Generates the contact body section in the contact details.
+ * It includes contact information such as email and phone, and an option to edit or delete the contact.
+ */
 function generateContactBody() {
     document.getElementById('contactDetails').innerHTML += `
     <div class="contactInformationContainer d-none" id="contactInformationContainer">
@@ -183,10 +191,16 @@ function generateContactBody() {
             </div>
          </div>
     </div>
-    <div class="deleteButtonContent" id="deleteButtonContent">
+    <div class="deleteButtonContent" id="deleteButtonContent"></div>
     `;
 }
 
+/**
+ * Generates HTML for labels in the form.
+ * @param {string} field - The HTML tag for the label.
+ * @param {string} headline - The headline for the labels section.
+ * @returns {string} - The generated HTML for the labels.
+ */
 function generateLabelsHTML(field, headline) {
     return `
     <div class="detail">
@@ -200,6 +214,14 @@ function generateLabelsHTML(field, headline) {
     `;
 }
 
+/**
+ * Generates HTML for a textarea field in the form.
+ * @param {string} field1 - The HTML tag for the label.
+ * @param {string} field2 - The HTML tag for the textarea field.
+ * @param {string} headline - The headline for the textarea field.
+ * @param {string} placeholder - The placeholder text for the textarea field.
+ * @returns {string} - The generated HTML for the textarea field.
+ */
 function generatesTextareaFieldHTML(field1, field2, headline, placeholder) {
     return `
     <div class="detail">
@@ -209,6 +231,17 @@ function generatesTextareaFieldHTML(field1, field2, headline, placeholder) {
     `;
 }
 
+/**
+ * Generates HTML for an input field in the form.
+ * @param {string} field1 - The HTML tag for the label.
+ * @param {string} field2 - The HTML tag for the input field.
+ * @param {string} headline - The headline for the input field.
+ * @param {string} properties - The CSS properties for the input field.
+ * @param {string} type - The type of the input field (e.g., text, date, etc.).
+ * @param {string} id - The id of the input field.
+ * @param {string} placeholder - The placeholder text for the input field.
+ * @returns {string} - The generated HTML for the input field.
+ */
 function generatesInputFieldHTML(field1, field2, headline, properties, type, id, placeholder) {
     return `
     <div class="detail" id="id_${id}">
@@ -218,13 +251,24 @@ function generatesInputFieldHTML(field1, field2, headline, properties, type, id,
     `;
 }
 
+/**
+ * Generates HTML for an input field in the form with the option to change the input field.
+ * @param {string} field1 - The HTML tag for the label.
+ * @param {string} field2 - The HTML tag for the input field.
+ * @param {string} headline - The headline for the input field.
+ * @param {string} properties - The CSS properties for the input field.
+ * @param {string} type - The type of the input field (e.g., text, date, etc.).
+ * @param {string} id - The id of the input field.
+ * @param {string} restoreID - The id to restore when canceling the change.
+ * @param {string} atClick - The function to execute when confirming the change.
+ * @param {string} newclass - The CSS class for the change container.
+ * @returns {string} - The generated HTML for the input field with change option.
+ */
 function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick,newclass) {
     return `
     <${field1}>${headline}</${field1}>
-
     <${field2} class="${properties}" type="${type}" id="${id}" >
     <div class="${newclass} newCat">
-
         <a onclick="cancelAddNew('${restoreID}')"><img src="../img/cancelIcon.png"></a>
         <div class="border-1px-solid margin0px width0-height31px"></div>
         <a onclick="${atClick}"><img src="../img/checkIcon.png"></a>
@@ -232,8 +276,17 @@ function generatesChangedInputFieldHTML(field1, field2, headline, properties, ty
     `;
 }
 
+/**
+ * Generates HTML for an options field in the form.
+ * @param {string} field1 - The HTML tag for the label.
+ * @param {string} headline - The headline for the options field.
+ * @param {string} properties - The CSS properties for the options field.
+ * @param {string} id - The id of the options field.
+ * @param {string} source - The path to the image source.
+ * @param {string} selectionText - The text to display as the default selection.
+ * @returns {string} - The generated HTML for the options field.
+ */
 function generatesOptionsFieldHTML(field1, headline, properties, id, source, selectionText) {
-
     return `
     <div class="detail" id="id_${id}">
         <${field1}>${headline}</${field1}>
@@ -246,6 +299,9 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
     `;
 }
 
+/**
+ * Adds the "Invite Contact" option to the assignedTo dropdown menu.
+ */
 function addInviteNewContact() {
     document.getElementById('assignedTo').innerHTML += `
         <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">
@@ -257,6 +313,16 @@ function addInviteNewContact() {
     `;
 }
 
+/**
+ * Generates the options field HTML with the selected value displayed.
+ * @param {string} field1 - The HTML tag for the field label.
+ * @param {string} headline - The headline or label text.
+ * @param {string} properties - The class or properties of the field.
+ * @param {string} id - The unique identifier for the field.
+ * @param {string} source - The source of the image for the select button.
+ * @param {string} selectionText - The text to display when no option is selected.
+ * @returns {string} The generated HTML for the options field.
+ */
 function setBackToOptionsField(field1, headline, properties, id, source, selectionText) {
     return `
     <${field1}>${headline}</${field1}>
@@ -267,6 +333,16 @@ function setBackToOptionsField(field1, headline, properties, id, source, selecti
         </div>
     `;
 }
+
+/**
+ * Generates the subtask field HTML with the option to add a new subtask.
+ * @param {string} field1 - The HTML tag for the field label.
+ * @param {string} headline - The headline or label text.
+ * @param {string} properties - The class or properties of the field.
+ * @param {string} id - The unique identifier for the field.
+ * @param {string} source - The source of the image for the add subtask button.
+ * @returns {string} The generated HTML for the subtask field.
+ */
 function setBackToSubTaskField(field1, headline, properties, id, source) {
     return `
     <${field1}>${headline}</${field1}>
@@ -287,15 +363,6 @@ function generateSubTaskField(field1, headline, properties, id, source) {
         </div>
     </div>
     `;
-}
-
-
-
-function generateNavigationLinksContacts() {
-    generateNavigationLinks(color, linkname);
-    generateNavigationLinks(color, linkname);
-    generateNavigationLinks(color, linkname);
-    generateNavigationLinks(color, linkname);
 }
 
 function addHelp() {
@@ -410,14 +477,12 @@ function generateUnSelectedNavigationLinkHTML(linkname) {
  */
 function addLogoutButton() {
     let clientWidth = document.body.clientWidth;
-
     document.body.innerHTML += `
     <div class="logoutButton" id="optionsMenu">
         <div  id="logoutButton" onclick="logout()">
             Logout
         </div>
     </div>`;
-
     if (clientWidth < 1300) {
         document.getElementById('optionsMenu').innerHTML += `
         <div>Legal Notice</div>
