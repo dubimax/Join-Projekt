@@ -363,6 +363,10 @@
         display: block !important;
     }
 
+    .logoutButton {
+        z-index: 9;
+    }
+
     .summaryWelcomeText {
         display: none;
     }

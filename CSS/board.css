@@ -535,6 +535,10 @@ h1 {
 
 @media (max-width:1300px) {
 
+    .logoutButton {
+        z-index: 9;
+    }
+    
     .boardContainer {
         display: flex;
         flex-direction: column;
