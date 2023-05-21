@@ -596,6 +596,14 @@ function addCloseBtnToAddTaskAtBoard() {
     <div onclick="hideAddNewTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
     `;
 }
+
+/**
+ * Generates HTML for an assigned circle element with the specified username.
+ * @param {Object} username - The username object.
+ * @param {string} username.name - The username.
+ * @param {string} username.color - The color for the circle background.
+ * @returns {string} The HTML for the assigned circle element.
+ */
 function setAssignedCircleHTML(username) {
     return `
     <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
