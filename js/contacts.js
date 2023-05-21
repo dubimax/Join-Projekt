@@ -388,14 +388,7 @@ function setContactDetail(userName, userColor, userMail, userPhone) {
     document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
 }
 
-/**
- * Sets the inner HTML content of an element with the provided text.
- * @param {string} id - The ID of the element.
- * @param {string} text - The text to set as the inner HTML content.
- */
-function setInnerHTML(id, text) {
-    document.getElementById(id).innerHTML = text;
-}
+
 
 /**
  * Hides the contact details container by adding the 'd-none' class to specific child elements.
