@@ -262,7 +262,7 @@ function generateOpenCardHTML(element, index, status) {
         
         <div>
             <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
-            <input class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly value="${element['title']}"/>
+            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly >${element['title']}</textarea>
         </div>
         <div>
             <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
