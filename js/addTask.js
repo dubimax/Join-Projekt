@@ -21,7 +21,7 @@ function createNewTask(statusTag) {
  * @returns {string} The priority value of the active task.
  */
 function getTasksPrio() {
-    let taskPrio = getValue(activeID).innerHTML.split(' ');
+    let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     taskPrio = taskPrio[0];
     return taskPrio;
 }
@@ -137,13 +137,13 @@ function clearListSubtask() {
  * @param  {...any} ids elemnts to reset
  */
 function clearFields(...ids) {
-    for (let i = 0; i < ids.length; i++) changeStyleIfExistent();
+    for (let i = 0; i < ids.length; i++) changeStyleIfExistent(ids, i);
 }
 
 /**
  * Changes style of Label an reset Style if Element exists
  */
-function changeStyleIfExistent() {
+function changeStyleIfExistent(ids, i) {
     if (isElementExistent(ids[i])) document.getElementById(ids[i]).value = '';
     changeStyleOfLabel(ids[i]);
 }

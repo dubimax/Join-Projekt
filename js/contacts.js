@@ -258,7 +258,7 @@ function createNewContact() {
 function confirmMessage() {
     addConfirmMessage('Contact');
     addDisplayNone('createNewUserAtContacts');
-    setTimeout(removeConfirmMessage(), 1000);
+    setTimeout(() => removeConfirmMessage(), 1000);
 }
 
 /**
