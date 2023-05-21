@@ -25,9 +25,14 @@
 
 <body onload="initSummary()">
 
-    <div w3-include-html="../templates/navs.html"></div>
+    <div class="summaryWelcomeTextMobile d-none" id="summaryWelcomeTextMobile">
+        <div class="summaryGreeting" id="greetingMobile"></div>
+        <div class="summaryContactName" id="currentUserMobile"></div>
+    </div>
 
-    <div class="leftRightContainers">
+    <div w3-include-html="../templates/navs.html" id="nav"></div>
+    
+    <div class="leftRightContainers" id="mainContainer">
         <div class="summaryPageContainer">
             <div class="summaryHeader">
                 <h1>Summary</h1>

@@ -331,12 +331,18 @@
     line-height: 120%;
 
     color: #29ABE2;
+}
 
+.summaryWelcomeTextMobile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* **************** RESPONSIVE DESIGN **************** */
 @media (max-width: 1410px) {
-    .summaryWelcomeText{
+    .summaryWelcomeText {
         margin-left: -50px;
     }
 }
@@ -521,12 +527,30 @@
     }
 }
 
-@media (max-width:500px){
+@media (max-width: 850px) {
+    .summaryGreeting {
+        font-size: 37px;
+    }
+
+    .summaryContactName {
+        font-size: 55px;
+    }
+}
+
+@media (max-width:500px) {
+    .summaryGreeting {
+        font-size: 20px;
+    }
+
+    .summaryContactName {
+        font-size: 27px;
+    }
+
     .summaryHeader {
         margin-left: 55px;
     }
 
-    .summaryHeader h1{
+    .summaryHeader h1 {
         font-size: 40px;
     }
 
@@ -534,7 +558,7 @@
         font-size: 18px;
     }
 
-    .verticalLine{
+    .verticalLine {
         top: 180px;
     }
 
@@ -598,20 +622,20 @@
         height: 58px;
     }
 
-    .summaryBottom{
+    .summaryBottom {
         gap: 0;
         width: 335px;
         height: 90px;
         margin-right: 30px;
     }
 
-    .summaryBottomSingle{
+    .summaryBottomSingle {
         width: 137.5px;
         height: 90px;
         margin-left: 35px;
     }
 
-    .summaryBottomSingle:hover{
+    .summaryBottomSingle:hover {
         width: 147.5px;
         height: 100px;
     }
