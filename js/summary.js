@@ -1,4 +1,3 @@
-
 /**
  * Initialize the Summary Page
  */
@@ -14,21 +13,22 @@ async function initSummary() {
  */
 function generateSummary() {
     load();
-    if (loggedIn) {
-        tasksInBoardBox();
-        tasksNumbersInBox();
-        greeting();
-        showUserName();
-        greetingMobile();
-    } else {
-        window.location.href = '../login.html';
-    }
+    if (loggedIn) activeSummary();
+    else window.location.href = '../login.html';
+}
+
+function activeSummary() {
+    tasksInBoardBox();
+    tasksNumbersInBox();
+    greeting();
+    showUserName();
+    greetingMobile();
 }
 
 /**
  * Open the Board the Page if clicked on some boxes
  */
-async function openBoardPage() {
+function openBoardPage() {
     showLink('board.html');
 }
 
@@ -36,50 +36,54 @@ async function openBoardPage() {
  * Greet the User
  */
 function greeting() {
-    let greet;
     let myDate = new Date();
     let hrs = myDate.getHours();
+    if (hrs < 12) greetAllContainer('Good Morning,');
+    else if (hrs >= 12 && hrs <= 18) greetAllContainer('Good Afternoon,');
+    else if (hrs >= 18 && hrs <= 24) greetAllContainer('Good Evening,');
+}
 
-    if (hrs < 12)
-        greet = 'Good Morning';
-    else if (hrs >= 12 && hrs <= 18)
-        greet = 'Good Afternoon,';
-    else if (hrs >= 18 && hrs <= 24)
-        greet = 'Good Evening,';
+function greetAllContainer(greet) {
+    addInnerHTML('greeting', greet(greet));
+    addInnerHTML('greetingMobile', greet(greet));
+}
 
-    document.getElementById('greeting').innerHTML = greet;
-    document.getElementById('greetingMobile').innerHTML = greet;
+function greet(greeting) {
+    return greeting;
 }
 
 function showUserName() {
-    let nameOfCurrentUser = document.getElementById('currentUser');
-    let nameOfCurrentUserMobile = document.getElementById('currentUserMobile');
-    if (indexOfEmail.name == 'Guest Guest') {
-        nameOfCurrentUser.innerHTML = '';
-        nameOfCurrentUserMobile.innerHTML = '';
-    } else {
-    nameOfCurrentUser.innerHTML = indexOfEmail.name;
-    nameOfCurrentUserMobile.innerHTML = indexOfEmail.name;
-    }
+    if (isGuest()) setUserName('');
+    else setUserName(indexOfEmail.name);
+}
+
+function isGuest() {
+    indexOfEmail.name == 'Guest Guest';
+}
+
+function setUserName(text) {
+    setInnerHTML('currentUser', text);
+    setInnerHTML('currentUserMobile', text)
 }
 
 function greetingMobile() {
-    if (window.innerWidth <= 1300) {
-        let greetMobileContainer = document.getElementById("summaryWelcomeTextMobile");
-        let mainContainer = document.getElementById('mainContainer');
-        let navContainer = document.getElementById('nav');
-        if (document.referrer.includes("login.html")) {
-            greetMobileContainer.classList.remove('d-none');
-            mainContainer.classList.add('d-none');
-            navContainer.classList.add('d-none');
-            showUserName();
-            setTimeout(function() {
-                greetMobileContainer.classList.add('d-none');
-                mainContainer.classList.remove('d-none');
-                navContainer.classList.remove('d-none');
-            }, 2500);
-        }
+    if (window.innerWidth <= 1300 && document.referrer.includes("login.html")) {
+        showGreetingResponsive();
+        setTimeout(hideGreetingsResponsive(), 2500);
     }
+}
+
+function hideGreetingsResponsive() {
+    addDisplayNone('summaryWelcomeTextMobile');
+    removeDisplayNone('mainContainer');
+    removeDisplayNone('nav');
+}
+
+function showGreetingResponsive() {
+    removeDisplayNone('summaryWelcomeTextMobile');
+    addDisplayNone('mainContainer');
+    addDisplayNone('nav');
+    showUserName();
 }
 
 /**
@@ -107,11 +111,9 @@ function tasksNumbersInBox() {
 function numberOfInPorgressBox() {
     let iPBox = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'inProgress') {
-            iPBox.push(tasks[i]);
-        }
+        if (tasks[i]['status'] == 'inProgress') iPBox.push(tasks[i]);
     }
-    document.getElementById('tasksInProgressBox').innerHTML = iPBox.length;
+    setInnerHTML('tasksInProgressBox', iPBox.length);
 }
 
 /**
@@ -120,11 +122,9 @@ function numberOfInPorgressBox() {
 function numberOfAwaitingFeedbackBox() {
     let aFBox = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'awaitingFeedback') {
-            aFBox.push(tasks[i]);
-        }
+        if (tasks[i]['status'] == 'awaitingFeedback') aFBox.push(tasks[i]);
     }
-    document.getElementById('awaitingFeedbackBox').innerHTML = aFBox.length;
+    setInnerHTML('awaitingFeedbackBox', aFBox.length);
 }
 
 /**
@@ -133,11 +133,9 @@ function numberOfAwaitingFeedbackBox() {
 function numberOfToDoBox() {
     let tDBox = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'toDo') {
-            tDBox.push(tasks[i]);
-        }
+        if (tasks[i]['status'] == 'toDo') tDBox.push(tasks[i]);
     }
-    document.getElementById('toDo').innerHTML = tDBox.length;
+    setInnerHTML('toDo', tDBox.length);
 }
 
 /**
@@ -146,11 +144,9 @@ function numberOfToDoBox() {
 function numberOfDoneBox() {
     let dBox = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'done') {
-            dBox.push(tasks[i]);
-        }
+        if (tasks[i]['status'] == 'done') dBox.push(tasks[i]);
     }
-    document.getElementById('done').innerHTML = dBox.length;
+    setInnerHTML('done', dBox.length);
 }
 
 /**
@@ -159,11 +155,9 @@ function numberOfDoneBox() {
 function numberOfUrgentTasksBox() {
     let uBox = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['prio'] == 'Urgent') {
-            uBox.push(tasks[i]);
-        }
+        if (tasks[i]['prio'] == 'Urgent') uBox.push(tasks[i]);
     }
-    document.getElementById('urgent').innerHTML = uBox.length;
+    setInnerHTML('urgent', uBox.length);
 }
 
 /**
@@ -172,21 +166,15 @@ function numberOfUrgentTasksBox() {
 function checkNextDueDate() {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'];
-
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks.length > 0 && tasks[0] != '') {
-            let dueDate = new Date(tasks[i]['dueDate']);
-            let month = months[dueDate.getMonth()];
-            let nextDueDate = month + ' ' + dueDate.getDate() + ', ' + dueDate.getFullYear();
-            document.getElementById('date').innerHTML = nextDueDate;
-        } else {
-            upcomingDeadline.innerHTML = `No upcoming deadline`;
-        }
+        if (tasks.length > 0 && tasks[0] != '') setDate(i,months);
+        else setInnerHTML('upcomingDeadline',`No upcoming deadline`);
     }
 }
 
-
-
-
-
-
+function setDate(i,months) {
+    let dueDate = new Date(tasks[i]['dueDate']);
+    let month = months[dueDate.getMonth()];
+    let nextDueDate = month + ' ' + dueDate.getDate() + ', ' + dueDate.getFullYear();
+    setInnerHTML('date', nextDueDate);
+}
