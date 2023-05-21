@@ -398,32 +398,45 @@ function removeMessage(id) {
  * Shows the useritems in Dropdown menu
  */
 function showUsersItems() {
-    if (!dropDownAssign) {
-        document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-        document.getElementById('assignedTo').style = `height:unset;`;
-        document.getElementById('invite').classList.remove('d-none');
-        dropDownAssign = true;
-    } else {
+    if (!dropDownAssign) setUserItems();
+    else hideUserItems();
+    setStyleOfSelectedUsers();
+}
 
-        if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
-            document.getElementById('Assigned toassignedTo').classList.add('d-none');
-            document.getElementById('invite').classList.remove('d-none');
 
-        } else {
-            document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-            document.getElementById('invite').classList.add('d-none');
-        }
-        dropDownAssign = false;
-    }
+function setStyleOfSelectedUsers() {
     for (let i = 0; i < users.length; i++) {
-        if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
-            document.getElementById(users[i]['name']).classList.remove('d-none');
-            document.getElementById('assignedTo').style = `height:unset !important;`;
-        }
-        else {
-            document.getElementById(users[i]['name']).classList.add('d-none');
-        }
+        if (isContainingClassDnone(users[i]['name'])) setUserItemsandShow(i)
+        else addDisplayNone(users[i]['name']);
     }
+}
+
+function hideUserItems() {
+    if (isContainingClassDnone('Assigned toassignedTo')) showUsersDropdown();
+    else hideUsersDropDown();
+    dropDownAssign = false;
+}
+
+function setUserItemsandShow(i) {
+    removeDisplayNone(users[i]['name']);
+    document.getElementById('assignedTo').style = `height:unset !important;`;
+}
+
+function hideUsersDropDown() {
+    removeDisplayNone('Assigned toassignedTo');
+    addDisplayNone('invite');
+}
+
+function showUsersDropdown() {
+    addDisplayNone('Assigned toassignedTo');
+    removeDisplayNone('invite');
+}
+
+function setUserItems() {
+    removeDisplayNone('Assigned toassignedTo');
+    document.getElementById('assignedTo').style = `height:unset;`;
+    removeDisplayNone('invite');
+    dropDownAssign = true;
 }
 
 /**
