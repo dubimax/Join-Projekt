@@ -7,7 +7,16 @@ async function initContacts() {
     await includeHTML();
     generateNavigationLinks('Contacts', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateContactsHTML();
+}
 
+function setSiteActive() {
+    addContactCategories();
+    setVisibleIfnotEmpty();
+    generateContactDetailsHTML();
+    generateAddTaskHTML('addTaskAtContacts');
+    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
+    setOnSubmitForm('toDo');
+    addEventListenerToDropDown();
 }
 
 /**
@@ -15,18 +24,15 @@ async function initContacts() {
  */
 function generateContactsHTML() {
     load();
-    if (loggedIn) {
-        addContactCategories();
-        setVisibleIfnotEmpty();
-        generateContactDetailsHTML();
-        generateAddTaskHTML('addTaskAtContacts');
-        addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
-        setOnSubmitForm('toDo');
-        addEventListenerToDropDown();
+    if (loggedIn) setSiteActive();
+    else window.location.href = '../login.html';
+}
 
-    } else {
-        window.location.href = '../login.html';
-    }
+function setContactCategory(i) {
+    let ascicode = (65 + i).toString();
+    let value = String.fromCharCode(ascicode);
+    document.getElementById('contacts').innerHTML += addContactCategoriesHTML(value);
+    getContactsWith(value);
 }
 
 /**
@@ -34,12 +40,7 @@ function generateContactsHTML() {
  */
 function addContactCategories() {
     document.getElementById('contacts').innerHTML = '';
-    for (let i = 0; i < 26; i++) {
-        let ascicode = (65 + i).toString();
-        let value = String.fromCharCode(ascicode);
-        document.getElementById('contacts').innerHTML += addContactCategoriesHTML(value);
-        getContactsWith(value);
-    }
+    for (let i = 0; i < 26; i++) setContactCategory(i);
 }
 
 async function onSubmitting(event) {
@@ -68,24 +69,29 @@ function deleteContact(contactName) {
 function addEventListenerToDeleButton(id) {
     let deleteButton = document.getElementById(id);
     let contactToDelete;
-    if(id == 'deleteButtonContent'){
-        contactToDelete = document.getElementById('contactDetailsEmail').innerHTML;
-    }else if(id == 'deleteButton'){
-        contactToDelete = document.getElementById('editContactName').value;
-
-    }
-
-
-
+    if (id == 'deleteButtonContent') contactToDelete = getContactToDeleteButtonContent();
+    else if (id == 'deleteButton') contactToDelete = getContactToDeleteButton();
     deleteButton.addEventListener('click', function () {
-        deleteContact(contactToDelete);
-        hideEditContact();
-        addContactCategories();
-        setVisibleIfnotEmpty();
-        generateContactDetailsHTML();
-        document.getElementById('contactDetails').classList.add('d-none');
-        save();
+        setEventToDeleteButton(contactToDelete);
     });
+}
+
+function setEventToDeleteButton(contactToDelete) {
+    deleteContact(contactToDelete);
+    hideEditContact();
+    addContactCategories();
+    setVisibleIfnotEmpty();
+    generateContactDetailsHTML();
+    document.getElementById('contactDetails').classList.add('d-none');
+    save();
+}
+
+function getContactToDeleteButton() {
+    return document.getElementById('editContactName').value;
+}
+
+function getContactToDeleteButtonContent() {
+    return document.getElementById('contactDetailsEmail').innerHTML;
 }
 
 /**
@@ -95,11 +101,17 @@ function addEventListenerToDeleButton(id) {
 function getContactsWith(startLetter) {
     names = [];
     for (let i = 0; i < users.length; i++) {
-        if (users[i]['name'].charAt(0) == startLetter) {
-            names.push(users[i]);
-            generateAlphaContainerFor(`${users[i]['name'].charAt(0)}`);
-        }
+        if (isStartingWith(i, startLetter)) setAlphaContainer(i);
     }
+}
+
+function isStartingWith(i, startLetter) {
+    return users[i]['name'].charAt(0) == startLetter;
+}
+
+function setAlphaContainer(i) {
+    names.push(users[i]);
+    generateAlphaContainerFor(`${users[i]['name'].charAt(0)}`);
 }
 
 /**
@@ -118,29 +130,32 @@ function getContactWith(i, value) {
  */
 function generateAlphaContainerFor(letter) {
     for (let i = 0; i < names.length; i++) {
-        let contactName = getContactWith(i, 'name');
-        let userMail = getContactWith(i, 'email');
-        let userPhone = getContactWith(i, 'phone');
-        let userColor = getContactWith(i, 'color')
-        document.getElementById('contact' + letter.toUpperCase()).innerHTML += setContactsContainerHTML(contactName, userMail, userPhone, userColor);
-        names.splice(0);
+        setAlphaContainerForLetter(i, letter);
     }
+}
+
+function setAlphaContainerForLetter(i, letter) {
+    let contactName = getContactWith(i, 'name');
+    let userMail = getContactWith(i, 'email');
+    let userPhone = getContactWith(i, 'phone');
+    let userColor = getContactWith(i, 'color')
+    document.getElementById('contact' + letter.toUpperCase()).innerHTML += setContactsContainerHTML(contactName, userMail, userPhone, userColor);
+    names.splice(0);
 }
 
 /**
  * Sets Letter Container visible if it is not empty
  */
 function setVisibleIfnotEmpty() {
-    for (let j = 0; j < 26; j++) {
-        let ascicode = (65 + j).toString();
-        let value = String.fromCharCode(ascicode);
-        let child = document.getElementById('contact' + value).children;
-        if (child[2]) {
-            document.getElementById('contact' + value).classList.remove('d-none');
-        }
-    }
+    for (let j = 0; j < 26; j++) setVissible(j);
 }
 
+function setVissible(j) {
+    let ascicode = (65 + j).toString();
+    let value = String.fromCharCode(ascicode);
+    let child = document.getElementById('contact' + value).children;
+    if (child[2]) document.getElementById('contact' + value).classList.remove('d-none');
+}
 
 
 /**
@@ -163,7 +178,7 @@ function hideAddNewContact() {
 function showAddNewTaskAtContacts() {
     document.getElementById('addTaskAtContacts').classList.remove('d-none');
     setStyleOfCloseIconAtContacts();
-    
+
 }
 
 /**
@@ -187,47 +202,61 @@ function showEditContact() {
     let oldName = document.getElementById('contactName').innerHTML;
     let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
     let oldPhone = document.getElementById('contactDetailsPhone').innerHTML;
+    setEditContact(oldName, oldEmail, oldPhone);
+    addEventListenerToDeleButton('deleteButton');
+}
+
+function setEditContact(oldName, oldEmail, oldPhone) {
     document.getElementById('editContactName').value = oldName;
     document.getElementById('editContactEmail').value = oldEmail;
     document.getElementById('editContactPhone').value = oldPhone;
     document.getElementById('editUserAtContacts').classList.remove('d-none');
-    
-    addEventListenerToDeleButton('deleteButton');
 }
 
 /**
  * Creates a new Contact
  */
 function createNewContact() {
-    let userName = document.getElementById('createNewContactName').value;
-    let userEmail = document.getElementById('createNewContactEmail').value;
-    let userPhone = document.getElementById('createNewContactPhone').value;
+    let userName = getValueOf('createNewContactName');
+    let userEmail = getValueOf('createNewContactEmail');
+    let userPhone = getValueOf('createNewContactPhone');
     let userColor = randomcolor();
     users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone, 'color': userColor });
     pushToDatabase();
-    
+
+    confirmMessage();
+}
+
+function confirmMessage() {
     addConfirmMessage();
     hideAddNewContact();
-    setTimeout(function () {
-        removeConfirmMessage();
-        addContactCategories();
-        setVisibleIfnotEmpty();
-        save();
-    }, 1000);
+    setTimeout(removeConfirmMessage(), 1000);
+}
+
+function removeConfirmMessage() {
+    removeConfirmMessage();
+    addContactCategories();
+    setVisibleIfnotEmpty();
+    save();
+}
+
+function getValueOf(id) {
+    return document.getElementById(id).value;
 }
 
 /**
  * Edits an existing contact
  */
 function editContact() {
-    let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
-    let userName = document.getElementById('editContactName').value;
-    let userEmail = document.getElementById('editContactEmail').value;
-    let userPhone = document.getElementById('editContactPhone').value;
-    let oldUser = users.findIndex(user => user.email == oldEmail);
-    users[oldUser]['name'] = userName;
-    users[oldUser]['email'] = userEmail;
-    users[oldUser]['phone'] = userPhone;
+    let oldEmail = getInnerHTMLOf('contactDetailsEmail');
+    let userName = getValueOf('editContactName');
+    let userEmail = getValueOf('createNewContactEmail');
+    let userPhone = getValueOf('createNewContactPhone');
+    setOldData(oldEmail, userName, userEmail, userPhone);
+    closeEditContact();
+}
+
+function closeEditContact() {
     pushToDatabase();
     hideEditContact();
     addContactCategories();
@@ -236,13 +265,32 @@ function editContact() {
     save();
 }
 
+function setOldData(oldEmail, userName, userEmail, userPhone) {
+    let oldUser = users.findIndex(user => user.email == oldEmail);
+    users[oldUser]['name'] = userName;
+    users[oldUser]['email'] = userEmail;
+    users[oldUser]['phone'] = userPhone;
+}
+
+function getInnerHTMLOf(id) {
+    return document.getElementById(id).innerHTML;
+}
+
 /**
  * Adds the class "d-none" to hide contactdetails
  */
 function hideContactDetails() {
-    document.getElementById('contactDetails').classList.add('d-none');
+    addDisplayNone('contactDetails');
     hideKPMT();
     showAddNewContactButton();
+}
+
+function addDisplayNone(id) {
+    document.getElementById(id).classList.add('d-none');
+}
+
+function removeDisplayNone(id) {
+    document.getElementById(id).classList.remove('d-none');
 }
 
 /**
@@ -253,26 +301,40 @@ function hideContactDetails() {
  * @param {*} userColor 
  */
 function setContactDetails(userName, userMail, userPhone, userColor) {
-    if (document.body.clientWidth <= 350) {
-        document.getElementById('contactDetailsContainer').children[5].classList.add('d-none');
-        document.getElementById('navigation-top').children[1].classList.remove('d-none');
-    }
-    if (document.getElementById('contactDetails').classList.contains('d-none')) {
-        document.getElementById('contactDetails').classList.remove('d-none');
-    }
-    document.getElementById('contactName').innerHTML = userName;
-    document.getElementById('contactDetailsLogo').style = `background:${userColor}`;
-    document.getElementById('contactDetailsLogo').innerHTML = getFirstLettersOfName(userName);
-    document.getElementById('contactDetailsEmail').innerHTML = userMail;
-    document.getElementById('contactDetailsEmail').href = `mailto:${userMail}`;
-    document.getElementById('contactDetailsPhone').innerHTML = userPhone;
-    document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
-    document.getElementById('contactHeadContainer').classList.remove('d-none');
-    document.getElementById('contactInformationContainer').classList.remove('d-none');
+    if (isClientWidthSmaller350()) hideCOntactDetailsContainer();
+    if (document.getElementById('contactDetails').classList.contains('d-none')) removeDisplayNone('contactDetails');
+    setContactDetail(userName, userColor, userMail, userPhone);
+    resetSetContactDetails();
+}
 
+function resetSetContactDetails() {
+    removeDisplayNone('contactHeadContainer');
+    removeDisplayNone('contactInformationContainer');
     showKPMT();
     hideAddNewContactButton();
     addEventListenerToDeleButton('deleteButtonContent');
+}
+
+function setContactDetail(userName, userColor, userMail, userPhone) {
+    setInnerHTML('contactName', userName);
+    document.getElementById('contactDetailsLogo').style = `background:${userColor}`;
+    setInnerHTML('contactDetailsLogo', getFirstLettersOfName(userName));
+    setInnerHTML('contactDetailsEmail', userMail);
+    setInnerHTML('contactDetailsPhone', userPhone);
+    document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
+}
+
+function setInnerHTML(id, text) {
+    document.getElementById(id).innerHTML = text;
+}
+
+function hideCOntactDetailsContainer() {
+    document.getElementById('contactDetailsContainer').children[5].classList.add('d-none');
+    document.getElementById('navigation-top').children[1].classList.remove('d-none');
+}
+
+function isClientWidthSmaller350() {
+    return document.body.clientWidth <= 350;
 }
 
 /**
@@ -297,34 +359,26 @@ function randomcolor() {
 
 }
 
-function showKPMT(){
+function showKPMT() {
     let clientWidth = document.body.clientWidth;
     let kpmt = document.getElementById('kpmt');
-    if(clientWidth <=1000){
-        kpmt.style = `display:unset !important;top:120px !important;padding-left:25px !important;`;
-    }
+    if (clientWidth <= 1000) kpmt.style = `display:unset !important;top:120px !important;padding-left:25px !important;`;
 }
 
-function hideKPMT(){
+function hideKPMT() {
     let clientWidth = document.body.clientWidth;
     let kpmt = document.getElementById('kpmt');
-    if(clientWidth <=1000){
-        kpmt.style = `display:none !important;`;
-    }
+    if (clientWidth <= 1000) kpmt.style = `display:none !important;`;
 }
 
-function showAddNewContactButton(){
+function showAddNewContactButton() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('addNewContactButton');
-    if(clientWidth <=1000){
-        hideButton.style = '';
-    }
+    if (clientWidth <= 1000) hideButton.style = '';
 }
 
-function hideAddNewContactButton(){
+function hideAddNewContactButton() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('addNewContactButton');
-    if(clientWidth <=1000){
-        hideButton.style = `display:none !important;`;
-    }
+    if (clientWidth <= 1000) hideButton.style = `display:none !important;`;
 }
