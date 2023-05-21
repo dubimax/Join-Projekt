@@ -353,15 +353,6 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
 }
 
 /**
- * Checks if an element contains the 'd-none' class.
- * @param {string} id - The ID of the element.
- * @returns {boolean} True if the element contains the 'd-none' class, false otherwise.
- */
-function isContainingClassDnone(id){
-    return document.getElementById(id).classList.contains('d-none');
-}
-
-/**
  * Resets the set contact details state and performs various actions.
  */
 function resetSetContactDetails() {

@@ -174,10 +174,10 @@ function checkUserData(userEmail, userPassword) {
 
 function checkUserDataForUser(i, userEmail, userPassword) {
     const user = users[i];
-    if (isUserAndMailCorrect(userEmail, userPassword)) setLoggedIn(userEmail);
+    if (isUserAndMailCorrect(user, userEmail, userPassword)) setLoggedIn(userEmail);
 }
 
-function isUserAndMailCorrect(userEmail, userPassword) {
+function isUserAndMailCorrect(user, userEmail, userPassword) {
     return user.email == userEmail && user.pwd == userPassword;
 }
 
@@ -264,22 +264,22 @@ function getUser(i) {
  */
 function cancelAddNew(id) {
     if (id == 'addNewCat') cancelAddNewCat();
-    if (id == 'addNewSubTask') setInnerHTML(id +'addNewSubTask', setBackToSubTaskField('label', 'Subtasks',
-     'dropDownMenuField', 'addNewSubTask', './img/addIcon.png'));
+    if (id == 'addNewSubTask') setInnerHTML(id + 'addNewSubTask', setBackToSubTaskField('label', 'Subtasks',
+        'dropDownMenuField', 'addNewSubTask', './img/addIcon.png'));
     if (id == 'assignedTo') cancelAssignedTo();
 }
 
-function cancelAssignedTo(){
+function cancelAssignedTo() {
     let children = document.getElementById('assignedTo').children;
     for (let i = 0; i < children.length; i++) setCheckBoxFalse(i);
 }
 
-function setCheckBoxFalse(i){
+function setCheckBoxFalse(i) {
     if (i > 1) document.getElementById('assignedTo').children[i].children[0].checked = false;
 }
 
 function cancelAddNewCat() {
-    setInnerHTML('id_categoryBox',setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
+    setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
     save();
@@ -303,14 +303,10 @@ function showCategoryItems() {
     if (document.getElementById('CategorycategoryBox')) {
         checkDropDown();
         for (let i = 0; i < categories.length; i++) {
-            if (document.getElementById(categories[i]['name']).classList.contains('d-none')) {
-                document.getElementById(categories[i]['name']).classList.remove('d-none');
-            } else {
-                document.getElementById(categories[i]['name']).classList.add('d-none');
-            }
-        } if (selectedCategory) {
-            document.getElementById(selectedCategory).classList.remove('d-none');
+            if (isContainingClassDnone(categories[i]['name'])) removeDisplayNone(categories[i]['name']);
+            else addDisplayNone(categories[i]['name']);
         }
+        if (selectedCategory) removeDisplayNone(selectedCategory);
     }
 }
 
@@ -498,6 +494,14 @@ async function showLink(id) {
     location.href = id;
 }
 
+/**
+ * Checks if an element contains the 'd-none' class.
+ * @param {string} id - The ID of the element.
+ * @returns {boolean} True if the element contains the 'd-none' class, false otherwise.
+ */
+function isContainingClassDnone(id) {
+    return document.getElementById(id).classList.contains('d-none');
+}
 
 function showFrame(...ids) {
     let element1 = ids[0];
