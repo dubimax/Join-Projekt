@@ -398,32 +398,45 @@ function removeMessage(id) {
  * Shows the useritems in Dropdown menu
  */
 function showUsersItems() {
-    if (!dropDownAssign) {
-        document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-        document.getElementById('assignedTo').style = `height:unset;`;
-        document.getElementById('invite').classList.remove('d-none');
-        dropDownAssign = true;
-    } else {
+    if (!dropDownAssign) setUserItems();
+    else hideUserItems();
+    setStyleOfSelectedUsers();
+}
 
-        if (document.getElementById('Assigned toassignedTo').classList.contains('d-none')) {
-            document.getElementById('Assigned toassignedTo').classList.add('d-none');
-            document.getElementById('invite').classList.remove('d-none');
 
-        } else {
-            document.getElementById('Assigned toassignedTo').classList.remove('d-none');
-            document.getElementById('invite').classList.add('d-none');
-        }
-        dropDownAssign = false;
-    }
+function setStyleOfSelectedUsers() {
     for (let i = 0; i < users.length; i++) {
-        if (document.getElementById(users[i]['name']).classList.contains('d-none')) {
-            document.getElementById(users[i]['name']).classList.remove('d-none');
-            document.getElementById('assignedTo').style = `height:unset !important;`;
-        }
-        else {
-            document.getElementById(users[i]['name']).classList.add('d-none');
-        }
+        if (isContainingClassDnone(users[i]['name'])) setUserItemsandShow(i)
+        else addDisplayNone(users[i]['name']);
     }
+}
+
+function hideUserItems() {
+    if (isContainingClassDnone('Assigned toassignedTo')) showUsersDropdown();
+    else hideUsersDropDown();
+    dropDownAssign = false;
+}
+
+function setUserItemsandShow(i) {
+    removeDisplayNone(users[i]['name']);
+    document.getElementById('assignedTo').style = `height:unset !important;`;
+}
+
+function hideUsersDropDown() {
+    removeDisplayNone('Assigned toassignedTo');
+    addDisplayNone('invite');
+}
+
+function showUsersDropdown() {
+    addDisplayNone('Assigned toassignedTo');
+    removeDisplayNone('invite');
+}
+
+function setUserItems() {
+    removeDisplayNone('Assigned toassignedTo');
+    document.getElementById('assignedTo').style = `height:unset;`;
+    removeDisplayNone('invite');
+    dropDownAssign = true;
 }
 
 /**
@@ -431,26 +444,31 @@ function showUsersItems() {
  */
 function generateCheckboxItem() {
     let isChecked;
-    document.getElementById('list-subtask').innerHTML += `
-    <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
-    `;
-    if (document.getElementById('list-subtask-' + getItemFromInput()).checked == true) {
-        isChecked = true;
-    } else {
-        isChecked = false;
-    }
-    subtasks.push({ 'item': getItemFromInput(), 'checked': isChecked });
+    addInnerHTML('list-subtask', setCheckBox());
+    if (isItemChecked()) isChecked = true;
+    else isChecked = false;
+    subtasks.push({ 'item': getValueOf('newSubtasks'), 'checked': isChecked });
     document.getElementById('newSubtasks').value = '';
 }
 
 
+function setCheckBox() {
+    return `
+        <li><input type="checkbox" id="list-subtask-${getValueOf('newSubtasks')}" value="${getValueOf('newSubtasks')}"> ${getValueOf('newSubtasks')}</li>
+    `;
+}
+
+function isItemChecked() {
+    return document.getElementById('list-subtask-' + getValueOf('newSubtasks')).checked == true;
+}
 
 /**
- * Gets the inputfield Value for Subtasks
- * @returns rrturns the value from the input at subtasks
+ * Retrieves the value of an input field by its ID.
+ * @param {string} id - The ID of the input field.
+ * @returns {string} The value of the input field.
  */
-function getItemFromInput() {
-    return document.getElementById('newSubtasks').value;
+function getValueOf(id) {
+    return document.getElementById(id).value;
 }
 
 /**
@@ -460,23 +478,17 @@ function getItemFromInput() {
  */
 function generateOptionsHTML(array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') {
-            document.getElementById('assignedTo').innerHTML += `
-            <div  class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
-                ${getUser(i)} 
-                <input type="checkbox" value="${getUser(i)}">
-            </div>
-        `;
-        }
-        if (nameOfArray == 'categories') {
-            document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
-                ${getCategory(i)}
-                <div class="colorCircle" style="background:${getCategoryColor(i)}">
-            </div>
-        `;
-        }
+        if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray,getUser(i)));
+        if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateTheOptionHTML(nameOfArray, getCategory(i)));
     }
+}
+
+function generateTheOptionHTML(nameOfArray, content) {
+    return `<div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
+                ${content} 
+                <input type="checkbox" value="${content}">
+           </div>
+    `;
 }
 
 /**
@@ -512,15 +524,9 @@ function isContainingClassDnone(id) {
 function showFrame(...ids) {
     let element1 = ids[0];
     let element2 = ids[1];
-
-    for (let i = 0; i < ids.length; i++) {
-
-        document.getElementById(ids[i]).classList.add('d-none');
-    }
-    document.getElementById(element1).classList.remove('d-none');
-    if (element2.length > 0) {
-        document.getElementById(element2).classList.remove('d-none');
-    }
+    for (let i = 0; i < ids.length; i++) addDisplayNone(ids[i]);
+    removeDisplayNone(element1);
+    if (element2.length > 0) removeDisplayNone(element2);
 }
 
 /**

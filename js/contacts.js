@@ -272,15 +272,6 @@ function removeConfirmMessage() {
 }
 
 /**
- * Retrieves the value of an input field by its ID.
- * @param {string} id - The ID of the input field.
- * @returns {string} The value of the input field.
- */
-function getValueOf(id) {
-    return document.getElementById(id).value;
-}
-
-/**
  * Edits a contact by retrieving input values, getting the old email, setting old data, and closing the edit contact section.
  */
 function editContact() {
