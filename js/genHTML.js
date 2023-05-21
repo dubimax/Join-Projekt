@@ -108,6 +108,10 @@ function generateAddTaskHTML(id) {
     } else window.location.href = '../login.html';
 }
 
+/**
+ * Adds a new option to the category dropdown field with a function to handle the click event.
+ * @param {string} id - The ID of the option.
+ */
 function addOptionWithFunction(id) {
     document.getElementById('categoryBox').innerHTML += `
             <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
@@ -358,6 +362,15 @@ function setBackToSubTaskField(field1, headline, properties, id, source) {
     `;
 }
 
+/**
+ * Generates the HTML for a subtask field in the form.
+ * @param {string} field1 - The type of the outer field element (e.g., "label").
+ * @param {string} headline - The text for the headline of the field.
+ * @param {string} properties - The class name or properties for the field element.
+ * @param {string} id - The ID of the field element.
+ * @param {string} source - The source URL for the image.
+ * @returns {string} The generated HTML for the subtask field.
+ */
 function generateSubTaskField(field1, headline, properties, id, source) {
     return `
     <div class="detail" id="id_${id}">
@@ -370,6 +383,9 @@ function generateSubTaskField(field1, headline, properties, id, source) {
     `;
 }
 
+/**
+ * Generates the navigation links for the contacts page.
+ */
 function generateNavigationLinksContacts() {
     generateNavigationLinks(color, linkname);
     generateNavigationLinks(color, linkname);
@@ -377,8 +393,11 @@ function generateNavigationLinksContacts() {
     generateNavigationLinks(color, linkname);
 }
 
+/**
+ * Adds a help section to the webpage.
+ */
 function addHelp() {
-    document.body.innerHTML += /*html*/`
+    document.body.innerHTML += `
     <div class="help content" id="helpContent">
         <a class="back" onclick="removeHelp()"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="helpContainer">
@@ -411,6 +430,9 @@ function addHelp() {
         `;
 }
 
+/**
+ * Adds a legal notice section to the webpage.
+ */
 function addLegalNotice() {
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
@@ -470,12 +492,23 @@ function addLegalNotice() {
     </div>`;
 }
 
+/**
+ * Generates HTML code for a selected navigation link.
+ * @param {string} linkname - The name of the navigation link.
+ * @returns {string} The generated HTML code for the selected navigation link.
+ */
 function generateSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" style="background:#091931;" target="_self" class="navigation-left-link" id="show${linkname}">
          <img src="../img/${linkname.toLowerCase()}.png" alt=""> ${linkname}</a>     
     `;
 }
+
+/**
+ * Generates HTML code for an unselected navigation link.
+ * @param {string} linkname - The name of the navigation link.
+ * @returns {string} The generated HTML code for the unselected navigation link.
+ */
 
 function generateUnSelectedNavigationLinkHTML(linkname) {
     return `
@@ -485,7 +518,7 @@ function generateUnSelectedNavigationLinkHTML(linkname) {
 }
 
 /**
- * Adds a LogoutButton to the Body
+ * Adds a logout button to the page.
  */
 function addLogoutButton() {
     let clientWidth = document.body.clientWidth;
@@ -503,9 +536,9 @@ function addLogoutButton() {
 }
 
 /**
- * Generates HTML for ContactCategories
- * @param {*} value 
- * @returns 
+ * Generates HTML code for a contact category section.
+ * @param {string} value - The category value (e.g., a letter).
+ * @returns {string} The generated HTML code for the contact category section.
  */
 function addContactCategoriesHTML(value) {
     return `
@@ -515,6 +548,14 @@ function addContactCategoriesHTML(value) {
     </div>`;
 }
 
+/**
+ * Generates HTML code for a contact container.
+ * @param {string} contactName - The name of the contact.
+ * @param {string} userMail - The email address of the contact.
+ * @param {string} userPhone - The phone number of the contact.
+ * @param {string} userColor - The color associated with the contact.
+ * @returns {string} The generated HTML code for the contact container.
+ */
 function setContactsContainerHTML(contactName, userMail, userPhone, userColor) {
     return `
     <div onclick="setContactDetails('${contactName}','${userMail}','${userPhone}','${userColor}');setColorWhenSelectet('contactAt${contactName}')" class="contactSelect" id="contactAt${contactName}">
@@ -538,7 +579,8 @@ function generateContactDetailsHTML() {
 }
 
 /**
- * Adds a close Button to AddTaskAtContacts
+ * Adds a close button to the "Add Task" overlay at contacts.
+ * @param {string} overlay - The class name for the overlay.
  */
 function addCloseBtnToAddTaskAtContacts(overlay) {
     document.getElementById('addTaskAtContacts').innerHTML += `
@@ -546,6 +588,9 @@ function addCloseBtnToAddTaskAtContacts(overlay) {
     `;
 }
 
+/**
+ * Adds a close button to the "Add Task" overlay at the board.
+ */
 function addCloseBtnToAddTaskAtBoard() {
     document.getElementById('addTaskAtBoard').innerHTML += `
     <div onclick="hideAddNewTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
@@ -557,6 +602,11 @@ function setAssignedCircleHTML(username) {
  `;
 }
 
+/**
+ * Generates the HTML for the assigned circle element with the specified username.
+ * @param {string} username - The username.
+ * @returns {string} The HTML for the assigned circle element.
+ */
 function setStyleOfCloseIconAtContacts() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('closeIconAtContacts');
