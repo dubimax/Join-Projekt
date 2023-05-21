@@ -229,6 +229,11 @@ h1 {
     line-height: 120%;
 
     color: #2A3647;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .taskDescription {
@@ -322,8 +327,8 @@ h1 {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 43%;
+    left: 43%;
     transform: translate(-50%, -50%);
     width: 623px;
     max-height: 824px;
@@ -336,7 +341,7 @@ h1 {
     align-items: flex-start;
     padding: 4px 36.5px;
     gap: 10px;
-    width: 43%;
+    width: fit-content;
     font-weight: 400;
     font-size: 27px;
     line-height: 120%;
@@ -357,15 +362,16 @@ h1 {
 }
 
 .taskTitleOpen {
-    margin: 15px 0px;
+    margin-top: 15px;
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
     width: 500px;
-
+    min-height: fit-content;
     color: #2A3647;
     background-color: none;
     border: none;
+    resize: none;
 }
 
 .taskDescriptionOpen {
