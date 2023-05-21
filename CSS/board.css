@@ -543,8 +543,20 @@ h1 {
         width: 300px;
     }
 
+    .taskTitle {
+        margin-top: 10px;
+    }
+
     .taskDescription {
         width: 270px;
+    }
+
+    .containerUserAndPrio {
+        margin-top: 10px;
+    }
+
+    .barContainer {
+        margin-top: 10px;
     }
     
     .boardContainer {
