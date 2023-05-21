@@ -481,7 +481,7 @@ function isElementExistent(id) {
 
 function removeMessage(id) {
     addDisplayNone(id);
-    setTimeout(removeConfirmMessage(), 1000);
+    setTimeout(() => removeConfirmMessage(), 1000);
     return false;
 }
 
