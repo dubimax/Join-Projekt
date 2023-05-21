@@ -444,26 +444,31 @@ function setUserItems() {
  */
 function generateCheckboxItem() {
     let isChecked;
-    document.getElementById('list-subtask').innerHTML += `
-    <li><input type="checkbox" id="list-subtask-${getItemFromInput()}" value="${getItemFromInput()}"> ${getItemFromInput()}</li>
-    `;
-    if (document.getElementById('list-subtask-' + getItemFromInput()).checked == true) {
-        isChecked = true;
-    } else {
-        isChecked = false;
-    }
-    subtasks.push({ 'item': getItemFromInput(), 'checked': isChecked });
+    addInnerHTML('list-subtask',setCheckBox());
+    if (isItemChecked()) isChecked = true;
+    else isChecked = false;
+    subtasks.push({ 'item': getValueOf('newSubtasks'), 'checked': isChecked });
     document.getElementById('newSubtasks').value = '';
 }
 
 
+function setCheckBox() {
+    return `
+        <li><input type="checkbox" id="list-subtask-${getValueOf('newSubtasks')}" value="${getValueOf('newSubtasks')}"> ${getValueOf('newSubtasks')}</li>
+    `;
+}
+
+function isItemChecked() {
+    return document.getElementById('list-subtask-' + getValueOf('newSubtasks')).checked == true;
+}
 
 /**
- * Gets the inputfield Value for Subtasks
- * @returns rrturns the value from the input at subtasks
+ * Retrieves the value of an input field by its ID.
+ * @param {string} id - The ID of the input field.
+ * @returns {string} The value of the input field.
  */
-function getItemFromInput() {
-    return document.getElementById('newSubtasks').value;
+function getValueOf(id) {
+    return document.getElementById(id).value;
 }
 
 /**
