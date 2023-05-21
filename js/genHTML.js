@@ -108,6 +108,11 @@ function generateAddTaskHTML(id) {
     } else window.location.href = '../login.html';
 }
 
+function addOptionWithFunction(id) {
+    document.getElementById('categoryBox').innerHTML += `
+            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
+}
+
 /**
  * Adds color choices to the category box in the "Add Task" form.
  */
@@ -363,6 +368,13 @@ function generateSubTaskField(field1, headline, properties, id, source) {
         </div>
     </div>
     `;
+}
+
+function generateNavigationLinksContacts() {
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
 }
 
 function addHelp() {
