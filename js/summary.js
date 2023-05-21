@@ -97,7 +97,7 @@ function setUserName(text) {
 function greetingMobile() {
     if (window.innerWidth <= 1300 && document.referrer.includes("login.html")) {
         showGreetingResponsive();
-        setTimeout(hideGreetingsResponsive(), 2500);
+        setTimeout(() => hideGreetingsResponsive(), 2500);
     }
 }
 
