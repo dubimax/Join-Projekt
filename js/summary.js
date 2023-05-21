@@ -51,9 +51,9 @@ function greeting() {
  * Adds the greeting message to the 'greeting' and 'greetingMobile' containers.
  * @param {string} greet - The greeting message to display.
  */
-function greetAllContainer(greet) {
-    addInnerHTML('greeting', greet(greet));
-    addInnerHTML('greetingMobile', greet(greet));
+function greetAllContainer(greets) {
+    setInnerHTML('greeting', greet(greets));
+    setInnerHTML('greetingMobile', greet(greets));
 }
 
 /**
