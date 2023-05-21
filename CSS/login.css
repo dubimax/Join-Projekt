@@ -349,7 +349,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: start-overlay-animation 1.5s ease-in-out both;
+    animation: start-overlay-animation 3.5s ease-in-out both;
 }
 
 @keyframes start-overlay-animation {
@@ -374,7 +374,7 @@ p {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    animation: start-logo-animation 1.0s ease-in-out both;
+    animation: start-logo-animation 2.5s ease-in-out both;
 }
 
 @keyframes start-logo-animation {
@@ -494,4 +494,12 @@ p {
         font-size: 16px;
     }
 
+    /* Animation-Responsive */
+    .start-overlay {
+        background-color: #2A3647;
+    }
+
+    .start-logo {
+        content: url("../img/LogoWhiteGross.png");
+    }
 }
