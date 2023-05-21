@@ -416,13 +416,17 @@ p {
     }
 
     .frameStyle {
-        width: 372px;
+        width: 318px;
         height: 573px;
     }
 
     .inputField {
-        width: 327px;
+        width: 290px;
         height: 41px;
+    }
+
+    .inputField input{
+        font-size: 18px;
     }
 
     .containerRememberAndForgot {
@@ -459,7 +463,7 @@ p {
     }
 
     #forgotMyPasswordFrame {
-        width: 372px;
+        width: 318px;
         height: 501px;
         gap: 0;
     }
