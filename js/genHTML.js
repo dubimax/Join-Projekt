@@ -13,6 +13,46 @@ function generateAddTaskToBoardImg() {
 `;
 }
 
+/**
+ * Generates HTML for a checkbox item.
+ * @returns {string} The HTML code for the checkbox item.
+ */
+function setCheckBox() {
+    return `
+        <li><input type="checkbox" id="list-subtask-${getValueOf('newSubtasks')}" value="${getValueOf('newSubtasks')}"> ${getValueOf('newSubtasks')}</li>
+    `;
+}
+
+/**
+ * Generates the HTML for an option in a dropdown menu.
+ * @param {string} nameOfArray - The name of the array.
+ * @param {string} content - The content of the option.
+ * @returns {string} The HTML for the option.
+ */
+function generateTheOptionHTML(nameOfArray, content) {
+    return `
+            <div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
+                ${content} 
+                <input type="checkbox" value="${content}">
+            </div>
+    `;
+}
+
+/**
+ * Generates the HTML for a category option in a dropdown menu.
+ * @param {string} nameOfArray - The name of the array.
+ * @param {number} i - The index of the category.
+ * @returns {string} The HTML for the category option.
+ */
+function generateCategoryOptionHTML(nameOfArray, i){
+    return `
+        <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
+            ${getCategory(i)}
+            <div class="colorCircle" style="background:${getCategoryColor(i)}">
+        </div>
+    `;
+}
+
 function generateAddTaskHTML(id) {
     load();
     if (loggedIn) {
@@ -446,4 +486,13 @@ function setStyleOfCloseIconAtContacts() {
     if (clientWidth <= 1300) {
         hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`;
     }
+}
+
+/**
+ * Sets a confirmation message with the specified text.
+ * @param {string} text - The text of the confirmation message.
+ * @returns {string} The HTML string representing the confirmation message.
+ */
+function setConfirmMessage(text) {
+    return `<div class="confirmMessage" id="confirmMessage">${text} successfully createt</div>`;
 }

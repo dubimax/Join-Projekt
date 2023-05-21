@@ -14,9 +14,9 @@ async function includeHTML() {
 }
 
 /**
- * Gets the First letters of given username
- * @param {*} username 
- * @returns Acronyms of username (Surname Name)
+ * Retrieves the first letters of each word in a username and returns them as an acronym.
+ * @param {string} username - The username from which to extract the first letters.
+ * @returns {string} The acronym formed from the first letters of the username.
  */
 function getFirstLettersOfName(username) {
     let str = username;
@@ -26,7 +26,7 @@ function getFirstLettersOfName(username) {
 }
 
 /**
- * Load saved variables from localstorage
+ * Loads data from the local storage into corresponding variables.
  */
 function load() {
     loggedIn = JSON.parse(localStorage.getItem("loggedIn" || false));
@@ -34,11 +34,10 @@ function load() {
     categories = JSON.parse(localStorage.getItem("categories") || [{}]);
     tasks = JSON.parse(localStorage.getItem("tasks") || [{}]);
     indexOfEmail = JSON.parse(localStorage.getItem("indexOfEmail") || [{}]);
-
 }
 
 /**
- * Saves needed variables in localstorage
+ * Saves data to the local storage.
  */
 function save() {
     localStorage.clear();
@@ -49,14 +48,14 @@ function save() {
     localStorage.setItem("indexOfEmail", JSON.stringify(indexOfEmail));
 }
 
-
-
+/**
+ * Performs an action by sending a POST request to a specified URL with the provided form data.
+ * @param {FormData} formData - The form data to be sent in the request body.
+ * @returns {Promise<Response>} A promise that resolves to the response from the server.
+ */
 function action(formData) {
     const input = 'https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php';
-    const requestInit = {
-        method: 'post',
-        body: formData
-    };
+    const requestInit = {method: 'post', body: formData};
     return fetch(input, requestInit);
 }
 
@@ -69,20 +68,31 @@ function setInnerHTML(id, text) {
     document.getElementById(id).innerHTML = text;
 }
 
+/**
+ * Appends the provided text to the inner HTML of an element with the specified ID.
+ * @param {string} id - The ID of the element to update its inner HTML.
+ * @param {string} text - The text to append to the inner HTML of the element.
+ */
 function addInnerHTML(id, text) {
     document.getElementById(id).innerHTML += text;
 }
 
 /**
- * Sets the selected Navigation Link
- * @param {*} coloredLink The Link to set colored
- * @param  {...any} links array with all navigation links
+ * Generates navigation links by updating the inner HTML of the navigation container with the provided links.
+ * @param {string} coloredLink - The CSS class to apply to the colored link.
+ * @param {...string} links - The links to be added to the navigation container.
  */
 function generateNavigationLinks(coloredLink, ...links) {
     document.getElementById('navigation-left-links').innerHTML = '';
     for (let i = 0; i < links.length; i++) addNavigationLink(coloredLink, i, links);
 }
 
+/**
+ * Adds a navigation link to the navigation container based on the provided parameters.
+ * @param {string} coloredLink - The CSS class representing the colored link.
+ * @param {number} i - The index of the link in the links array.
+ * @param {string[]} links - The array of links.
+ */
 function addNavigationLink(coloredLink, i, links) {
     let linkname = links[i];
     if (coloredLink == linkname) addInnerHTML('navigation-left-links', generateSelectedNavigationLinkHTML(linkname));
@@ -90,66 +100,71 @@ function addNavigationLink(coloredLink, i, links) {
 }
 
 /**
- * Sets only the first Letter to lowerCase
- * @param {*} string 
- * @returns returns the String with the first letter as lowerCase
+ * Converts the first letter of a string to lowercase.
+ * @param {string} string - The input string.
+ * @returns {string} The input string with the first letter converted to lowercase.
  */
 function firstLetterToLowerCase(string) {
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
 /**
- * Adds a Confirmmessage
+ * Adds a confirmation message to the body of the document.
+ * @param {string} text - The text of the confirmation message.
  */
 function addConfirmMessage(text) {
     document.body.innerHTML += setConfirmMessage(text);
 }
 
-function setConfirmMessage(text) {
-    return `<div class="confirmMessage" id="confirmMessage">${text} successfully createt</div>`;
-}
-
 /**
- * Removes the Confirmmessage
+ * Removes the confirmation message from the document.
  */
 function removeConfirmMessage() {
     document.getElementById('confirmMessage').remove();
 }
 
 /**
- * add the Logout Button if not there
- *  or removes the Logout Button if there
+ * Sets the logout button based on its current visibility state.
  */
 function setLogoutButton() {
     if (isLogoutButtonShown()) removeLogoutButton();
     else addLogoutButton();
 }
 
+/**
+ * Checks if the logout button is currently shown.
+ * @returns {boolean} A boolean indicating whether the logout button is shown.
+ */
 function isLogoutButtonShown() {
     return document.body.lastChild.id == 'optionsMenu';
 }
 
 /**
- * Removes the logout button from the page body
+ * Removes the logout button from the document
  */
 function removeLogoutButton() {
     document.getElementById('optionsMenu').remove();
 }
 
 /**
- * Removes the legal notice from the page body
+ * Removes the legal notice from the document
  */
 function removeLegalNotice() {
     document.getElementById('legalNotice').remove();
 }
 
 /**
- * Removes the help from the page body
+ * Removes the help from the document
  */
 function removeHelp() {
     document.getElementById('helpContent').remove();
 }
 
+/**
+ * Initializes the application.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function init() {
     await includeHTML();
     await downloadFromServer();
@@ -159,12 +174,20 @@ async function init() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
 }
 
+/**
+ * Performs the login operation.
+ */
 function login() {
     let userEmail = document.getElementById('userMailLogIn').value;
     let userPassword = document.getElementById('userPasswordLogIn').value;
     checkUserData(userEmail, userPassword);
 }
 
+/**
+ * Checks the user data for a given email and password.
+ * @param {string} userEmail - The user email to check.
+ * @param {string} userPassword - The user password to check.
+ */
 function checkUserData(userEmail, userPassword) {
     for (let i = 0; i < users.length; i++) {
         checkUserDataForUser(i, userEmail, userPassword);
@@ -172,15 +195,32 @@ function checkUserData(userEmail, userPassword) {
     removeDisplayNone('dataCheck');
 }
 
+/**
+ * Checks the user data for a specific user.
+ * @param {number} i - The index of the user in the users array.
+ * @param {string} userEmail - The user email to check.
+ * @param {string} userPassword - The user password to check.
+ */
 function checkUserDataForUser(i, userEmail, userPassword) {
     const user = users[i];
     if (isUserAndMailCorrect(user, userEmail, userPassword)) setLoggedIn(userEmail);
 }
 
+/**
+ * Checks if the user email and password combination is correct.
+ * @param {object} user - The user object to check.
+ * @param {string} userEmail - The user email to compare.
+ * @param {string} userPassword - The user password to compare.
+ * @returns {boolean} - True if the user email and password combination is correct, false otherwise.
+ */
 function isUserAndMailCorrect(user, userEmail, userPassword) {
     return user.email == userEmail && user.pwd == userPassword;
 }
 
+/**
+ * Sets the logged-in status for the user.
+ * @param {string} userEmail - The user email to set as logged in.
+ */
 function setLoggedIn(userEmail) {
     indexOfEmail = users.find(u => u.email == userEmail);
     loggedIn = true;
@@ -188,10 +228,16 @@ function setLoggedIn(userEmail) {
     window.location.href = './html/summary.html';
 }
 
+/**
+ * Performs a guest login by checking the user data.
+ */
 function guestLogin() {
     checkUserData('guest@guest.de', 'guest');
 }
 
+/**
+ * Performs the logout action.
+ */
 function logout() {
     localStorage.removeItem(indexOfEmail);
     localStorage.removeItem(loggedIn);
@@ -208,6 +254,9 @@ async function pushToDatabase() {
     await backend.setItem('tasks', JSON.stringify(tasks));
 }
 
+/**
+ * Adds a new user with the provided details.
+ */
 function addUser() {
     let name = document.getElementById('name').value;
     let email = document.getElementById('userMail').value;
@@ -221,7 +270,7 @@ function addUser() {
 
 
 /**
- * Add a new Category 
+ * Adds a new category with the provided details.
  */
 function addCategory() {
     let newCategory = document.getElementById('newCat').value;
@@ -232,52 +281,63 @@ function addCategory() {
 }
 
 /**
- * Gets a Categoryname by its index
- * @param {*} i index
- * @returns  Categoryname
+ * Retrieves the name of the category at the specified index.
+ * @param {number} i - The index of the category.
+ * @returns {string} The name of the category.
  */
 function getCategory(i) {
     return categories[i]['name'];
 }
 
 /**
- * Gets the color of Category by its index
- * @param {*} i index
- * @returns Categorycolor
+ * Retrieves the color of the category at the specified index.
+ * @param {number} i - The index of the category.
+ * @returns {string} The color of the category.
  */
 function getCategoryColor(i) {
     return categories[i]['color'];
 }
 
 /**
- * Gets a username by its index
- * @param {*} i index
- * @returns Username
+ * Retrieves the name of the user at the specified index.
+ * @param {number} i - The index of the user.
+ * @returns {string} The name of the user.
  */
 function getUser(i) {
     return users[i]['name'];
 }
 
 /**
- * Aborts the process of Adding something new
- * @param {*} id 
+ * Cancels the action of adding a new item based on the provided ID.
+ * @param {string} id - The ID of the element.
  */
 function cancelAddNew(id) {
     if (id == 'addNewCat') cancelAddNewCat();
-    if (id == 'addNewSubTask') setInnerHTML(id + 'addNewSubTask', setBackToSubTaskField('label', 'Subtasks',
+    if (id == 'addNewSubTask') setInnerHTML('id_' + 'addNewSubTask', setBackToSubTaskField('label', 'Subtasks',
         'dropDownMenuField', 'addNewSubTask', './img/addIcon.png'));
     if (id == 'assignedTo') cancelAssignedTo();
 }
 
+/**
+ * Cancels the assignedTo action by setting all checkboxes to false.
+ */
 function cancelAssignedTo() {
     let children = document.getElementById('assignedTo').children;
     for (let i = 0; i < children.length; i++) setCheckBoxFalse(i);
 }
 
+/**
+ * Sets the checkbox at the specified index to false.
+ * @param {number} i - The index of the checkbox to set to false.
+ */
 function setCheckBoxFalse(i) {
     if (i > 1) document.getElementById('assignedTo').children[i].children[0].checked = false;
 }
 
+/**
+ * Cancels the process of adding a new category.
+ * Restores the category selection field to its initial state.
+ */
 function cancelAddNewCat() {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
@@ -288,8 +348,8 @@ function cancelAddNewCat() {
 }
 
 /**
- * Open the selected dropdownmenu
- * @param {*} usedItems 
+ * Shows the dropdown items based on the specified type of used items.
+ * @param {string} usedItems - The type of used items ('categories' or 'users').
  */
 function showDropDownItems(usedItems) {
     if (usedItems == 'categories') showCategoryItems();
@@ -297,18 +357,24 @@ function showDropDownItems(usedItems) {
 }
 
 /**
- * Shows all category in Dropdown
+ * Shows the category items in the dropdown.
  */
 function showCategoryItems() {
     if (document.getElementById('CategorycategoryBox')) showCategories();
 }
 
+/**
+ * Shows the categories in the dropdown.
+ */
 function showCategories() {
     checkDropDown();
     setCategoriesVisisble();
     if (selectedCategory) removeDisplayNone(selectedCategory);
 }
 
+/**
+ * Sets the visibility of the categories.
+ */
 function setCategoriesVisisble() {
     for (let i = 0; i < categories.length; i++) {
         if (isContainingClassDnone(categories[i]['name'])) removeDisplayNone(categories[i]['name']);
@@ -316,21 +382,38 @@ function setCategoriesVisisble() {
     }
 }
 
+/**
+ * Checks the state of the drop-down menu and sets it to visible.
+ */
 function checkDropDown() {
     if (!selectedCategory) setDropDownVisible();
     else setDropDownVisible();
 }
 
+/**
+ * Sets the category drop-down menu to visible.
+ * If `dropDownCat` is `false`, it calls the `showDropDown` function.
+ * Otherwise, it calls the `hideDropdownCat` function.
+ */
 function setDropDownCatVisible() {
     if (!dropDownCat) showDropDown();
     else hideDropdownCat();
 }
 
+/**
+ * Sets the drop-down menus to visible.
+ * If `dropDownCat` is `false`, it calls the `showDropDown` function to show the category drop-down menu.
+ * Otherwise, it calls the `hideDropdowns` function to hide all drop-down menus.
+ */
 function setDropDownVisible() {
     if (!dropDownCat) showDropDown();
     else hideDropdowns();
 }
 
+/**
+ * Hides the category drop-down menu.
+ * It adds the 'd-none' class to the element with the 'addNewCat' id and sets the `dropDownCat` variable to `false`.
+ */
 function hideDropdownCat() {
     addDisplayNone('addNewCat');
     dropDownCat = false;
@@ -341,6 +424,10 @@ function hideDropdowns() {
     hideDropdownCat();
 }
 
+/**
+ * Hides all drop-down menus.
+ * It adds the 'd-none' class to the element with the 'CategorycategoryBox' id and calls the 'hideDropdownCat' function to hide the category drop-down menu.
+ */
 function showDropDown() {
     removeDisplayNone('CategorycategoryBox');
     removeDisplayNone('addNewCat');
@@ -348,8 +435,8 @@ function showDropDown() {
 }
 
 /**
- * checks the Status to set for a Task
- * @param {*} id 
+ * Checks the status to set the appropriate behavior.
+ * @param {string} id - The ID of the element to check the status.
  */
 function checkStatusToSet(id) {
     let getStatus = document.getElementById(id);
@@ -360,8 +447,8 @@ function checkStatusToSet(id) {
 }
 
 /**
- * Sets onsubmit to the form element
- * @param {*} addForm formelement
+ * Sets the behavior for submitting the form.
+ * @param {string} addForm - The form to set the behavior for.
  */
 function setOnSubmitForm(addForm) {
     let submitElement = document.getElementById('submitting');
@@ -370,6 +457,10 @@ function setOnSubmitForm(addForm) {
     };
 }
 
+/**
+ * Sets the form behavior when submitted.
+ * @param {string} addForm - The form to set the behavior for.
+ */
 function setForm(addForm) {
     createNewTask(addForm);
     addConfirmMessage('Task');
@@ -403,7 +494,9 @@ function showUsersItems() {
     setStyleOfSelectedUsers();
 }
 
-
+/**
+ * Sets the style of the selected users in the dropdown.
+ */
 function setStyleOfSelectedUsers() {
     for (let i = 0; i < users.length; i++) {
         if (isContainingClassDnone(users[i]['name'])) setUserItemsandShow(i)
@@ -411,27 +504,44 @@ function setStyleOfSelectedUsers() {
     }
 }
 
+/**
+ * Hides the user items in the dropdown.
+ */
 function hideUserItems() {
     if (isContainingClassDnone('Assigned toassignedTo')) showUsersDropdown();
     else hideUsersDropDown();
     dropDownAssign = false;
 }
 
+/**
+ * Sets the user items and shows the dropdown.
+ * @param {number} i - The index of the user.
+ */
 function setUserItemsandShow(i) {
     removeDisplayNone(users[i]['name']);
     document.getElementById('assignedTo').style = `height:unset !important;`;
 }
+
+/**
+ * Hides the users dropdown.
+ */
 
 function hideUsersDropDown() {
     removeDisplayNone('Assigned toassignedTo');
     addDisplayNone('invite');
 }
 
+/**
+ * Shows the users dropdown.
+ */
 function showUsersDropdown() {
     addDisplayNone('Assigned toassignedTo');
     removeDisplayNone('invite');
 }
 
+/**
+ * Sets the user items and shows the user dropdown.
+ */
 function setUserItems() {
     removeDisplayNone('Assigned toassignedTo');
     document.getElementById('assignedTo').style = `height:unset;`;
@@ -440,7 +550,7 @@ function setUserItems() {
 }
 
 /**
- * Creates CheckboxItems for Subtasks
+ * Generates a checkbox item, adds it to the list of subtasks, and clears the input field.
  */
 function generateCheckboxItem() {
     let isChecked;
@@ -451,13 +561,10 @@ function generateCheckboxItem() {
     document.getElementById('newSubtasks').value = '';
 }
 
-
-function setCheckBox() {
-    return `
-        <li><input type="checkbox" id="list-subtask-${getValueOf('newSubtasks')}" value="${getValueOf('newSubtasks')}"> ${getValueOf('newSubtasks')}</li>
-    `;
-}
-
+/**
+ * Checks if the checkbox item is checked.
+ * @returns {boolean} True if the checkbox item is checked, false otherwise.
+ */
 function isItemChecked() {
     return document.getElementById('list-subtask-' + getValueOf('newSubtasks')).checked == true;
 }
@@ -472,9 +579,9 @@ function getValueOf(id) {
 }
 
 /**
- * generates the option for dropdown
- * @param {*} array items to set
- * @param {*} nameOfArray array for rendering items
+ * Generates HTML options for an array of items.
+ * @param {Array} array - The array of items.
+ * @param {string} nameOfArray - The name of the array.
  */
 function generateOptionsHTML(array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
@@ -483,28 +590,10 @@ function generateOptionsHTML(array, nameOfArray) {
     }
 }
 
-function generateTheOptionHTML(nameOfArray, content) {
-    return `
-            <div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
-                ${content} 
-                <input type="checkbox" value="${content}">
-            </div>
-    `;
-}
-
-function generateCategoryOptionHTML(nameOfArray, i){
-        return `
-            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
-                ${getCategory(i)}
-                <div class="colorCircle" style="background:${getCategoryColor(i)}">
-            </div>
-        `;
-}
-
 /**
- * Adds a Title to the shown Content
- * @param {*} title Insert the title which should be shown
- * @param {*} id Insert the ID you want to Create the Headline
+ * Adds a content title to an element by setting its innerHTML.
+ * @param {string} title - The title to be added.
+ * @param {string} id - The ID of the element.
  */
 function addContentTitle(title, id) {
     document.getElementById(id).innerHTML += `
@@ -513,9 +602,8 @@ function addContentTitle(title, id) {
 }
 
 /**
- * Adds the class "d-none" (display: none) to all nav Links
- * than removes "d-none" from the param id 
- * @param {*} id Insert the ID you want to get shown
+ * Redirects to the specified link after saving the data.
+ * @param {string} id - The URL or path of the link to be navigated to.
  */
 async function showLink(id) {
     await save();
@@ -531,6 +619,10 @@ function isContainingClassDnone(id) {
     return document.getElementById(id).classList.contains('d-none');
 }
 
+/**
+ * Shows the specified frames and hides the rest.
+ * @param {...string} ids - IDs of the frames to be shown.
+ */
 function showFrame(...ids) {
     let element1 = ids[0];
     let element2 = ids[1];
