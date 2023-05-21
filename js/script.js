@@ -493,4 +493,18 @@ function showFrame(...ids) {
     }
 }
 
+/**
+ * Adds the 'd-none' class to an element to hide it by setting its display property to 'none'.
+ * @param {string} id - The ID of the element.
+ */
+function addDisplayNone(id) {
+    document.getElementById(id).classList.add('d-none');
+}
 
+/**
+ * Removes the 'd-none' class from an element to show it by restoring its display property.
+ * @param {string} id - The ID of the element.
+ */
+function removeDisplayNone(id) {
+    document.getElementById(id).classList.remove('d-none');
+}
