@@ -444,7 +444,7 @@ function setUserItems() {
  */
 function generateCheckboxItem() {
     let isChecked;
-    addInnerHTML('list-subtask',setCheckBox());
+    addInnerHTML('list-subtask', setCheckBox());
     if (isItemChecked()) isChecked = true;
     else isChecked = false;
     subtasks.push({ 'item': getValueOf('newSubtasks'), 'checked': isChecked });
@@ -478,23 +478,17 @@ function getValueOf(id) {
  */
 function generateOptionsHTML(array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') {
-            document.getElementById('assignedTo').innerHTML += `
-            <div  class="cl_${nameOfArray} d-none" id="${getUser(i)}" value="${getUser(i)}">
-                ${getUser(i)} 
-                <input type="checkbox" value="${getUser(i)}">
-            </div>
-        `;
-        }
-        if (nameOfArray == 'categories') {
-            document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
-                ${getCategory(i)}
-                <div class="colorCircle" style="background:${getCategoryColor(i)}">
-            </div>
-        `;
-        }
+        if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray,getUser(i)));
+        if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateTheOptionHTML(nameOfArray, getCategory(i)));
     }
+}
+
+function generateTheOptionHTML(nameOfArray, content) {
+    return `<div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
+                ${content} 
+                <input type="checkbox" value="${content}">
+           </div>
+    `;
 }
 
 /**
@@ -530,15 +524,9 @@ function isContainingClassDnone(id) {
 function showFrame(...ids) {
     let element1 = ids[0];
     let element2 = ids[1];
-
-    for (let i = 0; i < ids.length; i++) {
-
-        document.getElementById(ids[i]).classList.add('d-none');
-    }
-    document.getElementById(element1).classList.remove('d-none');
-    if (element2.length > 0) {
-        document.getElementById(element2).classList.remove('d-none');
-    }
+    for (let i = 0; i < ids.length; i++) addDisplayNone(ids[i]);
+    removeDisplayNone(element1);
+    if (element2.length > 0) removeDisplayNone(element2);
 }
 
 /**
