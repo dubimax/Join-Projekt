@@ -17,6 +17,7 @@
     justify-content: space-between;
     margin-left: 7%;
 }
+
 .details {
     overflow: overlay;
 }
@@ -24,12 +25,13 @@
 .detailBox {
     height: 550px;
 }
-.boardContainer{
+
+.boardContainer {
     width: calc(100% - 232px);
     position: absolute;
     right: 0;
     bottom: 0;
-    top:135px;
+    top: 135px;
 }
 
 .editcard {
@@ -84,7 +86,7 @@ h1 {
 
 .cursor:hover {
     content: url("../img/plusButtonBlue.png");
-} 
+}
 
 .searchVerticalLine {
     width: 0px;
@@ -468,6 +470,7 @@ h1 {
     background-image: center;
     background-position: center;
 }
+
 .editBtnOpenCard {
     background-image: url("../img/editPenInvert.png");
     background-color: #2A3647;
@@ -481,6 +484,7 @@ h1 {
     background-image: center;
     background-position: center;
 }
+
 .deleteBtnOpenCard:hover {
     background-image: url("../img/deleteLogoHover.png");
     border-color: #29ABE2;
@@ -535,6 +539,11 @@ h1 {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 150px;
+        margin-left: 0;
+        width: unset;
+        top: 0;
+        position: unset;
     }
 
     .boardHeaderContainer {
@@ -542,12 +551,11 @@ h1 {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        margin-top: 162px;
-        margin-left: 33px;
+        margin: 0 !important;
     }
 
     .boardHeaderContainer h1 {
-        font-size: 47px;
+        font-size: 40px;
     }
 
     .findAddTaskContainer {
@@ -555,6 +563,11 @@ h1 {
     }
 
     .addTaskBtn {
+        padding: 5px 5px;
+        gap: 10px;
+        height: 50px;
+        margin-top: -145px;
+        margin-left: 20px;
         font-size: 0;
     }
 
@@ -563,10 +576,35 @@ h1 {
     }
 
     .cardHeaders {
+        height: 548px;
+        overflow-y: scroll;
+        position: fixed;
+        top: 300px;
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        margin: 20px 33px 0px -70px;
+        justify-content: flex-start;
+        margin: 0;
+    }
+
+    .searchBox input {
+        width: 145px;
+        font-size: 13px;
+    }
+
+    .dragAreaFullContainer {
+        width: 100%;
+    }
+
+    .dragArea {
+        height: fit-content;
+    }
+
+    .dragAreaTitle {
+        display: flex;
+        padding: 0 10px;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .overlay {
@@ -577,36 +615,45 @@ h1 {
     .openCard {
         box-shadow: none;
         border-radius: 0;
-        min-width: 428px;
+        min-width: 350px;
         min-height: 926px;
         z-index: 6;
-        margin-top: 140px;
+        margin-top: 200px;
         background-color: #F5F5F5;
-        margin-left: 81px;
+        margin-left: 140px;
     }
 
     .closeBtnOpen {
         content: url('../img/backIconBlack.png');
         left: 0;
         top: 0;
-        margin-top: 52px;
+        margin-top: 40px;
         margin-right: 33px;
-        margin-left: 385px;
+        margin-left: 320px;
+    }
+
+    .taskStatusOpen {
+        padding: 3px 25px;
+        font-size: 20px;
     }
 
     .taskTitleOpen {
         font-size: 36px;
+        width: 350px;
     }
 
     .taskDescriptionOpen {
         font-size: 16px;
+        width: 350px;
+        padding-right: 35px;
+        margin-top: 15px;
     }
 
     .taskDueDateOpen {
         font-size: 16px;
     }
 
-    .taskPrioOpen {
+    .taskLabelOpen {
         font-size: 16px;
     }
 
@@ -620,24 +667,57 @@ h1 {
     }
 
     .deleteBtnOpenCard {
-        content: url('../img/deleteBtnOpenCard.png');
+        background-image: url('../img/deleteBtnOpenCard.png');
         width: 40px !important;
         height: 40px !important;
         margin-bottom: 24px;
+        border: none;
     }
 
     .editBtnOpenCard {
-        content: url('../img/editBtnOpenCard.png');
+        background-image: url('../img/editBtnOpenCard.png');
+        border: none;
+        background-color: unset;
+    }
+
+    .deleteBtnOpenCard:hover {
+        background-image: url('../img/deleteBtnOpenCardHover.png');
+        width: 40px !important;
+        height: 40px !important;
+        margin-bottom: 24px;
+        border: none;
+    }
+
+    .editBtnOpenCard:hover {
+        background-image: url('../img/editBtnOpenCardHover.png');
+        border: none;
+        background-color: unset;
     }
 
     .editDeleteBtnOpen {
         display: flex;
         position: fixed;
         bottom: 222px;
-        right: 179px;
+        right: 245px;
         flex-direction: column;
         align-items: flex-end;
         margin-right: 33px;
         margin-bottom: 33px;
     }
+
+    .editSaveBtnOpenContainer {
+        width: 305px;
+    }
+
+    .detail div label {
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .prioImg {
+        width: 18px;
+        height: 13.51px;
+        object-fit: cover;
+    }
+
 }
