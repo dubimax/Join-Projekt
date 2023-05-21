@@ -80,10 +80,10 @@ function addInnerHTML(id, text) {
  */
 function generateNavigationLinks(coloredLink, ...links) {
     document.getElementById('navigation-left-links').innerHTML = '';
-    for (let i = 0; i < links.length; i++) addNavigationLink(coloredLink, i);
+    for (let i = 0; i < links.length; i++) addNavigationLink(coloredLink, i, links);
 }
 
-function addNavigationLink(coloredLink, i) {
+function addNavigationLink(coloredLink, i, links) {
     let linkname = links[i];
     if (coloredLink == linkname) addInnerHTML('navigation-left-links', generateSelectedNavigationLinkHTML(linkname));
     else addInnerHTML('navigation-left-links', generateUnSelectedNavigationLinkHTML(linkname));
@@ -479,16 +479,26 @@ function getValueOf(id) {
 function generateOptionsHTML(array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
         if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray,getUser(i)));
-        if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateTheOptionHTML(nameOfArray, getCategory(i)));
+        if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateCategoryOptionHTML(nameOfArray, i));
     }
 }
 
 function generateTheOptionHTML(nameOfArray, content) {
-    return `<div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
+    return `
+            <div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
                 ${content} 
                 <input type="checkbox" value="${content}">
-           </div>
+            </div>
     `;
+}
+
+function generateCategoryOptionHTML(nameOfArray, i){
+        return `
+            <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
+                ${getCategory(i)}
+                <div class="colorCircle" style="background:${getCategoryColor(i)}">
+            </div>
+        `;
 }
 
 /**
