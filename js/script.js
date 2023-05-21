@@ -101,12 +101,12 @@ function firstLetterToLowerCase(string) {
 /**
  * Adds a Confirmmessage
  */
-function addConfirmMessage() {
-    document.body.innerHTML += setConfirmMessage();
+function addConfirmMessage(text) {
+    document.body.innerHTML += setConfirmMessage(text);
 }
 
-function setConfirmMessage() {
-    return `<div class="confirmMessage" id="confirmMessage">Contact successfully createt</div>`;
+function setConfirmMessage(text) {
+    return `<div class="confirmMessage" id="confirmMessage">${text} successfully createt</div>`;
 }
 
 /**
@@ -300,40 +300,51 @@ function showDropDownItems(usedItems) {
  * Shows all category in Dropdown
  */
 function showCategoryItems() {
-    if (document.getElementById('CategorycategoryBox')) {
-        checkDropDown();
-        for (let i = 0; i < categories.length; i++) {
-            if (isContainingClassDnone(categories[i]['name'])) removeDisplayNone(categories[i]['name']);
-            else addDisplayNone(categories[i]['name']);
-        }
-        if (selectedCategory) removeDisplayNone(selectedCategory);
+    if (document.getElementById('CategorycategoryBox')) showCategories();
+}
+
+function showCategories() {
+    checkDropDown();
+    setCategoriesVisisble();
+    if (selectedCategory) removeDisplayNone(selectedCategory);
+}
+
+function setCategoriesVisisble() {
+    for (let i = 0; i < categories.length; i++) {
+        if (isContainingClassDnone(categories[i]['name'])) removeDisplayNone(categories[i]['name']);
+        else addDisplayNone(categories[i]['name']);
     }
 }
 
-
 function checkDropDown() {
-    if (!selectedCategory) {
-        if (!dropDownCat) {
-            document.getElementById('CategorycategoryBox').classList.remove('d-none');
-            document.getElementById('addNewCat').classList.remove('d-none');
-            dropDownCat = true;
-        } else {
-            document.getElementById('addNewCat').classList.add('d-none');
-            dropDownCat = false;
-        }
-    } else {
-        if (!dropDownCat) {
-            document.getElementById('CategorycategoryBox').classList.remove('d-none');
-            document.getElementById('addNewCat').classList.remove('d-none');
+    if (!selectedCategory) setDropDownVisible();
+    else setDropDownVisible();
+}
 
-            dropDownCat = true;
-        } else {
-            document.getElementById('addNewCat').classList.add('d-none');
-            document.getElementById('CategorycategoryBox').classList.add('d-none');
+function setDropDownCatVisible() {
+    if (!dropDownCat) showDropDown();
+    else hideDropdownCat();
+}
 
-            dropDownCat = false;
-        }
-    }
+function setDropDownVisible() {
+    if (!dropDownCat) showDropDown();
+    else hideDropdowns();
+}
+
+function hideDropdownCat() {
+    addDisplayNone('addNewCat');
+    dropDownCat = false;
+}
+
+function hideDropdowns() {
+    addDisplayNone('CategorycategoryBox');
+    hideDropdownCat();
+}
+
+function showDropDown() {
+    removeDisplayNone('CategorycategoryBox');
+    removeDisplayNone('addNewCat');
+    dropDownCat = true;
 }
 
 /**
@@ -346,7 +357,6 @@ function checkStatusToSet(id) {
     addForm.replace(/\s+/g, '');
     showAddNewTaskAtBoard();
     setOnSubmitForm(addForm);
-    console.log('erfolgreich');
 }
 
 /**
@@ -356,36 +366,32 @@ function checkStatusToSet(id) {
 function setOnSubmitForm(addForm) {
     let submitElement = document.getElementById('submitting');
     submitElement.onsubmit = function () {
-        createNewTask(addForm);
-        document.body.innerHTML += `
-            <div class="confirmMessage" id="submitted">Task successfully created</div>
-        `;
-        if (document.getElementById('addTask')) {
-            document.getElementById('addTask').classList.add('d-none');
-            setTimeout(() => {
-                document.getElementById('submitted').remove();
-
-            }, 1000);
-            return false;
-
-        } else if (document.getElementById('addTaskAtContacts')) {
-            document.getElementById('addTaskAtContacts').classList.add('d-none');
-            setTimeout(() => {
-                document.getElementById('submitted').remove();
-
-            }, 1000);
-            return false;
-        } else if (document.getElementById('addTaskAtBoard')) {
-            document.getElementById('addTaskAtBoard').classList.add('d-none');
-            setTimeout(() => {
-                document.getElementById('submitted').remove();
-
-            }, 1000);
-            return false;
-        }
-
-
+        setForm(addForm);
     };
+}
+
+function setForm(addForm) {
+    createNewTask(addForm);
+    addConfirmMessage('Task');
+    if (isElementExistent('addTask')) removeMessage('addTask');
+    else if (isElementExistent('addTaskAtContacts')) removeMessage('addTaskAtContacts');
+    else if (isElementExistent('addTaskAtBoard')) removeMessage('addTaskAtBoard');
+}
+
+/**
+ * Checks if an element with the specified ID exists in the DOM.
+ *
+ * @param {string} id - The ID of the element to check.
+ * @returns {boolean} - `true` if the element exists, `false` otherwise.
+ */
+function isElementExistent(id) {
+    return document.getElementById(id);
+}
+
+function removeMessage(id) {
+    addDisplayNone(id);
+    setTimeout(removeConfirmMessage(), 1000);
+    return false;
 }
 
 /**

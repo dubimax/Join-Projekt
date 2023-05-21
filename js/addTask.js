@@ -161,16 +161,6 @@ function changeStyleIfExistent() {
 }
 
 /**
- * Checks if an element with the specified ID exists in the DOM.
- *
- * @param {string} id - The ID of the element to check.
- * @returns {boolean} - `true` if the element exists, `false` otherwise.
- */
-function isElementExistent(id) {
-    return document.getElementById(id);
-}
-
-/**
  * Resets all label containers to their default values.
  */
 function resetAllLabelContainer() {

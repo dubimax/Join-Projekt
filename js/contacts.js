@@ -256,7 +256,7 @@ function createNewContact() {
  * Displays a confirmation message, hides the 'create new user' section, and removes the confirmation message after a delay.
  */
 function confirmMessage() {
-    addConfirmMessage();
+    addConfirmMessage('Contact');
     addDisplayNone('createNewUserAtContacts');
     setTimeout(removeConfirmMessage(), 1000);
 }
@@ -336,8 +336,6 @@ function hideContactDetails() {
     showAddNewContactButton();
 }
 
-
-
 /**
  * Sets the contact details with the provided information and performs various actions.
  * @param {string} userName - The name of the contact.
@@ -378,8 +376,6 @@ function setContactDetail(userName, userColor, userMail, userPhone) {
     setInnerHTML('contactDetailsPhone', userPhone);
     document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
 }
-
-
 
 /**
  * Hides the contact details container by adding the 'd-none' class to specific child elements.
