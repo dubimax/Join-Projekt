@@ -107,7 +107,6 @@ function greetingMobile() {
 function hideGreetingsResponsive() {
     addDisplayNone('summaryWelcomeTextMobile');
     removeDisplayNone('mainContainer');
-    removeDisplayNone('nav');
 }
 
 /**
@@ -117,7 +116,6 @@ function hideGreetingsResponsive() {
 function showGreetingResponsive() {
     removeDisplayNone('summaryWelcomeTextMobile');
     addDisplayNone('mainContainer');
-    addDisplayNone('nav');
     showUserName();
 }
 
