@@ -482,23 +482,41 @@ function editTaskData(index, stati) {
     tasks[index]['status'] = tasks[index]['status'];
 }
 
+/**
+ * Sets the style of the board label based on the given active ID (aID).
+ * @param {string} aID - The active ID of the board label.
+ */
 function setStyleOfBoardLabel(aID) {
     if (aID == 'id_urgent') setStyleOfUrgent(aID);
     if (aID == 'id_medium') setStyleOfMedium(aID);
     if (aID == 'id_low') setStyleOfLow(aID);
 }
 
+/**
+ * Adds the assigned users list to the specified status and element index.
+ * @param {string} status - The status of the task.
+ * @param {number} elementIndex - The index of the task element.
+ */
 function addAssignedUsersList(status, elementIndex) {
     addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
 }
 
+/**
+ * Enables editing for the specified field in the edit card.
+ * @param {string} status - The status of the task.
+ * @param {number} elementIndex - The index of the task element.
+ * @param {string} id - The ID of the field to be edited.
+ * @param {string} addClass - The CSS class to be added to the field.
+ */
 function editEditField(status, elementIndex, id, addClass) {
     document.getElementById(id + status + elementIndex).removeAttribute('readonly');
     document.getElementById(id + status + elementIndex).classList.add(addClass);
 }
 
 /**
- * Add display:none to close the bigger card
+ * Closes the open card and hides the overlay.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task element.
  */
 function closeOpenCard(status, index) {
     addDisplayNone('openCard' + status + index);
@@ -507,15 +525,17 @@ function closeOpenCard(status, index) {
 }
 
 /**
- * Allow the drop from card
+ * Allows dropping of dragged elements by preventing the default behavior.
+ * @param {Event} ev - The dragover event object.
  */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
 /**
- * Move the card from current area to antother area
- * @param {*} status is To do, in Progress, Awaiting Feedback or Done (Area)
+ * Moves the currently dragged element to the specified status.
+ * Updates the status of the task, saves the changes, updates the board HTML, and pushes the changes to the database.
+ * @param {string} status - The status to move the task to.
  */
 function moveTo(status) {
     tasks[currentDraggedElement]['status'] = status;
@@ -525,8 +545,8 @@ function moveTo(status) {
 }
 
 /**
- * Generate the highlight if dragged the card
- * @param {*} id of the card
+ * Adds the 'dragAreaHighlight' class to the specified element to highlight it.
+ * @param {string} id - The ID of the element to highlight.
  */
 function highlight(id) {
     document.getElementById(id).classList.add('dragAreaHighlight');
@@ -551,6 +571,10 @@ function createNewTaskAtBoard(statusTag) {
     clearAllInputs();
 }
 
+/**
+ * Shows the "Add New Task" section on the board and populates it with necessary HTML.
+ * Updates event listeners for the dropdown menu.
+ */
 function showAddNewTaskAtBoard() {
     if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
     removeDisplayNone('addTaskAtBoard');
@@ -561,7 +585,8 @@ function showAddNewTaskAtBoard() {
 }
 
 /**
- * reset the board and deletes all tasks from the html code
+ * Resets the content of each column on the board to empty.
+ * Clears the task cards from the "ToDo", "InProgress", "AwaitingFeedback", and "Done" columns.
  */
 function resetBoard() {
     setInnerHTML('toDo', '');
@@ -571,7 +596,7 @@ function resetBoard() {
 }
 
 /**
- * Search the tasks and filter by title or description
+ * Searches for tasks based on the entered search query and updates the display to show only the found tasks.
  */
 function searchTasks() {
     let search = document.getElementById('search').value;
@@ -579,6 +604,11 @@ function searchTasks() {
     for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i,search);
 }
 
+/**
+ * Updates the display to show only the tasks that match the search query.
+ * @param {number} i - The index of the task to check.
+ * @param {string} search - The search query to match against task titles and descriptions.
+ */
 function onlyShowFoundTasks(i,search) {
     let taskTitle = tasks[i]['title'];
     let taskIndex = tasks.indexOf(tasks[i]);
@@ -588,6 +618,11 @@ function onlyShowFoundTasks(i,search) {
     else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
 }
 
+/**
+ * Deletes a task from the tasks array.
+ * @param {string} status - The status of the task to delete.
+ * @param {number} ind - The index of the task to delete.
+ */
 function deleteTask(status, ind) {
     tasks.splice(ind, 1);
     removeEventlistenerFromSelectUserBox();
