@@ -433,7 +433,7 @@ function hideKPMT() {
 function showAddNewContactButton() {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById('addNewContactButton');
-    if (clientWidth <= 1000) hideButton.style = '';
+    if (clientWidth <= 1000) hideButton.style = 'display:flex !important;';
 }
 
 /**
