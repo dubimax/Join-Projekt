@@ -530,8 +530,8 @@ function addLogoutButton() {
     </div>`;
     if (clientWidth < 1300) {
         document.getElementById('optionsMenu').innerHTML += `
-        <div>Legal Notice</div>
-        <div>Help</div>`;
+        <div onclick="addLegalNotice()">Legal Notice</div>
+        <div onclick="addHelp()">Help</div>`;
     }
 }
 
