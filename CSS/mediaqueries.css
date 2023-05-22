@@ -353,6 +353,7 @@
         font-size: 21px;
         line-height: 120%;
         color: #2A3647;
+        animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
     }
 
     .summaryGreeting {

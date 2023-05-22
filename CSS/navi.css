@@ -8,11 +8,7 @@
     align-items: flex-start;
     overflow: hidden;
     background-color: #F5F5F5;
-    z-index: 6;
-}
-
-#helpContent {
-    z-index: 6 !important;
+    z-index: 15;
 }
 
 .kpmt {
@@ -132,9 +128,7 @@
         margin-top: 55px;
         margin-bottom: 155px;
     }
-    #helpContent, #legalNotice {
-        z-index: 0;
-    }
+    
 
     .help, .legalNotice {
         width: unset;
