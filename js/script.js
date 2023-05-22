@@ -65,7 +65,8 @@ function action(formData) {
  * @param {string} text - The text to set as the inner HTML content.
  */
 function setInnerHTML(id, text) {
-    document.getElementById(id).innerHTML = text;
+    if(text.length == 0) document.getElementById(id).innerHTML = '';
+    else document.getElementById(id).innerHTML = text;
 }
 
 /**

@@ -16,21 +16,19 @@ async function initBoard() {
  * Uptade the Board Page
  */
 function updateBoardHTML() {
-    toDoArea();
-    inProgressArea();
-    awaitingFeedbackArea();
-    doneArea();
+    addArea('toDo');
+    addArea('inProgress');
+    addArea('awaitingFeedback');
+    addArea('done');
     addUserAcronyms('assignedUserLogo');
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
     setStyleProgressbar();
-   
-
 }
 
 function showAddNewTaskAtBoardStandard() {
-    if(document.getElementById('addTaskAtBoard')) document.getElementById('addTaskAtBoard').innerHTML = '';
-    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
+    removeDisplayNone('addTaskAtBoard');
     generateAddTaskHTML('addTaskAtBoard');
     addCloseBtnToAddTaskAtBoard();
     setOnSubmitForm('toDo');
@@ -38,72 +36,26 @@ function showAddNewTaskAtBoardStandard() {
 }
 
 function hideAddNewTaskAtBoard() {
-    document.getElementById('addTaskAtBoard').classList.add('d-none');
+    addDisplayNone('addTaskAtBoard');
     removeEventListenerFromDropDown();
 }
 
-/**
- * Show all tasks on the To do Area
- */
-function toDoArea() {
-    let toDo = tasks.filter(t => t['status'] == 'toDo');
-    document.getElementById('toDo').innerHTML = '';
-
-    for (let index = 0; index < toDo.length; index++) {
-        const element = toDo[index];
-        document.getElementById('toDo').innerHTML += generateTodoHTML(element, 'toDo');
-
+function addArea(id) {
+    let area = tasks.filter(t => t['status'] == id);
+    setInnerHTML(id, '');
+    for (let index = 0; index < area.length; index++) {
+        addInnerHTML(id, generateTodoHTML(area[index], id));
     }
 }
 
 function taskDetails() {
-
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        document.getElementById('boardContainer').innerHTML += generateOpenCardHTML(element, i, tasks[i]['status']);
-        setRowCount(tasks[i]['status'], i);
-    }
+    for (let i = 0; i < tasks.length; i++) addTaskDetail(i);
 }
 
-/**
- * Show all tasks on the In Progress Area
- */
-function inProgressArea() {
-    let inProgress = tasks.filter(t => t['status'] == 'inProgress');
-    document.getElementById('inProgress').innerHTML = '';
-
-    for (let index = 0; index < inProgress.length; index++) {
-        const element = inProgress[index];
-        document.getElementById('inProgress').innerHTML += generateTodoHTML(element, 'inProgress');
-
-    }
-}
-
-/**
- * Show all tasks on the Awaiting Feedback Area
- */
-function awaitingFeedbackArea() {
-    let awaitingFeedback = tasks.filter(t => t['status'] == 'awaitingFeedback');
-    document.getElementById('awaitingFeedback').innerHTML = '';
-
-    for (let index = 0; index < awaitingFeedback.length; index++) {
-        const element = awaitingFeedback[index];
-        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, 'awaitingFeedback');
-    }
-}
-
-/**
- * Show all tasks on the Done Area
- */
-function doneArea() {
-    let done = tasks.filter(t => t['status'] == 'done');
-    document.getElementById('done').innerHTML = '';
-
-    for (let index = 0; index < done.length; index++) {
-        const element = done[index];
-        document.getElementById('done').innerHTML += generateTodoHTML(element, 'done');
-
-    }
+function addTaskDetail(i) {
+    const element = tasks[i];
+    addInnerHTML('boardContainer', generateOpenCardHTML(element, element['status']));
+    setRowCount(element['status'], i);
 }
 
 /**
@@ -116,289 +68,201 @@ function startDragging(id) {
 
 function getColor(element) {
     for (let i = 0; i < categories.length; i++) {
-
-        if (categories[i]['name'] == element['category']) {
-            return categories[i]['color'];
-        }
+        if (isElement(i, element)) return categories[i]['color'];
     }
 }
 
-
-
-/**
- * Generate a card to the To do Area
- * @param {*} element Elements of the card
- * @returns the card with elements
- */
-function generateTodoHTML(element, status) {
-    let elementIndex = tasks.indexOf(element);
-    return /*html*/`
-    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
-        <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
-            ${element['category']}</div>
-        <div class="taskTitle" id="cardTaskTitle">
-            ${element['title']}
-        </div>
-        <div class="taskDescription" id="cardTaskDescription${element['status']}${elementIndex}">
-            ${element['description']}
-        </div>  
-        
-        <div class="barContainer">
-        <div class="bar" id="progressbar${element['status']}${elementIndex}">
-        </div>
-        <div class="taskProgressbar">
-            ${getCheckedSubtasks(elementIndex)}/${element['subtasks'].length} Done 
-        </div>   
-       </div>
-
-        <div class="containerUserAndPrio">
-            <div class="assignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
-            </div>
-
-            <div class="taskPrio">
-                <img src="../img/${element['prio'].toLowerCase()}.png">
-            </div>
-        </div>  
-    </div>`;
-
+function isElement(i, element) {
+    return categories[i]['name'] == element['category'];
 }
 
-function setStyleProgressbar(){
-    for(let i = 0; i < tasks.length;i++){
+function setStyleProgressbar() {
+    for (let i = 0; i < tasks.length; i++) {
         let progress = getProgressOfSubtasks(i);
         let difference = 100 - progress;
-
-        if(document.getElementById('progressbar' + tasks[i]['status'] + i) && progress != 0){
-            document.getElementById('progressbar' + tasks[i]['status'] + i).style = `background:linear-gradient(to right,#29ABE2 ${progress}%,#F4F4F4 ${difference}%);`;
-        }
-    } 
+        if (isTaskAndProgressNotZero(i, progress)) setStyleOfProgressbar(generateProgresstStyleHTML(progress, difference), i);
+    }
 }
 
-function getProgressOfSubtasks(index){
+function setStyleOfProgressbar(text, i) {
+    document.getElementById('progressbar' + tasks[i]['status'] + i).style = text;
+}
+
+function isTaskAndProgressNotZero(i, progress) {
+    return document.getElementById('progressbar' + tasks[i]['status'] + i) && progress != 0;
+}
+
+function getProgressOfSubtasks(index) {
     let progress = getCheckedSubtasks(index);
     let size = tasks[index]['subtasks'].length;
-    return 100/size*progress;
+    return 100 / size * progress;
 }
 
-function getCheckedSubtasks(elementIndex){
+function getCheckedSubtasks(elementIndex) {
     let count = 0;
-    for(let i = 0; i < tasks[elementIndex]['subtasks'].length;i++){
-        if(tasks[elementIndex]['subtasks'][i]['checked'] == true){
-            count++;
-        }
+    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) {
+        if (isSubtaskChecked(elementIndex, i)) count++;
     }
     return count;
+}
+
+function isSubtaskChecked(elementIndex, i) {
+    return tasks[elementIndex]['subtasks'][i]['checked'] == true;
 }
 
 /**
  * Remove display:none from the bigger card to see it
  */
 function openCard(index, status) {
-    if (document.getElementById('openCard' + status + index)) {
-
-        document.getElementById('openCard' + status + index).classList.remove('d-none');
-    }
-    
-    document.getElementById('assignedUserLogoOpen' + status + index).innerHTML = '';
+    if (isHTMLElement('openCard', status, index)) removeDisplayNone('openCard' + status + index);
+    setInnerHTML('assignedUserLogoOpen' + status + index, '');
     addUserAcronyms('assignedUserLogoOpen');
     addSubtasksToCardOpen(status, index);
-
     document.getElementById('overlay').style.display = "block";
 }
 
+function isHTMLElement(id, status, index) {
+    return document.getElementById(id + status + index);
+}
 function addUserAcronyms(id) {
     for (let i = 0; i < tasks.length; i++) {
         let index = tasks.indexOf(tasks[i]);
         let status = tasks[i]['status'];
-
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
-            if (id == 'assignedUserLogoOpen') {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen');
-                setAssignedNames(tasks[i]['status'], index, tasks[i]['isAssigned'][j], 'assignedToContainerOpen');
-            } else if (id == 'assignedUserLogo') {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer');
-
-            }
+            if (id == 'assignedUserLogoOpen') addNamesToOpenCard(id, i, index, status, j);
+            else if (id == 'assignedUserLogo') addNamesToCard(id, i, index, status, j);
         }
     }
 }
 
+function addNamesToCard(id, i, index, status, j) {
+    addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer'));
+}
 
-function generateAssignedUserHTML(username, index, status, id) {
+function addNamesToOpenCard(id, i, index, status, j) {
+    addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen'));
+    setAssignedNames(tasks[i]['status'], index, tasks[i]['isAssigned'][j], 'assignedToContainerOpen');
+}
+
+
+function findColor(username) {
     let color;
-    users.find((user) => {
-        if (user.name == username) {
-            color = user.color;
-        }
-    });
-    let category = tasks[index]['category'];
-    return /*html*/`
-    <div class="assignedToContainer" id="${category}${id}${username}${status}${index}">
-        <div class="colorCircleMedium boardCircle" style="background:${color}">
-            ${getFirstLettersOfName(username)} 
-        </div>
-    </div>
-    `;
+    users.find((user) => { if (user.name == username) color = user.color; });
+    return color;
 }
 
 function setAssignedNames(status, index, username, id) {
     let category = tasks[index]['category'];
-
-    document.getElementById(category + id + username + status + index).innerHTML += `<div>${username}</div>`;
-
+    addInnerHTML(category + id + username + status + index, generateUserNameDivHTML(username));
 }
 
 function setRowCount(status, elementIndex) {
-    let textAreaField = document.getElementById('editTitle'+ status + elementIndex);
-    if (textAreaField.cols >= "20") {
-        textAreaField.rows = "2";
-    } else {
-        textAreaField.rows = "1";
-    }
-}
-
-/**
- * Generate a bigger card if you clicket a small card on the areas
- * @param {*} element elemts of the card 
- * @returns the bigger card with more information
- */
-function generateOpenCardHTML(element, index, status) {
-    let elementIndex = tasks.indexOf(element);
-    return /*html*/`
-    <div class="openCard d-none" id="openCard${status}${elementIndex}">
-            <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
-
-        <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
-            ${element['category']}
-        </div>
-        
-        <div>
-            <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
-            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
-        </div>
-        <div>
-            <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
-            <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
-        </div>  
-        <div id="dateContainer${status}${elementIndex}" style="display:flex;">
-            <label class="taskLabelOpen editcard" >Due date: </label>
-            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
-        </div>
-        <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
-            <label class="taskLabelOpen">Priority: </label>
-            <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
-        </div>
-        <div id="editSubtasksContainer${status}${elementIndex}">
-        </div>  
-        <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
-        <span class="taskLabelOpen">Assigned to: </span> 
-
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
-        </div>
-        
-        <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
-            <div class="deleteBtnOpenCard" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})"></div>
-            <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
-        </div>
-        <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
-                Ok<img src="../img/okWhite.png">
-            </button>
-        </div>
-    </div>`
+    let textAreaField = document.getElementById('editTitle' + status + elementIndex);
+    if (textAreaField.cols >= "20") textAreaField.rows = "2";
+    else textAreaField.rows = "1";
 }
 
 function addSubtasksToCardOpen(status, index) {
-    document.getElementById('editSubtasksContainer' + status + index).innerHTML = '';
-    for (let i = 0; i < tasks[index]['subtasks'].length; i++) {
-        document.getElementById('editSubtasksContainer' + status + index).innerHTML += `
-      <div> ${tasks[index]['subtasks'][i]['item']} <input type="checkbox"class="taskSubtasksOpen" onchange="setSubtaskChecked('${status}', ${index}, ${i})" id="editSubtasks${tasks[index]['subtasks'][i]['item']}${status}${index}" value="${tasks[index]['subtasks'][i]['item']}"/></div>
-    `;}
+    setInnerHTML('editSubtasksContainer' + status + index, '');
+    for (let i = 0; i < tasks[index]['subtasks'].length; i++) addInnerHTML('editSubtasksContainer' + status + index, addCheckBoxAtBoardHTML(index, i, status));
     for (let j = 0; j < tasks[index]['subtasks'].length; j++) {
-        if (tasks[index]['subtasks'][j]['checked'] == true) {
-            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = true;
-        } else {
-            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = false;
-        }
+        if (tasks[index]['subtasks'][j]['checked'] == true) setCheckBoxCheckedOpenCard(index, j, status, true);
+        else setCheckBoxCheckedOpenCard(index, j, status, false);
     }
 }
 
-function setSubtaskChecked(status, index, i){
-    if(document.getElementById('editSubtasks' + tasks[index]['subtasks'][i]['item'] + status + index).checked == true){
-        tasks[index]['subtasks'][i]['checked'] = true;
-    }else {
-        tasks[index]['subtasks'][i]['checked'] = false;
-    }
+function setCheckBoxCheckedOpenCard(index, j, status, prop) {
+    document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = prop;
+}
+
+function setSubtaskChecked(status, index, i) {
+    if (isSubtaskAtBoardChecked(index, i, status)) tasks[index]['subtasks'][i]['checked'] = true;
+    else tasks[index]['subtasks'][i]['checked'] = false;
     pushToDatabase();
+}
+
+function isSubtaskAtBoardChecked(index, i, status) {
+    return document.getElementById('editSubtasks' + tasks[index]['subtasks'][i]['item'] + status + index).checked == true;
 }
 
 function editCard(status, elementIndex, aID) {
     let task = tasks[elementIndex];
-    document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
-    document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
-    document.getElementById('editDeleteBtnOpen' + status + elementIndex).classList.add('d-none');
-    document.getElementById('editSaveBtnOpen' + status + elementIndex).classList.remove('d-none');
-    document.getElementById('editSubtasksContainer' + status + elementIndex).classList.add('d-none');
+    showEditCard(status, elementIndex);
+    setStyleForEditCard(status, elementIndex);
+    setDataForEditCard(status, elementIndex, task, aID);
+}
 
-    document.getElementById('openCardTitle' + status + elementIndex).classList.remove('d-none');
-    document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
-    document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
-    document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
-    document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
-    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
-    document.getElementById('assignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
+function setDataForEditCard(status, elementIndex, task,aID) {
+    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio'));
+    setInnerHTML('assignedUserOpen' + status + elementIndex,
+        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
     setActiveCheckbox(task);
     setStyleOfBoardLabel(aID);
-    generateEditTitle(status, elementIndex);
-    generateEditDescription(status, elementIndex);
-    generateEditDate(status, elementIndex);
+    editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
+    editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
+    editEditField(status, elementIndex, 'editDate', 'inputTextStd');
     addEventListenerToSelectUserBox();
+}
+
+function setStyleForEditCard(status, elementIndex) {
+    document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
+    document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
+    document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
+    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
+}
+
+function showEditCard(status, elementIndex) {
+    addDisplayNone('taskStatusCategory' + status + elementIndex);
+    addDisplayNone('editDeleteBtnOpen' + status + elementIndex);
+    removeDisplayNone('editSaveBtnOpen' + status + elementIndex);
+    addDisplayNone('editSubtasksContainer' + status + elementIndex);
+    removeDisplayNone('openCardTitle' + status + elementIndex);
+    removeDisplayNone('openCardDescription' + status + elementIndex);
 }
 
 function resetEditCard(index, status) {
     document.getElementById('editTitle' + status + index).readOnly = true;
     document.getElementById('editDescription' + status + index).readOnly = true;
     document.getElementById('editDate' + status + index).readOnly = true;
-    document.getElementById('assignedUserOpen' + status + index).innerHTML = '';
-    document.getElementById('editDeleteBtnOpen' + status + index).classList.remove('d-none');
-    document.getElementById('editSaveBtnOpen' + status + index).classList.add('d-none');
-    document.getElementById('editSubtasksContainer' + status + index).classList.remove('d-none');
+    setInnerHTML('assignedUserOpen' + status + index, '');
+    hideEditCard(status, index);
+    resetStylesForOpenCard(status, index);
+    resetAssigned(status, index);
+    resetTaskPrio(status, index);
+    addUserAcronyms('assignedUserOpen', index, status);
+    addAssignedUsersList(status, index);
+}
+
+function resetStylesForOpenCard(status, index) {
     document.getElementById('editDate' + status + index).classList.remove('inputTextStd');
     document.getElementById('editDescription' + status + index).classList.remove('inputDescriptionField');
     document.getElementById('editTitle' + status + index).classList.remove('inputTextStd');
     document.getElementById('editTitle' + status + index).classList.add('taskTitleOpen');
-    document.getElementById('openCardTitle' + status + index).classList.add('d-none');
-    document.getElementById('openCardDescription' + status + index).classList.add('d-none');
     document.getElementById('editDescription' + status + index).classList.add('taskDescriptionOpen');
     document.getElementById('editDate' + status + index).classList.add('taskDueDateOpen');
     document.getElementById('dateContainer' + status + index).style = "display:flex;";
-    document.getElementById('taskStatusCategory' + status + index).classList.remove('d-none');
+}
 
-
-    resetAssigned(status, index);
-    resetTaskPrio(status, index);
-    addUserAcronyms('assignedUserOpen', index, status);
-
-    addAssignedUsersList(status, index);
+function hideEditCard(status, index) {
+    removeDisplayNone('editDeleteBtnOpen' + status + index);
+    addDisplayNone('editSaveBtnOpen' + status + index);
+    removeDisplayNone('editSubtasksContainer' + status + index);
+    addDisplayNone('openCardTitle' + status + index);
+    addDisplayNone('openCardDescription' + status + index);
+    removeDisplayNone('taskStatusCategory' + status + index);
 }
 
 function resetTaskPrio(status, index) {
     let element = tasks[index];
-    document.getElementById('taskPrioOpen' + status + index).innerHTML = `
-        <label class="taskLabelOpen">Priority: </label>
-        <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
-    `;
+    setInnerHTML('taskPrioOpen' + status + index, resetTaskPrioHTML(element));
 }
 
 function resetAssigned(status, index) {
-    document.getElementById('assignedUserOpen' + status + index).innerHTML = `
-    <span class="taskLabelOpen">Assigned to: </span> 
-
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${index}"></label>
-    `;
+    setInnerHTML('assignedUserOpen' + status + index, resetAssignedHTML(status, index));
 }
 
 function setActiveCheckbox(task) {
@@ -408,9 +272,18 @@ function setActiveCheckbox(task) {
 }
 
 function editThisTask(index, stati) {
+    editTaskData(index, stati);
+    addDisplayNone('openCard' + stati + index);
+    addDisplayNone('overlay');
+    resetEditCard(index, stati);
+    save();
+    updateBoardHTML();
+    pushToDatabase();
+}
+
+function editTaskData(index, stati) {
     tasks[index]['title'] = document.getElementById('editTitle' + stati + index).value;
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
-
     tasks[index]['category'] = tasks[index]['category'];
     assigned = [];
     tasks[index]['isAssigned'] = getAssignedContacts();
@@ -420,17 +293,6 @@ function editThisTask(index, stati) {
     tasks[index]['subtasks'] = tasks[index]['subtasks'];
     tasks[index]['id'] = tasks[index]['id'];
     tasks[index]['status'] = tasks[index]['status'];
-
-    document.getElementById('openCard' + stati + index).classList.add('d-none');
-    document.getElementById('overlay').classList.add('d-none');
-
-
-    resetEditCard(index, stati);
-
-    save();
-    updateBoardHTML();
-    pushToDatabase();
-
 }
 
 function setStyleOfBoardLabel(aID) {
@@ -440,40 +302,21 @@ function setStyleOfBoardLabel(aID) {
 }
 
 function addAssignedUsersList(status, elementIndex) {
-    document.getElementById('assignedUserOpen' + status + elementIndex).innerHTML += `
-    <div class="p-relative d-flex align-c">
-        <list class="d-flex" id="list-assigned-user">
-        </list>
-    </div>
-    `;
+    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
 }
 
-function generateEditTitle(status, elementIndex) {
-    document.getElementById('editTitle' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editTitle' + status + elementIndex).classList.add('inputTextStd');
-
+function editEditField(status, elementIndex, id, addClass) {
+    document.getElementById(id + status + elementIndex).removeAttribute('readonly');
+    document.getElementById(id + status + elementIndex).classList.add(addClass);
 }
-
-function generateEditDescription(status, elementIndex) {
-    document.getElementById('editDescription' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDescription' + status + elementIndex).classList.add('inputDescriptionField');
-
-
-}
-
-function generateEditDate(status, elementIndex) {
-    document.getElementById('editDate' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDate' + status + elementIndex).classList.add('inputTextStd');
-}
-
 
 /**
  * Add display:none to close the bigger card
  */
 function closeOpenCard(status, index) {
-    document.getElementById('openCard' + status + index).classList.add('d-none');
+    addDisplayNone('openCard' + status + index);
     document.getElementById('overlay').style.display = "none";
-    resetEditCard(index,status);
+    resetEditCard(index, status);
 }
 
 /**
@@ -522,8 +365,8 @@ function createNewTaskAtBoard(statusTag) {
 }
 
 function showAddNewTaskAtBoard() {
-    if(document.getElementById('addTaskAtBoard')) document.getElementById('addTaskAtBoard').innerHTML = '';
-    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
+    removeDisplayNone('addTaskAtBoard');
     generateAddTaskHTML('addTaskAtBoard');
     addCloseBtnToAddTaskAtBoard();
     removeEventListenerFromDropDown();
@@ -534,10 +377,10 @@ function showAddNewTaskAtBoard() {
  * reset the board and deletes all tasks from the html code
  */
 function resetBoard() {
-    document.getElementById('toDo').innerHTML = '';
-    document.getElementById('inProgress').innerHTML = '';
-    document.getElementById('awaitingFeedback').innerHTML = '';
-    document.getElementById('done').innerHTML = '';
+    setInnerHTML('toDo', '');
+    setInnerHTML('inProgress', '');
+    setInnerHTML('awaitingFeedback', '');
+    setInnerHTML('done', '');
 }
 
 /**
@@ -546,33 +389,23 @@ function resetBoard() {
 function searchTasks() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
-    console.log(search);
-    for (let i = 0; i < tasks.length; i++) {
-        let taskTitle = tasks[i]['title'];
-        let taskIndex = tasks.indexOf(tasks[i]);
-        let tDescription = tasks[i]['description'];
-        if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
-            console.log('gefunden');
-            if (document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.contains('d-none')) {
-                document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.remove('d-none');
-            }
-        }
-        else {
-            document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.add('d-none');
-
-        }
-    }
+    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i,search);
 }
 
-function deleteTask(task, status, ind) {
-    let index = -1;
-    
-            
+function onlyShowFoundTasks(i,search) {
+    let taskTitle = tasks[i]['title'];
+    let taskIndex = tasks.indexOf(tasks[i]);
+    let tDescription = tasks[i]['description'];
+    if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) &&
+        isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
+}
+
+function deleteTask(status, ind) {
     tasks.splice(ind, 1);
     removeEventlistenerFromSelectUserBox();
     closeOpenCard(status, ind);
     pushToDatabase();
     updateBoardHTML();
-
 }
 

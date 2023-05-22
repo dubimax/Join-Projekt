@@ -631,3 +631,143 @@ function setStyleOfCloseIconAtContacts() {
 function setConfirmMessage(text) {
     return `<div class="confirmMessage" id="confirmMessage">${text} successfully createt</div>`;
 }
+
+/**
+ * Generate a card to the To do Area
+ * @param {*} element Elements of the card
+ * @returns the card with elements
+ */
+function generateTodoHTML(element, status) {
+    let elementIndex = tasks.indexOf(element);
+    return /*html*/`
+    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
+        <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
+            ${element['category']}</div>
+        <div class="taskTitle" id="cardTaskTitle">
+            ${element['title']}
+        </div>
+        <div class="taskDescription" id="cardTaskDescription${element['status']}${elementIndex}">
+            ${element['description']}
+        </div>  
+        <div class="barContainer">
+        <div class="bar" id="progressbar${element['status']}${elementIndex}">
+        </div>
+        <div class="taskProgressbar">
+            ${getCheckedSubtasks(elementIndex)}/${element['subtasks'].length} Done 
+        </div>   
+       </div>
+        <div class="containerUserAndPrio">
+            <div class="assignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
+            </div>
+
+            <div class="taskPrio">
+                <img src="../img/${element['prio'].toLowerCase()}.png">
+            </div>
+        </div>  
+    </div>`;
+}
+
+function generateProgresstStyleHTML(progress, difference){
+    return `background:linear-gradient(to right,#29ABE2 ${progress}%,#F4F4F4 ${difference}%);`;
+}
+
+function generateAssignedUserHTML(username, index, status, id) {
+    let category = tasks[index]['category'];
+    let color = findColor(username);
+
+    return /*html*/`
+    <div class="assignedToContainer" id="${category}${id}${username}${status}${index}">
+        <div class="colorCircleMedium boardCircle" style="background:${color}">
+            ${getFirstLettersOfName(username)} 
+        </div>
+    </div>
+    `;
+}
+
+function generateUserNameDivHTML(username){
+    return `<div>${username}</div>`;
+}
+
+/**
+ * Generate a bigger card if you clicket a small card on the areas
+ * @param {*} element elemts of the card 
+ * @returns the bigger card with more information
+ */
+function generateOpenCardHTML(element,status) {
+    let elementIndex = tasks.indexOf(element);
+    return `
+    <div class="openCard d-none" id="openCard${status}${elementIndex}">
+            <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
+
+        <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
+            ${element['category']}
+        </div>
+        
+        <div>
+            <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
+            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
+        </div>
+        <div>
+            <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
+            <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
+        </div>  
+        <div id="dateContainer${status}${elementIndex}" style="display:flex;">
+            <label class="taskLabelOpen editcard" >Due date: </label>
+            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
+        </div>
+        <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
+            <label class="taskLabelOpen">Priority: </label>
+            <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
+        </div>
+        <div id="editSubtasksContainer${status}${elementIndex}">
+        </div>  
+        <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
+        <span class="taskLabelOpen">Assigned to: </span> 
+
+        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
+        </div>
+        
+        <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
+            <div class="deleteBtnOpenCard" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})"></div>
+            <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
+        </div>
+        <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
+                Ok<img src="../img/okWhite.png">
+            </button>
+        </div>
+    </div>`;
+}
+
+function addCheckBoxAtBoardHTML(index,i,status) {
+    return `
+        <div> 
+            ${tasks[index]['subtasks'][i]['item']} 
+            <input type="checkbox"class="taskSubtasksOpen" onchange="setSubtaskChecked('${status}', ${index}, ${i})"
+             id="editSubtasks${tasks[index]['subtasks'][i]['item']}${status}${index}" value="${tasks[index]['subtasks'][i]['item']}"/>
+        </div>
+    `;
+}
+
+function resetTaskPrioHTML(element) {
+    return `
+        <label class="taskLabelOpen">Priority: </label>
+        <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
+    `;
+}
+
+function resetAssignedHTML(status,index){
+    return `
+    <span class="taskLabelOpen">Assigned to: </span> 
+
+        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${index}"></label>
+    `;
+}
+
+function generateAssignedListHTML(){
+    return `
+    <div class="p-relative d-flex align-c">
+        <list class="d-flex" id="list-assigned-user">
+        </list>
+    </div>
+    `;
+}
