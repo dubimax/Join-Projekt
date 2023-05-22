@@ -14,8 +14,8 @@
 .boardHeaderContainer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-left: 7%;
+    justify-content: center;
+    gap: 30%;
 }
 
 .details {
@@ -43,15 +43,13 @@ h1 {
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
-
     color: #000000;
 }
 
 .findAddTaskContainer {
     display: flex;
-    align-items: flex-start;
     align-items: center;
-    margin-right: 8%;
+    margin-left: 8%;
 }
 
 .searchBox {
@@ -535,27 +533,36 @@ h1 {
 
 @media (max-width:1480px) {
     .boardContainer {
-        width: calc(100% - 0px);
-        padding: 0px 30px;
+        width: calc(100% - 220px);
+        padding: 0px 35px;
     }
-    .boardHeaderContainer{
+
+    .boardHeaderContainer {
         margin-top: 15px;
+        gap: 22%;
     }
+
     .boardHeaderContainer h1 {
         font-size: 50px;
     }
 
     .cardHeaders {
         margin-top: 25px;
-    } 
+    }
 
     .dragAreaTitle {
         font-size: 16px;
     }
+
     .dragAreaTitle img {
         width: 25px;
         height: 25px;
     }
+
+    .dragAreaFullContainer {
+        padding: 5px;
+    }
+
     .card {
         width: 210px;
         margin-bottom: 25px;
@@ -571,11 +578,13 @@ h1 {
         margin-top: 10px;
         font-size: 13px;
     }
+
     .taskDescription {
         margin-top: 7px;
         width: 174px;
         font-size: 13px;
     }
+
     .barContainer {
         margin-top: 10px;
     }
@@ -605,117 +614,17 @@ h1 {
         width: 27px;
         height: 27px;
     }
-    .helpContainer, .noticeContainer {
-        padding: 20px 25px;
-        overflow-y: scroll;
-        margin-top: 55px;
-        margin-bottom: 155px;
-    }
-    #helpContent, #legalNotice {
-        z-index: 0;
-    }
 
-    .help, .legalNotice {
-        width: unset;
-    }
+}
 
-    #helpContainer, #noticeContainer {
-        display: none;
-    }
-
-    .back {
-        right: 30px;
-    }
-
-    .impressum {
-        font-size: 13px;
-    }
-
-    .impressum h1 {
-        font-size: 40px;
-    }
-
-    .logoutButton {
-        z-index: 5;
-        gap: 5px;
-        align-items: flex-start;
-        height: unset;
-    }
-
-    .kpmt {
-        position: absolute;
-        top: unset;
-        left: 0;
-        padding-left: 70px;
-        display: block !important;
-
-    }
-
-    .profileNavContainer {
-        position: absolute;
-        right: 25px;
-    }
-
-    .logoInvertColor {
-        display: unset;
-        width: 32px;
-        height: 40px;
-        position: absolute;
-        left: 25px;
-        object-fit: contain;
-    }
-
-    .navigation-left {
-        background-color: #2A3647;
-        display: flex;
-        align-items: center;
-        position: absolute;
-        height: 80px;
-        left: 0px;
-        top: unset;
-        z-index: 9;
-        box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.3);
-        width: 100%;
-        right: 0;
-        bottom: 0;
-    }
-
-    .navigation-left-link {
-        flex-direction: column;
-        justify-content: center;
-        padding-top: unset;
-        width: 25%;
-        padding: unset;
-        height: 100%;
-    }
-
-    .navigation-left-links,
-    .navigation-left-linksContainer {
-        margin-top: unset;
-        width: 100%;
-    }
-
-    .navigation-left-links {
-        flex-direction: row;
-        height: 100%;
-    }
-
-    .navigation-left-linksContainer {
-        margin-bottom: unset;
-        height: 100%;
-    }
-
-    #logoNav {
-        display: none;
-    }
-
-    #addLegal {
-        display: none;
+@media (max-width:1300px) {
+    .boardContainer {
+        width: calc(100% - 0px);
     }
 }
 
 
-@media (max-width:1100px) {
+@media (max-width:1000px) {
 
     .logoutButton {
         z-index: 9;
@@ -740,7 +649,7 @@ h1 {
     .barContainer {
         margin-top: 10px;
     }
-    
+
     .boardContainer {
         display: flex;
         flex-direction: column;
@@ -766,6 +675,7 @@ h1 {
 
     .findAddTaskContainer {
         margin-top: 30px;
+        margin-left: 0;
     }
 
     .addTaskBtn {
@@ -943,7 +853,7 @@ h1 {
         transform: unset !important;
     }
 
-    #addTaskAtBoard h1{
+    #addTaskAtBoard h1 {
         margin-top: -50px !important;
     }
 
