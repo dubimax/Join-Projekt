@@ -674,7 +674,6 @@ function generateProgresstStyleHTML(progress, difference){
 function generateAssignedUserHTML(username, index, status, id) {
     let category = tasks[index]['category'];
     let color = findColor(username);
-
     return /*html*/`
     <div class="assignedToContainer" id="${category}${id}${username}${status}${index}">
         <div class="colorCircleMedium boardCircle" style="background:${color}">
