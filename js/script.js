@@ -55,7 +55,7 @@ function save() {
  */
 function action(formData) {
     const input = 'https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php';
-    const requestInit = {method: 'post', body: formData};
+    const requestInit = { method: 'post', body: formData };
     return fetch(input, requestInit);
 }
 
@@ -65,7 +65,7 @@ function action(formData) {
  * @param {string} text - The text to set as the inner HTML content.
  */
 function setInnerHTML(id, text) {
-    if(text.length == 0) document.getElementById(id).innerHTML = '';
+    if (text.length == 0) document.getElementById(id).innerHTML = '';
     else document.getElementById(id).innerHTML = text;
 }
 
@@ -269,7 +269,6 @@ function addUser() {
     showFrame('signUpConfirmFrame', 'signUpFrame');
 }
 
-
 /**
  * Adds a new category with the provided details.
  */
@@ -387,51 +386,49 @@ function setCategoriesVisisble() {
  * Checks the state of the drop-down menu and sets it to visible.
  */
 function checkDropDown() {
-    if (!selectedCategory) setDropDownVisible();
-    else setDropDownVisible();
+    if (!selectedCategory) setContainerCategeroyVisible();
+    else setContainerVisibleAlerternate();
 }
 
 /**
- * Sets the category drop-down menu to visible.
- * If `dropDownCat` is `false`, it calls the `showDropDown` function.
- * Otherwise, it calls the `hideDropdownCat` function.
+ * Toggles the visibility of the container based on the state of the dropDownCat variable.
  */
-function setDropDownCatVisible() {
-    if (!dropDownCat) showDropDown();
-    else hideDropdownCat();
+function setContainerVisibleAlerternate() {
+    if (!dropDownCat) showDropDonwsMenu();
+    else hideDropDownWithAddNewCat();
 }
 
 /**
- * Sets the drop-down menus to visible.
- * If `dropDownCat` is `false`, it calls the `showDropDown` function to show the category drop-down menu.
- * Otherwise, it calls the `hideDropdowns` function to hide all drop-down menus.
+ * Toggles the visibility of the container category based on the state of the dropDownCat variable.
  */
-function setDropDownVisible() {
-    if (!dropDownCat) showDropDown();
-    else hideDropdowns();
+function setContainerCategeroyVisible() {
+    if (!dropDownCat) showDropDonwsMenu();
+    else hideDropDownWithOutAddNewCat();
 }
 
 /**
- * Hides the category drop-down menu.
- * It adds the 'd-none' class to the element with the 'addNewCat' id and sets the `dropDownCat` variable to `false`.
+ * Hides the drop-down menu without showing the "Add New Category" option.
  */
-function hideDropdownCat() {
-    addDisplayNone('addNewCat');
+function hideDropDownWithOutAddNewCat() {
+    document.getElementById('addNewCat').classList.add('d-none');
     dropDownCat = false;
 }
 
-function hideDropdowns() {
-    addDisplayNone('CategorycategoryBox');
-    hideDropdownCat();
+/**
+ * Hides the drop-down menu along with the "Add New Category" option.
+ */
+function hideDropDownWithAddNewCat() {
+    document.getElementById('addNewCat').classList.add('d-none');
+    document.getElementById('CategorycategoryBox').classList.add('d-none');
+    dropDownCat = false;
 }
 
 /**
- * Hides all drop-down menus.
- * It adds the 'd-none' class to the element with the 'CategorycategoryBox' id and calls the 'hideDropdownCat' function to hide the category drop-down menu.
+ * Shows the drop-down menu with the "Add New Category" option.
  */
-function showDropDown() {
-    removeDisplayNone('CategorycategoryBox');
-    removeDisplayNone('addNewCat');
+function showDropDonwsMenu() {
+    document.getElementById('CategorycategoryBox').classList.remove('d-none');
+    document.getElementById('addNewCat').classList.remove('d-none');
     dropDownCat = true;
 }
 
@@ -481,7 +478,6 @@ function isElementExistent(id) {
 }
 
 function removeMessage(id) {
-    addDisplayNone(id);
     setTimeout(() => removeConfirmMessage(), 1000);
     return false;
 }
@@ -586,7 +582,7 @@ function getValueOf(id) {
  */
 function generateOptionsHTML(array, nameOfArray) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray,getUser(i)));
+        if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray, getUser(i)));
         if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateCategoryOptionHTML(nameOfArray, i));
     }
 }
