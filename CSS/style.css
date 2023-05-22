@@ -907,3 +907,10 @@ a {
 #helpContent {
     z-index: 15;
 }
+
+@media (max-width:1300px) {
+    #helpContent {
+    z-index: 6;
+    overflow-y: scroll;
+    }
+}
