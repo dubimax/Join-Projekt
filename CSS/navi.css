@@ -136,7 +136,7 @@
         width: unset;
     }
 
-    #helpContainer, #boardContainer {
+    #helpContainer, #noticeContainer {
         display: none;
     }
     .back {

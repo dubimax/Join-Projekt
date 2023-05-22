@@ -619,9 +619,10 @@ h1 {
         width: unset;
     }
 
-    #helpContainer, #boardContainer {
+    #helpContainer, #noticeContainer {
         display: none;
     }
+
     .back {
         right: 30px;
     }
