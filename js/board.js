@@ -9,408 +9,468 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
-
 }
 
 /**
  * Uptade the Board Page
  */
 function updateBoardHTML() {
-    toDoArea();
-    inProgressArea();
-    awaitingFeedbackArea();
-    doneArea();
+    addArea('toDo');
+    addArea('inProgress');
+    addArea('awaitingFeedback');
+    addArea('done');
     addUserAcronyms('assignedUserLogo');
     taskDetails();
     addUserAcronyms('assignedUserLogoOpen');
     setStyleProgressbar();
-   
-
 }
 
+/**
+ * Displays the add new task form at the board view with the standard configuration.
+ */
 function showAddNewTaskAtBoardStandard() {
-    if(document.getElementById('addTaskAtBoard')) document.getElementById('addTaskAtBoard').innerHTML = '';
-    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
+    removeDisplayNone('addTaskAtBoard');
     generateAddTaskHTML('addTaskAtBoard');
     addCloseBtnToAddTaskAtBoard();
     setOnSubmitForm('toDo');
     addEventListenerToDropDown();
 }
 
+/**
+ * Hides the add new task form at the board view.
+ */
 function hideAddNewTaskAtBoard() {
-    document.getElementById('addTaskAtBoard').classList.add('d-none');
+    addDisplayNone('addTaskAtBoard');
     removeEventListenerFromDropDown();
 }
 
 /**
- * Show all tasks on the To do Area
+ * Adds task areas to the specified container based on the given status ID.
+ * @param {string} id - The ID of the container to which the task areas will be added.
  */
-function toDoArea() {
-    let toDo = tasks.filter(t => t['status'] == 'toDo');
-    document.getElementById('toDo').innerHTML = '';
-
-    for (let index = 0; index < toDo.length; index++) {
-        const element = toDo[index];
-        document.getElementById('toDo').innerHTML += generateTodoHTML(element, 'toDo');
-
-    }
+function addArea(id) {
+    let area = tasks.filter(t => t['status'] == id);
+    setInnerHTML(id, '');
+    for (let index = 0; index < area.length; index++) addInnerHTML(id, generateTodoHTML(area[index], id));
 }
 
+/**
+ * Adds task details for all tasks.
+ */
 function taskDetails() {
-
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        document.getElementById('boardContainer').innerHTML += generateOpenCardHTML(element, i, tasks[i]['status']);
-        setRowCount(tasks[i]['status'], i);
-    }
+    for (let i = 0; i < tasks.length; i++) addTaskDetail(i);
 }
 
 /**
- * Show all tasks on the In Progress Area
+ * Adds task details for a specific task to the board container.
+ * @param {number} i - The index of the task in the tasks array.
  */
-function inProgressArea() {
-    let inProgress = tasks.filter(t => t['status'] == 'inProgress');
-    document.getElementById('inProgress').innerHTML = '';
-
-    for (let index = 0; index < inProgress.length; index++) {
-        const element = inProgress[index];
-        document.getElementById('inProgress').innerHTML += generateTodoHTML(element, 'inProgress');
-
-    }
+function addTaskDetail(i) {
+    const element = tasks[i];
+    addInnerHTML('boardContainer', generateOpenCardHTML(element, element['status']));
+    setRowCount(element['status'], i);
 }
 
 /**
- * Show all tasks on the Awaiting Feedback Area
- */
-function awaitingFeedbackArea() {
-    let awaitingFeedback = tasks.filter(t => t['status'] == 'awaitingFeedback');
-    document.getElementById('awaitingFeedback').innerHTML = '';
-
-    for (let index = 0; index < awaitingFeedback.length; index++) {
-        const element = awaitingFeedback[index];
-        document.getElementById('awaitingFeedback').innerHTML += generateTodoHTML(element, 'awaitingFeedback');
-    }
-}
-
-/**
- * Show all tasks on the Done Area
- */
-function doneArea() {
-    let done = tasks.filter(t => t['status'] == 'done');
-    document.getElementById('done').innerHTML = '';
-
-    for (let index = 0; index < done.length; index++) {
-        const element = done[index];
-        document.getElementById('done').innerHTML += generateTodoHTML(element, 'done');
-
-    }
-}
-
-/**
- * Starting with dragging a card
- * @param {*} id is the of current dragging card
+ * Sets the currently dragged element ID.
+ * @param {string} id - The ID of the element being dragged.
  */
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
+/**
+ * Retrieves the color associated with a specific element.
+ * @param {string} element - The element to retrieve the color for.
+ * @returns {string} The color associated with the element.
+ */
 function getColor(element) {
     for (let i = 0; i < categories.length; i++) {
-
-        if (categories[i]['name'] == element['category']) {
-            return categories[i]['color'];
-        }
+        if (isElement(i, element)) return categories[i]['color'];
     }
 }
 
-
+/**
+ * Checks if the element's category matches the category at the specified index in the categories array.
+ * @param {number} i - The index of the category in the categories array.
+ * @param {Object} element - The element to compare the category with.
+ * @returns {boolean} True if the element's category matches the category at the specified index, false otherwise.
+ */
+function isElement(i, element) {
+    return categories[i]['name'] == element['category'];
+}
 
 /**
- * Generate a card to the To do Area
- * @param {*} element Elements of the card
- * @returns the card with elements
+ * Sets the style of the progress bar for each task.
  */
-function generateTodoHTML(element, status) {
-    let elementIndex = tasks.indexOf(element);
-    return /*html*/`
-    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
-        <div style="background:${getColor(element)}" class="taskStatus" id="cardTaskStatus">
-            ${element['category']}</div>
-        <div class="taskTitle" id="cardTaskTitle">
-            ${element['title']}
-        </div>
-        <div class="taskDescription" id="cardTaskDescription${element['status']}${elementIndex}">
-            ${element['description']}
-        </div>  
-        
-        <div class="barContainer">
-        <div class="bar" id="progressbar${element['status']}${elementIndex}">
-        </div>
-        <div class="taskProgressbar">
-            ${getCheckedSubtasks(elementIndex)}/${element['subtasks'].length} Done 
-        </div>   
-       </div>
-
-        <div class="containerUserAndPrio">
-            <div class="assignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
-            </div>
-
-            <div class="taskPrio">
-                <img src="../img/${element['prio'].toLowerCase()}.png">
-            </div>
-        </div>  
-    </div>`;
-
-}
-
-function setStyleProgressbar(){
-    for(let i = 0; i < tasks.length;i++){
+function setStyleProgressbar() {
+    for (let i = 0; i < tasks.length; i++) {
         let progress = getProgressOfSubtasks(i);
         let difference = 100 - progress;
-
-        if(document.getElementById('progressbar' + tasks[i]['status'] + i) && progress != 0){
-            document.getElementById('progressbar' + tasks[i]['status'] + i).style = `background:linear-gradient(to right,#29ABE2 ${progress}%,#F4F4F4 ${difference}%);`;
-        }
-    } 
+        if (isTaskAndProgressNotZero(i, progress)) setStyleOfProgressbar(generateProgresstStyleHTML(progress, difference), i);
+    }
 }
 
-function getProgressOfSubtasks(index){
+/**
+ * Sets the style of the progress bar for a specific task.
+ * @param {string} text - The CSS style text to apply to the progress bar.
+ * @param {number} i - The index of the task in the tasks array.
+ */
+function setStyleOfProgressbar(text, i) {
+    document.getElementById('progressbar' + tasks[i]['status'] + i).style = text;
+}
+
+/**
+ * Checks if the task element and progress are not zero.
+ * @param {number} i - The index of the task in the tasks array.
+ * @param {number} progress - The progress of the task.
+ * @returns {boolean} - Returns true if the task element exists and the progress is not zero, otherwise false.
+ */
+function isTaskAndProgressNotZero(i, progress) {
+    return document.getElementById('progressbar' + tasks[i]['status'] + i) && progress != 0;
+}
+
+/**
+ * Calculates the progress of subtasks for a given task.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {number} - The progress of the task based on the completed subtasks.
+ */
+function getProgressOfSubtasks(index) {
     let progress = getCheckedSubtasks(index);
     let size = tasks[index]['subtasks'].length;
-    return 100/size*progress;
+    return 100 / size * progress;
 }
 
-function getCheckedSubtasks(elementIndex){
+/**
+ * Counts the number of checked subtasks for a given task.
+ * @param {number} elementIndex - The index of the task in the tasks array.
+ * @returns {number} - The number of checked subtasks.
+ */
+function getCheckedSubtasks(elementIndex) {
     let count = 0;
-    for(let i = 0; i < tasks[elementIndex]['subtasks'].length;i++){
-        if(tasks[elementIndex]['subtasks'][i]['checked'] == true){
-            count++;
-        }
+    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) {
+        if (isSubtaskChecked(elementIndex, i)) count++;
     }
     return count;
 }
 
 /**
- * Remove display:none from the bigger card to see it
+ * Checks if a subtask is checked for a given task.
+ * @param {number} elementIndex - The index of the task in the tasks array.
+ * @param {number} i - The index of the subtask in the subtasks array of the task.
+ * @returns {boolean} - True if the subtask is checked, false otherwise.
+ */
+function isSubtaskChecked(elementIndex, i) {
+    return tasks[elementIndex]['subtasks'][i]['checked'] == true;
+}
+
+/**
+ * Opens a card with detailed information for a task.
+ * @param {number} index - The index of the task in the tasks array.
+ * @param {string} status - The status of the task.
  */
 function openCard(index, status) {
-    if (document.getElementById('openCard' + status + index)) {
-
-        document.getElementById('openCard' + status + index).classList.remove('d-none');
-    }
-    
-    document.getElementById('assignedUserLogoOpen' + status + index).innerHTML = '';
+    if (isHTMLElement('openCard', status, index)) removeDisplayNone('openCard' + status + index);
+    setInnerHTML('assignedUserLogoOpen' + status + index, '');
     addUserAcronyms('assignedUserLogoOpen');
     addSubtasksToCardOpen(status, index);
-
     document.getElementById('overlay').style.display = "block";
 }
 
+/**
+ * Checks if an HTML element with the specified id exists.
+ * @param {string} id - The id of the HTML element.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {boolean} - Returns true if the HTML element exists, false otherwise.
+ */
+function isHTMLElement(id, status, index) {
+    return document.getElementById(id + status + index);
+}
+/**
+* Adds user acronyms to the specified HTML element.
+* @param {string} id - The id of the HTML element.
+*/
 function addUserAcronyms(id) {
     for (let i = 0; i < tasks.length; i++) {
         let index = tasks.indexOf(tasks[i]);
         let status = tasks[i]['status'];
-
         for (let j = 0; j < tasks[i]['isAssigned'].length; j++) {
-            if (id == 'assignedUserLogoOpen') {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen');
-                setAssignedNames(tasks[i]['status'], index, tasks[i]['isAssigned'][j], 'assignedToContainerOpen');
-            } else if (id == 'assignedUserLogo') {
-                document.getElementById(id + tasks[i]['status'] + index).innerHTML += generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer');
-
-            }
+            if (id == 'assignedUserLogoOpen') addNamesToOpenCard(id, i, index, status, j);
+            else if (id == 'assignedUserLogo') addNamesToCard(id, i, index, status, j);
         }
-    }
-}
-
-
-function generateAssignedUserHTML(username, index, status, id) {
-    let color;
-    users.find((user) => {
-        if (user.name == username) {
-            color = user.color;
-        }
-    });
-    let category = tasks[index]['category'];
-    return /*html*/`
-    <div class="assignedToContainer" id="${category}${id}${username}${status}${index}">
-        <div class="colorCircleMedium boardCircle" style="background:${color}">
-            ${getFirstLettersOfName(username)} 
-        </div>
-    </div>
-    `;
-}
-
-function setAssignedNames(status, index, username, id) {
-    let category = tasks[index]['category'];
-
-    document.getElementById(category + id + username + status + index).innerHTML += `<div>${username}</div>`;
-
-}
-
-function setRowCount(status, elementIndex) {
-    let textAreaField = document.getElementById('editTitle'+ status + elementIndex);
-    if (textAreaField.cols >= "20") {
-        textAreaField.rows = "2";
-    } else {
-        textAreaField.rows = "1";
     }
 }
 
 /**
- * Generate a bigger card if you clicket a small card on the areas
- * @param {*} element elemts of the card 
- * @returns the bigger card with more information
+ * Adds user names to the card with the specified id.
+ * @param {string} id - The id of the card element.
+ * @param {number} i - The index of the task.
+ * @param {number} index - The index of the task within the tasks array.
+ * @param {number} status - The status of the task.
+ * @param {number} j - The index of the assigned user within the isAssigned array.
  */
-function generateOpenCardHTML(element, index, status) {
-    let elementIndex = tasks.indexOf(element);
-    return /*html*/`
-    <div class="openCard d-none" id="openCard${status}${elementIndex}">
-            <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
-
-        <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
-            ${element['category']}
-        </div>
-        
-        <div>
-            <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
-            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
-        </div>
-        <div>
-            <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
-            <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
-        </div>  
-        <div id="dateContainer${status}${elementIndex}" style="display:flex;">
-            <label class="taskLabelOpen editcard" >Due date: </label>
-            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
-        </div>
-        <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
-            <label class="taskLabelOpen">Priority: </label>
-            <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
-        </div>
-        <div id="editSubtasksContainer${status}${elementIndex}">
-        </div>  
-        <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
-        <span class="taskLabelOpen">Assigned to: </span> 
-
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
-        </div>
-        
-        <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
-            <div class="deleteBtnOpenCard" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})"></div>
-            <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
-        </div>
-        <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
-                Ok<img src="../img/okWhite.png">
-            </button>
-        </div>
-    </div>`
+function addNamesToCard(id, i, index, status, j) {
+    addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer'));
 }
 
+/**
+ * Adds user names to the open card with the specified id.
+ * @param {string} id - The id of the open card element.
+ * @param {number} i - The index of the task.
+ * @param {number} index - The index of the task within the tasks array.
+ * @param {number} status - The status of the task.
+ * @param {number} j - The index of the assigned user within the isAssigned array.
+ */
+function addNamesToOpenCard(id, i, index, status, j) {
+    addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen'));
+    setAssignedNames(tasks[i]['status'], index, tasks[i]['isAssigned'][j], 'assignedToContainerOpen');
+}
+
+/**
+ * Finds the color associated with the specified username.
+ * @param {string} username - The username for which to find the color.
+ * @returns {string|undefined} - The color associated with the username, or undefined if not found.
+ */
+function findColor(username) {
+    let color;
+    users.find((user) => { if (user.name == username) color = user.color; });
+    return color;
+}
+
+/**
+ * Sets the assigned names for a task in the specified container.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task.
+ * @param {string} username - The username to set.
+ * @param {string} id - The ID of the container where the assigned name will be added.
+ */
+function setAssignedNames(status, index, username, id) {
+    let category = tasks[index]['category'];
+    addInnerHTML(category + id + username + status + index, generateUserNameDivHTML(username));
+}
+
+/**
+ * Sets the row count for the text area field based on its content length.
+ * @param {string} status - The status of the element.
+ * @param {number} elementIndex - The index of the element.
+ */
+function setRowCount(status, elementIndex) {
+    let textAreaField = document.getElementById('editTitle' + status + elementIndex);
+    if (textAreaField.cols >= "20") textAreaField.rows = "2";
+    else textAreaField.rows = "1";
+}
+
+/**
+ * Adds subtasks to the open card.
+ * @param {string} status - The status of the element.
+ * @param {number} index - The index of the element.
+ */
 function addSubtasksToCardOpen(status, index) {
-    document.getElementById('editSubtasksContainer' + status + index).innerHTML = '';
-    for (let i = 0; i < tasks[index]['subtasks'].length; i++) {
-        document.getElementById('editSubtasksContainer' + status + index).innerHTML += `
-      <div> ${tasks[index]['subtasks'][i]['item']} <input type="checkbox"class="taskSubtasksOpen" onchange="setSubtaskChecked('${status}', ${index}, ${i})" id="editSubtasks${tasks[index]['subtasks'][i]['item']}${status}${index}" value="${tasks[index]['subtasks'][i]['item']}"/></div>
-    `;}
+    setInnerHTML('editSubtasksContainer' + status + index, '');
+    for (let i = 0; i < tasks[index]['subtasks'].length; i++) addInnerHTML('editSubtasksContainer' + status + index, addCheckBoxAtBoardHTML(index, i, status));
     for (let j = 0; j < tasks[index]['subtasks'].length; j++) {
-        if (tasks[index]['subtasks'][j]['checked'] == true) {
-            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = true;
-        } else {
-            document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = false;
-        }
+        if (tasks[index]['subtasks'][j]['checked'] == true) setCheckBoxCheckedOpenCard(index, j, status, true);
+        else setCheckBoxCheckedOpenCard(index, j, status, false);
     }
 }
 
-function setSubtaskChecked(status, index, i){
-    if(document.getElementById('editSubtasks' + tasks[index]['subtasks'][i]['item'] + status + index).checked == true){
-        tasks[index]['subtasks'][i]['checked'] = true;
-    }else {
-        tasks[index]['subtasks'][i]['checked'] = false;
-    }
+/**
+ * Sets the checked property of the checkbox in the open card.
+ * @param {number} index - The index of the element.
+ * @param {number} j - The index of the subtask.
+ * @param {string} status - The status of the element.
+ * @param {boolean} prop - The value of the checked property.
+ */
+function setCheckBoxCheckedOpenCard(index, j, status, prop) {
+    document.getElementById('editSubtasks' + tasks[index]['subtasks'][j]['item'] + status + index).checked = prop;
+}
+
+/**
+ * Sets the checked property of a subtask in the board.
+ * @param {string} status - The status of the element.
+ * @param {number} index - The index of the element.
+ * @param {number} i - The index of the subtask.
+ */
+function setSubtaskChecked(status, index, i) {
+    if (isSubtaskAtBoardChecked(index, i, status)) tasks[index]['subtasks'][i]['checked'] = true;
+    else tasks[index]['subtasks'][i]['checked'] = false;
     pushToDatabase();
 }
 
+/**
+ * Checks if a subtask in the board is checked.
+ * @param {number} index - The index of the element.
+ * @param {number} i - The index of the subtask.
+ * @param {string} status - The status of the element.
+ * @returns {boolean} - True if the subtask is checked, false otherwise.
+ */
+function isSubtaskAtBoardChecked(index, i, status) {
+    return document.getElementById('editSubtasks' + tasks[index]['subtasks'][i]['item'] + status + index).checked == true;
+}
+
+/**
+ * Opens the edit card view for a specific task.
+ * @param {string} status - The status of the task.
+ * @param {number} elementIndex - The index of the task element.
+ * @param {string} aID - The ID of the assigned user.
+ */
 function editCard(status, elementIndex, aID) {
     let task = tasks[elementIndex];
-    document.getElementById('taskPrioOpen' + status + elementIndex).innerHTML = generateLabelsHTML('label', 'Prio');
-    document.getElementById('taskStatusCategory' + status + elementIndex).classList.add('d-none');
-    document.getElementById('editDeleteBtnOpen' + status + elementIndex).classList.add('d-none');
-    document.getElementById('editSaveBtnOpen' + status + elementIndex).classList.remove('d-none');
-    document.getElementById('editSubtasksContainer' + status + elementIndex).classList.add('d-none');
+    showEditCard(status, elementIndex);
+    setStyleForEditCard(status, elementIndex);
+    setDataForEditCard(status, elementIndex, task, aID);
+}
 
-    document.getElementById('openCardTitle' + status + elementIndex).classList.remove('d-none');
-    document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
-    document.getElementById('openCardDescription' + status + elementIndex).classList.remove('d-none');
-    document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
-    document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
-    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
-    document.getElementById('assignedUserOpen' + status + elementIndex).innerHTML = generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign');
+/**
+ * Sets the data for the edit card view.
+ * @param {string} status - The status of the task.
+ * @param {number} elementIndex - The index of the task element.
+ * @param {Object} task - The task object.
+ * @param {string} aID - The ID of the assigned user.
+ */
+function setDataForEditCard(status, elementIndex, task,aID) {
+    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio'));
+    setInnerHTML('assignedUserOpen' + status + elementIndex,
+        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users');
     addAssignedUsersList(status, elementIndex);
     setActiveCheckbox(task);
     setStyleOfBoardLabel(aID);
-    generateEditTitle(status, elementIndex);
-    generateEditDescription(status, elementIndex);
-    generateEditDate(status, elementIndex);
+    editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
+    editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
+    editEditField(status, elementIndex, 'editDate', 'inputTextStd');
     addEventListenerToSelectUserBox();
 }
 
+/**
+ * Sets the style for the edit card view.
+ * @param {string} status - The status of the task.
+ * @param {number} elementIndex - The index of the task element.
+ */
+function setStyleForEditCard(status, elementIndex) {
+    document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
+    document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
+    document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
+    document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
+}
+
+/**
+ * Shows the edit card view by modifying the display of various elements.
+ * @param {string} status - The status of the task.
+ * @param {number} elementIndex - The index of the task element.
+ */
+function showEditCard(status, elementIndex) {
+    addDisplayNone('taskStatusCategory' + status + elementIndex);
+    addDisplayNone('editDeleteBtnOpen' + status + elementIndex);
+    removeDisplayNone('editSaveBtnOpen' + status + elementIndex);
+    addDisplayNone('editSubtasksContainer' + status + elementIndex);
+    removeDisplayNone('openCardTitle' + status + elementIndex);
+    removeDisplayNone('openCardDescription' + status + elementIndex);
+}
+
+/**
+ * Resets the edit card view by restoring default states and styles.
+ * @param {number} index - The index of the task element.
+ * @param {string} status - The status of the task.
+ */
 function resetEditCard(index, status) {
     document.getElementById('editTitle' + status + index).readOnly = true;
     document.getElementById('editDescription' + status + index).readOnly = true;
     document.getElementById('editDate' + status + index).readOnly = true;
-    document.getElementById('assignedUserOpen' + status + index).innerHTML = '';
-    document.getElementById('editDeleteBtnOpen' + status + index).classList.remove('d-none');
-    document.getElementById('editSaveBtnOpen' + status + index).classList.add('d-none');
-    document.getElementById('editSubtasksContainer' + status + index).classList.remove('d-none');
+    setInnerHTML('assignedUserOpen' + status + index, '');
+    hideEditCard(status, index);
+    resetStylesForOpenCard(status, index);
+    resetAssigned(status, index);
+    resetTaskPrio(status, index);
+    addUserAcronyms('assignedUserOpen', index, status);
+    addAssignedUsersList(status, index);
+}
+
+/**
+ * Resets the styles for the open card view to their default states.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task element.
+ */
+function resetStylesForOpenCard(status, index) {
     document.getElementById('editDate' + status + index).classList.remove('inputTextStd');
     document.getElementById('editDescription' + status + index).classList.remove('inputDescriptionField');
     document.getElementById('editTitle' + status + index).classList.remove('inputTextStd');
     document.getElementById('editTitle' + status + index).classList.add('taskTitleOpen');
-    document.getElementById('openCardTitle' + status + index).classList.add('d-none');
-    document.getElementById('openCardDescription' + status + index).classList.add('d-none');
     document.getElementById('editDescription' + status + index).classList.add('taskDescriptionOpen');
     document.getElementById('editDate' + status + index).classList.add('taskDueDateOpen');
     document.getElementById('dateContainer' + status + index).style = "display:flex;";
-    document.getElementById('taskStatusCategory' + status + index).classList.remove('d-none');
-
-
-    resetAssigned(status, index);
-    resetTaskPrio(status, index);
-    addUserAcronyms('assignedUserOpen', index, status);
-
-    addAssignedUsersList(status, index);
 }
 
+/**
+ * Hides the edit card view and shows the default open card view.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task element.
+ */
+function hideEditCard(status, index) {
+    removeDisplayNone('editDeleteBtnOpen' + status + index);
+    addDisplayNone('editSaveBtnOpen' + status + index);
+    removeDisplayNone('editSubtasksContainer' + status + index);
+    addDisplayNone('openCardTitle' + status + index);
+    addDisplayNone('openCardDescription' + status + index);
+    removeDisplayNone('taskStatusCategory' + status + index);
+}
+
+/**
+ * Resets the task priority to its initial value.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task element.
+ */
 function resetTaskPrio(status, index) {
     let element = tasks[index];
-    document.getElementById('taskPrioOpen' + status + index).innerHTML = `
-        <label class="taskLabelOpen">Priority: </label>
-        <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
-    `;
+    setInnerHTML('taskPrioOpen' + status + index, resetTaskPrioHTML(element));
 }
 
+/**
+ * Resets the assigned users to their initial values.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task element.
+ */
 function resetAssigned(status, index) {
-    document.getElementById('assignedUserOpen' + status + index).innerHTML = `
-    <span class="taskLabelOpen">Assigned to: </span> 
-
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${index}"></label>
-    `;
+    setInnerHTML('assignedUserOpen' + status + index, resetAssignedHTML(status, index));
 }
 
+/**
+ * Sets the checkboxes of assigned users to active.
+ * @param {Object} task - The task object containing assigned user information.
+ */
 function setActiveCheckbox(task) {
     for (let i = 0; i < task['isAssigned'].length; i++) {
         document.getElementById(task['isAssigned'][i]).children[0].checked = true;
     }
 }
 
+/**
+ * Edits the task data and updates the board.
+ * @param {number} index - The index of the task to edit.
+ * @param {string} stati - The status of the task to edit.
+ */
 function editThisTask(index, stati) {
+    editTaskData(index, stati);
+    addDisplayNone('openCard' + stati + index);
+    addDisplayNone('overlay');
+    resetEditCard(index, stati);
+    save();
+    updateBoardHTML();
+    pushToDatabase();
+}
+
+/**
+ * Updates the task data based on the edited values.
+ * @param {number} index - The index of the task to edit.
+ * @param {string} stati - The status of the task to edit.
+ */
+function editTaskData(index, stati) {
     tasks[index]['title'] = document.getElementById('editTitle' + stati + index).value;
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
-
     tasks[index]['category'] = tasks[index]['category'];
     assigned = [];
     tasks[index]['isAssigned'] = getAssignedContacts();
@@ -420,17 +480,6 @@ function editThisTask(index, stati) {
     tasks[index]['subtasks'] = tasks[index]['subtasks'];
     tasks[index]['id'] = tasks[index]['id'];
     tasks[index]['status'] = tasks[index]['status'];
-
-    document.getElementById('openCard' + stati + index).classList.add('d-none');
-    document.getElementById('overlay').classList.add('d-none');
-
-
-    resetEditCard(index, stati);
-
-    save();
-    updateBoardHTML();
-    pushToDatabase();
-
 }
 
 function setStyleOfBoardLabel(aID) {
@@ -440,40 +489,21 @@ function setStyleOfBoardLabel(aID) {
 }
 
 function addAssignedUsersList(status, elementIndex) {
-    document.getElementById('assignedUserOpen' + status + elementIndex).innerHTML += `
-    <div class="p-relative d-flex align-c">
-        <list class="d-flex" id="list-assigned-user">
-        </list>
-    </div>
-    `;
+    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
 }
 
-function generateEditTitle(status, elementIndex) {
-    document.getElementById('editTitle' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editTitle' + status + elementIndex).classList.add('inputTextStd');
-
+function editEditField(status, elementIndex, id, addClass) {
+    document.getElementById(id + status + elementIndex).removeAttribute('readonly');
+    document.getElementById(id + status + elementIndex).classList.add(addClass);
 }
-
-function generateEditDescription(status, elementIndex) {
-    document.getElementById('editDescription' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDescription' + status + elementIndex).classList.add('inputDescriptionField');
-
-
-}
-
-function generateEditDate(status, elementIndex) {
-    document.getElementById('editDate' + status + elementIndex).removeAttribute('readonly');
-    document.getElementById('editDate' + status + elementIndex).classList.add('inputTextStd');
-}
-
 
 /**
  * Add display:none to close the bigger card
  */
 function closeOpenCard(status, index) {
-    document.getElementById('openCard' + status + index).classList.add('d-none');
+    addDisplayNone('openCard' + status + index);
     document.getElementById('overlay').style.display = "none";
-    resetEditCard(index,status);
+    resetEditCard(index, status);
 }
 
 /**
@@ -522,8 +552,8 @@ function createNewTaskAtBoard(statusTag) {
 }
 
 function showAddNewTaskAtBoard() {
-    if(document.getElementById('addTaskAtBoard')) document.getElementById('addTaskAtBoard').innerHTML = '';
-    document.getElementById('addTaskAtBoard').classList.remove('d-none');
+    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
+    removeDisplayNone('addTaskAtBoard');
     generateAddTaskHTML('addTaskAtBoard');
     addCloseBtnToAddTaskAtBoard();
     removeEventListenerFromDropDown();
@@ -534,10 +564,10 @@ function showAddNewTaskAtBoard() {
  * reset the board and deletes all tasks from the html code
  */
 function resetBoard() {
-    document.getElementById('toDo').innerHTML = '';
-    document.getElementById('inProgress').innerHTML = '';
-    document.getElementById('awaitingFeedback').innerHTML = '';
-    document.getElementById('done').innerHTML = '';
+    setInnerHTML('toDo', '');
+    setInnerHTML('inProgress', '');
+    setInnerHTML('awaitingFeedback', '');
+    setInnerHTML('done', '');
 }
 
 /**
@@ -546,33 +576,23 @@ function resetBoard() {
 function searchTasks() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
-    console.log(search);
-    for (let i = 0; i < tasks.length; i++) {
-        let taskTitle = tasks[i]['title'];
-        let taskIndex = tasks.indexOf(tasks[i]);
-        let tDescription = tasks[i]['description'];
-        if (taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) {
-            console.log('gefunden');
-            if (document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.contains('d-none')) {
-                document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.remove('d-none');
-            }
-        }
-        else {
-            document.getElementById('card' + tasks[i]['status'] + taskIndex).classList.add('d-none');
-
-        }
-    }
+    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i,search);
 }
 
-function deleteTask(task, status, ind) {
-    let index = -1;
-    
-            
+function onlyShowFoundTasks(i,search) {
+    let taskTitle = tasks[i]['title'];
+    let taskIndex = tasks.indexOf(tasks[i]);
+    let tDescription = tasks[i]['description'];
+    if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) &&
+        isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
+}
+
+function deleteTask(status, ind) {
     tasks.splice(ind, 1);
     removeEventlistenerFromSelectUserBox();
     closeOpenCard(status, ind);
     pushToDatabase();
     updateBoardHTML();
-
 }
 
