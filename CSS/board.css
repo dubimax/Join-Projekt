@@ -534,8 +534,6 @@ h1 {
 }
 
 @media (max-width:1480px) {
-
-    
     .boardContainer {
         width: calc(100% - 0px);
         padding: 0px 30px;
@@ -550,7 +548,7 @@ h1 {
     .cardHeaders {
         margin-top: 25px;
     } 
-    
+
     .dragAreaTitle {
         font-size: 16px;
     }
@@ -607,12 +605,24 @@ h1 {
         width: 27px;
         height: 27px;
     }
+    .helpContainer {
+        padding: 50px 25px;
+        overflow-y: scroll;
+    }
+    #helpContent {
+        z-index: 0;
+    }
+
+    .help {
+        width: unset;
+    }
 
     #helpContainer {
         display: none;
     }
 
     .logoutButton {
+        z-index: 5;
         gap: 5px;
         align-items: flex-start;
         height: unset;
