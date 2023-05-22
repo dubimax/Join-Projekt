@@ -299,6 +299,9 @@
     }
 }
 @media (max-width:1300px) {
+    .contactInformationContent{
+        margin-top: 0 !important;
+    }
     .backArrow {
         display: unset !important;
     }
@@ -386,9 +389,8 @@
         right: -72% !important;
     }
     .newSubtasksField{
-        bottom: -75px !important;
-        right: 40px !important;
-
+        bottom: 41px !important;
+        right: -72% !important;
     }
     #addTaskAtContacts h2 {
         margin-top: 80px !important;
@@ -396,6 +398,15 @@
     #addTaskAtContacts {
         overflow: overlay !important;
     }
+    .newCat div{
+        display: block !important;
+    }
+    
+.editButtonContainer{
+    gap:20px !important;
+    margin-top: 25px !important;
+    margin-bottom: 25px !important;
+}
 }
 
 

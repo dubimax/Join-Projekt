@@ -137,6 +137,17 @@ h4 {
         transform: translateX(0);
     }
 }
+@keyframes myAnimRevert {
+    0% {
+        opacity: 1;
+        transform: translateY(1200px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 @keyframes myAnim2 {
     0% {
