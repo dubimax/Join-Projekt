@@ -158,6 +158,12 @@ h1 {
     object-fit: contain;
 }
 
+.checkUserData {
+    font-size: 16px;
+    padding: 0 10px;
+    color: darkred;
+}
+
 
 #userPasswordIcon {
     cursor: pointer;
@@ -427,6 +433,10 @@ p {
 
     .inputField input{
         font-size: 14px !important;
+    }
+
+    .checkUserData {
+        font-size: 8px;
     }
 
     .containerRememberAndForgot {
