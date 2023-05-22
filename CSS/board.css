@@ -605,20 +605,33 @@ h1 {
         width: 27px;
         height: 27px;
     }
-    .helpContainer {
-        padding: 50px 25px;
+    .helpContainer, .noticeContainer {
+        padding: 20px 25px;
         overflow-y: scroll;
+        margin-top: 55px;
+        margin-bottom: 155px;
     }
-    #helpContent {
+    #helpContent, #legalNotice {
         z-index: 0;
     }
 
-    .help {
+    .help, .legalNotice {
         width: unset;
     }
 
-    #helpContainer {
+    #helpContainer, #boardContainer {
         display: none;
+    }
+    .back {
+        right: 30px;
+    }
+
+    .impressum {
+        font-size: 13px;
+    }
+
+    .impressum h1 {
+        font-size: 40px;
     }
 
     .logoutButton {
