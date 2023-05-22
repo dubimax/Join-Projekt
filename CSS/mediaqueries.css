@@ -80,10 +80,13 @@
         height: 0 !important;
         margin: 0 !important;
         align-self: unset !important;
+        position: absolute !important;
+        top: 189px !important;
     }
 
     h4 {
         align-self: unset !important;
+        font-size: 26px !important;
     }
 
     .colorCircle-big {
@@ -94,7 +97,7 @@
     }
 
     #contactName {
-        font-size: 26px !important;
+        font-size: 24px !important;
         font-weight: 400 !important;
     }
 
@@ -120,8 +123,8 @@
     #createNewUserAtContacts,
     #editUserAtContacts {
         position: absolute;
-        transform: unset !important;
-        top: 90px;
+        top: 89px;
+        transform: unset;
         left: 0;
         right: 0;
         bottom: 90px;
@@ -132,6 +135,8 @@
         align-items: center;
         z-index: 99 !important;
         background: rgb(245, 245, 245);
+        animation: myAnimRevert 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
+
     }
 
 
@@ -331,7 +336,7 @@
         bottom: 160px;
         background-image: url('../img/trashIcon.png');
         background-repeat: no-repeat;
-        background-size: 60% 65%;
+        background-size: 52% 66%;
         background-position: center;
         width: 30px;
         height: 30px;
