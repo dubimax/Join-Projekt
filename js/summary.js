@@ -115,6 +115,7 @@ function hideGreetingsResponsive() {
  */
 function showGreetingResponsive() {
     removeDisplayNone('summaryWelcomeTextMobile');
+    if(indexOfEmail.name == 'Guest Guest') addDisplayNone('currentUserMobile');
     addDisplayNone('mainContainer');
     showUserName();
 }
