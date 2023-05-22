@@ -130,7 +130,7 @@ h1 {
 .cardHeaders {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
     overflow-y: scroll;
     height: 680px;
 }
@@ -548,6 +548,7 @@ h1 {
 
     .cardHeaders {
         margin-top: 25px;
+        height: 590px;
     }
 
     .dragAreaTitle {
