@@ -739,9 +739,9 @@ function generateOpenCardHTML(element,status) {
 function addCheckBoxAtBoardHTML(index,i,status) {
     return `
         <div> 
-            ${tasks[index]['subtasks'][i]['item']} 
             <input type="checkbox"class="taskSubtasksOpen" onchange="setSubtaskChecked('${status}', ${index}, ${i})"
              id="editSubtasks${tasks[index]['subtasks'][i]['item']}${status}${index}" value="${tasks[index]['subtasks'][i]['item']}"/>
+             ${tasks[index]['subtasks'][i]['item']} 
         </div>
     `;
 }

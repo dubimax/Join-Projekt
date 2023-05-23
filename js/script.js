@@ -497,6 +497,7 @@ function closeTaskAtBoard() {
     setInnerHTML('addTaskAtBoard', '');
     addDisplayNone('addTaskAtBoard')
     removeMessage();
+    updateBoardHTML();
 }
 
 function removeMessage() {
