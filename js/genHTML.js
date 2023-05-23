@@ -519,7 +519,7 @@ function generateUnSelectedNavigationLinkHTML(linkname) {
 /**
  * Adds a logout button to the page.
  */
-function addLogoutButton() {
+function addLogoutButton(e) {
     let clientWidth = document.body.clientWidth;
     document.body.innerHTML += `
     <div class="logoutButton" id="optionsMenu">
@@ -532,6 +532,8 @@ function addLogoutButton() {
         <div onclick="showImpressumRespo()">Legal Notice</div>
         <div onclick="showHelpRespo()">Help</div>`;
     }
+    addEventListenerDocumentLogoutButton(e);
+
 }
 
 /**

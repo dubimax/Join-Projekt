@@ -230,11 +230,15 @@ function changeStyleOfLabel(id) {
  */
 function refreshStyleOfSelectedLabel(id) {
     if (activeID == id) {
-        activeID = '';
-        activeImg = '';
+        resetStyleVariables();
         document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
     }
     else changeStyleOfLabels(id)
+}
+
+function resetStyleVariables(){
+    activeID = '';
+    activeImg = '';
 }
 
 /**
@@ -242,8 +246,7 @@ function refreshStyleOfSelectedLabel(id) {
  * @param {string} id - The ID of the label.
  */
 function changeStyleOfLabels(id) {
-    activeID = '';
-    activeImg = '';
+    resetStyleVariables();
     changeStyleOfLabel(id);
 }
 

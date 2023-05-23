@@ -124,28 +124,9 @@ function removeConfirmMessage() {
     document.getElementById('confirmMessage').remove();
 }
 
-/**
- * Sets the logout button based on its current visibility state.
- */
-function setLogoutButton() {
-    if (isLogoutButtonShown()) removeLogoutButton();
-    else addLogoutButton();
-}
 
-/**
- * Checks if the logout button is currently shown.
- * @returns {boolean} A boolean indicating whether the logout button is shown.
- */
-function isLogoutButtonShown() {
-    return document.body.lastChild.id == 'optionsMenu';
-}
 
-/**
- * Removes the logout button from the document
- */
-function removeLogoutButton() {
-    document.getElementById('optionsMenu').remove();
-}
+
 
 /**
  * Removes the legal notice from the document
@@ -468,12 +449,12 @@ function setForm(addForm) {
     else if (isElementExistent('addTaskAtBoard').children.length != 0) closeTaskAtBoard();
 }
 
-function showHelpRespo(){
+function showHelpRespo() {
     setLogoutButton();
     addHelp();
 }
 
-function showImpressumRespo(){
+function showImpressumRespo() {
     setLogoutButton();
     addLegalNotice();
 }
@@ -511,6 +492,47 @@ function showUsersItems() {
     if (!dropDownAssign) setUserItems();
     else hideUserItems();
     setStyleOfSelectedUsers();
+}
+let targetElement;
+
+function addEventListenerDocumentLogoutButton(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.addEventListener("click", (event) => {
+
+        let optionDiv = document.getElementById('optionsMenu');
+        targetElement = event.target;
+
+        if (optionDiv && !optionDiv.contains(targetElement)) {
+
+            removeLogoutButton();
+        }
+    });
+}
+/**
+ * Checks if the logout button is currently shown.
+ * @returns {boolean} A boolean indicating whether the logout button is shown.
+ */
+function isLogoutButtonShown() {
+    return document.getElementById('optionsMenu');
+}
+
+/**
+ * Removes the logout button from the document
+ */
+function removeLogoutButton() {
+    removeEventListenerDocumentLogoutButton();
+    document.getElementById('optionsMenu').remove();
+} 
+
+function removeEventListenerDocumentLogoutButton() {
+    let meineDiv = document.getElementById('optionsMenu')
+    meineDiv.removeEventListener('click', () => { });
+}
+
+function setLogoutButton(event) {
+    if (isLogoutButtonShown()) removeLogoutButton();
+    else addLogoutButton(event);
 }
 
 /**
