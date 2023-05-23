@@ -611,8 +611,9 @@ function onlyShowFoundTasks(i,search) {
     let taskTitle = tasks[i]['title'];
     let taskIndex = tasks.indexOf(tasks[i]);
     let tDescription = tasks[i]['description'];
-    if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search)) &&
-        isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search))) {
+        if(isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    }
     else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
 }
 
