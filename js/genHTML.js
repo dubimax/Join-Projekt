@@ -441,18 +441,16 @@ function addLegalNotice() {
             <div class='impressum'>
                 <h1>Impressum</h1><br>
                 <p>Angaben gemäß § 5 TMG</p><br>
-                <p>Max Muster <br>
-                    Musterweg<br>
-                    12345 Musterstadt <br>
+                <p>Marijan Dupkovic<br>
+                    Königsbergerstr. 65<br>
+                    21465 Reinbek <br>
                 </p><br>
                 <p> <strong>Vertreten durch: </strong><br><br>
-                    Max Muster<br>
-                    Maxi Musterli<br>
+                    Marijan Dupkovic<br>
+                    Oural Mantenli<br>
                 </p><br>
                 <p><strong>Kontakt:</strong> <br><br>
-                    Telefon: 01234-789456<br>
-                    Fax: 1234-56789<br>
-                    E-Mail: <a style="color:blue;" href='mailto:max@muster.de'>max@muster.de</a></br></p>
+                    E-Mail: <a style="color:blue;" href='mailto:m.dupkovic@gmail.com'>m.dupkovic@gmail.com</a></br></p>
                 </p><br>
                 <p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung für Inhalte</strong><br><br>
                     Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
@@ -530,8 +528,8 @@ function addLogoutButton() {
     </div>`;
     if (clientWidth < 1300) {
         document.getElementById('optionsMenu').innerHTML += `
-        <div onclick="addLegalNotice()">Legal Notice</div>
-        <div onclick="addHelp()">Help</div>`;
+        <div onclick="showImpressumRespo()">Legal Notice</div>
+        <div onclick="showHelpRespo()">Help</div>`;
     }
 }
 

@@ -468,6 +468,16 @@ function setForm(addForm) {
     else if (isElementExistent('addTaskAtBoard').children.length != 0) closeTaskAtBoard();
 }
 
+function showHelpRespo(){
+    setLogoutButton();
+    addHelp();
+}
+
+function showImpressumRespo(){
+    setLogoutButton();
+    addLegalNotice();
+}
+
 /**
  * Checks if an element with the specified ID exists in the DOM.
  *
