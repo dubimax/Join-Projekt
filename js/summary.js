@@ -69,7 +69,7 @@ function greet(greeting) {
  * Displays the user's name.
 */
 function showUserName() {
-    if (isGuest()) setUserName('');
+    if(indexOfEmail.name == 'Guest Guest') addDisplayNone('currentUser');
     else setUserName(indexOfEmail.name);
 }
 
