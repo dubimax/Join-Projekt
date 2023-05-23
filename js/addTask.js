@@ -447,7 +447,19 @@ function isUserAssigned(j) {
  * @param {string} username - The username for which to set the assigned circle.
  */
 function setAssignedCircle(username) {
-    document.getElementById('list-assigned-user').innerHTML += setAssignedCircleHTML(username);
+    if( typeof username === 'string'){
+        username = users.find(u => u.name == username);
+    }
+    if( !checkIfUserCicleIsThere(username)){
+        document.getElementById('list-assigned-user').innerHTML += setAssignedCircleHTML(username);
+    }
+}
+
+function checkIfUserCicleIsThere(username){
+    for(let i = 0;i <document.getElementById('list-assigned-user').children.length;i++ ){
+        if(document.getElementById('list-assigned-user').children[i].id == 'colorCircleMedium'+username.name) return true;
+        else return false;
+    }
 }
 
 /**

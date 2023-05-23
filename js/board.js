@@ -48,7 +48,6 @@ function showAddNewTaskAtBoardStandard() {
  */
 function hideAddNewTaskAtBoard() {
     addDisplayNone('addTaskAtBoard');
-    removeEventListenerFromDropDown();
 }
 
 /**
@@ -161,7 +160,7 @@ function getProgressOfSubtasks(index) {
 function getCheckedSubtasks(elementIndex) {
     let count = 0;
     for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) {
-        if (isSubtaskChecked(elementIndex, i)) count++;
+        if (isSubtaskCheckedBoard(elementIndex, i)) count++;
     }
     return count;
 }
@@ -172,7 +171,7 @@ function getCheckedSubtasks(elementIndex) {
  * @param {number} i - The index of the subtask in the subtasks array of the task.
  * @returns {boolean} - True if the subtask is checked, false otherwise.
  */
-function isSubtaskChecked(elementIndex, i) {
+function isSubtaskCheckedBoard(elementIndex, i) {
     return tasks[elementIndex]['subtasks'][i]['checked'] == true;
 }
 
@@ -355,6 +354,7 @@ function setDataForEditCard(status, elementIndex, task,aID) {
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
     addEventListenerToSelectUserBox();
+    assigned = [];
 }
 
 /**
@@ -389,13 +389,14 @@ function showEditCard(status, elementIndex) {
  * @param {string} status - The status of the task.
  */
 function resetEditCard(index, status) {
+    assigned = [];
     setInnerHTML('assignedUserOpen' + status + index, '');
      hideEditCard(status, index);
     resetStylesForOpenCard(status, index);
     resetAssigned(status, index);
-    resetTaskPrio(status, index);
+    // resetTaskPrio(status, index);
     addUserAcronyms('assignedUserOpen', index, status);
-    addAssignedUsersList(status, index);
+    // addAssignedUsersList(status, index);
     document.getElementById('editTitle' + status + index).readOnly = true;
     document.getElementById('editDescription' + status + index).readOnly = true;
     document.getElementById('editDate' + status + index).readOnly = true;
@@ -456,6 +457,7 @@ function resetAssigned(status, index) {
 function setActiveCheckbox(task) {
     for (let i = 0; i < task['isAssigned'].length; i++) {
         document.getElementById(task['isAssigned'][i]).children[0].checked = true;
+        setAssignedCircle(task['isAssigned'][i]);
     }
 }
 
@@ -485,7 +487,6 @@ function editTaskData(index, stati) {
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
     document.getElementById('editDescription' + stati + index).innerHTML = tasks[index]['description'];
     tasks[index]['category'] = tasks[index]['category'];
-    assigned = [];
     tasks[index]['isAssigned'] = getAssignedContacts();
     tasks[index]['dueDate'] = document.getElementById('editDate' + stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
@@ -534,7 +535,9 @@ function editEditField(status, elementIndex, id, addClass) {
 function closeOpenCard(status, index) {
     addDisplayNone('openCard' + status + index);
     document.getElementById('overlay').style.display = "none";
-    resetEditCard(index, status);
+    save();
+    pushToDatabase();
+    updateBoardHTML();
 }
 
 /**
@@ -565,24 +568,6 @@ function highlight(id) {
     document.getElementById(id).classList.add('dragAreaHighlight');
 }
 
-// generate add task funktionen
-function createNewTaskAtBoard(statusTag) {
-    let taskTitle = document.getElementById('inputTitle').value;
-    let taskDesc = document.getElementById('inputDescription').value;
-    let taskCategory = selectedCategory;
-    let assignedTo = getAssignedContacts();
-    let taskDueDate = document.getElementById('inputDate').value;
-    let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
-    taskPrio = taskPrio[0].toLowerCase();
-    getSubtasks();
-    let taskSubtasks = subtasks;
-    let id = tasks.length + 1;
-    let status = statusTag;
-    tasks.push({ 'title': taskTitle, 'description': taskDesc, 'category': taskCategory, 'isAssigned': assignedTo, 'dueDate': taskDueDate, 'prio': taskPrio, 'subtasks': taskSubtasks, 'id': id, 'status': status });
-    pushToDatabase();
-    subtasks = [];
-    clearAllInputs();
-}
 
 /**
  * Shows the "Add New Task" section on the board and populates it with necessary HTML.
@@ -638,7 +623,6 @@ function onlyShowFoundTasks(i,search) {
  */
 function deleteTask(status, ind) {
     tasks.splice(ind, 1);
-    removeEventlistenerFromSelectUserBox();
     closeOpenCard(status, ind);
     pushToDatabase();
     updateBoardHTML();

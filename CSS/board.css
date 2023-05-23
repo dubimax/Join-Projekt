@@ -334,6 +334,7 @@ h1 {
     width: 623px;
     max-height: 824px;
     z-index: 10;
+    overflow: overlay;
 }
 
 .taskStatusOpen {

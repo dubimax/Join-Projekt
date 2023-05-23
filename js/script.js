@@ -452,6 +452,7 @@ function setOnSubmitForm(addForm) {
     let submitElement = document.getElementById('submitting');
     submitElement.onsubmit = function () {
         setForm(addForm);
+        return false;
     };
 }
 
@@ -462,9 +463,9 @@ function setOnSubmitForm(addForm) {
 function setForm(addForm) {
     createNewTask(addForm);
     addConfirmMessage('Task');
-    if (isElementExistent('addTask')) removeMessage('addTask');
-    else if (isElementExistent('addTaskAtContacts')) removeMessage('addTaskAtContacts');
-    else if (isElementExistent('addTaskAtBoard')) removeMessage('addTaskAtBoard');
+    if (isElementExistent('addTask')) removeMessage();
+    else if (isElementExistent('addTaskAtContacts')) closeAtContacts();
+    else if (isElementExistent('addTaskAtBoard').children.length != 0) closeTaskAtBoard();
 }
 
 /**
@@ -477,9 +478,19 @@ function isElementExistent(id) {
     return document.getElementById(id);
 }
 
-function removeMessage(id) {
+function closeAtContacts() {
+    hideAddNewTaskAtContacts();
+    removeMessage();
+}
+
+function closeTaskAtBoard() {
+    setInnerHTML('addTaskAtBoard', '');
+    addDisplayNone('addTaskAtBoard')
+    removeMessage();
+}
+
+function removeMessage() {
     setTimeout(() => removeConfirmMessage(), 1000);
-    return false;
 }
 
 /**

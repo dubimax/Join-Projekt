@@ -213,6 +213,10 @@ function showAddNewTaskAtContacts() {
     setStyleOfCloseIconAtContacts();
 }
 
+function hideAddNewTaskAtContacts(){
+    addDisplayNone('addTaskAtContacts');
+}
+
 /**
  * Removes the class "d-none" to show editContacts page
  * Set the value from the selected user to the inputfields

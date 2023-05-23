@@ -727,7 +727,7 @@ function generateOpenCardHTML(element,status) {
         </div>
         
         <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
-            <div class="deleteBtnOpenCard" onclick="deleteTask('${element["title"]}','${status}',${elementIndex})"></div>
+            <div class="deleteBtnOpenCard" onclick="deleteTask('${status}',${elementIndex})"></div>
             <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
         </div>
         <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
