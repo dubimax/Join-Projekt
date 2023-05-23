@@ -442,5 +442,18 @@
     }
 }
 
+@media (max-height:700px) {
+    #contactDetails {
+        top: 50px !important;
+    }
+
+    .contactsTitleContainer {
+        margin-bottom: 25px !important;
+    }
+
+    .contactHeadContainer {
+        margin-bottom: 0px;
+    }
+}
 
 

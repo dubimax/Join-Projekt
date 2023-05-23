@@ -679,3 +679,27 @@
         height: 35px !important;
     }
 }
+
+@media (max-height: 700px) {
+    html, body {
+        overflow: hidden;
+      }
+
+    .summeryBoxContainer {
+        margin: 10px 32px 0px 32px;
+    }
+
+    .summaryHeader span {
+        margin: 15px 0px;
+    }
+
+    .verticalLine {
+        margin-top: 20px;
+    }
+
+    .summaryCenter {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-right: 30px;
+    }
+}
