@@ -21,8 +21,14 @@ function updateBoardHTML() {
     addArea('done');
     addUserAcronyms('assignedUserLogo');
     taskDetails();
-    addUserAcronyms('assignedUserLogoOpen');
+    
     setStyleProgressbar();
+}
+
+function resetBoardComplete(){
+    for(let i = 0; i<document.getElementById('boardContainer').children.length;i++ ){
+        if( document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
+    }            
 }
 
 /**
@@ -59,7 +65,12 @@ function addArea(id) {
  * Adds task details for all tasks.
  */
 function taskDetails() {
-    for (let i = 0; i < tasks.length; i++) addTaskDetail(i);
+    resetBoardComplete();
+    for (let i = 0; i < tasks.length; i++) {
+        addTaskDetail(i);
+    }
+    addUserAcronyms('assignedUserLogoOpen');
+
 }
 
 /**
@@ -378,16 +389,16 @@ function showEditCard(status, elementIndex) {
  * @param {string} status - The status of the task.
  */
 function resetEditCard(index, status) {
-    document.getElementById('editTitle' + status + index).readOnly = true;
-    document.getElementById('editDescription' + status + index).readOnly = true;
-    document.getElementById('editDate' + status + index).readOnly = true;
     setInnerHTML('assignedUserOpen' + status + index, '');
-    hideEditCard(status, index);
+     hideEditCard(status, index);
     resetStylesForOpenCard(status, index);
     resetAssigned(status, index);
     resetTaskPrio(status, index);
     addUserAcronyms('assignedUserOpen', index, status);
     addAssignedUsersList(status, index);
+    document.getElementById('editTitle' + status + index).readOnly = true;
+    document.getElementById('editDescription' + status + index).readOnly = true;
+    document.getElementById('editDate' + status + index).readOnly = true;
 }
 
 /**
@@ -459,8 +470,8 @@ function editThisTask(index, stati) {
     addDisplayNone('overlay');
     resetEditCard(index, stati);
     save();
-    updateBoardHTML();
     pushToDatabase();
+    updateBoardHTML();
 }
 
 /**
@@ -470,13 +481,15 @@ function editThisTask(index, stati) {
  */
 function editTaskData(index, stati) {
     tasks[index]['title'] = document.getElementById('editTitle' + stati + index).value;
+    document.getElementById('editTitle' + stati + index).innerHTML = tasks[index]['title'];
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
+    document.getElementById('editDescription' + stati + index).innerHTML = tasks[index]['description'];
     tasks[index]['category'] = tasks[index]['category'];
     assigned = [];
     tasks[index]['isAssigned'] = getAssignedContacts();
     tasks[index]['dueDate'] = document.getElementById('editDate' + stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
-    tasks[index]['prio'] = taskPrio[0];
+    tasks[index]['prio'] = taskPrio[0].toLowerCase();
     tasks[index]['subtasks'] = tasks[index]['subtasks'];
     tasks[index]['id'] = tasks[index]['id'];
     tasks[index]['status'] = tasks[index]['status'];
@@ -560,7 +573,7 @@ function createNewTaskAtBoard(statusTag) {
     let assignedTo = getAssignedContacts();
     let taskDueDate = document.getElementById('inputDate').value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
-    taskPrio = taskPrio[0];
+    taskPrio = taskPrio[0].toLowerCase();
     getSubtasks();
     let taskSubtasks = subtasks;
     let id = tasks.length + 1;

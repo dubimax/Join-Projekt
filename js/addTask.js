@@ -455,7 +455,7 @@ function setAssignedCircle(username) {
  * @returns {Array} - The list of assigned contacts.
  */
 function getAssignedContacts() {
-    for (let i = 0; i < users.length; i++) { if (checkIfCOntactIsAssigned(i)) addAssignedUser(i) }
+    for (let i = 0; i < users.length; i++) { if (checkIfCOntactIsAssigned(i)) addAssignedUser(i); }
     return assigned;
 }
 

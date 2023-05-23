@@ -750,7 +750,7 @@ function addCheckBoxAtBoardHTML(index,i,status) {
 function resetTaskPrioHTML(element) {
     return `
         <label class="taskLabelOpen">Priority: </label>
-        <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
+        <img src="../img/${element['prio'].toLowerCase()}.png">
     `;
 }
 
