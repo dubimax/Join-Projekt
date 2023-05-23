@@ -262,13 +262,13 @@ function createNewContact() {
 function confirmMessage() {
     addConfirmMessage('Contact');
     addDisplayNone('createNewUserAtContacts');
-    setTimeout(() => removeConfirmMessage(), 1000);
+    setTimeout(() => removeConfirmMessageContacts(), 1000);
 }
 
 /**
  * Performs various actions after removing the confirmation message.
  */
-function removeConfirmMessage() {
+function removeConfirmMessageContacts() {
     removeConfirmMessage();
     addContactCategories();
     setVisibleIfnotEmpty();
@@ -281,22 +281,25 @@ function removeConfirmMessage() {
 function editContact() {
     let oldEmail = getInnerHTMLOf('contactDetailsEmail');
     let userName = getValueOf('editContactName');
-    let userEmail = getValueOf('createNewContactEmail');
-    let userPhone = getValueOf('createNewContactPhone');
+    let userEmail = getValueOf('editContactEmail');
+    let userPhone = getValueOf('editContactPhone');
+    let user = users.find(u => u.name == userName);
+    
     setOldData(oldEmail, userName, userEmail, userPhone);
     closeEditContact();
+    setContactDetails(userName, userEmail, userPhone, user.color);
 }
 
 /**
  * Closes the edit contact section and performs various actions.
  */
 function closeEditContact() {
+    save();
     pushToDatabase();
     addDisplayNone('editUserAtContacts');
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
-    save();
 }
 
 /**
