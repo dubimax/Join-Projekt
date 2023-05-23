@@ -14,3 +14,4 @@ let dropDownAssign = false;
 let assigned = [];
 let loggedIn = false;
 let indexOfEmail = [];
+let today = new Date().toISOString().split('T')[0];

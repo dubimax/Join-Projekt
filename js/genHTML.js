@@ -105,6 +105,7 @@ function generateAddTaskHTML(id) {
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
     addEventListenerToDropDown();
+    document.getElementById('inputDate').setAttribute('min',today);
     } else window.location.href = '../login.html';
 }
 
@@ -710,7 +711,7 @@ function generateOpenCardHTML(element,status) {
         </div>  
         <div id="dateContainer${status}${elementIndex}" style="display:flex;">
             <label class="taskLabelOpen editcard" >Due date: </label>
-            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly type="date" value="${element['dueDate']}" class="inputTextStd"/>
+            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly min="today" type="date" value="${element['dueDate']}" class="inputTextStd"/>
         </div>
         <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
             <label class="taskLabelOpen">Priority: </label>
