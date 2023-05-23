@@ -152,6 +152,7 @@ function changeStyleIfExistent(ids, i) {
  * Resets all label containers to their default values.
  */
 function resetAllLabelContainer() {
+
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
@@ -228,7 +229,11 @@ function changeStyleOfLabel(id) {
  * @param {string} id - The ID of the label.
  */
 function refreshStyleOfSelectedLabel(id) {
-    if (activeID == id) document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
+    if (activeID == id) {
+        activeID = '';
+        activeImg = '';
+        document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
+    }
     else changeStyleOfLabels(id)
 }
 
@@ -447,17 +452,17 @@ function isUserAssigned(j) {
  * @param {string} username - The username for which to set the assigned circle.
  */
 function setAssignedCircle(username) {
-    if( typeof username === 'string'){
+    if (typeof username === 'string') {
         username = users.find(u => u.name == username);
     }
-    if( !checkIfUserCicleIsThere(username)){
+    if (!checkIfUserCicleIsThere(username)) {
         document.getElementById('list-assigned-user').innerHTML += setAssignedCircleHTML(username);
     }
 }
 
-function checkIfUserCicleIsThere(username){
-    for(let i = 0;i <document.getElementById('list-assigned-user').children.length;i++ ){
-        if(document.getElementById('list-assigned-user').children[i].id == 'colorCircleMedium'+username.name) return true;
+function checkIfUserCicleIsThere(username) {
+    for (let i = 0; i < document.getElementById('list-assigned-user').children.length; i++) {
+        if (document.getElementById('list-assigned-user').children[i].id == 'colorCircleMedium' + username.name) return true;
         else return false;
     }
 }
