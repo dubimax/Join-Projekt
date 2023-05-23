@@ -167,13 +167,14 @@ h1 {
 
 .dragAreaTitle {
     font-weight: 700;
-    font-size: 21px;
+    font-size: 19px;
     line-height: 120%;
     color: #2A3647;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
+    width: 265px;
 }
 
 .dragAreaTitle img {
@@ -554,6 +555,7 @@ h1 {
 
     .dragAreaTitle {
         font-size: 16px;
+        width: 225px;
     }
 
     .dragAreaTitle img {
@@ -641,7 +643,7 @@ h1 {
     }
 
     .taskDescription {
-        width: 270px;
+        width: 285px;
     }
 
     .containerUserAndPrio {
@@ -723,6 +725,7 @@ h1 {
         padding: 0 10px;
         align-items: center;
         justify-content: space-between;
+        width: 315px;
     }
 
     .overlay {
