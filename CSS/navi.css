@@ -3,7 +3,7 @@
     position: absolute;
     width: calc(100% - 232px);
     right: 0;
-    height: 100%;
+    bottom: 80px;
     top: 89px;
     align-items: flex-start;
     overflow: hidden;
@@ -127,7 +127,6 @@
         padding: 20px 25px;
         overflow-y: scroll;
         margin-top: 55px;
-        margin-bottom: 155px;
     }
     
 
@@ -183,7 +182,7 @@
         background-color: #2A3647;
         display: flex;
         align-items: center;
-        position: absolute;
+        position: fixed;
         height: 80px;
         left: 0px;
         top: unset;
