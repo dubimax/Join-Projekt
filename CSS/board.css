@@ -873,3 +873,9 @@ h1 {
     }
 
 }
+
+@media (max-height: 700px) {
+    .cardHeaders {
+        height: 280px; 
+    }
+}
