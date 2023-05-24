@@ -922,6 +922,5 @@ a {
 @media (max-width:1300px) {
     #helpContent {
     z-index: 15;
-    overflow-y: scroll;
     }
 }
