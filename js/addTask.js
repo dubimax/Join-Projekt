@@ -124,7 +124,6 @@ function clearLists(id, array) {
     array = [];
 }
 
-
 /**
  * resets value of given elements and set back the Style of LabelsFields
  * @param  {...any} ids elemnts to reset
@@ -259,40 +258,15 @@ function changeToAddNewSubtask() {
 function removeEventListenerFromDropDown() {
     document.getElementById('categoryBox').removeEventListener('click', function () { });
     document.getElementById('assignedTo').removeEventListener('click', function () { });
-    removeEventlistenerFromSelectCategories();
-    removeEventlistenerFromSelectUsers();
+    removeEventlistenerFrom(categories);
+    removeEventlistenerFrom(users)
 }
-
 
 function removeEventlistenerFrom(array) {
     let selItem;
     for (let i = 0; i < array.length; i++) {
         selItem = document.getElementById(array[i]['name']);
         selItem.removeEventListener('click', function () { });
-    }
-}
-
-/**
- * Removes the event listeners from the select users.
- * Iterates through the 'users' array and removes the 'click' event listener from each corresponding element.
- */
-function removeEventlistenerFromSelectUsers() {
-    let selUser;
-    for (let i = 0; i < users.length; i++) {
-        selUser = document.getElementById(users[i]['name']);
-        selUser.removeEventListener('click', function () { });
-    }
-}
-
-/**
- * Removes the event listeners from the select categories.
- * Iterates through the 'categories' array and removes the 'click' event listener from each corresponding element.
- */
-function removeEventlistenerFromSelectCategories() {
-    let selCat;
-    for (let i = 0; i < categories.length; i++) {
-        selCat = document.getElementById(categories[i]['name']);
-        selCat.removeEventListener('click', function () { });
     }
 }
 
@@ -304,7 +278,15 @@ function removeEventlistenerFromSelectUserBox() {
     userBox.removeEventListener('click', function () { });
     for (let i = 0; i < users.length; i++) removeListenerFromSelectUserBox(i);
 }
-
+/**
+ * Adds the event listeners to the dropdown elements, such as categories and select user box.
+ */
+function addEventListenerToDropDown() {
+    addEventListenerToSelectBoxFor('categoryBox','categories');
+    addEventListenerToSelectBoxFor('assignedTo','users');
+    addEventListenerToSelectUsers();
+    addEvenListenerToSelectCategories();
+}
 
 /**
  * Removes the event listener from the select user element.
@@ -316,30 +298,11 @@ function removeListenerFromSelectUserBox(i) {
 }
 
 /**
- * Adds the event listener to the categories dropdown box.
+ * Adds the event listener to the select user box and calls the function to add event listeners to user elements.
  */
-function addEventListenerToCategories() {
-    let catBox = document.getElementById('categoryBox');
-    catBox.addEventListener('click', function () { showDropDownItems('categories') });
-    addEvenListenerToSelectCategories();
-}
-
-/**
- * Add an Eventlistener to select categories in dropdown
- */
-function addEvenListenerToSelectCategories() {
-    for (let i = 0; i < categories.length; i++) addEvenListenerToSelectCategory(i);
-}
-
-/**
- * Adds the event listener to the select category element.
- * @param {number} i - The index of the category.
- */
-function addEvenListenerToSelectCategory(i) {
-    let selCat = document.getElementById(categories[i]['name']);
-    selCat.addEventListener('click', function (e) {
-        setEventListenerToSelectCategory(e)
-    });
+function addEventListenerToSelectBoxFor(id, setfor) {
+    let box = document.getElementById(id);
+    box.addEventListener('click', function () { showDropDownItems(setfor) });
 }
 
 /**
@@ -353,52 +316,36 @@ function setEventListenerToSelectCategory(e) {
 }
 
 /**
- * Adds the event listeners to the dropdown elements, such as categories and select user box.
+ * Add an Eventlistener to select categories in dropdown
  */
-function addEventListenerToDropDown() {
-    addEventListenerToCategories();
-    addEventListenerToSelectUserBox();
+function addEvenListenerToSelectCategories() {
+    for (let i = 0; i < categories.length; i++) addEvenListenerToSelectfor(i, categories , 'categories');
 }
-
-/**
- * Adds the event listener to the select user box and calls the function to add event listeners to user elements.
- */
-function addEventListenerToSelectUserBox() {
-    let userBox = document.getElementById('assignedTo');
-    userBox.addEventListener('click', function () { showDropDownItems('users') });
-    addEventListenerToSelectUsers();
-}
-
-
-
-
 
 /**
  * Adds event listeners to the select user options.
  * Iterates through the 'users' array and calls the 'addEventListenerToSelectUser()' function for each user.
  */
 function addEventListenerToSelectUsers() {
-    for (let j = 0; j < users.length; j++) addEventListenerToSelectUser(j);
+    for (let i = 0; i < users.length; i++) addEvenListenerToSelectfor(i, users , 'users');
 }
 
 /**
- * Adds an event listener to the select user element.
- * @param {number} j - The index of the user in the "users" array.
+ * Adds the event listener to the select category element.
+ * @param {number} i - The index of the category.
  */
-function addEventListenerToSelectUser(j) {
-    let selUser = document.getElementById(users[j]['name']);
-    selUser.addEventListener('click', function (e) {
-        setChecked(j, e)
-    });
+function addEvenListenerToSelectfor(i, array, nameFor) {
+    let sel = document.getElementById(array[i]['name']);
+    if(nameFor == 'users') sel.addEventListener('click',() => setChecked(i));
+    if(nameFor == 'categories') sel.addEventListener('click', (e) => setEventListenerToSelectCategory(e));
 }
+
 
 /**
  * Sets the checkbox of a user to checked or unchecked based on its current state.
  * @param {number} j - The index of the user in the "users" array.
- * @param {Event} e - The event object.
  */
-function setChecked(j, e) {
-    e.stopPropagation();
+function setChecked(j) {
     if (!isUserAssigned(j)) setCheckedToSelectUser(j);
     else if (isUserAssigned(j)) setUnCheckedToSelectUser(j);
 }
@@ -442,12 +389,8 @@ function isUserAssigned(j) {
  * @param {string} username - The username for which to set the assigned circle.
  */
 function setAssignedCircle(username) {
-    if (typeof username === 'string') {
-        username = users.find(u => u.name == username);
-    }
-    if (!checkIfUserCicleIsThere(username)) {
-        document.getElementById('list-assigned-user').innerHTML += setAssignedCircleHTML(username);
-    }
+    if (typeof username === 'string')  username = users.find(u => u.name == username);
+    if (!checkIfUserCicleIsThere(username)) document.getElementById('list-assigned-user').innerHTML += setAssignedCircleHTML(username);
 }
 
 function checkIfUserCicleIsThere(username) {

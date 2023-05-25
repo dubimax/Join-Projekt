@@ -125,10 +125,6 @@ function removeConfirmMessage() {
     window.location.href = './board.html'
 }
 
-
-
-
-
 /**
  * Removes the legal notice from the document
  */
