@@ -122,6 +122,7 @@ function addConfirmMessage(text) {
  */
 function removeConfirmMessage() {
     document.getElementById('confirmMessage').remove();
+    window.location.href = './board.html'
 }
 
 

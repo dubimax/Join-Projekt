@@ -109,28 +109,21 @@ function setActiveColor(id) {
  */
 function clearAllInputs() {
     clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
-    clearListSubtask();
+    clearLists('list-assigned-user', assignedTo);
     cancelAddNew('addNewCat');
     cancelAddNew('assignedTo');
     cancelAddNew('addNewSubTask');
-    clearListAssigned();
+    clearLists('list-subtask', subtasks);
 }
 
 /**
- * Clears AssignedUserList
+ * Clears list by given id and array
  */
-function clearListAssigned() {
-    document.getElementById('list-assigned-user').innerHTML = '';
-    assignedTo = [];
+function clearLists(id, array) {
+    document.getElementById(id).innerHTML = '';
+    array = [];
 }
 
-/**
- * Resets added Subtasks
- */
-function clearListSubtask() {
-    document.getElementById('list-subtask').innerHTML = '';
-    subtasks = [];
-}
 
 /**
  * resets value of given elements and set back the Style of LabelsFields
@@ -152,7 +145,6 @@ function changeStyleIfExistent(ids, i) {
  * Resets all label containers to their default values.
  */
 function resetAllLabelContainer() {
-
     document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
@@ -181,26 +173,8 @@ function setStyle(id, color, name) {
  * If the provided ID matches 'id_urgent', it calls the setStyle() function to set the style properties.
  * @param {string} id - The ID of the element to set the style properties.
  */
-function setStyleOfUrgent(id) {
-    if (id == 'id_urgent') setStyle(id, urgentColor, 'urgent');
-}
-
-/**
- * Sets the style properties and image source for the specified element ID with the 'medium' designation.
- * If the provided ID matches 'id_medium', it calls the setStyle() function to set the style properties.
- * @param {string} id - The ID of the element to set the style properties.
- */
-function setStyleOfMedium(id) {
-    if (id == 'id_medium') setStyle(id, mediumColor, 'medium');
-}
-
-/**
- * Sets the style properties and image source for the specified element ID with the 'low' designation.
- * If the provided ID matches 'id_low', it calls the setStyle() function to set the style properties.
- * @param {string} id - The ID of the element to set the style properties.
- */
-function setStyleOfLow(id) {
-    if (id == 'id_low') setStyle(id, lowColor, 'low');
+function setStyleOf(id, color, name) {
+    if (id == 'id_' + name) setStyle(id, color, name);
 }
 
 /**
@@ -208,9 +182,9 @@ function setStyleOfLow(id) {
  * @param {string} id - The ID of the element to set the style properties.
  */
 function setStyles(id) {
-    setStyleOfUrgent(id);
-    setStyleOfMedium(id);
-    setStyleOfLow(id);
+    setStyleOf(id, urgentColor, 'urgent');
+    setStyleOf(id, mediumColor, 'medium');
+    setStyleOf(id, lowColor, 'low');
 }
 
 /**
@@ -232,11 +206,10 @@ function refreshStyleOfSelectedLabel(id) {
     if (activeID == id) {
         resetStyleVariables();
         document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
-    }
-    else changeStyleOfLabels(id)
+    } else changeStyleOfLabels(id)
 }
 
-function resetStyleVariables(){
+function resetStyleVariables() {
     activeID = '';
     activeImg = '';
 }
@@ -290,14 +263,23 @@ function removeEventListenerFromDropDown() {
     removeEventlistenerFromSelectUsers();
 }
 
+
+function removeEventlistenerFrom(array) {
+    let selItem;
+    for (let i = 0; i < array.length; i++) {
+        selItem = document.getElementById(array[i]['name']);
+        selItem.removeEventListener('click', function () { });
+    }
+}
+
 /**
  * Removes the event listeners from the select users.
  * Iterates through the 'users' array and removes the 'click' event listener from each corresponding element.
  */
 function removeEventlistenerFromSelectUsers() {
     let selUser;
-    for (let j = 0; j < users.length; j++) {
-        selUser = document.getElementById(users[j]['name']);
+    for (let i = 0; i < users.length; i++) {
+        selUser = document.getElementById(users[i]['name']);
         selUser.removeEventListener('click', function () { });
     }
 }
@@ -312,6 +294,25 @@ function removeEventlistenerFromSelectCategories() {
         selCat = document.getElementById(categories[i]['name']);
         selCat.removeEventListener('click', function () { });
     }
+}
+
+/**
+ * Removes the event listener from the select user box and all user elements.
+ */
+function removeEventlistenerFromSelectUserBox() {
+    let userBox = document.getElementById('assignedTo');
+    userBox.removeEventListener('click', function () { });
+    for (let i = 0; i < users.length; i++) removeListenerFromSelectUserBox(i);
+}
+
+
+/**
+ * Removes the event listener from the select user element.
+ * @param {number} i - The index of the user in the "users" array.
+ */
+function removeListenerFromSelectUserBox(i) {
+    let selUser = document.getElementById(users[i]['name']);
+    selUser.removeEventListener('click', function () { });
 }
 
 /**
@@ -368,23 +369,9 @@ function addEventListenerToSelectUserBox() {
     addEventListenerToSelectUsers();
 }
 
-/**
- * Removes the event listener from the select user box and all user elements.
- */
-function removeEventlistenerFromSelectUserBox() {
-    let userBox = document.getElementById('assignedTo');
-    userBox.removeEventListener('click', function () { });
-    for (let i = 0; i < users.length; i++) removeListenerFromSelectUserBox(i);
-}
 
-/**
- * Removes the event listener from the select user element.
- * @param {number} i - The index of the user in the "users" array.
- */
-function removeListenerFromSelectUserBox(i) {
-    let selUser = document.getElementById(users[i]['name']);
-    selUser.removeEventListener('click', function () { });
-}
+
+
 
 /**
  * Adds event listeners to the select user options.
