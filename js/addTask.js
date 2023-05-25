@@ -119,9 +119,9 @@ function clearAllInputs() {
 /**
  * Clears list by given id and array
  */
-function clearLists(id, array) {
-    document.getElementById(id).innerHTML = '';
-    array = [];
+function clearLists(id, arrayitem) {
+    setInnerHTML(id,'');
+    arrayitem = [];
 }
 
 /**
@@ -235,9 +235,8 @@ function changeToInputField(id) {
  * Changes the category dropdown box to the "Add New Category" input field.
  */
 function changeToAddNewCat() {
-    document.getElementById('id_categoryBox').innerHTML =
-        generatesChangedInputFieldHTML('label', 'input', 'Category', 'inputTextStd', 'text',
-            'newCat', 'addNewCat', 'addCategory()', 'newCategoriesField');
+    setInnerHTML('id_categoryBox',generatesChangedInputFieldHTML('label', 'input', 'Category',
+     'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()', 'newCategoriesField'));
     addColorChoser();
     dropDown = false;
 }
@@ -258,8 +257,8 @@ function changeToAddNewSubtask() {
 function addEventListenerToDropDown() {
     addEventListenerToSelectBoxFor('categoryBox','categories');
     addEventListenerToSelectBoxFor('assignedTo','users');
-    addEventListenerToSelectUsers();
-    addEvenListenerToSelectCategories();
+    addEvenListenersToSelectfor(users,'users');
+    addEvenListenersToSelectfor(categories,'categories');
 }
 
 /**
@@ -279,20 +278,11 @@ function setEventListenerToSelectCategory(e) {
     setOption(txt, 'category');
     e.stopPropagation();
 }
-
 /**
  * Add an Eventlistener to select categories in dropdown
  */
-function addEvenListenerToSelectCategories() {
-    for (let i = 0; i < categories.length; i++) addEvenListenerToSelectfor(i, categories , 'categories');
-}
-
-/**
- * Adds event listeners to the select user options.
- * Iterates through the 'users' array and calls the 'addEventListenerToSelectUser()' function for each user.
- */
-function addEventListenerToSelectUsers() {
-    for (let i = 0; i < users.length; i++) addEvenListenerToSelectfor(i, users , 'users');
+function addEvenListenersToSelectfor(array,nameOfArray) {
+    for (let i = 0; i < array.length; i++) addEvenListenerToSelectfor(i, array , nameOfArray);
 }
 
 /**
@@ -304,7 +294,6 @@ function addEvenListenerToSelectfor(i, array, nameFor) {
     if(nameFor == 'users') sel.addEventListener('click',() => setChecked(i));
     if(nameFor == 'categories') sel.addEventListener('click', (e) => setEventListenerToSelectCategory(e));
 }
-
 
 /**
  * Sets the checkbox of a user to checked or unchecked based on its current state.
@@ -355,7 +344,7 @@ function isUserAssigned(j) {
  */
 function setAssignedCircle(username) {
     if (typeof username === 'string')  username = users.find(u => u.name == username);
-    if (!checkIfUserCicleIsThere(username)) document.getElementById('list-assigned-user').innerHTML += setAssignedCircleHTML(username);
+    if (!checkIfUserCicleIsThere(username)) addInnerHTML('list-assigned-user',setAssignedCircleHTML(username));
 }
 
 function checkIfUserCicleIsThere(username) {
