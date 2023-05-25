@@ -104,8 +104,8 @@ function generateAddTaskHTML(id) {
     generateOptionsHTML(users, 'users');
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
-    addEventListenerToDropDown();
     document.getElementById('inputDate').setAttribute('min',today);
+    addEventListenerToDropDown();
     } else window.location.href = '../login.html';
 }
 

@@ -122,7 +122,6 @@ function addConfirmMessage(text) {
  */
 function removeConfirmMessage() {
     document.getElementById('confirmMessage').remove();
-    window.location.href = './board.html'
 }
 
 /**
@@ -320,9 +319,10 @@ function cancelAddNewCat() {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
+    addEventListenerToSelectBoxFor('categoryBox','categories');
+    addEvenListenersToSelectfor(categories,'categories');
     save();
     dropDownCat = false;
-    addEventListenerToCategories();
 }
 
 /**
@@ -409,7 +409,14 @@ function showDropDonwsMenu() {
     document.getElementById('addNewCat').classList.remove('d-none');
     dropDownCat = true;
 }
-
+/**
+ * Retrieves the inner HTML content of an element by its ID.
+ * @param {string} id - The ID of the element.
+ * @returns {string} The inner HTML content of the element.
+ */
+function getInnerHTMLOf(id) {
+    return document.getElementById(id).innerHTML;
+}
 
 
 /**
@@ -457,8 +464,9 @@ function isElementExistent(id) {
 }
 
 function closeAtContacts() {
-    hideAddNewTaskAtContacts();
+    addDisplayNone('addTaskAtContacts');
     removeMessage();
+    window.location.href = './board.html'
 }
 
 function closeTaskAtBoard() {

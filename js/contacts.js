@@ -9,12 +9,7 @@ async function initContacts() {
     generateContactsHTML();
 }
 
-/**
- * Sets the site active on the Contacts page.
- * Performs various tasks such as adding contact categories, setting visibility, generating contact details HTML,
- * generating add task HTML, adding a close button to the add task section at contacts, setting the onsubmit form,
- * and adding event listeners to the dropdown.
- */
+/** Sets site active on Contacts page: categories, visibility, contact details HTML, add task HTML, close button, onSubmit form, event listeners. */
 function setSiteActive() {
     addContactCategories();
     setVisibleIfnotEmpty();
@@ -26,10 +21,7 @@ function setSiteActive() {
 }
 
 /**
- * Generates the HTML content for the Contacts page.
- * It loads the necessary resources and checks if the user is logged in.
- * If logged in, it sets the site active on the Contacts page by calling the setSiteActive() function.
- * If not logged in, it redirects the user to the login page.
+ * Generates HTML content for Contacts page: loads resources, checks login status, sets site active if logged in, redirects to login page if not logged in.
  */
 function generateContactsHTML() {
     load();
@@ -87,9 +79,7 @@ function addEventListenerToDeleButton(id) {
     let contactToDelete;
     if (id == 'deleteButtonContent') contactToDelete = getContactToDeleteButtonContent();
     else if (id == 'deleteButton') contactToDelete = getContactToDeleteButton();
-    deleteButton.addEventListener('click', function () {
-        setEventToDeleteButton(contactToDelete);
-    });
+    deleteButton.addEventListener('click', () => setEventToDeleteButton(contactToDelete));
 }
 
 /**
@@ -167,9 +157,7 @@ function getContactWith(i, value) {
  * @param {string} letter - The letter for which to generate the alpha container.
  */
 function generateAlphaContainerFor(letter) {
-    for (let i = 0; i < names.length; i++) {
-        setAlphaContainerForLetter(i, letter);
-    }
+    for (let i = 0; i < names.length; i++) setAlphaContainerForLetter(i, letter);
 }
 
 /**
@@ -182,24 +170,23 @@ function setAlphaContainerForLetter(i, letter) {
     let userMail = getContactWith(i, 'email');
     let userPhone = getContactWith(i, 'phone');
     let userColor = getContactWith(i, 'color')
-    document.getElementById('contact' + letter.toUpperCase()).innerHTML += setContactsContainerHTML(contactName, userMail, userPhone, userColor);
+    addInnerHTML('contact' + letter.toUpperCase(),setContactsContainerHTML(contactName, userMail, userPhone, userColor));
     names.splice(0);
 }
 
 /**
  * Sets the visibility of alpha containers based on whether they have any contacts.
  */
-
 function setVisibleIfnotEmpty() {
-    for (let j = 0; j < 26; j++) setVissible(j);
+    for (let i = 0; i < 26; i++) setVissible(i);
 }
 
 /**
  * Sets the visibility of the alpha container based on whether it has any contacts.
- * @param {number} j - The index of the alpha container.
+ * @param {number} i - The index of the alpha container.
  */
-function setVissible(j) {
-    let ascicode = (65 + j).toString();
+function setVissible(i) {
+    let ascicode = (65 + i).toString();
     let value = String.fromCharCode(ascicode);
     let child = document.getElementById('contact' + value).children;
     if (child[2]) removeDisplayNone('contact' + value);
@@ -211,10 +198,6 @@ function setVissible(j) {
 function showAddNewTaskAtContacts() {
     removeDisplayNone('addTaskAtContacts');
     setStyleOfCloseIconAtContacts();
-}
-
-function hideAddNewTaskAtContacts(){
-    addDisplayNone('addTaskAtContacts');
 }
 
 /**
@@ -284,7 +267,6 @@ function editContact() {
     let userEmail = getValueOf('editContactEmail');
     let userPhone = getValueOf('editContactPhone');
     let user = users.find(u => u.name == userName);
-    
     setOldData(oldEmail, userName, userEmail, userPhone);
     closeEditContact();
     setContactDetails(userName, userEmail, userPhone, user.color);
@@ -314,15 +296,6 @@ function setOldData(oldEmail, userName, userEmail, userPhone) {
     users[oldUser]['name'] = userName;
     users[oldUser]['email'] = userEmail;
     users[oldUser]['phone'] = userPhone;
-}
-
-/**
- * Retrieves the inner HTML content of an element by its ID.
- * @param {string} id - The ID of the element.
- * @returns {string} The inner HTML content of the element.
- */
-function getInnerHTMLOf(id) {
-    return document.getElementById(id).innerHTML;
 }
 
 /**
