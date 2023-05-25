@@ -416,3 +416,14 @@ function resetOptions() {
         document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
     }
 }
+
+/**
+ * Adds a new category with the provided details.
+ */
+function addCategory() {
+    let newCategory = document.getElementById('newCat').value;
+    let color = getValueOfChosenColor();
+    categories.push({ 'name': newCategory, 'color': color });
+    pushToDatabase();
+    cancelAddNew('addNewCat');
+}

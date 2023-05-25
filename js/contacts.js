@@ -252,7 +252,7 @@ function confirmMessage() {
  * Performs various actions after removing the confirmation message.
  */
 function removeConfirmMessageContacts() {
-    removeConfirmMessage();
+    removeID('confirmMessage');
     addContactCategories();
     setVisibleIfnotEmpty();
     save();

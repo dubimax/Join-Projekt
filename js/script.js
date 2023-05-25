@@ -117,100 +117,8 @@ function addConfirmMessage(text) {
     document.body.innerHTML += setConfirmMessage(text);
 }
 
-/**
- * Removes the confirmation message from the document.
- */
-function removeConfirmMessage() {
-    document.getElementById('confirmMessage').remove();
-}
-
-/**
- * Removes the legal notice from the document
- */
-function removeLegalNotice() {
-    document.getElementById('legalNotice').remove();
-}
-
-/**
- * Removes the help from the document
- */
-function removeHelp() {
-    document.getElementById('helpContent').remove();
-}
-
-/**
- * Initializes the application.
- * @async
- * @returns {Promise<void>}
- */
-async function init() {
-    await includeHTML();
-    await downloadFromServer();
-    load();
-    users = JSON.parse(backend.getItem('users')) || [];
-    categories = JSON.parse(backend.getItem('categories')) || [];
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-}
-
-/**
- * Performs the login operation.
- */
-function login() {
-    let userEmail = document.getElementById('userMailLogIn').value;
-    let userPassword = document.getElementById('userPasswordLogIn').value;
-    checkUserData(userEmail, userPassword);
-}
-
-/**
- * Checks the user data for a given email and password.
- * @param {string} userEmail - The user email to check.
- * @param {string} userPassword - The user password to check.
- */
-function checkUserData(userEmail, userPassword) {
-    for (let i = 0; i < users.length; i++) {
-        checkUserDataForUser(i, userEmail, userPassword);
-    }
-    removeDisplayNone('dataCheck');
-}
-
-/**
- * Checks the user data for a specific user.
- * @param {number} i - The index of the user in the users array.
- * @param {string} userEmail - The user email to check.
- * @param {string} userPassword - The user password to check.
- */
-function checkUserDataForUser(i, userEmail, userPassword) {
-    const user = users[i];
-    if (isUserAndMailCorrect(user, userEmail, userPassword)) setLoggedIn(userEmail);
-}
-
-/**
- * Checks if the user email and password combination is correct.
- * @param {object} user - The user object to check.
- * @param {string} userEmail - The user email to compare.
- * @param {string} userPassword - The user password to compare.
- * @returns {boolean} - True if the user email and password combination is correct, false otherwise.
- */
-function isUserAndMailCorrect(user, userEmail, userPassword) {
-    return user.email == userEmail && user.pwd == userPassword;
-}
-
-/**
- * Sets the logged-in status for the user.
- * @param {string} userEmail - The user email to set as logged in.
- */
-function setLoggedIn(userEmail) {
-    indexOfEmail = users.find(u => u.email == userEmail);
-    loggedIn = true;
-    save();
-    window.location.href = './html/summary.html';
-}
-
-/**
- * Performs a guest login by checking the user data.
- */
-function guestLogin() {
-    checkUserData('guest@guest.de', 'guest');
+function removeID(id){
+    document.getElementById(id).remove();
 }
 
 /**
@@ -230,31 +138,6 @@ async function pushToDatabase() {
     await backend.setItem('users', JSON.stringify(users));
     await backend.setItem('categories', JSON.stringify(categories));
     await backend.setItem('tasks', JSON.stringify(tasks));
-}
-
-/**
- * Adds a new user with the provided details.
- */
-function addUser() {
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('userMail').value;
-    let password = document.getElementById('userPassword').value;
-    let userColor = randomcolor();
-    users.push({ 'name': name, 'email': email, 'pwd': password, 'color': userColor });
-    pushToDatabase();
-    save();
-    showFrame('signUpConfirmFrame', 'signUpFrame');
-}
-
-/**
- * Adds a new category with the provided details.
- */
-function addCategory() {
-    let newCategory = document.getElementById('newCat').value;
-    let color = getValueOfChosenColor();
-    categories.push({ 'name': newCategory, 'color': color });
-    pushToDatabase();
-    cancelAddNew('addNewCat');
 }
 
 /**
@@ -409,6 +292,7 @@ function showDropDonwsMenu() {
     document.getElementById('addNewCat').classList.remove('d-none');
     dropDownCat = true;
 }
+
 /**
  * Retrieves the inner HTML content of an element by its ID.
  * @param {string} id - The ID of the element.
@@ -417,7 +301,6 @@ function showDropDonwsMenu() {
 function getInnerHTMLOf(id) {
     return document.getElementById(id).innerHTML;
 }
-
 
 /**
  * Sets the behavior for submitting the form.
@@ -477,7 +360,7 @@ function closeTaskAtBoard() {
 }
 
 function removeMessage() {
-    setTimeout(() => removeConfirmMessage(), 1000);
+    setTimeout(() => removeID('confirmMessage'), 1000);
 }
 
 /**
@@ -494,12 +377,9 @@ function addEventListenerDocumentLogoutButton(e) {
     e.preventDefault();
     e.stopPropagation();
     document.addEventListener("click", (event) => {
-
         let optionDiv = document.getElementById('optionsMenu');
         targetElement = event.target;
-
         if (optionDiv && !optionDiv.contains(targetElement)) {
-
             removeLogoutButton();
         }
     });
@@ -544,8 +424,8 @@ function setStyleOfSelectedUsers() {
  * Hides the user items in the dropdown.
  */
 function hideUserItems() {
-    if (isContainingClassDnone('Assigned toassignedTo')) showUsersDropdown();
-    else hideUsersDropDown();
+    if (isContainingClassDnone('Assigned toassignedTo')) toggleUsersDropDown('invite','Assigned toassignedTo');
+    else toggleUsersDropDown('Assigned toassignedTo','invite');
     dropDownAssign = false;
 }
 
@@ -559,20 +439,11 @@ function setUserItemsandShow(i) {
 }
 
 /**
- * Hides the users dropdown.
+ * toggles the users dropdown.
  */
-
-function hideUsersDropDown() {
-    removeDisplayNone('Assigned toassignedTo');
-    addDisplayNone('invite');
-}
-
-/**
- * Shows the users dropdown.
- */
-function showUsersDropdown() {
-    addDisplayNone('Assigned toassignedTo');
-    removeDisplayNone('invite');
+function toggleUsersDropDown(showID,hideID) {
+    removeDisplayNone(showID);
+    addDisplayNone(hideID);
 }
 
 /**

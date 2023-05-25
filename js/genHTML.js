@@ -400,7 +400,7 @@ function generateNavigationLinksContacts() {
 function addHelp() {
     document.body.innerHTML += `
     <div class="help content" id="helpContent">
-        <a class="back" onclick="removeHelp()"><img src="../img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeID('helpContent')"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="helpContainer">
             <h2 class="helpHeader">Help</h2>
             <div class="helpDescriptionContainer">
@@ -437,7 +437,7 @@ function addHelp() {
 function addLegalNotice() {
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
-        <a class="back" onclick="removeLegalNotice()"><img src="../img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeID('legalNotice')"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="noticeContainer">
             <div class='impressum'>
                 <h1>Impressum</h1><br>

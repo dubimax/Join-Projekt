@@ -346,7 +346,7 @@ function setDataForEditCard(status, elementIndex, task,aID) {
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
-    addEventListenerToSelectUserBox();
+    
     assigned = [];
 }
 
@@ -494,9 +494,9 @@ function editTaskData(index, stati) {
  * @param {string} aID - The active ID of the board label.
  */
 function setStyleOfBoardLabel(aID) {
-    if (aID == 'id_urgent') setStyleOfUrgent(aID);
-    if (aID == 'id_medium') setStyleOfMedium(aID);
-    if (aID == 'id_low') setStyleOfLow(aID);
+    setStyleOf(aID, urgentColor, 'urgent');
+    setStyleOf(aID, mediumColor, 'medium');
+    setStyleOf(aID, lowColor, 'low');
 }
 
 /**
