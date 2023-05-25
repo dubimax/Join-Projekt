@@ -81,7 +81,7 @@ function generateAddTaskHTML(id) {
                 <div class="border-1px-solid"></div>
                 <div class="detailBox-right">
                     ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-                    ${generateLabelsHTML('label', 'Prio')} 
+                    ${generateLabelsHTML('label', 'Prio','')} 
                     ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
                     <div class="p-relative d-flex align-c">
                         <list class="" id="list-subtask">
@@ -101,9 +101,9 @@ function generateAddTaskHTML(id) {
         </form>
     `;
     addInviteNewContact();
-    generateOptionsHTML(users, 'users');
+    generateOptionsHTML(users, 'users', '');
     addOptionWithFunction('addNewCat');
-    generateOptionsHTML(categories, 'categories');
+    generateOptionsHTML(categories, 'categories', '');
     document.getElementById('inputDate').setAttribute('min',today);
     addEventListenerToDropDown();
     } else window.location.href = '../login.html';
@@ -211,14 +211,14 @@ function generateContactBody() {
  * @param {string} headline - The headline for the labels section.
  * @returns {string} - The generated HTML for the labels.
  */
-function generateLabelsHTML(field, headline) {
+function generateLabelsHTML(field, headline,board) {
     return `
     <div class="detail">
         <${field}>${headline}</${field}>
         <div class="d-flex">
-            <${field} id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="../img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
-            <${field} id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="../img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
-            <${field} id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img src="../img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
+            <${field} id="id_urgent${board}" value="urgent" onclick="changeStyleOfLabel('id_urgent${board}','${board}')">Urgent <img src="../img/urgentIcon.png" class="prioImg" id="urgentImgID${board}"> </${field}>
+            <${field} id="id_medium${board}" value="medium" onclick="changeStyleOfLabel('id_medium${board}','${board}')">Medium <img src="../img/mediumIcon.png" class="prioImg" id="mediumImgID${board}"> </${field}>
+            <${field} id="id_low${board}" value="low" onclick="changeStyleOfLabel('id_low${board}','${board}')">Low <img src="../img/lowIcon.png" class="prioImg" id="lowImgID${board}"> </${field}>
         </div>
     </div>
     `;

@@ -64,7 +64,7 @@ function isSubtaskChecked(i) {
 async function initAddTask() {
     await includeHTML();
     generateNavigationLinks('AddTask', 'Summary', 'Board', 'AddTask', 'Contacts');
-    generateAddTaskHTML('addTask');
+    generateAddTaskHTML('addTask', '');
     setOnSubmitForm('toDo');
 }
 
@@ -125,15 +125,25 @@ function changeStyleIfExistent(ids, i) {
     if (isElementExistent(ids[i])) document.getElementById(ids[i]).value = '';
     changeStyleOfLabel(ids[i]);
 }
+/**
+ * Changes the style of the label based on the specified element ID.
+ * Resets all label containers, then either sets the styles for the specified ID or refreshes the style of the selected label.
+ * @param {string} id - The ID of the label element to change the style.
+ */
+function changeStyleOfLabel(id,board) {
+    resetAllLabelContainer(board);
+    if (activeID.length == 0) setStyles(id,board);
+    else refreshStyleOfSelectedLabel(id,board);
+}
 
 /** Resets all label containers to their default values. */
-function resetAllLabelContainer() {
-    document.getElementById('id_urgent').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_medium').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_low').style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('urgentImgID').src = '../img/urgentIcon.png';
-    document.getElementById('mediumImgID').src = '../img/mediumIcon.png';
-    document.getElementById('lowImgID').src = '../img/lowIcon.png';
+function resetAllLabelContainer(board) {
+    document.getElementById('id_urgent'+ board).style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('id_medium'+ board).style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('id_low' + board).style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('urgentImgID' + board).src = '../img/urgentIcon.png';
+    document.getElementById('mediumImgID' + board).src = '../img/mediumIcon.png';
+    document.getElementById('lowImgID'+ board).src = '../img/lowIcon.png';
 }
 
 /**
@@ -142,11 +152,11 @@ function resetAllLabelContainer() {
  * @param {string} color - The style property value to set for the element.
  * @param {string} name - The name used to construct the image source.
  */
-function setStyle(id, color, name) {
+function setStyle(id, color, name, board) {
     document.getElementById(id).style = color;
-    document.getElementById(name + 'ImgID').src = `../img/${name}WhiteIcon.png`;
+    document.getElementById(name + 'ImgID' + board).src = `../img/${name}WhiteIcon.png`;
     activeID = id;
-    activeImg = name + 'ImgID';
+    activeImg = name + 'ImgID' + board;
     return;
 }
 
@@ -155,40 +165,31 @@ function setStyle(id, color, name) {
  * If the provided ID matches 'id_urgent', it calls the setStyle() function to set the style properties.
  * @param {string} id - The ID of the element to set the style properties.
  */
-function setStyleOf(id, color, name) {
-    if (id == 'id_' + name) setStyle(id, color, name);
+function setStyleOf(id, color, name,board) {
+    if (id == 'id_' + name + board) setStyle(id, color, name, board);
 }
 
 /**
  * Sets the style properties for the specified element ID by calling the corresponding style functions.
  * @param {string} id - The ID of the element to set the style properties.
  */
-function setStyles(id) {
-    setStyleOf(id, urgentColor, 'urgent');
-    setStyleOf(id, mediumColor, 'medium');
-    setStyleOf(id, lowColor, 'low');
+function setStyles(id,board) {
+    setStyleOf(id, urgentColor, 'urgent',board);
+    setStyleOf(id, mediumColor, 'medium',board);
+    setStyleOf(id, lowColor, 'low',board);
 }
 
-/**
- * Changes the style of the label based on the specified element ID.
- * Resets all label containers, then either sets the styles for the specified ID or refreshes the style of the selected label.
- * @param {string} id - The ID of the label element to change the style.
- */
-function changeStyleOfLabel(id) {
-    resetAllLabelContainer();
-    if (activeID.length == 0) setStyles(id);
-    else refreshStyleOfSelectedLabel(id);
-}
+
 
 /**
  * Refreshes the style of the selected label based on the specified ID.
  * @param {string} id - The ID of the label.
  */
-function refreshStyleOfSelectedLabel(id) {
+function refreshStyleOfSelectedLabel(id,board) {
     if (activeID == id) {
         resetStyleVariables();
         document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
-    } else changeStyleOfLabels(id);
+    } else changeStyleOfLabels(id,board);
 }
 
 function resetStyleVariables() {
@@ -200,9 +201,9 @@ function resetStyleVariables() {
  * Changes the style of labels based on the specified ID.
  * @param {string} id - The ID of the label.
  */
-function changeStyleOfLabels(id) {
+function changeStyleOfLabels(id,board) {
     resetStyleVariables();
-    changeStyleOfLabel(id);
+    changeStyleOfLabel(id,board);
 }
 
 /**
@@ -224,9 +225,8 @@ function changeToAddNewCat() {
 
 /** Changes 'id_addNewSubTask' element to add new subtask. Modifies HTML content by generating changed input field. */
 function changeToAddNewSubtask() {
-    document.getElementById('id_addNewSubTask').innerHTML =
-        generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text',
-            'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()', 'newSubtasksField');
+    setInnerHTML('id_addNewSubTask', generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text',
+            'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()', 'newSubtasksField'));
 }
 
 /** Adds the event listeners to the dropdown elements, such as categories and select user box. */
@@ -238,9 +238,9 @@ function addEventListenerToDropDown() {
 }
 
 /** Adds the event listener to the select user box and calls the function to add event listeners to user elements. */
-function addEventListenerToSelectBoxFor(id, setfor) {
+function addEventListenerToSelectBoxFor(id, setfor, edit) {
     let box = document.getElementById(id);
-    box.addEventListener('click', function () { showDropDownItems(setfor) });
+    box.addEventListener('click', () => showDropDownItems(setfor, edit));
 }
 
 /**

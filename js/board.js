@@ -9,7 +9,7 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
-    generateAddTaskHTML('addTaskAtBoard');
+    generateAddTaskHTML('addTaskAtBoard', 'Edit');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
 }
@@ -334,12 +334,12 @@ function editCard(status, elementIndex, aID) {
  * @param {string} aID - The ID of the assigned user.
  */
 function setDataForEditCard(status, elementIndex, task,aID) {
-    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio'));
+    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio','Board'));
     setInnerHTML('assignedUserOpen' + status + elementIndex,
-        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign'));
+        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
-    generateOptionsHTML(users, 'users');
+    generateOptionsHTML(users, 'users', 'Edit');
     addAssignedUsersList(status, elementIndex);
     setActiveCheckbox(task);
     setStyleOfBoardLabel(aID);

@@ -14,7 +14,7 @@ function setSiteActive() {
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
-    generateAddTaskHTML('addTaskAtContacts');
+    generateAddTaskHTML('addTaskAtContacts','');
     addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
     setOnSubmitForm('toDo');
     addEventListenerToDropDown();

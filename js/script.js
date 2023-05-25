@@ -212,9 +212,9 @@ function cancelAddNewCat() {
  * Shows the dropdown items based on the specified type of used items.
  * @param {string} usedItems - The type of used items ('categories' or 'users').
  */
-function showDropDownItems(usedItems) {
+function showDropDownItems(usedItems, edit) {
     if (usedItems == 'categories') showCategoryItems();
-    if (usedItems == 'users') showUsersItems();
+    if (usedItems == 'users'+ edit) showUsersItems();
 }
 
 /**
@@ -449,9 +449,9 @@ function toggleUsersDropDown(showID,hideID) {
 /**
  * Sets the user items and shows the user dropdown.
  */
-function setUserItems() {
-    removeDisplayNone('Assigned toassignedTo');
-    document.getElementById('assignedTo').style = `height:unset;`;
+function setUserItems(edit) {
+    removeDisplayNone('Assigned toassignedTo' + edit);
+    document.getElementById('assignedTo'+ edit).style = `height:unset;`;
     removeDisplayNone('invite');
     dropDownAssign = true;
 }
@@ -490,9 +490,9 @@ function getValueOf(id) {
  * @param {Array} array - The array of items.
  * @param {string} nameOfArray - The name of the array.
  */
-function generateOptionsHTML(array, nameOfArray) {
+function generateOptionsHTML(array, nameOfArray, edit) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray, getUser(i)));
+        if (nameOfArray == 'users') addInnerHTML('assignedTo' + edit, generateTheOptionHTML(nameOfArray, getUser(i)));
         if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateCategoryOptionHTML(nameOfArray, i));
     }
 }
