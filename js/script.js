@@ -410,17 +410,7 @@ function showDropDonwsMenu() {
     dropDownCat = true;
 }
 
-/**
- * Checks the status to set the appropriate behavior.
- * @param {string} id - The ID of the element to check the status.
- */
-function checkStatusToSet(id) {
-    let getStatus = document.getElementById(id);
-    let addForm = getStatus.parentElement.children[0].children[0].attributes.for.value;
-    addForm.replace(/\s+/g, '');
-    showAddNewTaskAtBoard();
-    setOnSubmitForm(addForm);
-}
+
 
 /**
  * Sets the behavior for submitting the form.

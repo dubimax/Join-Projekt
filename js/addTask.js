@@ -271,14 +271,6 @@ function removeEventlistenerFrom(array) {
 }
 
 /**
- * Removes the event listener from the select user box and all user elements.
- */
-function removeEventlistenerFromSelectUserBox() {
-    let userBox = document.getElementById('assignedTo');
-    userBox.removeEventListener('click', function () { });
-    for (let i = 0; i < users.length; i++) removeListenerFromSelectUserBox(i);
-}
-/**
  * Adds the event listeners to the dropdown elements, such as categories and select user box.
  */
 function addEventListenerToDropDown() {
@@ -286,15 +278,6 @@ function addEventListenerToDropDown() {
     addEventListenerToSelectBoxFor('assignedTo','users');
     addEventListenerToSelectUsers();
     addEvenListenerToSelectCategories();
-}
-
-/**
- * Removes the event listener from the select user element.
- * @param {number} i - The index of the user in the "users" array.
- */
-function removeListenerFromSelectUserBox(i) {
-    let selUser = document.getElementById(users[i]['name']);
-    selUser.removeEventListener('click', function () { });
 }
 
 /**

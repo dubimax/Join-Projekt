@@ -9,6 +9,9 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
+    generateAddTaskHTML('addTaskAtBoard');
+    addCloseBtnToAddTaskAtBoard();
+    addEventListenerToDropDown();
 }
 
 /**
@@ -31,17 +34,7 @@ function resetBoardComplete(){
     }            
 }
 
-/**
- * Displays the add new task form at the board view with the standard configuration.
- */
-function showAddNewTaskAtBoardStandard() {
-    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
-    removeDisplayNone('addTaskAtBoard');
-    generateAddTaskHTML('addTaskAtBoard');
-    addCloseBtnToAddTaskAtBoard();
-    setOnSubmitForm('toDo');
-    addEventListenerToDropDown();
-}
+
 
 /**
  * Hides the add new task form at the board view.
@@ -573,13 +566,9 @@ function highlight(id) {
  * Shows the "Add New Task" section on the board and populates it with necessary HTML.
  * Updates event listeners for the dropdown menu.
  */
-function showAddNewTaskAtBoard() {
-    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
+function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
-    generateAddTaskHTML('addTaskAtBoard');
-    addCloseBtnToAddTaskAtBoard();
-    removeEventListenerFromDropDown();
-    addEventListenerToDropDown();
+    setOnSubmitForm(status);
 }
 
 /**
