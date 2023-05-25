@@ -303,8 +303,8 @@ function setOldData(oldEmail, userName, userEmail, userPhone) {
  */
 function hideContactDetails() {
     addDisplayNone('contactDetails');
-    hideKPMT();
-    showAddNewContactButton();
+    toggle('kpmt','display:none !important;',1000);
+    toggle('addNewContactButton','display:flex !important;',1300);
 }
 
 /**
@@ -327,8 +327,8 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
 function resetSetContactDetails() {
     removeDisplayNone('contactHeadContainer');
     removeDisplayNone('contactInformationContainer');
-    showKPMT();
-    hideAddNewContactButton();
+    toggle('kpmt','display:unset !important;top:120px !important;padding-left:25px !important;',1000);
+    toggle('addNewContactButton','display:none !important;',1300)
     addEventListenerToDeleButton('deleteButtonContent');
 }
 
@@ -387,41 +387,11 @@ function randomcolor() {
 }
 
 /**
- * Shows the KPMT element based on the client width.
- * Adjusts the display, position, and padding styles of the KPMT element for smaller client widths.
- */
-function showKPMT() {
-    let clientWidth = document.body.clientWidth;
-    let kpmt = document.getElementById('kpmt');
-    if (clientWidth <= 1000) kpmt.style = `display:unset !important;top:120px !important;padding-left:25px !important;`;
-}
-
-/**
- * Hides the KPMT element based on the client width.
- * Adjusts the display style of the KPMT element for smaller client widths.
- */
-function hideKPMT() {
-    let clientWidth = document.body.clientWidth;
-    let kpmt = document.getElementById('kpmt');
-    if (clientWidth <= 1000) kpmt.style = `display:none !important;`;
-}
-
-/**
  * Shows the addNewContactButton element based on the client width.
  * Adjusts the style of the addNewContactButton element for smaller client widths.
  */
-function showAddNewContactButton() {
+function toggle(id,styling,pixels) {
     let clientWidth = document.body.clientWidth;
-    let hideButton = document.getElementById('addNewContactButton');
-    if (clientWidth <= 1000) hideButton.style = 'display:flex !important;';
-}
-
-/**
- * Hides the addNewContactButton element based on the client width.
- * Adjusts the display style of the addNewContactButton element for smaller client widths.
- */
-function hideAddNewContactButton() {
-    let clientWidth = document.body.clientWidth;
-    let hideButton = document.getElementById('addNewContactButton');
-    if (clientWidth <= 1000) hideButton.style = `display:none !important;`;
+    let hideButton = document.getElementById(id);
+    if (clientWidth <= pixels) hideButton.style = styling;
 }
