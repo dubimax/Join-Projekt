@@ -253,24 +253,6 @@ function changeToAddNewSubtask() {
 }
 
 /**
- * removes event listener from DropDownMenus
- */
-function removeEventListenerFromDropDown() {
-    document.getElementById('categoryBox').removeEventListener('click', function () { });
-    document.getElementById('assignedTo').removeEventListener('click', function () { });
-    removeEventlistenerFrom(categories);
-    removeEventlistenerFrom(users)
-}
-
-function removeEventlistenerFrom(array) {
-    let selItem;
-    for (let i = 0; i < array.length; i++) {
-        selItem = document.getElementById(array[i]['name']);
-        selItem.removeEventListener('click', function () { });
-    }
-}
-
-/**
  * Adds the event listeners to the dropdown elements, such as categories and select user box.
  */
 function addEventListenerToDropDown() {
