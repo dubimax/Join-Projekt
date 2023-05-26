@@ -27,10 +27,10 @@ function updateBoardHTML() {
     setStyleProgressbar();
 }
 
-function resetBoardComplete(){
-    for(let i = 0; i<document.getElementById('boardContainer').children.length;i++ ){
-        if( document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
-    }            
+function resetBoardComplete() {
+    for (let i = 0; i < document.getElementById('boardContainer').children.length; i++) {
+        if (document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
+    }
 }
 
 /**
@@ -75,9 +75,7 @@ function startDragging(id) {
  * @returns {string} The color associated with the element.
  */
 function getColor(element) {
-    for (let i = 0; i < categories.length; i++) {
-        if (isElement(i, element)) return categories[i]['color'];
-    }
+    for (let i = 0; i < categories.length; i++) if (isElement(i, element)) return categories[i]['color'];
 }
 
 /**
@@ -138,9 +136,7 @@ function getProgressOfSubtasks(index) {
  */
 function getCheckedSubtasks(elementIndex) {
     let count = 0;
-    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) {
-        if (isSubtaskCheckedBoard(elementIndex, i)) count++;
-    }
+    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) if (isSubtaskCheckedBoard(elementIndex, i)) count++;
     return count;
 }
 
@@ -309,20 +305,24 @@ function editCard(status, elementIndex, aID) {
  * @param {Object} task - The task object.
  * @param {string} aID - The ID of the assigned user.
  */
-function setDataForEditCard(status, elementIndex, task,aID) {
-    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio','Board'));
+function setDataForEditCard(status, elementIndex, task, aID) {
+    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio', 'Board'));
     setInnerHTML('assignedUserOpen' + status + elementIndex,
         generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users', 'Edit');
-    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
+    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);
-    setStyles(aID+'Board','Board');
+    setStyles(aID + 'Board', 'Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
+    dropDownAssign = false;
+    addEventListenerToSelectBoxFor('assignedToEdit', 'users','Edit');
+    addEvenListenersToSelectfor(users, 'users');
     assigned = [];
+    
 }
 
 /**
@@ -352,21 +352,6 @@ function showEditCard(status, elementIndex) {
 }
 
 /**
- * Resets the styles for the open card view to their default states.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task element.
- */
-function resetStylesForOpenCard(status, index) {
-    document.getElementById('editDate' + status + index).classList.remove('inputTextStd');
-    document.getElementById('editDescription' + status + index).classList.remove('inputDescriptionField');
-    document.getElementById('editTitle' + status + index).classList.remove('inputTextStd');
-    document.getElementById('editTitle' + status + index).classList.add('taskTitleOpen');
-    document.getElementById('editDescription' + status + index).classList.add('taskDescriptionOpen');
-    document.getElementById('editDate' + status + index).classList.add('taskDueDateOpen');
-    document.getElementById('dateContainer' + status + index).style = "display:flex;";
-}
-
-/**
  * Hides the edit card view and shows the default open card view.
  * @param {string} status - The status of the task.
  * @param {number} index - The index of the task element.
@@ -386,8 +371,8 @@ function hideEditCard(status, index) {
  */
 function setActiveCheckbox(task) {
     for (let i = 0; i < task['isAssigned'].length; i++) {
-        document.getElementById(task['isAssigned'][i]).children[0].checked = true;
-        setAssignedCircle(task['isAssigned'][i]);
+        document.getElementById(task['isAssigned'][i] + 'Edit').children[0].checked = true;
+        setAssignedCircle(task['isAssigned'][i], 'Edit');
     }
 }
 
@@ -499,13 +484,11 @@ function resetBoard() {
     setInnerHTML('done', '');
 }
 
-/**
- * Searches for tasks based on the entered search query and updates the display to show only the found tasks.
- */
+/** Searches for tasks based on the entered search query and updates the display to show only the found tasks. */
 function searchTasks() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
-    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i,search);
+    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i, search);
 }
 
 /**
@@ -513,14 +496,13 @@ function searchTasks() {
  * @param {number} i - The index of the task to check.
  * @param {string} search - The search query to match against task titles and descriptions.
  */
-function onlyShowFoundTasks(i,search) {
+function onlyShowFoundTasks(i, search) {
     let taskTitle = tasks[i]['title'];
     let taskIndex = tasks.indexOf(tasks[i]);
     let tDescription = tasks[i]['description'];
     if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search))) {
-        if(isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
-    }
-    else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
+        if (isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    } else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
 }
 
 /**

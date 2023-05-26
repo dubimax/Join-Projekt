@@ -123,7 +123,7 @@ function cancelAddNewCat() {
  */
 function showDropDownItems(usedItems, edit) {
     if (usedItems == 'categories') showCategoryItems();
-    if (usedItems == 'users'+ edit) showUsersItems(edit);
+    if (usedItems + edit == 'users'+ edit) showUsersItems(edit);
 }
 
 /**
@@ -259,7 +259,7 @@ function removeMessage() {
 function showUsersItems(edit) {
     if (!dropDownAssign) setUserItems(edit);
     else hideUserItems(edit);
-    setStyleOfSelectedUsers();
+    setStyleOfSelectedUsers(edit);
 }
 let targetElement;
 
@@ -294,18 +294,18 @@ function setLogoutButton(event) {
 /**
  * Sets the style of the selected users in the dropdown.
  */
-function setStyleOfSelectedUsers() {
+function setStyleOfSelectedUsers(edit) {
     for (let i = 0; i < users.length; i++) {
-        if (isContainingClassDnone(users[i]['name'])) setUserItemsandShow(i)
-        else addDisplayNone(users[i]['name']);
+        if (isContainingClassDnone(users[i]['name'] + edit)) setUserItemsandShow(i, edit)
+        else addDisplayNone(users[i]['name'] + edit);
     }
 }
 
 /**
  * Hides the user items in the dropdown.
  */
-function hideUserItems() {
-    if (isContainingClassDnone('Assigned toassignedTo')) toggleUsersDropDown('invite','Assigned toassignedTo');
+function hideUserItems(edit) {
+    if (isContainingClassDnone('Assigned toassignedTo' + edit)) toggleUsersDropDown('invite','Assigned toassignedTo');
     else toggleUsersDropDown('Assigned toassignedTo','invite');
     dropDownAssign = false;
 }
@@ -314,9 +314,9 @@ function hideUserItems() {
  * Sets the user items and shows the dropdown.
  * @param {number} i - The index of the user.
  */
-function setUserItemsandShow(i) {
-    removeDisplayNone(users[i]['name']);
-    document.getElementById('assignedTo').style = `height:unset !important;`;
+function setUserItemsandShow(i, edit) {
+    removeDisplayNone(users[i]['name'] + edit);
+    document.getElementById('assignedTo' + edit).style = `height:unset !important;`;
 }
 
 /**
@@ -364,7 +364,7 @@ function isItemChecked() {
  */
 function generateOptionsHTML(array, nameOfArray, edit) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') addInnerHTML('assignedTo' + edit, generateTheOptionHTML(nameOfArray, getUser(i)));
+        if (nameOfArray == 'users') addInnerHTML('assignedTo' + edit, generateTheOptionHTML(nameOfArray, getUser(i), edit));
         if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateCategoryOptionHTML(nameOfArray, i));
     }
 }

@@ -33,9 +33,9 @@ function setCheckBox() {
  * @param {string} content - The content of the option.
  * @returns {string} The HTML for the option.
  */
-function generateTheOptionHTML(nameOfArray, content) {
+function generateTheOptionHTML(nameOfArray, content, edit) {
     return `
-            <div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
+            <div class="cl_${nameOfArray} d-none" id="${content}${edit}" value="${content}">
                 ${content} 
                 <input type="checkbox" value="${content}">
             </div>
@@ -603,9 +603,9 @@ function addCloseBtnToAddTaskAtBoard() {
  * @param {string} username.color - The color for the circle background.
  * @returns {string} The HTML for the assigned circle element.
  */
-function setAssignedCircleHTML(username) {
+function setAssignedCircleHTML(username, edit) {
     return `
-    <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
+    <div class="colorCircleMedium" id="colorCircleMedium${username.name}${edit}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
  `;
 }
 
@@ -761,10 +761,10 @@ function resetAssignedHTML(status,index){
     `;
 }
 
-function generateAssignedListHTML(){
+function generateAssignedListHTML(edit){
     return `
     <div class="p-relative d-flex align-c">
-        <list class="d-flex" id="list-assigned-user">
+        <list class="d-flex" id="list-assigned-user${edit}">
         </list>
     </div>
     `;
