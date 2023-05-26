@@ -4,16 +4,16 @@
  */
 function generateAddTaskToBoardImg() {
     document.getElementById('dragAreaToDoTitle').innerHTML += `
-        <img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="checkStatusToSet('toDo')">
+        <img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="showAddNewTaskAtBoard('toDo')">
     `;
     document.getElementById('dragAreaIPTitle').innerHTML += `
-        <img class="cursor" src="../img/plusButtonDark.png" id="ipImg" onclick="checkStatusToSet('inProgress')">
+        <img class="cursor" src="../img/plusButtonDark.png" id="ipImg" onclick="showAddNewTaskAtBoard('inProgress')">
     `;
     document.getElementById('dragAreaAFTitle').innerHTML += `
-        <img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="checkStatusToSet('awaitingFeedback')">
+        <img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="showAddNewTaskAtBoard('awaitingFeedback')">
     `;
     document.getElementById('dragAreaDoneTitle').innerHTML += `
-    <img class="cursor" src="../img/plusButtonDark.png" id="doneImg" onclick="checkStatusToSet('done')">
+    <img class="cursor" src="../img/plusButtonDark.png" id="doneImg" onclick="showAddNewTaskAtBoard('done')">
 `;
 }
 
@@ -81,7 +81,7 @@ function generateAddTaskHTML(id) {
                 <div class="border-1px-solid"></div>
                 <div class="detailBox-right">
                     ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-                    ${generateLabelsHTML('label', 'Prio')} 
+                    ${generateLabelsHTML('label', 'Prio','')} 
                     ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
                     <div class="p-relative d-flex align-c">
                         <list class="" id="list-subtask">
@@ -101,11 +101,11 @@ function generateAddTaskHTML(id) {
         </form>
     `;
     addInviteNewContact();
-    generateOptionsHTML(users, 'users');
+    generateOptionsHTML(users, 'users', '');
     addOptionWithFunction('addNewCat');
-    generateOptionsHTML(categories, 'categories');
-    addEventListenerToDropDown();
+    generateOptionsHTML(categories, 'categories', '');
     document.getElementById('inputDate').setAttribute('min',today);
+    addEventListenerToDropDown();
     } else window.location.href = '../login.html';
 }
 
@@ -211,14 +211,14 @@ function generateContactBody() {
  * @param {string} headline - The headline for the labels section.
  * @returns {string} - The generated HTML for the labels.
  */
-function generateLabelsHTML(field, headline) {
+function generateLabelsHTML(field, headline,board) {
     return `
     <div class="detail">
         <${field}>${headline}</${field}>
         <div class="d-flex">
-            <${field} id="id_urgent" value="urgent" onclick="changeStyleOfLabel('id_urgent')">Urgent <img src="../img/urgentIcon.png" class="prioImg" id="urgentImgID"> </${field}>
-            <${field} id="id_medium" value="medium" onclick="changeStyleOfLabel('id_medium')">Medium <img src="../img/mediumIcon.png" class="prioImg" id="mediumImgID"> </${field}>
-            <${field} id="id_low" value="low" onclick="changeStyleOfLabel('id_low')">Low <img src="../img/lowIcon.png" class="prioImg" id="lowImgID"> </${field}>
+            <${field} id="id_urgent${board}" value="urgent" onclick="changeStyleOfLabel('id_urgent${board}','${board}')">Urgent <img src="../img/urgentIcon.png" class="prioImg" id="urgentImgID${board}"> </${field}>
+            <${field} id="id_medium${board}" value="medium" onclick="changeStyleOfLabel('id_medium${board}','${board}')">Medium <img src="../img/mediumIcon.png" class="prioImg" id="mediumImgID${board}"> </${field}>
+            <${field} id="id_low${board}" value="low" onclick="changeStyleOfLabel('id_low${board}','${board}')">Low <img src="../img/lowIcon.png" class="prioImg" id="lowImgID${board}"> </${field}>
         </div>
     </div>
     `;
@@ -400,7 +400,7 @@ function generateNavigationLinksContacts() {
 function addHelp() {
     document.body.innerHTML += `
     <div class="help content" id="helpContent">
-        <a class="back" onclick="removeHelp()"><img src="../img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeID('helpContent')"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="helpContainer">
             <h2 class="helpHeader">Help</h2>
             <div class="helpDescriptionContainer">
@@ -437,7 +437,7 @@ function addHelp() {
 function addLegalNotice() {
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
-        <a class="back" onclick="removeLegalNotice()"><img src="../img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeID('legalNotice')"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="noticeContainer">
             <div class='impressum'>
                 <h1>Impressum</h1><br>

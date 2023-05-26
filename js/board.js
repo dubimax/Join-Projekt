@@ -9,6 +9,9 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
+    generateAddTaskHTML('addTaskAtBoard', 'Edit');
+    addCloseBtnToAddTaskAtBoard();
+    addEventListenerToDropDown();
 }
 
 /**
@@ -21,7 +24,6 @@ function updateBoardHTML() {
     addArea('done');
     addUserAcronyms('assignedUserLogo');
     taskDetails();
-    
     setStyleProgressbar();
 }
 
@@ -29,18 +31,6 @@ function resetBoardComplete(){
     for(let i = 0; i<document.getElementById('boardContainer').children.length;i++ ){
         if( document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
     }            
-}
-
-/**
- * Displays the add new task form at the board view with the standard configuration.
- */
-function showAddNewTaskAtBoardStandard() {
-    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
-    removeDisplayNone('addTaskAtBoard');
-    generateAddTaskHTML('addTaskAtBoard');
-    addCloseBtnToAddTaskAtBoard();
-    setOnSubmitForm('toDo');
-    addEventListenerToDropDown();
 }
 
 /**
@@ -65,11 +55,8 @@ function addArea(id) {
  */
 function taskDetails() {
     resetBoardComplete();
-    for (let i = 0; i < tasks.length; i++) {
-        addTaskDetail(i);
-    }
+    for (let i = 0; i < tasks.length; i++) addTaskDetail(i);
     addUserAcronyms('assignedUserLogoOpen');
-
 }
 
 /**
@@ -330,7 +317,7 @@ function editCard(status, elementIndex, aID) {
     let task = tasks[elementIndex];
     showEditCard(status, elementIndex);
     setStyleForEditCard(status, elementIndex);
-    setDataForEditCard(status, elementIndex, task, aID);
+    setDataForEditCard(status, elementIndex, task, aID, 'Edit');
 }
 
 /**
@@ -341,19 +328,18 @@ function editCard(status, elementIndex, aID) {
  * @param {string} aID - The ID of the assigned user.
  */
 function setDataForEditCard(status, elementIndex, task,aID) {
-    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio'));
+    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio','Board'));
     setInnerHTML('assignedUserOpen' + status + elementIndex,
-        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign'));
+        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
-    generateOptionsHTML(users, 'users');
+    generateOptionsHTML(users, 'users', 'Edit');
     addAssignedUsersList(status, elementIndex);
     setActiveCheckbox(task);
-    setStyleOfBoardLabel(aID);
+    setStyles(aID+'Board','Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
-    addEventListenerToSelectUserBox();
     assigned = [];
 }
 
@@ -391,7 +377,7 @@ function showEditCard(status, elementIndex) {
 function resetEditCard(index, status) {
     assigned = [];
     setInnerHTML('assignedUserOpen' + status + index, '');
-     hideEditCard(status, index);
+    hideEditCard(status, index);
     resetStylesForOpenCard(status, index);
     resetAssigned(status, index);
     // resetTaskPrio(status, index);
@@ -496,15 +482,7 @@ function editTaskData(index, stati) {
     tasks[index]['status'] = tasks[index]['status'];
 }
 
-/**
- * Sets the style of the board label based on the given active ID (aID).
- * @param {string} aID - The active ID of the board label.
- */
-function setStyleOfBoardLabel(aID) {
-    if (aID == 'id_urgent') setStyleOfUrgent(aID);
-    if (aID == 'id_medium') setStyleOfMedium(aID);
-    if (aID == 'id_low') setStyleOfLow(aID);
-}
+
 
 /**
  * Adds the assigned users list to the specified status and element index.
@@ -573,13 +551,9 @@ function highlight(id) {
  * Shows the "Add New Task" section on the board and populates it with necessary HTML.
  * Updates event listeners for the dropdown menu.
  */
-function showAddNewTaskAtBoard() {
-    if (document.getElementById('addTaskAtBoard')) setInnerHTML('addTaskAtBoard', '');
+function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
-    generateAddTaskHTML('addTaskAtBoard');
-    addCloseBtnToAddTaskAtBoard();
-    // removeEventListenerFromDropDown();
-    addEventListenerToDropDown();
+    setOnSubmitForm(status);
 }
 
 /**
@@ -628,4 +602,3 @@ function deleteTask(status, ind) {
     pushToDatabase();
     updateBoardHTML();
 }
-

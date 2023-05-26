@@ -26,29 +26,6 @@ function getFirstLettersOfName(username) {
 }
 
 /**
- * Loads data from the local storage into corresponding variables.
- */
-function load() {
-    loggedIn = JSON.parse(localStorage.getItem("loggedIn" || false));
-    users = JSON.parse(localStorage.getItem("users") || [{}]);
-    categories = JSON.parse(localStorage.getItem("categories") || [{}]);
-    tasks = JSON.parse(localStorage.getItem("tasks") || [{}]);
-    indexOfEmail = JSON.parse(localStorage.getItem("indexOfEmail") || [{}]);
-}
-
-/**
- * Saves data to the local storage.
- */
-function save() {
-    localStorage.clear();
-    localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("categories", JSON.stringify(categories));
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    localStorage.setItem("indexOfEmail", JSON.stringify(indexOfEmail));
-}
-
-/**
  * Performs an action by sending a POST request to a specified URL with the provided form data.
  * @param {FormData} formData - The form data to be sent in the request body.
  * @returns {Promise<Response>} A promise that resolves to the response from the server.
@@ -57,25 +34,6 @@ function action(formData) {
     const input = 'https://gruppe-527.developerakademie.net/Join-Projekt/send_mail.php';
     const requestInit = { method: 'post', body: formData };
     return fetch(input, requestInit);
-}
-
-/**
- * Sets the inner HTML content of an element with the provided text.
- * @param {string} id - The ID of the element.
- * @param {string} text - The text to set as the inner HTML content.
- */
-function setInnerHTML(id, text) {
-    if (text.length == 0) document.getElementById(id).innerHTML = '';
-    else document.getElementById(id).innerHTML = text;
-}
-
-/**
- * Appends the provided text to the inner HTML of an element with the specified ID.
- * @param {string} id - The ID of the element to update its inner HTML.
- * @param {string} text - The text to append to the inner HTML of the element.
- */
-function addInnerHTML(id, text) {
-    document.getElementById(id).innerHTML += text;
 }
 
 /**
@@ -110,155 +68,12 @@ function firstLetterToLowerCase(string) {
 }
 
 /**
- * Adds a confirmation message to the body of the document.
- * @param {string} text - The text of the confirmation message.
- */
-function addConfirmMessage(text) {
-    document.body.innerHTML += setConfirmMessage(text);
-}
-
-/**
- * Removes the confirmation message from the document.
- */
-function removeConfirmMessage() {
-    document.getElementById('confirmMessage').remove();
-}
-
-
-
-
-
-/**
- * Removes the legal notice from the document
- */
-function removeLegalNotice() {
-    document.getElementById('legalNotice').remove();
-}
-
-/**
- * Removes the help from the document
- */
-function removeHelp() {
-    document.getElementById('helpContent').remove();
-}
-
-/**
- * Initializes the application.
- * @async
- * @returns {Promise<void>}
- */
-async function init() {
-    await includeHTML();
-    await downloadFromServer();
-    load();
-    users = JSON.parse(backend.getItem('users')) || [];
-    categories = JSON.parse(backend.getItem('categories')) || [];
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-}
-
-/**
- * Performs the login operation.
- */
-function login() {
-    let userEmail = document.getElementById('userMailLogIn').value;
-    let userPassword = document.getElementById('userPasswordLogIn').value;
-    checkUserData(userEmail, userPassword);
-}
-
-/**
- * Checks the user data for a given email and password.
- * @param {string} userEmail - The user email to check.
- * @param {string} userPassword - The user password to check.
- */
-function checkUserData(userEmail, userPassword) {
-    for (let i = 0; i < users.length; i++) {
-        checkUserDataForUser(i, userEmail, userPassword);
-    }
-    removeDisplayNone('dataCheck');
-}
-
-/**
- * Checks the user data for a specific user.
- * @param {number} i - The index of the user in the users array.
- * @param {string} userEmail - The user email to check.
- * @param {string} userPassword - The user password to check.
- */
-function checkUserDataForUser(i, userEmail, userPassword) {
-    const user = users[i];
-    if (isUserAndMailCorrect(user, userEmail, userPassword)) setLoggedIn(userEmail);
-}
-
-/**
- * Checks if the user email and password combination is correct.
- * @param {object} user - The user object to check.
- * @param {string} userEmail - The user email to compare.
- * @param {string} userPassword - The user password to compare.
- * @returns {boolean} - True if the user email and password combination is correct, false otherwise.
- */
-function isUserAndMailCorrect(user, userEmail, userPassword) {
-    return user.email == userEmail && user.pwd == userPassword;
-}
-
-/**
- * Sets the logged-in status for the user.
- * @param {string} userEmail - The user email to set as logged in.
- */
-function setLoggedIn(userEmail) {
-    indexOfEmail = users.find(u => u.email == userEmail);
-    loggedIn = true;
-    save();
-    window.location.href = './html/summary.html';
-}
-
-/**
- * Performs a guest login by checking the user data.
- */
-function guestLogin() {
-    checkUserData('guest@guest.de', 'guest');
-}
-
-/**
  * Performs the logout action.
  */
 function logout() {
     localStorage.removeItem(indexOfEmail);
     localStorage.removeItem(loggedIn);
     window.location.href = '../login.html';
-}
-
-/**
- * Pushes the Tasks to the Backend, clear all Inputs and Save
- */
-async function pushToDatabase() {
-    save();
-    await backend.setItem('users', JSON.stringify(users));
-    await backend.setItem('categories', JSON.stringify(categories));
-    await backend.setItem('tasks', JSON.stringify(tasks));
-}
-
-/**
- * Adds a new user with the provided details.
- */
-function addUser() {
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('userMail').value;
-    let password = document.getElementById('userPassword').value;
-    let userColor = randomcolor();
-    users.push({ 'name': name, 'email': email, 'pwd': password, 'color': userColor });
-    pushToDatabase();
-    save();
-    showFrame('signUpConfirmFrame', 'signUpFrame');
-}
-
-/**
- * Adds a new category with the provided details.
- */
-function addCategory() {
-    let newCategory = document.getElementById('newCat').value;
-    let color = getValueOfChosenColor();
-    categories.push({ 'name': newCategory, 'color': color });
-    pushToDatabase();
-    cancelAddNew('addNewCat');
 }
 
 /**
@@ -323,18 +138,19 @@ function cancelAddNewCat() {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
+    addEventListenerToSelectBoxFor('categoryBox','categories');
+    addEvenListenersToSelectfor(categories,'categories');
     save();
     dropDownCat = false;
-    addEventListenerToCategories();
 }
 
 /**
  * Shows the dropdown items based on the specified type of used items.
  * @param {string} usedItems - The type of used items ('categories' or 'users').
  */
-function showDropDownItems(usedItems) {
+function showDropDownItems(usedItems, edit) {
     if (usedItems == 'categories') showCategoryItems();
-    if (usedItems == 'users') showUsersItems();
+    if (usedItems == 'users'+ edit) showUsersItems(edit);
 }
 
 /**
@@ -391,7 +207,7 @@ function setContainerCategeroyVisible() {
  * Hides the drop-down menu without showing the "Add New Category" option.
  */
 function hideDropDownWithOutAddNewCat() {
-    document.getElementById('addNewCat').classList.add('d-none');
+    addDisplayNone('addNewCat');
     dropDownCat = false;
 }
 
@@ -399,8 +215,8 @@ function hideDropDownWithOutAddNewCat() {
  * Hides the drop-down menu along with the "Add New Category" option.
  */
 function hideDropDownWithAddNewCat() {
-    document.getElementById('addNewCat').classList.add('d-none');
-    document.getElementById('CategorycategoryBox').classList.add('d-none');
+    addDisplayNone('addNewCat');
+    addDisplayNone('CategorycategoryBox');
     dropDownCat = false;
 }
 
@@ -408,21 +224,18 @@ function hideDropDownWithAddNewCat() {
  * Shows the drop-down menu with the "Add New Category" option.
  */
 function showDropDonwsMenu() {
-    document.getElementById('CategorycategoryBox').classList.remove('d-none');
-    document.getElementById('addNewCat').classList.remove('d-none');
+    removeDisplayNone('CategorycategoryBox');
+    removeDisplayNone('addNewCat');
     dropDownCat = true;
 }
 
 /**
- * Checks the status to set the appropriate behavior.
- * @param {string} id - The ID of the element to check the status.
+ * Retrieves the inner HTML content of an element by its ID.
+ * @param {string} id - The ID of the element.
+ * @returns {string} The inner HTML content of the element.
  */
-function checkStatusToSet(id) {
-    let getStatus = document.getElementById(id);
-    let addForm = getStatus.parentElement.children[0].children[0].attributes.for.value;
-    addForm.replace(/\s+/g, '');
-    showAddNewTaskAtBoard();
-    setOnSubmitForm(addForm);
+function getInnerHTMLOf(id) {
+    return document.getElementById(id).innerHTML;
 }
 
 /**
@@ -459,19 +272,10 @@ function showImpressumRespo() {
     addLegalNotice();
 }
 
-/**
- * Checks if an element with the specified ID exists in the DOM.
- *
- * @param {string} id - The ID of the element to check.
- * @returns {boolean} - `true` if the element exists, `false` otherwise.
- */
-function isElementExistent(id) {
-    return document.getElementById(id);
-}
-
 function closeAtContacts() {
-    hideAddNewTaskAtContacts();
+    addDisplayNone('addTaskAtContacts');
     removeMessage();
+    window.location.href = './board.html'
 }
 
 function closeTaskAtBoard() {
@@ -482,15 +286,15 @@ function closeTaskAtBoard() {
 }
 
 function removeMessage() {
-    setTimeout(() => removeConfirmMessage(), 1000);
+    setTimeout(() => removeID('confirmMessage'), 1000);
 }
 
 /**
  * Shows the useritems in Dropdown menu
  */
-function showUsersItems() {
-    if (!dropDownAssign) setUserItems();
-    else hideUserItems();
+function showUsersItems(edit) {
+    if (!dropDownAssign) setUserItems(edit);
+    else hideUserItems(edit);
     setStyleOfSelectedUsers();
 }
 let targetElement;
@@ -499,12 +303,9 @@ function addEventListenerDocumentLogoutButton(e) {
     e.preventDefault();
     e.stopPropagation();
     document.addEventListener("click", (event) => {
-
         let optionDiv = document.getElementById('optionsMenu');
         targetElement = event.target;
-
         if (optionDiv && !optionDiv.contains(targetElement)) {
-
             removeLogoutButton();
         }
     });
@@ -549,8 +350,8 @@ function setStyleOfSelectedUsers() {
  * Hides the user items in the dropdown.
  */
 function hideUserItems() {
-    if (isContainingClassDnone('Assigned toassignedTo')) showUsersDropdown();
-    else hideUsersDropDown();
+    if (isContainingClassDnone('Assigned toassignedTo')) toggleUsersDropDown('invite','Assigned toassignedTo');
+    else toggleUsersDropDown('Assigned toassignedTo','invite');
     dropDownAssign = false;
 }
 
@@ -564,28 +365,19 @@ function setUserItemsandShow(i) {
 }
 
 /**
- * Hides the users dropdown.
+ * toggles the users dropdown.
  */
-
-function hideUsersDropDown() {
-    removeDisplayNone('Assigned toassignedTo');
-    addDisplayNone('invite');
-}
-
-/**
- * Shows the users dropdown.
- */
-function showUsersDropdown() {
-    addDisplayNone('Assigned toassignedTo');
-    removeDisplayNone('invite');
+function toggleUsersDropDown(showID,hideID) {
+    removeDisplayNone(showID);
+    addDisplayNone(hideID);
 }
 
 /**
  * Sets the user items and shows the user dropdown.
  */
-function setUserItems() {
-    removeDisplayNone('Assigned toassignedTo');
-    document.getElementById('assignedTo').style = `height:unset;`;
+function setUserItems(edit) {
+    removeDisplayNone('Assigned toassignedTo' + edit);
+    document.getElementById('assignedTo'+ edit).style = `height:unset;`;
     removeDisplayNone('invite');
     dropDownAssign = true;
 }
@@ -611,22 +403,13 @@ function isItemChecked() {
 }
 
 /**
- * Retrieves the value of an input field by its ID.
- * @param {string} id - The ID of the input field.
- * @returns {string} The value of the input field.
- */
-function getValueOf(id) {
-    return document.getElementById(id).value;
-}
-
-/**
  * Generates HTML options for an array of items.
  * @param {Array} array - The array of items.
  * @param {string} nameOfArray - The name of the array.
  */
-function generateOptionsHTML(array, nameOfArray) {
+function generateOptionsHTML(array, nameOfArray, edit) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') addInnerHTML('assignedTo', generateTheOptionHTML(nameOfArray, getUser(i)));
+        if (nameOfArray == 'users') addInnerHTML('assignedTo' + edit, generateTheOptionHTML(nameOfArray, getUser(i)));
         if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateCategoryOptionHTML(nameOfArray, i));
     }
 }
@@ -637,9 +420,7 @@ function generateOptionsHTML(array, nameOfArray) {
  * @param {string} id - The ID of the element.
  */
 function addContentTitle(title, id) {
-    document.getElementById(id).innerHTML += `
-    <h2>${title}</h2>
-    `;
+    addInnerHTML(id, `<h2>${title}</h2>`);
 }
 
 /**
@@ -670,20 +451,4 @@ function showFrame(...ids) {
     for (let i = 0; i < ids.length; i++) addDisplayNone(ids[i]);
     removeDisplayNone(element1);
     if (element2.length > 0) removeDisplayNone(element2);
-}
-
-/**
- * Adds the 'd-none' class to an element to hide it by setting its display property to 'none'.
- * @param {string} id - The ID of the element.
- */
-function addDisplayNone(id) {
-    document.getElementById(id).classList.add('d-none');
-}
-
-/**
- * Removes the 'd-none' class from an element to show it by restoring its display property.
- * @param {string} id - The ID of the element.
- */
-function removeDisplayNone(id) {
-    document.getElementById(id).classList.remove('d-none');
 }

@@ -43,3 +43,92 @@ function getRedirected(){
     document.getElementById('forgotPwForm').style.display = "none";
     setTimeout(() => goToLogin(), 3000);
 }
+
+/**
+ * Initializes the application.
+ * @async
+ * @returns {Promise<void>}
+ */
+async function init() {
+    await includeHTML();
+    await downloadFromServer();
+    load();
+    users = JSON.parse(backend.getItem('users')) || [];
+    categories = JSON.parse(backend.getItem('categories')) || [];
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+}
+
+/**
+ * Performs the login operation.
+ */
+function login() {
+    let userEmail = document.getElementById('userMailLogIn').value;
+    let userPassword = document.getElementById('userPasswordLogIn').value;
+    checkUserData(userEmail, userPassword);
+}
+
+/**
+ * Checks the user data for a given email and password.
+ * @param {string} userEmail - The user email to check.
+ * @param {string} userPassword - The user password to check.
+ */
+function checkUserData(userEmail, userPassword) {
+    for (let i = 0; i < users.length; i++) {
+        checkUserDataForUser(i, userEmail, userPassword);
+    }
+    removeDisplayNone('dataCheck');
+}
+
+/**
+ * Checks the user data for a specific user.
+ * @param {number} i - The index of the user in the users array.
+ * @param {string} userEmail - The user email to check.
+ * @param {string} userPassword - The user password to check.
+ */
+function checkUserDataForUser(i, userEmail, userPassword) {
+    const user = users[i];
+    if (isUserAndMailCorrect(user, userEmail, userPassword)) setLoggedIn(userEmail);
+}
+
+/**
+ * Checks if the user email and password combination is correct.
+ * @param {object} user - The user object to check.
+ * @param {string} userEmail - The user email to compare.
+ * @param {string} userPassword - The user password to compare.
+ * @returns {boolean} - True if the user email and password combination is correct, false otherwise.
+ */
+function isUserAndMailCorrect(user, userEmail, userPassword) {
+    return user.email == userEmail && user.pwd == userPassword;
+}
+
+/**
+ * Sets the logged-in status for the user.
+ * @param {string} userEmail - The user email to set as logged in.
+ */
+function setLoggedIn(userEmail) {
+    indexOfEmail = users.find(u => u.email == userEmail);
+    loggedIn = true;
+    save();
+    window.location.href = './html/summary.html';
+}
+
+/**
+ * Performs a guest login by checking the user data.
+ */
+function guestLogin() {
+    checkUserData('guest@guest.de', 'guest');
+}
+
+/**
+ * Adds a new user with the provided details.
+ */
+function addUser() {
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('userMail').value;
+    let password = document.getElementById('userPassword').value;
+    let userColor = randomcolor();
+    users.push({ 'name': name, 'email': email, 'pwd': password, 'color': userColor });
+    pushToDatabase();
+    save();
+    showFrame('signUpConfirmFrame', 'signUpFrame');
+}
