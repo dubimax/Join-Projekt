@@ -61,7 +61,7 @@ function generateCategoryOptionHTML(nameOfArray, i){
  * Generates the HTML for the "Add Task" section.
  * @param {string} id - The ID of the element to append the HTML content.
  */
-function generateAddTaskHTML(id) {
+function generateAddTaskHTML(id, board) {
     load();
     if (loggedIn) {
         addContentTitle('Add Task', id);
@@ -88,7 +88,7 @@ function generateAddTaskHTML(id) {
                         </list>
                     </div>
                     <div class="d-flex align-c container-btns">
-                        <div class="clearButton" onclick="clearAllInputs()">
+                        <div class="clearButton" onclick="clearAllInputs('${board}')">
                             Clear
                         </div>
                         <button type="submit" class="createTaskBtn">

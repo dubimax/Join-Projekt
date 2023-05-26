@@ -97,8 +97,8 @@ function setActiveColor(id) {
 }
 
 /** Clears all input fields and resets relevant UI elements. */
-function clearAllInputs() {
-    clearFields('inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
+function clearAllInputs(board) {
+    clearFields(board,'inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
     clearLists('list-assigned-user', assignedTo);
     cancelAddNew('addNewCat');
     cancelAddNew('assignedTo');
@@ -116,14 +116,14 @@ function clearLists(id, arrayitem) {
  * resets value of given elements and set back the Style of LabelsFields
  * @param  {...any} ids elemnts to reset
  */
-function clearFields(...ids) {
-    for (let i = 0; i < ids.length; i++) changeStyleIfExistent(ids, i);
+function clearFields(board,...ids) {
+    for (let i = 0; i < ids.length; i++) changeStyleIfExistent(ids, i, board);
 }
 
 /** Changes style of Label an reset Style if Element exists */
-function changeStyleIfExistent(ids, i) {
-    if (isElementExistent(ids[i])) document.getElementById(ids[i]).value = '';
-    changeStyleOfLabel(ids[i]);
+function changeStyleIfExistent(ids, i, board) {
+    if (isElementExistent(ids[i] + board)) document.getElementById(ids[i]+ board).value = '';
+    changeStyleOfLabel(ids[i]+ board,board);
 }
 /**
  * Changes the style of the label based on the specified element ID.

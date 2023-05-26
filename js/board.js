@@ -9,7 +9,7 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
-    generateAddTaskHTML('addTaskAtBoard', 'Edit');
+    generateAddTaskHTML('addTaskAtBoard', '');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
 }
