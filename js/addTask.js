@@ -98,7 +98,7 @@ function setActiveColor(id) {
 
 /** Clears all input fields and resets relevant UI elements. */
 function clearAllInputs(board) {
-    clearFields(board,'inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
+    clearFields(board, 'inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
     clearLists('list-assigned-user', assignedTo);
     cancelAddNew('addNewCat');
     cancelAddNew('assignedTo');
@@ -108,7 +108,7 @@ function clearAllInputs(board) {
 
 /** Clears list by given id and array */
 function clearLists(id, arrayitem) {
-    setInnerHTML(id,'');
+    setInnerHTML(id, '');
     arrayitem = [];
 }
 
@@ -116,34 +116,34 @@ function clearLists(id, arrayitem) {
  * resets value of given elements and set back the Style of LabelsFields
  * @param  {...any} ids elemnts to reset
  */
-function clearFields(board,...ids) {
+function clearFields(board, ...ids) {
     for (let i = 0; i < ids.length; i++) changeStyleIfExistent(ids, i, board);
 }
 
 /** Changes style of Label an reset Style if Element exists */
 function changeStyleIfExistent(ids, i, board) {
-    if (isElementExistent(ids[i] + board)) document.getElementById(ids[i]+ board).value = '';
-    changeStyleOfLabel(ids[i]+ board,board);
+    if (isElementExistent(ids[i] + board)) document.getElementById(ids[i] + board).value = '';
+    changeStyleOfLabel(ids[i] + board, board);
 }
 /**
  * Changes the style of the label based on the specified element ID.
  * Resets all label containers, then either sets the styles for the specified ID or refreshes the style of the selected label.
  * @param {string} id - The ID of the label element to change the style.
  */
-function changeStyleOfLabel(id,board) {
+function changeStyleOfLabel(id, board) {
     resetAllLabelContainer(board);
-    if (activeID.length == 0) setStyles(id,board);
-    else refreshStyleOfSelectedLabel(id,board);
+    if (activeID.length == 0) setStyles(id, board);
+    else refreshStyleOfSelectedLabel(id, board);
 }
 
 /** Resets all label containers to their default values. */
 function resetAllLabelContainer(board) {
-    document.getElementById('id_urgent'+ board).style = 'background-color: #FFFFFF; color: #000000;';
-    document.getElementById('id_medium'+ board).style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('id_urgent' + board).style = 'background-color: #FFFFFF; color: #000000;';
+    document.getElementById('id_medium' + board).style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('id_low' + board).style = 'background-color: #FFFFFF; color: #000000;';
     document.getElementById('urgentImgID' + board).src = '../img/urgentIcon.png';
     document.getElementById('mediumImgID' + board).src = '../img/mediumIcon.png';
-    document.getElementById('lowImgID'+ board).src = '../img/lowIcon.png';
+    document.getElementById('lowImgID' + board).src = '../img/lowIcon.png';
 }
 
 /**
@@ -165,29 +165,29 @@ function setStyle(id, color, name, board) {
  * If the provided ID matches 'id_urgent', it calls the setStyle() function to set the style properties.
  * @param {string} id - The ID of the element to set the style properties.
  */
-function setStyleOf(id, color, name,board) {
-    if (id  == 'id_' + name + board) setStyle(id, color, name, board);
+function setStyleOf(id, color, name, board) {
+    if (id == 'id_' + name + board) setStyle(id, color, name, board);
 }
 
 /**
  * Sets the style properties for the specified element ID by calling the corresponding style functions.
  * @param {string} id - The ID of the element to set the style properties.
  */
-function setStyles(id,board) {
-    setStyleOf(id, urgentColor, 'urgent',board);
-    setStyleOf(id, mediumColor, 'medium',board);
-    setStyleOf(id, lowColor, 'low',board);
+function setStyles(id, board) {
+    setStyleOf(id, urgentColor, 'urgent', board);
+    setStyleOf(id, mediumColor, 'medium', board);
+    setStyleOf(id, lowColor, 'low', board);
 }
 
 /**
  * Refreshes the style of the selected label based on the specified ID.
  * @param {string} id - The ID of the label.
  */
-function refreshStyleOfSelectedLabel(id,board) {
+function refreshStyleOfSelectedLabel(id, board) {
     if (activeID == id) {
         resetStyleVariables();
         document.getElementById(id).style = 'background-color: #FFFFFF; color: #000000;';
-    } else changeStyleOfLabels(id,board);
+    } else changeStyleOfLabels(id, board);
 }
 
 function resetStyleVariables() {
@@ -199,9 +199,9 @@ function resetStyleVariables() {
  * Changes the style of labels based on the specified ID.
  * @param {string} id - The ID of the label.
  */
-function changeStyleOfLabels(id,board) {
+function changeStyleOfLabels(id, board) {
     resetStyleVariables();
-    changeStyleOfLabel(id,board);
+    changeStyleOfLabel(id, board);
 }
 
 /**
@@ -215,8 +215,8 @@ function changeToInputField(id) {
 
 /** Changes the category dropdown box to the "Add New Category" input field. */
 function changeToAddNewCat() {
-    setInnerHTML('id_categoryBox',generatesChangedInputFieldHTML('label', 'input', 'Category',
-     'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()', 'newCategoriesField'));
+    setInnerHTML('id_categoryBox', generatesChangedInputFieldHTML('label', 'input', 'Category',
+        'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()', 'newCategoriesField'));
     addColorChoser();
     dropDown = false;
 }
@@ -224,21 +224,22 @@ function changeToAddNewCat() {
 /** Changes 'id_addNewSubTask' element to add new subtask. Modifies HTML content by generating changed input field. */
 function changeToAddNewSubtask() {
     setInnerHTML('id_addNewSubTask', generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text',
-            'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()', 'newSubtasksField'));
+        'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()', 'newSubtasksField'));
 }
 
 /** Adds the event listeners to the dropdown elements, such as categories and select user box. */
 function addEventListenerToDropDown() {
-    addEventListenerToSelectBoxFor('categoryBox','categories');
-    addEventListenerToSelectBoxFor('assignedTo','users','');
-    addEvenListenersToSelectfor(users,'users','');
-    addEvenListenersToSelectfor(categories,'categories');
+    addEventListenerToSelectBoxFor('categoryBox', 'categories','');
+    addEventListenerToSelectBoxFor('assignedTo', 'users','');
+    addEvenListenersToSelectfor(users, 'users');
+    addEvenListenersToSelectfor(categories, 'categories');
 }
 
 /** Adds the event listener to the select user box and calls the function to add event listeners to user elements. */
 function addEventListenerToSelectBoxFor(id, setfor, edit) {
-    let box = document.getElementById(id);
-    box.addEventListener('click', () => showDropDownItems(setfor, edit));
+    if (document.getElementById(id)) {
+        document.getElementById(id).addEventListener('click', () => showDropDownItems(setfor, edit));
+    }
 }
 
 /**
@@ -252,8 +253,8 @@ function setEventListenerToSelectCategory(e) {
 }
 
 /**  Add an Eventlistener to select categories in dropdown */
-function addEvenListenersToSelectfor(array,nameOfArray) {
-    for (let i = 0; i < array.length; i++) addEvenListenerToSelectfor(i, array , nameOfArray);
+function addEvenListenersToSelectfor(array, nameOfArray) {
+    for (let i = 0; i < array.length; i++) addEvenListenerToSelectfor(i, array, nameOfArray);
 }
 
 /**
@@ -262,8 +263,8 @@ function addEvenListenersToSelectfor(array,nameOfArray) {
  */
 function addEvenListenerToSelectfor(i, array, nameFor) {
     let sel = document.getElementById(array[i]['name']);
-    if(nameFor == 'users') sel.addEventListener('click',() => setChecked(i));
-    if(nameFor == 'categories') sel.addEventListener('click', (e) => setEventListenerToSelectCategory(e));
+    if (nameFor == 'users') sel.addEventListener('click', () => setChecked(i));
+    if (nameFor == 'categories') sel.addEventListener('click', (e) => setEventListenerToSelectCategory(e));
 }
 
 /**
@@ -307,9 +308,9 @@ function isUserAssigned(j) {
  * Sets the assigned circle for a user.
  * @param {string} username - The username for which to set the assigned circle.
  */
-function setAssignedCircle(username) {
-    if (typeof username === 'string')  username = users.find(u => u.name == username);
-    if (!checkIfUserCicleIsThere(username)) addInnerHTML('list-assigned-user',setAssignedCircleHTML(username));
+function setAssignedCircle(username , edit) {
+    if (typeof username === 'string') username = users.find(u => u.name == username);
+    if (!checkIfUserCicleIsThere(username)) addInnerHTML('list-assigned-user' + edit, setAssignedCircleHTML(username, edit));
 }
 
 function checkIfUserCicleIsThere(username) {
@@ -382,7 +383,7 @@ function setCategoryOptions(id) {
  * @param {HTMLElement} sID - The target element to change.
  */
 function changeCategoryOptions(sID) {
-    sID.classList.add('d-none','cl_categories');
+    sID.classList.add('d-none', 'cl_categories');
     sID.classList.remove('dropDownStart');
 }
 
@@ -400,7 +401,7 @@ function isContainingClass(sID) {
  * @param {HTMLElement} sID - The target element to reset.
  */
 function resetCategoryOptions(sID) {
-    sID.classList.remove('d-none','cl_categories');
+    sID.classList.remove('d-none', 'cl_categories');
     sID.classList.add('dropDownStart');
 }
 
@@ -410,7 +411,7 @@ function resetCategoryOptions(sID) {
  */
 function resetOptions() {
     for (let i = 0; i < categories.length; i++) {
-        document.getElementById(categories[i]['name']).classList.add('d-none','cl_categories');
+        document.getElementById(categories[i]['name']).classList.add('d-none', 'cl_categories');
         document.getElementById(categories[i]['name']).classList.remove('dropDownStart');
     }
 }
