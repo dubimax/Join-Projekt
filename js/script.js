@@ -42,7 +42,7 @@ function action(formData) {
  * @param {...string} links - The links to be added to the navigation container.
  */
 function generateNavigationLinks(coloredLink, ...links) {
-    document.getElementById('navigation-left-links').innerHTML = '';
+    setInnerHTML('navigation-left-links', '');
     for (let i = 0; i < links.length; i++) addNavigationLink(coloredLink, i, links);
 }
 
@@ -74,33 +74,6 @@ function logout() {
     localStorage.removeItem(indexOfEmail);
     localStorage.removeItem(loggedIn);
     window.location.href = '../login.html';
-}
-
-/**
- * Retrieves the name of the category at the specified index.
- * @param {number} i - The index of the category.
- * @returns {string} The name of the category.
- */
-function getCategory(i) {
-    return categories[i]['name'];
-}
-
-/**
- * Retrieves the color of the category at the specified index.
- * @param {number} i - The index of the category.
- * @returns {string} The color of the category.
- */
-function getCategoryColor(i) {
-    return categories[i]['color'];
-}
-
-/**
- * Retrieves the name of the user at the specified index.
- * @param {number} i - The index of the user.
- * @returns {string} The name of the user.
- */
-function getUser(i) {
-    return users[i]['name'];
 }
 
 /**
@@ -150,7 +123,7 @@ function cancelAddNewCat() {
  */
 function showDropDownItems(usedItems, edit) {
     if (usedItems == 'categories') showCategoryItems();
-    if (usedItems == 'users'+ edit) showUsersItems(edit);
+    if (usedItems + edit == 'users'+ edit) showUsersItems(edit);
 }
 
 /**
@@ -230,15 +203,6 @@ function showDropDonwsMenu() {
 }
 
 /**
- * Retrieves the inner HTML content of an element by its ID.
- * @param {string} id - The ID of the element.
- * @returns {string} The inner HTML content of the element.
- */
-function getInnerHTMLOf(id) {
-    return document.getElementById(id).innerHTML;
-}
-
-/**
  * Sets the behavior for submitting the form.
  * @param {string} addForm - The form to set the behavior for.
  */
@@ -295,7 +259,7 @@ function removeMessage() {
 function showUsersItems(edit) {
     if (!dropDownAssign) setUserItems(edit);
     else hideUserItems(edit);
-    setStyleOfSelectedUsers();
+    setStyleOfSelectedUsers(edit);
 }
 let targetElement;
 
@@ -305,17 +269,8 @@ function addEventListenerDocumentLogoutButton(e) {
     document.addEventListener("click", (event) => {
         let optionDiv = document.getElementById('optionsMenu');
         targetElement = event.target;
-        if (optionDiv && !optionDiv.contains(targetElement)) {
-            removeLogoutButton();
-        }
+        if (optionDiv && !optionDiv.contains(targetElement)) removeLogoutButton();
     });
-}
-/**
- * Checks if the logout button is currently shown.
- * @returns {boolean} A boolean indicating whether the logout button is shown.
- */
-function isLogoutButtonShown() {
-    return document.getElementById('optionsMenu');
 }
 
 /**
@@ -332,25 +287,25 @@ function removeEventListenerDocumentLogoutButton() {
 }
 
 function setLogoutButton(event) {
-    if (isLogoutButtonShown()) removeLogoutButton();
+    if (isElementExistent('optionsMenu')) removeLogoutButton();
     else addLogoutButton(event);
 }
 
 /**
  * Sets the style of the selected users in the dropdown.
  */
-function setStyleOfSelectedUsers() {
+function setStyleOfSelectedUsers(edit) {
     for (let i = 0; i < users.length; i++) {
-        if (isContainingClassDnone(users[i]['name'])) setUserItemsandShow(i)
-        else addDisplayNone(users[i]['name']);
+        if (isContainingClassDnone(users[i]['name'] + edit)) setUserItemsandShow(i, edit)
+        else addDisplayNone(users[i]['name'] + edit);
     }
 }
 
 /**
  * Hides the user items in the dropdown.
  */
-function hideUserItems() {
-    if (isContainingClassDnone('Assigned toassignedTo')) toggleUsersDropDown('invite','Assigned toassignedTo');
+function hideUserItems(edit) {
+    if (isContainingClassDnone('Assigned toassignedTo' + edit)) toggleUsersDropDown('invite','Assigned toassignedTo');
     else toggleUsersDropDown('Assigned toassignedTo','invite');
     dropDownAssign = false;
 }
@@ -359,9 +314,9 @@ function hideUserItems() {
  * Sets the user items and shows the dropdown.
  * @param {number} i - The index of the user.
  */
-function setUserItemsandShow(i) {
-    removeDisplayNone(users[i]['name']);
-    document.getElementById('assignedTo').style = `height:unset !important;`;
+function setUserItemsandShow(i, edit) {
+    removeDisplayNone(users[i]['name'] + edit);
+    document.getElementById('assignedTo' + edit).style = `height:unset !important;`;
 }
 
 /**
@@ -409,7 +364,7 @@ function isItemChecked() {
  */
 function generateOptionsHTML(array, nameOfArray, edit) {
     for (let i = 0; i < array.length; i++) {
-        if (nameOfArray == 'users') addInnerHTML('assignedTo' + edit, generateTheOptionHTML(nameOfArray, getUser(i)));
+        if (nameOfArray == 'users') addInnerHTML('assignedTo' + edit, generateTheOptionHTML(nameOfArray, getUser(i), edit));
         if (nameOfArray == 'categories') addInnerHTML('categoryBox', generateCategoryOptionHTML(nameOfArray, i));
     }
 }

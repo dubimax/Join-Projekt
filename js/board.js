@@ -9,7 +9,7 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
-    generateAddTaskHTML('addTaskAtBoard', 'Edit');
+    generateAddTaskHTML('addTaskAtBoard', '');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
 }
@@ -27,17 +27,10 @@ function updateBoardHTML() {
     setStyleProgressbar();
 }
 
-function resetBoardComplete(){
-    for(let i = 0; i<document.getElementById('boardContainer').children.length;i++ ){
-        if( document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
-    }            
-}
-
-/**
- * Hides the add new task form at the board view.
- */
-function hideAddNewTaskAtBoard() {
-    addDisplayNone('addTaskAtBoard');
+function resetBoardComplete() {
+    for (let i = 0; i < document.getElementById('boardContainer').children.length; i++) {
+        if (document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
+    }
 }
 
 /**
@@ -64,9 +57,8 @@ function taskDetails() {
  * @param {number} i - The index of the task in the tasks array.
  */
 function addTaskDetail(i) {
-    const element = tasks[i];
-    addInnerHTML('boardContainer', generateOpenCardHTML(element, element['status']));
-    setRowCount(element['status'], i);
+    addInnerHTML('boardContainer', generateOpenCardHTML(tasks[i], tasks[i]['status']));
+    setRowCount(tasks[i]['status'], i);
 }
 
 /**
@@ -83,9 +75,7 @@ function startDragging(id) {
  * @returns {string} The color associated with the element.
  */
 function getColor(element) {
-    for (let i = 0; i < categories.length; i++) {
-        if (isElement(i, element)) return categories[i]['color'];
-    }
+    for (let i = 0; i < categories.length; i++) if (isElement(i, element)) return categories[i]['color'];
 }
 
 /**
@@ -146,9 +136,7 @@ function getProgressOfSubtasks(index) {
  */
 function getCheckedSubtasks(elementIndex) {
     let count = 0;
-    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) {
-        if (isSubtaskCheckedBoard(elementIndex, i)) count++;
-    }
+    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) if (isSubtaskCheckedBoard(elementIndex, i)) count++;
     return count;
 }
 
@@ -175,16 +163,6 @@ function openCard(index, status) {
     document.getElementById('overlay').style.display = "block";
 }
 
-/**
- * Checks if an HTML element with the specified id exists.
- * @param {string} id - The id of the HTML element.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task in the tasks array.
- * @returns {boolean} - Returns true if the HTML element exists, false otherwise.
- */
-function isHTMLElement(id, status, index) {
-    return document.getElementById(id + status + index);
-}
 /**
 * Adds user acronyms to the specified HTML element.
 * @param {string} id - The id of the HTML element.
@@ -327,20 +305,25 @@ function editCard(status, elementIndex, aID) {
  * @param {Object} task - The task object.
  * @param {string} aID - The ID of the assigned user.
  */
-function setDataForEditCard(status, elementIndex, task,aID) {
-    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio','Board'));
+function setDataForEditCard(status, elementIndex, task, aID) {
+    setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio', 'Board'));
     setInnerHTML('assignedUserOpen' + status + elementIndex,
         generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users', 'Edit');
-    addAssignedUsersList(status, elementIndex);
+    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);
-    setStyles(aID+'Board','Board');
+
+    setStyles(aID + 'Board', 'Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
+    dropDownAssign = false;
+    addEventListenerToSelectBoxFor('assignedToEdit', 'users','Edit');
+    addEvenListenersToSelectfor(users, 'users', 'Edit');
     assigned = [];
+    
 }
 
 /**
@@ -370,40 +353,6 @@ function showEditCard(status, elementIndex) {
 }
 
 /**
- * Resets the edit card view by restoring default states and styles.
- * @param {number} index - The index of the task element.
- * @param {string} status - The status of the task.
- */
-function resetEditCard(index, status) {
-    assigned = [];
-    setInnerHTML('assignedUserOpen' + status + index, '');
-    hideEditCard(status, index);
-    resetStylesForOpenCard(status, index);
-    resetAssigned(status, index);
-    // resetTaskPrio(status, index);
-    addUserAcronyms('assignedUserOpen', index, status);
-    // addAssignedUsersList(status, index);
-    document.getElementById('editTitle' + status + index).readOnly = true;
-    document.getElementById('editDescription' + status + index).readOnly = true;
-    document.getElementById('editDate' + status + index).readOnly = true;
-}
-
-/**
- * Resets the styles for the open card view to their default states.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task element.
- */
-function resetStylesForOpenCard(status, index) {
-    document.getElementById('editDate' + status + index).classList.remove('inputTextStd');
-    document.getElementById('editDescription' + status + index).classList.remove('inputDescriptionField');
-    document.getElementById('editTitle' + status + index).classList.remove('inputTextStd');
-    document.getElementById('editTitle' + status + index).classList.add('taskTitleOpen');
-    document.getElementById('editDescription' + status + index).classList.add('taskDescriptionOpen');
-    document.getElementById('editDate' + status + index).classList.add('taskDueDateOpen');
-    document.getElementById('dateContainer' + status + index).style = "display:flex;";
-}
-
-/**
  * Hides the edit card view and shows the default open card view.
  * @param {string} status - The status of the task.
  * @param {number} index - The index of the task element.
@@ -418,32 +367,14 @@ function hideEditCard(status, index) {
 }
 
 /**
- * Resets the task priority to its initial value.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task element.
- */
-function resetTaskPrio(status, index) {
-    let element = tasks[index];
-    setInnerHTML('taskPrioOpen' + status + index, resetTaskPrioHTML(element));
-}
-
-/**
- * Resets the assigned users to their initial values.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task element.
- */
-function resetAssigned(status, index) {
-    setInnerHTML('assignedUserOpen' + status + index, resetAssignedHTML(status, index));
-}
-
-/**
  * Sets the checkboxes of assigned users to active.
  * @param {Object} task - The task object containing assigned user information.
  */
 function setActiveCheckbox(task) {
     for (let i = 0; i < task['isAssigned'].length; i++) {
-        document.getElementById(task['isAssigned'][i]).children[0].checked = true;
-        setAssignedCircle(task['isAssigned'][i]);
+        document.getElementById(task['isAssigned'][i] + 'Edit').children[0].checked = true;
+        setAssignedCircle(task['isAssigned'][i], 'Edit');
+        usersAssignedTo.push(task['isAssigned'][i]);
     }
 }
 
@@ -456,7 +387,6 @@ function editThisTask(index, stati) {
     editTaskData(index, stati);
     addDisplayNone('openCard' + stati + index);
     addDisplayNone('overlay');
-    resetEditCard(index, stati);
     save();
     pushToDatabase();
     updateBoardHTML();
@@ -473,24 +403,13 @@ function editTaskData(index, stati) {
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
     document.getElementById('editDescription' + stati + index).innerHTML = tasks[index]['description'];
     tasks[index]['category'] = tasks[index]['category'];
-    tasks[index]['isAssigned'] = getAssignedContacts();
+    tasks[index]['isAssigned'] = getAssignedContacts('Edit');
     tasks[index]['dueDate'] = document.getElementById('editDate' + stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     tasks[index]['prio'] = taskPrio[0].toLowerCase();
     tasks[index]['subtasks'] = tasks[index]['subtasks'];
     tasks[index]['id'] = tasks[index]['id'];
     tasks[index]['status'] = tasks[index]['status'];
-}
-
-
-
-/**
- * Adds the assigned users list to the specified status and element index.
- * @param {string} status - The status of the task.
- * @param {number} elementIndex - The index of the task element.
- */
-function addAssignedUsersList(status, elementIndex) {
-    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
 }
 
 /**
@@ -567,13 +486,11 @@ function resetBoard() {
     setInnerHTML('done', '');
 }
 
-/**
- * Searches for tasks based on the entered search query and updates the display to show only the found tasks.
- */
+/** Searches for tasks based on the entered search query and updates the display to show only the found tasks. */
 function searchTasks() {
     let search = document.getElementById('search').value;
     search = search.toLowerCase();
-    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i,search);
+    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i, search);
 }
 
 /**
@@ -581,14 +498,13 @@ function searchTasks() {
  * @param {number} i - The index of the task to check.
  * @param {string} search - The search query to match against task titles and descriptions.
  */
-function onlyShowFoundTasks(i,search) {
+function onlyShowFoundTasks(i, search) {
     let taskTitle = tasks[i]['title'];
     let taskIndex = tasks.indexOf(tasks[i]);
     let tDescription = tasks[i]['description'];
     if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search))) {
-        if(isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
-    }
-    else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
+        if (isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    } else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
 }
 
 /**
