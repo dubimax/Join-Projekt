@@ -578,7 +578,7 @@ function showAddNewTaskAtBoard() {
     removeDisplayNone('addTaskAtBoard');
     generateAddTaskHTML('addTaskAtBoard');
     addCloseBtnToAddTaskAtBoard();
-    removeEventListenerFromDropDown();
+    // removeEventListenerFromDropDown();
     addEventListenerToDropDown();
 }
 
