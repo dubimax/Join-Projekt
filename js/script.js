@@ -214,7 +214,7 @@ function cancelAddNewCat() {
  */
 function showDropDownItems(usedItems, edit) {
     if (usedItems == 'categories') showCategoryItems();
-    if (usedItems == 'users'+ edit) showUsersItems();
+    if (usedItems == 'users'+ edit) showUsersItems(edit);
 }
 
 /**
@@ -366,9 +366,9 @@ function removeMessage() {
 /**
  * Shows the useritems in Dropdown menu
  */
-function showUsersItems() {
-    if (!dropDownAssign) setUserItems();
-    else hideUserItems();
+function showUsersItems(edit) {
+    if (!dropDownAssign) setUserItems(edit);
+    else hideUserItems(edit);
     setStyleOfSelectedUsers();
 }
 let targetElement;

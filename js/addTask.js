@@ -232,8 +232,8 @@ function changeToAddNewSubtask() {
 /** Adds the event listeners to the dropdown elements, such as categories and select user box. */
 function addEventListenerToDropDown() {
     addEventListenerToSelectBoxFor('categoryBox','categories');
-    addEventListenerToSelectBoxFor('assignedTo','users');
-    addEvenListenersToSelectfor(users,'users');
+    addEventListenerToSelectBoxFor('assignedTo','users','');
+    addEvenListenersToSelectfor(users,'users','');
     addEvenListenersToSelectfor(categories,'categories');
 }
 
