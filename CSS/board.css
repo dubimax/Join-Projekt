@@ -739,14 +739,19 @@ h1 {
     }
 
     .openCard {
-        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        overflow: hidden;
+        margin-left: 12px;
         box-shadow: none;
         border-radius: 0;
         z-index: 7;
         background-color: #F5F5F5;
         position: absolute;
-        margin-top: 150px;
-        padding-left: 15%;
+        margin-top: 170px;
+        padding-left: 10%;
         height: 100%;
         width: 100%;
     }
@@ -755,7 +760,7 @@ h1 {
         content: url('../img/backIconBlack.png');
         left: 0;
         top: 0;
-        margin-top: 40px;
+        margin-top: -3px;
         margin-right: 33px;
         margin-left: 320px;
     }
@@ -827,7 +832,7 @@ h1 {
         bottom: 222px;
         flex-direction: column;
         align-items: flex-end;
-        
+
     }
 
     .editSaveBtnOpenContainer {
@@ -837,12 +842,17 @@ h1 {
     .detail div label {
         gap: 10px;
         font-size: 13px;
+        width: 95px;
     }
 
     .prioImg {
         width: 18px;
         height: 13.51px;
         object-fit: cover;
+    }
+
+    #toassignedToEdit {
+        width: 250px !important;
     }
 
     #addTaskAtBoard {
@@ -878,8 +888,9 @@ h1 {
 
 }
 
-@media (max-height: 700px) {
+@media (max-height: 800px) {
     .cardHeaders {
         height: 280px;
     }
+
 }

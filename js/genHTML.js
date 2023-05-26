@@ -33,9 +33,9 @@ function setCheckBox() {
  * @param {string} content - The content of the option.
  * @returns {string} The HTML for the option.
  */
-function generateTheOptionHTML(nameOfArray, content) {
+function generateTheOptionHTML(nameOfArray, content, edit) {
     return `
-            <div class="cl_${nameOfArray} d-none" id="${content}" value="${content}">
+            <div class="cl_${nameOfArray} d-none" id="${content}${edit}" value="${content}">
                 ${content} 
                 <input type="checkbox" value="${content}">
             </div>
@@ -61,7 +61,7 @@ function generateCategoryOptionHTML(nameOfArray, i){
  * Generates the HTML for the "Add Task" section.
  * @param {string} id - The ID of the element to append the HTML content.
  */
-function generateAddTaskHTML(id) {
+function generateAddTaskHTML(id, board) {
     load();
     if (loggedIn) {
         addContentTitle('Add Task', id);
@@ -88,7 +88,7 @@ function generateAddTaskHTML(id) {
                         </list>
                     </div>
                     <div class="d-flex align-c container-btns">
-                        <div class="clearButton" onclick="clearAllInputs()">
+                        <div class="clearButton" onclick="clearAllInputs('${board}')">
                             Clear
                         </div>
                         <button type="submit" class="createTaskBtn">
@@ -593,9 +593,7 @@ function addCloseBtnToAddTaskAtContacts(overlay) {
  * Adds a close button to the "Add Task" overlay at the board.
  */
 function addCloseBtnToAddTaskAtBoard() {
-    document.getElementById('addTaskAtBoard').innerHTML += `
-    <div onclick="hideAddNewTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>
-    `;
+    addInnerHTML('addTaskAtBoard', `<div onclick="addDisplayNone('addTaskAtBoard')" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
 }
 
 /**
@@ -605,9 +603,9 @@ function addCloseBtnToAddTaskAtBoard() {
  * @param {string} username.color - The color for the circle background.
  * @returns {string} The HTML for the assigned circle element.
  */
-function setAssignedCircleHTML(username) {
+function setAssignedCircleHTML(username, edit) {
     return `
-    <div class="colorCircleMedium" id="colorCircleMedium${username.name}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
+    <div class="colorCircleMedium" id="colorCircleMedium${username.name}${edit}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
  `;
 }
 
@@ -696,46 +694,46 @@ function generateUserNameDivHTML(username){
 function generateOpenCardHTML(element,status) {
     let elementIndex = tasks.indexOf(element);
     return `
-    <div class="openCard d-none" id="openCard${status}${elementIndex}">
-            <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
+        <div class="openCard d-none" id="openCard${status}${elementIndex}">
+                <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
 
-        <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
-            ${element['category']}
-        </div>
-        
-        <div>
-            <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
-            <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
-        </div>
-        <div>
-            <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
-            <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
-        </div>  
-        <div id="dateContainer${status}${elementIndex}" style="display:flex;">
-            <label class="taskLabelOpen editcard" >Due date: </label>
-            <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly min="today" type="date" value="${element['dueDate']}" class="inputTextStd"/>
-        </div>
-        <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
-            <label class="taskLabelOpen">Priority: </label>
-            <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
-        </div>
-        <div id="editSubtasksContainer${status}${elementIndex}">
-        </div>  
-        <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
-        <span class="taskLabelOpen">Assigned to: </span> 
+            <div id="taskStatusCategory${status}${elementIndex}" style="background:${getColor(element)}" class="taskStatusOpen">
+                ${element['category']}
+            </div>
+            
+            <div>
+                <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
+                <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
+            </div>
+            <div>
+                <label id="openCardDescription${status}${elementIndex}" class="d-none editcard">Description</label>
+                <textarea class="taskDescriptionOpen" id="editDescription${status}${elementIndex}" readonly>${element['description']}</textarea>
+            </div>  
+            <div id="dateContainer${status}${elementIndex}" style="display:flex;">
+                <label class="taskLabelOpen editcard" >Due date: </label>
+                <input  class="taskDueDateOpen" id="editDate${status}${elementIndex}" readonly min="today" type="date" value="${element['dueDate']}" class="inputTextStd"/>
+            </div>
+            <div class="taskPrioOpen" id="taskPrioOpen${status}${elementIndex}">
+                <label class="taskLabelOpen">Priority: </label>
+                <img src="../img/${element['prio'].toLowerCase()}AllinOne.png">
+            </div>
+            <div id="editSubtasksContainer${status}${elementIndex}">
+            </div>  
+            <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
+            <span class="taskLabelOpen">Assigned to: </span> 
 
-        <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
-        </div>
-        
-        <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
-            <div class="deleteBtnOpenCard" onclick="deleteTask('${status}',${elementIndex})"></div>
-            <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
-        </div>
-        <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
-                Ok<img src="../img/okWhite.png">
-            </button>
-        </div>
-    </div>`;
+            <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
+            </div>
+            
+            <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
+                <div class="deleteBtnOpenCard" onclick="deleteTask('${status}',${elementIndex})"></div>
+                <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
+            </div>
+            <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
+                    Ok<img src="../img/okWhite.png">
+                </button>
+            </div>
+        </div>`;
 }
 
 function addCheckBoxAtBoardHTML(index,i,status) {
@@ -763,10 +761,10 @@ function resetAssignedHTML(status,index){
     `;
 }
 
-function generateAssignedListHTML(){
+function generateAssignedListHTML(edit){
     return `
     <div class="p-relative d-flex align-c">
-        <list class="d-flex" id="list-assigned-user">
+        <list class="d-flex" id="list-assigned-user${edit}">
         </list>
     </div>
     `;
