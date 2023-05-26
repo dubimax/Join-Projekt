@@ -320,7 +320,7 @@ function setDataForEditCard(status, elementIndex, task, aID) {
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
     dropDownAssign = false;
     addEventListenerToSelectBoxFor('assignedToEdit', 'users','Edit');
-    addEvenListenersToSelectfor(users, 'users');
+    addEvenListenersToSelectfor(users, 'users', 'Edit');
     assigned = [];
     
 }

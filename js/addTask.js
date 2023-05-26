@@ -231,8 +231,8 @@ function changeToAddNewSubtask() {
 function addEventListenerToDropDown() {
     addEventListenerToSelectBoxFor('categoryBox', 'categories','');
     addEventListenerToSelectBoxFor('assignedTo', 'users','');
-    addEvenListenersToSelectfor(users, 'users');
-    addEvenListenersToSelectfor(categories, 'categories');
+    addEvenListenersToSelectfor(users, 'users', '');
+    addEvenListenersToSelectfor(categories, 'categories', '');
 }
 
 /** Adds the event listener to the select user box and calls the function to add event listeners to user elements. */
@@ -253,17 +253,17 @@ function setEventListenerToSelectCategory(e) {
 }
 
 /**  Add an Eventlistener to select categories in dropdown */
-function addEvenListenersToSelectfor(array, nameOfArray) {
-    for (let i = 0; i < array.length; i++) addEvenListenerToSelectfor(i, array, nameOfArray);
+function addEvenListenersToSelectfor(array, nameOfArray, edit) {
+    for (let i = 0; i < array.length; i++) addEvenListenerToSelectfor(i, array, nameOfArray, edit);
 }
 
 /**
  * Adds the event listener to the select category element.
  * @param {number} i - The index of the category.
  */
-function addEvenListenerToSelectfor(i, array, nameFor) {
-    let sel = document.getElementById(array[i]['name']);
-    if (nameFor == 'users') sel.addEventListener('click', () => setChecked(i));
+function addEvenListenerToSelectfor(i, array, nameFor, edit) {
+    let sel = document.getElementById(array[i]['name'] + edit);
+    if (nameFor == 'users') sel.addEventListener('click', () => setChecked(i, edit));
     if (nameFor == 'categories') sel.addEventListener('click', (e) => setEventListenerToSelectCategory(e));
 }
 
@@ -271,17 +271,17 @@ function addEvenListenerToSelectfor(i, array, nameFor) {
  * Sets the checkbox of a user to checked or unchecked based on its current state.
  * @param {number} j - The index of the user in the "users" array.
  */
-function setChecked(j) {
-    if (!isUserAssigned(j)) setCheckedToSelectUser(j);
-    else if (isUserAssigned(j)) setUnCheckedToSelectUser(j);
+function setChecked(j, edit) {
+    if (!isUserAssigned(j, edit)) setCheckedToSelectUser(j, edit);
+    else if (isUserAssigned(j, edit)) setUnCheckedToSelectUser(j, edit);
 }
 
 /** Sets checkbox to unchecked, removes assigned circle, and removes user from "usersAssignedTo" array.
  * @param {number} j - Index in "users" array.
 */
-function setUnCheckedToSelectUser(j) {
-    document.getElementById('colorCircleMedium' + users[j]['name']).remove();
-    document.getElementById(users[j]['name']).children[0].checked = false;
+function setUnCheckedToSelectUser(j, edit) {
+    document.getElementById('colorCircleMedium' + users[j]['name'] + edit).remove();
+    document.getElementById(users[j]['name'] + edit).children[0].checked = false;
     let index = usersAssignedTo.indexOf(users[j]['name']);
     usersAssignedTo.splice(index, 1);
 }
@@ -289,10 +289,10 @@ function setUnCheckedToSelectUser(j) {
 /** Sets checkbox, adds user to "usersAssignedTo" array, and sets assigned circle.
  * @param {number} j - Index in "users" array. 
  */
-function setCheckedToSelectUser(j) {
+function setCheckedToSelectUser(j, edit) {
     usersAssignedTo.push(users[j]['name']);
-    document.getElementById(users[j]['name']).children[0].checked = true;
-    setAssignedCircle(users[j]);
+    document.getElementById(users[j]['name'] + edit).children[0].checked = true;
+    setAssignedCircle(users[j] ,edit);
 }
 
 /**
@@ -300,8 +300,8 @@ function setCheckedToSelectUser(j) {
  * @param {number} j - The index of the user to check.
  * @returns {boolean} - Indicates whether the user is assigned or not.
  */
-function isUserAssigned(j) {
-    return usersAssignedTo.includes(users[j]['name']);
+function isUserAssigned(j, edit) {
+    return usersAssignedTo.includes(users[j]['name'] + edit);
 }
 
 /**
