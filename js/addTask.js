@@ -166,7 +166,7 @@ function setStyle(id, color, name, board) {
  * @param {string} id - The ID of the element to set the style properties.
  */
 function setStyleOf(id, color, name,board) {
-    if (id == 'id_' + name + board) setStyle(id, color, name, board);
+    if (id  == 'id_' + name + board) setStyle(id, color, name, board);
 }
 
 /**
@@ -178,8 +178,6 @@ function setStyles(id,board) {
     setStyleOf(id, mediumColor, 'medium',board);
     setStyleOf(id, lowColor, 'low',board);
 }
-
-
 
 /**
  * Refreshes the style of the selected label based on the specified ID.

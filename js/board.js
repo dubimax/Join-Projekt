@@ -24,7 +24,6 @@ function updateBoardHTML() {
     addArea('done');
     addUserAcronyms('assignedUserLogo');
     taskDetails();
-    
     setStyleProgressbar();
 }
 
@@ -33,8 +32,6 @@ function resetBoardComplete(){
         if( document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
     }            
 }
-
-
 
 /**
  * Hides the add new task form at the board view.
@@ -58,11 +55,8 @@ function addArea(id) {
  */
 function taskDetails() {
     resetBoardComplete();
-    for (let i = 0; i < tasks.length; i++) {
-        addTaskDetail(i);
-    }
+    for (let i = 0; i < tasks.length; i++) addTaskDetail(i);
     addUserAcronyms('assignedUserLogoOpen');
-
 }
 
 /**
@@ -323,7 +317,7 @@ function editCard(status, elementIndex, aID) {
     let task = tasks[elementIndex];
     showEditCard(status, elementIndex);
     setStyleForEditCard(status, elementIndex);
-    setDataForEditCard(status, elementIndex, task, aID);
+    setDataForEditCard(status, elementIndex, task, aID, 'Edit');
 }
 
 /**
@@ -342,11 +336,10 @@ function setDataForEditCard(status, elementIndex, task,aID) {
     generateOptionsHTML(users, 'users', 'Edit');
     addAssignedUsersList(status, elementIndex);
     setActiveCheckbox(task);
-    setStyleOfBoardLabel(aID);
+    setStyles(aID+'Board','Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
     editEditField(status, elementIndex, 'editDate', 'inputTextStd');
-    
     assigned = [];
 }
 
@@ -384,7 +377,7 @@ function showEditCard(status, elementIndex) {
 function resetEditCard(index, status) {
     assigned = [];
     setInnerHTML('assignedUserOpen' + status + index, '');
-     hideEditCard(status, index);
+    hideEditCard(status, index);
     resetStylesForOpenCard(status, index);
     resetAssigned(status, index);
     // resetTaskPrio(status, index);
@@ -489,15 +482,7 @@ function editTaskData(index, stati) {
     tasks[index]['status'] = tasks[index]['status'];
 }
 
-/**
- * Sets the style of the board label based on the given active ID (aID).
- * @param {string} aID - The active ID of the board label.
- */
-function setStyleOfBoardLabel(aID) {
-    setStyleOf(aID, urgentColor, 'urgent');
-    setStyleOf(aID, mediumColor, 'medium');
-    setStyleOf(aID, lowColor, 'low');
-}
+
 
 /**
  * Adds the assigned users list to the specified status and element index.
@@ -617,4 +602,3 @@ function deleteTask(status, ind) {
     pushToDatabase();
     updateBoardHTML();
 }
-

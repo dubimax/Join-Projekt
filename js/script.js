@@ -271,7 +271,7 @@ function setContainerCategeroyVisible() {
  * Hides the drop-down menu without showing the "Add New Category" option.
  */
 function hideDropDownWithOutAddNewCat() {
-    document.getElementById('addNewCat').classList.add('d-none');
+    addDisplayNone('addNewCat');
     dropDownCat = false;
 }
 
@@ -279,8 +279,8 @@ function hideDropDownWithOutAddNewCat() {
  * Hides the drop-down menu along with the "Add New Category" option.
  */
 function hideDropDownWithAddNewCat() {
-    document.getElementById('addNewCat').classList.add('d-none');
-    document.getElementById('CategorycategoryBox').classList.add('d-none');
+    addDisplayNone('addNewCat');
+    addDisplayNone('CategorycategoryBox');
     dropDownCat = false;
 }
 
@@ -288,8 +288,8 @@ function hideDropDownWithAddNewCat() {
  * Shows the drop-down menu with the "Add New Category" option.
  */
 function showDropDonwsMenu() {
-    document.getElementById('CategorycategoryBox').classList.remove('d-none');
-    document.getElementById('addNewCat').classList.remove('d-none');
+    removeDisplayNone('CategorycategoryBox');
+    removeDisplayNone('addNewCat');
     dropDownCat = true;
 }
 
