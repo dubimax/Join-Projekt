@@ -43,7 +43,7 @@
     font-weight: 400;
     font-size: 27px;
     line-height: 120%;
-    width: 305px;
+    width: 100%;
     color: #2A3647;
 }
 
@@ -379,7 +379,7 @@
 
     .summaryPageContainer {
         margin-left: 0;
-        align-items: flex-start;
+        align-items: center;
         margin-top: 0;
         width: 100%;
     }
@@ -388,22 +388,21 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin-left: 33px;
-        margin-top: 10px;
+        margin-left: -30%;
     }
 
     .summaryHeader h1 {
         font-weight: 700;
-        font-size: 47px;
+        font-size: 40px;
         line-height: 120%;
         margin-top: 19px;
     }
 
     .summaryHeader span {
         font-weight: 400;
-        font-size: 21px;
+        font-size: 17px;
         line-height: 120%;
-        margin-top: 20px;
+        margin: 10px 0px;
     }
 
     .verticalLine {
@@ -412,14 +411,15 @@
         height: 90px;
         margin-left: 40px;
         position: absolute;
-        top: 220px;
+        top: 165px;
         margin-top: 32px;
     }
 
     .summeryBoxContainer {
-        max-width: 363px;
-        max-height: 378px;
-        margin: 100px 32px 0px 32px;
+        max-width: 100%;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .summaryTopSingle {
@@ -568,8 +568,16 @@
         font-size: 27px;
     }
 
-    .summaryHeader {
-        margin-left: 60px;
+    .summeryBoxContainer {
+        margin-left: 0;
+    }
+
+    .summaryPageContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 0 10%;
     }
 
     .summaryHeader h1 {
@@ -578,10 +586,149 @@
 
     .summaryHeader span {
         font-size: 18px;
+
+    }
+
+    .summaryHeader {
+        margin-left: -20%;
     }
 
     .verticalLine {
         top: 180px;
+    }
+
+    .summaryTopSingle {
+        width: 90px;
+        height: 90px;
+        gap: 3px;
+    }
+
+    .summaryTopSingle:hover {
+        width: 100px;
+        height: 100px;
+    }
+
+    .boxNumber {
+        font-size: 30px;
+    }
+
+    .boxText {
+        font-size: 13px;
+    }
+
+    .summaryCenter {
+        gap: 10px;
+        width: 300px;
+        height: 90px;
+    }
+
+    .summaryCenter:hover {
+        width: 310px;
+        height: 100px;
+    }
+
+    .prioImg {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .prioNumber {
+        font-size: 30px;
+    }
+
+    .prioText {
+        font-size: 13px;
+    }
+
+    .upcomingDate {
+        font-size: 13px;
+    }
+
+    .upcomingDateText {
+        font-size: 13px;
+    }
+
+    .prioVerticalLine {
+        height: 58px;
+    }
+
+    .summaryBottom {
+        gap: 0;
+        width: 335px;
+        height: 90px;
+    }
+
+    .summaryBottomSingle {
+        width: 137.5px;
+        height: 90px;
+        margin-left: 35px;
+    }
+
+    .summaryBottomSingle:hover {
+        width: 147.5px;
+        height: 100px;
+    }
+
+    .todoPencilImg {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .todoNumber {
+        font-size: 30px;
+    }
+
+    .todoText {
+        font-size: 13px;
+    }
+
+    .todoDoneImg {
+        width: 35px !important;
+        height: 35px !important;
+    }
+}
+
+@media (max-height: 800px) {
+    html, body {
+        overflow: hidden;
+    }
+
+    .summeryBoxContainer {
+        margin: 10px 0px 0px 0px;
+    }
+    .summaryGreeting {
+        font-size: 20px;
+    }
+
+    .summaryContactName {
+        font-size: 27px;
+    }
+
+    .summaryPageContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 0 10%;
+    }
+
+    .summaryHeader h1 {
+        font-size: 40px;
+    }
+
+    .summaryHeader span {
+        font-size: 18px;
+        margin: 15px 0px;
+
+    }
+
+    .summaryHeader {
+        margin-left: -10%;
+    }
+
+    .verticalLine {
+        top: 180px;
+        margin-top: 20px;
     }
 
     .summaryTopSingle {
@@ -612,6 +759,8 @@
         width: 300px;
         margin-right: 30px;
         height: 90px;
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 
     .summaryCenter:hover {
@@ -679,28 +828,5 @@
         width: 35px !important;
         height: 35px !important;
     }
-}
 
-@media (max-height: 700px) {
-    html, body {
-        overflow: hidden;
-      }
-
-    .summeryBoxContainer {
-        margin: 10px 32px 0px 32px;
-    }
-
-    .summaryHeader span {
-        margin: 15px 0px;
-    }
-
-    .verticalLine {
-        margin-top: 20px;
-    }
-
-    .summaryCenter {
-        margin-top: 15px;
-        margin-bottom: 15px;
-        margin-right: 30px;
-    }
 }
