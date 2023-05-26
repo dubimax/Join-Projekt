@@ -57,9 +57,8 @@ function taskDetails() {
  * @param {number} i - The index of the task in the tasks array.
  */
 function addTaskDetail(i) {
-    const element = tasks[i];
-    addInnerHTML('boardContainer', generateOpenCardHTML(element, element['status']));
-    setRowCount(element['status'], i);
+    addInnerHTML('boardContainer', generateOpenCardHTML(tasks[i], tasks[i]['status']));
+    setRowCount(tasks[i]['status'], i);
 }
 
 /**
@@ -353,25 +352,6 @@ function showEditCard(status, elementIndex) {
 }
 
 /**
- * Resets the edit card view by restoring default states and styles.
- * @param {number} index - The index of the task element.
- * @param {string} status - The status of the task.
- */
-function resetEditCard(index, status) {
-    assigned = [];
-    setInnerHTML('assignedUserOpen' + status + index, '');
-    hideEditCard(status, index);
-    resetStylesForOpenCard(status, index);
-    setInnerHTML('assignedUserOpen' + status + index, resetAssignedHTML(status, index));
-    // resetTaskPrio(status, index);
-    addUserAcronyms('assignedUserOpen', index, status);
-    // addAssignedUsersList(status, index);
-    document.getElementById('editTitle' + status + index).readOnly = true;
-    document.getElementById('editDescription' + status + index).readOnly = true;
-    document.getElementById('editDate' + status + index).readOnly = true;
-}
-
-/**
  * Resets the styles for the open card view to their default states.
  * @param {string} status - The status of the task.
  * @param {number} index - The index of the task element.
@@ -401,16 +381,6 @@ function hideEditCard(status, index) {
 }
 
 /**
- * Resets the task priority to its initial value.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task element.
- */
-function resetTaskPrio(status, index) {
-    let element = tasks[index];
-    setInnerHTML('taskPrioOpen' + status + index, resetTaskPrioHTML(element));
-}
-
-/**
  * Sets the checkboxes of assigned users to active.
  * @param {Object} task - The task object containing assigned user information.
  */
@@ -430,7 +400,6 @@ function editThisTask(index, stati) {
     editTaskData(index, stati);
     addDisplayNone('openCard' + stati + index);
     addDisplayNone('overlay');
-    resetEditCard(index, stati);
     save();
     pushToDatabase();
     updateBoardHTML();
