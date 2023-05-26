@@ -9,7 +9,7 @@ function createNewTask(statusTag) {
     setSubtasksCheckedIf();
     tasks.push({
         'title': getValue('inputTitle'), 'description': getValue('inputDescription'),
-        'category': selectedCategory, 'isAssigned': getAssignedContacts(), 'dueDate': getValue('inputDate'),
+        'category': selectedCategory, 'isAssigned': getAssignedContacts(''), 'dueDate': getValue('inputDate'),
         'prio': getTasksPrio(), 'subtasks': subtasks, 'id': setTaskID(), 'status': statusTag
     });
     pushToDatabase();
@@ -301,7 +301,7 @@ function setCheckedToSelectUser(j, edit) {
  * @returns {boolean} - Indicates whether the user is assigned or not.
  */
 function isUserAssigned(j, edit) {
-    return usersAssignedTo.includes(users[j]['name'] + edit);
+    return usersAssignedTo.includes(users[j]['name']);
 }
 
 /**
@@ -310,12 +310,12 @@ function isUserAssigned(j, edit) {
  */
 function setAssignedCircle(username , edit) {
     if (typeof username === 'string') username = users.find(u => u.name == username);
-    if (!checkIfUserCicleIsThere(username)) addInnerHTML('list-assigned-user' + edit, setAssignedCircleHTML(username, edit));
+    if (!checkIfUserCicleIsThere(username, edit)) addInnerHTML('list-assigned-user' + edit, setAssignedCircleHTML(username, edit));
 }
 
-function checkIfUserCicleIsThere(username) {
-    for (let i = 0; i < document.getElementById('list-assigned-user').children.length; i++) {
-        if (document.getElementById('list-assigned-user').children[i].id == 'colorCircleMedium' + username.name) return true;
+function checkIfUserCicleIsThere(username, edit) {
+    for (let i = 0; i < document.getElementById('list-assigned-user' + edit).children.length; i++) {
+        if (document.getElementById('list-assigned-user' + edit).children[i].id == 'colorCircleMedium' + username.name + edit) return true;
         else return false;
     }
 }
@@ -324,17 +324,18 @@ function checkIfUserCicleIsThere(username) {
  * Retrieves the list of assigned contacts based on the "assigned" array.
  * @returns {Array} - The list of assigned contacts.
  */
-function getAssignedContacts() {
-    for (let i = 0; i < users.length; i++) { if (checkIfCOntactIsAssigned(i)) addAssignedUser(i); }
-    return assigned;
+function getAssignedContacts(edit) {
+    for (let i = 0; i < users.length; i++) { if (checkIfCOntactIsAssigned(i, edit)) addAssignedUser(i, edit); }
+    return usersAssignedTo;
 }
 
 /**
  * Adds an assigned user to the "assigned" array based on the given index.
  * @param {number} i - The index of the user.
  */
-function addAssignedUser(i) {
-    assigned.push(document.getElementById(users[i]['name']).children[0].value);
+function addAssignedUser(i, edit) {
+    assigned.push(document.getElementById(users[i]['name'] + edit).children[0].value);
+    usersAssignedTo = assigned;
 }
 
 /**
@@ -342,8 +343,8 @@ function addAssignedUser(i) {
  * @param {number} i - The index of the contact to check.
  * @returns {boolean} - Indicates whether the contact is assigned (checked) or not.
  */
-function checkIfCOntactIsAssigned(i) {
-    return document.getElementById(users[i]['name']).children[0].checked;
+function checkIfCOntactIsAssigned(i, edit) {
+    return document.getElementById(users[i]['name'] + edit).children[0].checked;
 }
 
 /**

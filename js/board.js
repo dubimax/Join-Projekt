@@ -314,6 +314,7 @@ function setDataForEditCard(status, elementIndex, task, aID) {
     generateOptionsHTML(users, 'users', 'Edit');
     addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);
+
     setStyles(aID + 'Board', 'Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
@@ -373,6 +374,7 @@ function setActiveCheckbox(task) {
     for (let i = 0; i < task['isAssigned'].length; i++) {
         document.getElementById(task['isAssigned'][i] + 'Edit').children[0].checked = true;
         setAssignedCircle(task['isAssigned'][i], 'Edit');
+        usersAssignedTo.push(task['isAssigned'][i]);
     }
 }
 
@@ -401,7 +403,7 @@ function editTaskData(index, stati) {
     tasks[index]['description'] = document.getElementById('editDescription' + stati + index).value;
     document.getElementById('editDescription' + stati + index).innerHTML = tasks[index]['description'];
     tasks[index]['category'] = tasks[index]['category'];
-    tasks[index]['isAssigned'] = getAssignedContacts();
+    tasks[index]['isAssigned'] = getAssignedContacts('Edit');
     tasks[index]['dueDate'] = document.getElementById('editDate' + stati + index).value;
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
     tasks[index]['prio'] = taskPrio[0].toLowerCase();
