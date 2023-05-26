@@ -95,3 +95,39 @@ function save() {
 function addConfirmMessage(text) {
     document.body.innerHTML += setConfirmMessage(text);
 }
+
+/**
+ * Retrieves the inner HTML content of an element by its ID.
+ * @param {string} id - The ID of the element.
+ * @returns {string} The inner HTML content of the element.
+ */
+function getInnerHTMLOf(id) {
+    return document.getElementById(id).innerHTML;
+}
+
+/**
+ * Retrieves the name of the category at the specified index.
+ * @param {number} i - The index of the category.
+ * @returns {string} The name of the category.
+ */
+function getCategory(i) {
+    return categories[i]['name'];
+}
+
+/**
+ * Retrieves the color of the category at the specified index.
+ * @param {number} i - The index of the category.
+ * @returns {string} The color of the category.
+ */
+function getCategoryColor(i) {
+    return categories[i]['color'];
+}
+
+/**
+ * Retrieves the name of the user at the specified index.
+ * @param {number} i - The index of the user.
+ * @returns {string} The name of the user.
+ */
+function getUser(i) {
+    return users[i]['name'];
+}
