@@ -34,13 +34,6 @@ function resetBoardComplete(){
 }
 
 /**
- * Hides the add new task form at the board view.
- */
-function hideAddNewTaskAtBoard() {
-    addDisplayNone('addTaskAtBoard');
-}
-
-/**
  * Adds task areas to the specified container based on the given status ID.
  * @param {string} id - The ID of the container to which the task areas will be added.
  */
@@ -175,16 +168,6 @@ function openCard(index, status) {
     document.getElementById('overlay').style.display = "block";
 }
 
-/**
- * Checks if an HTML element with the specified id exists.
- * @param {string} id - The id of the HTML element.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task in the tasks array.
- * @returns {boolean} - Returns true if the HTML element exists, false otherwise.
- */
-function isHTMLElement(id, status, index) {
-    return document.getElementById(id + status + index);
-}
 /**
 * Adds user acronyms to the specified HTML element.
 * @param {string} id - The id of the HTML element.
@@ -334,7 +317,7 @@ function setDataForEditCard(status, elementIndex, task,aID) {
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
     addInviteNewContact();
     generateOptionsHTML(users, 'users', 'Edit');
-    addAssignedUsersList(status, elementIndex);
+    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
     setActiveCheckbox(task);
     setStyles(aID+'Board','Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
@@ -379,7 +362,7 @@ function resetEditCard(index, status) {
     setInnerHTML('assignedUserOpen' + status + index, '');
     hideEditCard(status, index);
     resetStylesForOpenCard(status, index);
-    resetAssigned(status, index);
+    setInnerHTML('assignedUserOpen' + status + index, resetAssignedHTML(status, index));
     // resetTaskPrio(status, index);
     addUserAcronyms('assignedUserOpen', index, status);
     // addAssignedUsersList(status, index);
@@ -428,15 +411,6 @@ function resetTaskPrio(status, index) {
 }
 
 /**
- * Resets the assigned users to their initial values.
- * @param {string} status - The status of the task.
- * @param {number} index - The index of the task element.
- */
-function resetAssigned(status, index) {
-    setInnerHTML('assignedUserOpen' + status + index, resetAssignedHTML(status, index));
-}
-
-/**
  * Sets the checkboxes of assigned users to active.
  * @param {Object} task - The task object containing assigned user information.
  */
@@ -480,17 +454,6 @@ function editTaskData(index, stati) {
     tasks[index]['subtasks'] = tasks[index]['subtasks'];
     tasks[index]['id'] = tasks[index]['id'];
     tasks[index]['status'] = tasks[index]['status'];
-}
-
-
-
-/**
- * Adds the assigned users list to the specified status and element index.
- * @param {string} status - The status of the task.
- * @param {number} elementIndex - The index of the task element.
- */
-function addAssignedUsersList(status, elementIndex) {
-    addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML());
 }
 
 /**

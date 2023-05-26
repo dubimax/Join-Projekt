@@ -131,3 +131,14 @@ function getCategoryColor(i) {
 function getUser(i) {
     return users[i]['name'];
 }
+
+/**
+ * Checks if an HTML element with the specified id exists.
+ * @param {string} id - The id of the HTML element.
+ * @param {string} status - The status of the task.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {boolean} - Returns true if the HTML element exists, false otherwise.
+ */
+function isHTMLElement(id, status, index) {
+    return document.getElementById(id + status + index);
+}
