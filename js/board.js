@@ -446,6 +446,7 @@ function closeOpenCard(status, index) {
     dropDownAssign = false;
     save();
     pushToDatabase();
+    clearAllInputs();
     updateBoardHTML();
 }
 
