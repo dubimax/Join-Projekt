@@ -293,35 +293,43 @@
     cursor: pointer;
     display: none;
 }
+
 @media (max-width:1500px) {
     .border-1px-solid {
         margin: 0 25px !important;
     }
 }
+
 @media (max-width:1300px) {
-    .contactInformationContent{
+    .contactInformationContent {
         margin-top: 0 !important;
     }
+
     .backArrow {
         display: unset !important;
     }
+
     .addNewContactTitle {
         font-weight: 700 !important;
         font-size: 47px !important;
     }
+
     .detailBox {
         height: 100vh !important;
         overflow: scroll !important;
     }
-    #addTasksAtContacts{
+
+    #addTasksAtContacts {
         overflow: scroll !important;
     }
+
     .createNewUserAtContacts-right,
-    .editUserAtContacts-right{
+    .editUserAtContacts-right {
         background-color: #FFFFFF;
         border-bottom-right-radius: 30px;
         border-bottom-left-radius: 30px;
     }
+
     .createNewUserAtContacts-left,
     .editUserAtContacts-left {
         width: 100% !important;
@@ -330,106 +338,120 @@
         padding: 66px 33px !important;
         height: 380px !important;
     }
-    .closeIconAtContacts{
-        left:unset !important;
+
+    .closeIconAtContacts {
+        left: unset !important;
     }
+
     .kpmt {
         display: none !important;
     }
+
     .addNewContactTitle {
         font-weight: 900 !important;
         font-size: 40px !important;
     }
-    .addNewContactSubTitle{
+
+    .addNewContactSubTitle {
         font-size: 20px !important;
     }
-    
-    .editUserAtContacts-right, .createNewUserAtContacts-right{
+
+    .editUserAtContacts-right, .createNewUserAtContacts-right {
         width: 100% !important;
     }
-    .editUserAtContactsContainer,.createNewUserAtContactsContainer {
+
+    .editUserAtContactsContainer, .createNewUserAtContactsContainer {
         width: 80% !important;
     }
+
     .editContactNameInput {
         width: 90% !important;
     }
+
     .addNewContactInputs, .editContactInputs {
         width: 90% !important;
     }
-    .editUserCloseBtn,.addUserCloseBtn{
+
+    .editUserCloseBtn, .addUserCloseBtn {
         background-image: url('../img/closeIconWhite.png') !important;
         z-index: 10;
         right: 15% !important;
     }
-  
+
     #createNewContactName, #createNewContactEmail, #createNewContactPhone, #editContactName, #editContactEmail, #editContactPhone {
         width: 95% !important;
     }
 
     .editContactsButtonContainer,
-    .addNewContactsButtonContainer{
+    .addNewContactsButtonContainer {
         margin-top: 43px !important;
     }
+
     .container-btns {
         position: fixed;
         top: 15px !important;
         right: 15px !important;
         margin-top: unset !important;
     }
+
     .clearButton {
         display: none !important;
     }
+
     .newCat {
         position: relative !important;
         left: unset !important;
         top: unset !important;
     }
-    .newCategoriesField{
+
+    .newCategoriesField {
         top: -41px !important;
         right: -72% !important;
     }
-    .newSubtasksField{
+
+    .newSubtasksField {
         bottom: 41px !important;
         right: -72% !important;
     }
+
     #addTaskAtContacts h2 {
         margin-top: 80px !important;
     }
+
     #addTaskAtContacts {
         overflow: overlay !important;
     }
-    .newCat div{
+
+    .newCat div {
         display: block !important;
     }
-    
-.editButtonContainer{
-    gap:20px !important;
-    margin-top: 25px !important;
-    margin-bottom: 25px !important;
-}
-}
 
-
-@media (max-width:1000px) {
-   
-
-}
-@media (max-width:700px) {
-    
-  
-}
-@media (max-width:420px) {
-    
-    .createNewUserAtContactsContainer{
-        width: 340px !important;
-        
+    .editButtonContainer {
+        gap: 20px !important;
+        margin-top: 25px !important;
+        margin-bottom: 25px !important;
     }
-    .addUserCloseBtn{
+}
+
+
+@media (max-width:1000px) {}
+
+@media (max-width:700px) {}
+
+@media (max-width:420px) {
+
+    .createNewUserAtContactsContainer {
+        width: 340px !important;
+
+    }
+
+    .addUserCloseBtn {
         position: absolute !important;
         background-image: url('../img/closeIconWhite.png') !important;
         top: 25px !important;
         right: 40px !important;
     }
+
     .createNewUserAtContacts-left,
     .editUserAtContacts-left {
         width: 340px !important;
@@ -437,12 +459,13 @@
         border-top-right-radius: 30px !important;
         padding: 66px 33px !important;
     }
-    .editUserAtContacts-right, .createNewUserAtContacts-right{
+
+    .editUserAtContacts-right, .createNewUserAtContacts-right {
         width: 340px !important;
     }
 }
 
-@media (max-height:700px) {
+@media (max-height:900px) {
     #contactDetails {
         top: 50px !important;
     }
@@ -454,6 +477,39 @@
     .contactHeadContainer {
         margin-bottom: 0px;
     }
+
+    .createNewUserAtContacts-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 45px 33px !important;
+    }
+
+    .createNewUserAtContacts-left, .editUserAtContacts-left {
+        height: 190px !important;
+    }
+
+    .addNewContactTitle, .editContact {
+        font-size: 35px !important;
+    }
+
+    .addNewContactSubTitle {
+        font-size: 15px !important;
+    }
+
+    #addTaskAtContacts {
+        padding-bottom: 74px !important;
+        padding-top: 83px !important;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+
+    .addNewContactInputs {
+        gap: 20px;
+    }
+
+    .editContactsButtonContainer, .addNewContactsButtonContainer {
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
 }
-
-
