@@ -243,7 +243,7 @@ function closeAtContacts() {
 }
 
 function closeTaskAtBoard() {
-    setInnerHTML('addTaskAtBoard', '');
+    // setInnerHTML('addTaskAtBoard', '');
     addDisplayNone('addTaskAtBoard')
     removeMessage();
     updateBoardHTML();

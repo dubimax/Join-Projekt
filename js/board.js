@@ -12,7 +12,6 @@ async function initBoard() {
     generateAddTaskHTML('addTaskAtBoard', '');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
-    addUserAcronyms('assignedUserLogo');
 
 }
 
@@ -28,6 +27,8 @@ function updateBoardHTML() {
     addArea('done');
     taskDetails();
     setStyleProgressbar();
+    addUserAcronyms('assignedUserLogo');
+
 }
 
 function resetBoardComplete() {
