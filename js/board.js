@@ -486,6 +486,7 @@ function highlight(id) {
  */
 function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
+    document.getElementById('overlay').style.display = "block";
     setOnSubmitForm(status);
 }
 
