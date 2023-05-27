@@ -111,8 +111,8 @@ function cancelAddNewCat() {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
-    addEventListenerToSelectBoxFor('categoryBox','categories');
-    // addEvenListenersToSelectfor(categories,'categories');
+    addEventListenerToSelectBoxFor('categoryBox','categories', '');
+    addEvenListenersToSelectfor(categories,'categories', '');
     save();
     dropDownCat = false;
 }
