@@ -112,7 +112,7 @@ function cancelAddNewCat() {
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
     addEventListenerToSelectBoxFor('categoryBox','categories');
-    addEvenListenersToSelectfor(categories,'categories');
+    // addEvenListenersToSelectfor(categories,'categories');
     save();
     dropDownCat = false;
 }
@@ -306,7 +306,7 @@ function setStyleOfSelectedUsers(edit) {
  */
 function hideUserItems(edit) {
     if (isContainingClassDnone('Assigned toassignedTo' + edit)) toggleUsersDropDown('invite','Assigned toassignedTo');
-    else toggleUsersDropDown('Assigned toassignedTo','invite');
+    else toggleUsersDropDown('Assigned toassignedTo' + edit,'invite');
     dropDownAssign = false;
 }
 

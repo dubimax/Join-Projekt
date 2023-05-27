@@ -98,8 +98,10 @@ function setActiveColor(id) {
 
 /** Clears all input fields and resets relevant UI elements. */
 function clearAllInputs(board) {
+    if(!board) board = '';
     clearFields(board, 'inputTitle', 'inputDescription', 'inputDate', 'newSubtasks');
     clearLists('list-assigned-user', assignedTo);
+    usersAssignedTo = [];
     cancelAddNew('addNewCat');
     cancelAddNew('assignedTo');
     cancelAddNew('addNewSubTask');
@@ -292,7 +294,7 @@ function setUnCheckedToSelectUser(j, edit) {
 function setCheckedToSelectUser(j, edit) {
     usersAssignedTo.push(users[j]['name']);
     document.getElementById(users[j]['name'] + edit).children[0].checked = true;
-    setAssignedCircle(users[j] ,edit);
+    setAssignedCircle(users[j]['name'] ,edit);
 }
 
 /**
@@ -300,7 +302,7 @@ function setCheckedToSelectUser(j, edit) {
  * @param {number} j - The index of the user to check.
  * @returns {boolean} - Indicates whether the user is assigned or not.
  */
-function isUserAssigned(j, edit) {
+function isUserAssigned(j) {
     return usersAssignedTo.includes(users[j]['name']);
 }
 
