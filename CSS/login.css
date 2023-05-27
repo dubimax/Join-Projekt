@@ -339,7 +339,7 @@ p {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.clickHereLink{
+.clickHereLink {
     color: #29ABE2;
 }
 
@@ -418,7 +418,7 @@ p {
     }
 
     .notJoinUserContainer {
-        margin-top: 676px !important;
+        margin-top: 73vh !important;
     }
 
     .frameStyle {
@@ -431,7 +431,7 @@ p {
         height: 41px;
     }
 
-    .inputField input{
+    .inputField input {
         font-size: 14px !important;
     }
 
@@ -488,7 +488,8 @@ p {
         width: 88px;
         height: 0px;
     }
-    .lineForgotMyPassword{
+
+    .lineForgotMyPassword {
         margin-top: 24px;
     }
 
@@ -499,7 +500,7 @@ p {
         margin-bottom: 0;
     }
 
-    .btnSendMeMail{
+    .btnSendMeMail {
         width: 180px;
         font-size: 16px;
     }
@@ -507,9 +508,77 @@ p {
     /* Animation-Responsive */
     .start-overlay {
         background-color: #2A3647;
+        top: 0;
     }
 
     .start-logo {
         content: url("../img/LogoWhiteGross.png");
+
+    }
+}
+
+@media (max-height:800px) {
+
+    .loginHeaderContainer img {
+        width: 56px;
+        height: 70px;
+    }
+
+    .notJoinUserContainer {
+        margin-top: 70vh !important;
+    }
+
+    .frameStyle {
+        height: 60%;
+    }
+
+    form {
+        margin-top: -15px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .inputField {
+        margin-top: 0;
+        margin-bottom: 5%;
+    }
+
+    .containerRememberAndForgot {
+        margin-top: 0;
+        margin-bottom: 3%;
+    }
+
+    .containerCbRememberMe {
+        margin-top: 3%;
+    }
+
+    .rememberMe {
+        margin: 0;
+    }
+
+    .btnLoginAndSignUp {
+        width: 155px;
+        height: 43px;
+        margin-bottom: 3%;
+    }
+
+    .btnGuest {
+        width: 155px;
+        height: 43px;
+    }
+
+    #forgotMyPasswordFrame {
+        height: 60%;
+    }
+
+    .forgotMyPasswordText {
+        margin-bottom: 5%;
+        margin-top: 5%;
+    }
+
+    .start-overlay {
+        top: 0;
     }
 }
