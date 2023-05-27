@@ -111,8 +111,8 @@ function cancelAddNewCat() {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories');
-    addEventListenerToSelectBoxFor('categoryBox','categories', '');
-    addEvenListenersToSelectfor(categories,'categories', '');
+    addEventListenerToSelectBoxFor('categoryBox', 'categories', '');
+    addEvenListenersToSelectfor(categories, 'categories', '');
     save();
     dropDownCat = false;
 }
@@ -123,7 +123,7 @@ function cancelAddNewCat() {
  */
 function showDropDownItems(usedItems, edit) {
     if (usedItems == 'categories') showCategoryItems();
-    if (usedItems + edit == 'users'+ edit) showUsersItems(edit);
+    if (usedItems + edit == 'users' + edit) showUsersItems(edit);
 }
 
 /**
@@ -239,7 +239,6 @@ function showImpressumRespo() {
 function closeAtContacts() {
     addDisplayNone('addTaskAtContacts');
     removeMessage();
-    window.location.href = './board.html'
 }
 
 function closeTaskAtBoard() {
@@ -250,7 +249,11 @@ function closeTaskAtBoard() {
 }
 
 function removeMessage() {
-    setTimeout(() => removeID('confirmMessage'), 1000);
+    setTimeout(() => {
+        removeID('confirmMessage');
+        window.location.href = './board.html';
+    }, 1000);
+
 }
 
 /**
@@ -279,7 +282,7 @@ function addEventListenerDocumentLogoutButton(e) {
 function removeLogoutButton() {
     removeEventListenerDocumentLogoutButton();
     document.getElementById('optionsMenu').remove();
-} 
+}
 
 function removeEventListenerDocumentLogoutButton() {
     let meineDiv = document.getElementById('optionsMenu')
@@ -305,8 +308,8 @@ function setStyleOfSelectedUsers(edit) {
  * Hides the user items in the dropdown.
  */
 function hideUserItems(edit) {
-    if (isContainingClassDnone('Assigned toassignedTo' + edit)) toggleUsersDropDown('invite','Assigned toassignedTo');
-    else toggleUsersDropDown('Assigned toassignedTo' + edit,'invite');
+    if (isContainingClassDnone('Assigned toassignedTo' + edit)) toggleUsersDropDown('invite', 'Assigned toassignedTo');
+    else toggleUsersDropDown('Assigned toassignedTo' + edit, 'invite');
     dropDownAssign = false;
 }
 
@@ -322,7 +325,7 @@ function setUserItemsandShow(i, edit) {
 /**
  * toggles the users dropdown.
  */
-function toggleUsersDropDown(showID,hideID) {
+function toggleUsersDropDown(showID, hideID) {
     removeDisplayNone(showID);
     addDisplayNone(hideID);
 }
@@ -332,7 +335,7 @@ function toggleUsersDropDown(showID,hideID) {
  */
 function setUserItems(edit) {
     removeDisplayNone('Assigned toassignedTo' + edit);
-    document.getElementById('assignedTo'+ edit).style = `height:unset;`;
+    document.getElementById('assignedTo' + edit).style = `height:unset;`;
     removeDisplayNone('invite');
     dropDownAssign = true;
 }
