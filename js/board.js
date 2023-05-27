@@ -32,6 +32,7 @@ function updateBoardHTML() {
 }
 
 function resetBoardComplete() {
+    // resetBoard();
     for (let i = 0; i < document.getElementById('boardContainer').children.length; i++) {
         if (document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
     }
@@ -369,8 +370,6 @@ function hideEditCard(status, index) {
     addDisplayNone('openCardTitle' + status + index);
     addDisplayNone('openCardDescription' + status + index);
     removeDisplayNone('taskStatusCategory' + status + index);
-    
-
 }
 
 /**
@@ -394,9 +393,10 @@ function editThisTask(index, stati) {
     editTaskData(index, stati);
     addDisplayNone('openCard' + stati + index);
     addDisplayNone('overlay');
+    closeOpenCard(stati, index);
     save();
-    pushToDatabase();
     updateBoardHTML();
+    pushToDatabase();
 }
 
 /**
