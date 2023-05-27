@@ -12,17 +12,20 @@ async function initBoard() {
     generateAddTaskHTML('addTaskAtBoard', '');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
+    addUserAcronyms('assignedUserLogo');
+
 }
 
 /**
  * Uptade the Board Page
  */
 function updateBoardHTML() {
+    resetBoardComplete();
+
     addArea('toDo');
     addArea('inProgress');
     addArea('awaitingFeedback');
     addArea('done');
-    addUserAcronyms('assignedUserLogo');
     taskDetails();
     setStyleProgressbar();
 }
@@ -38,18 +41,19 @@ function resetBoardComplete() {
  * @param {string} id - The ID of the container to which the task areas will be added.
  */
 function addArea(id) {
-    let area = tasks.filter(t => t['status'] == id);
+    let area = [];
+    area = tasks.filter(t => t['status'] == id);
     setInnerHTML(id, '');
-    for (let index = 0; index < area.length; index++) addInnerHTML(id, generateTodoHTML(area[index], id));
+    for (let index = 0; index < area.length; index++) {
+        if(!document.getElementById('openCard' + id + index)) addInnerHTML(id, generateTodoHTML(area[index], id));
+    }
 }
 
 /**
  * Adds task details for all tasks.
  */
 function taskDetails() {
-    resetBoardComplete();
     for (let i = 0; i < tasks.length; i++) addTaskDetail(i);
-    addUserAcronyms('assignedUserLogoOpen');
 }
 
 /**
@@ -57,8 +61,10 @@ function taskDetails() {
  * @param {number} i - The index of the task in the tasks array.
  */
 function addTaskDetail(i) {
-    addInnerHTML('boardContainer', generateOpenCardHTML(tasks[i], tasks[i]['status']));
-    setRowCount(tasks[i]['status'], i);
+    if(!document.getElementById('openCard'+ tasks[i]['status'] + i )) {
+        addInnerHTML('boardContainer', generateOpenCardHTML(tasks[i], tasks[i]['status']));
+        setRowCount(tasks[i]['status'], i);
+    }
 }
 
 /**
@@ -187,7 +193,7 @@ function addUserAcronyms(id) {
  * @param {number} j - The index of the assigned user within the isAssigned array.
  */
 function addNamesToCard(id, i, index, status, j) {
-    addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer'));
+    addInnerHTML(id + status + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainer'));
 }
 
 /**
@@ -314,7 +320,6 @@ function setDataForEditCard(status, elementIndex, task, aID) {
     generateOptionsHTML(users, 'users', 'Edit');
     addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);
-
     setStyles(aID + 'Board', 'Board');
     editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
     editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
@@ -323,7 +328,6 @@ function setDataForEditCard(status, elementIndex, task, aID) {
     addEventListenerToSelectBoxFor('assignedToEdit', 'users','Edit');
     addEvenListenersToSelectfor(users, 'users', 'Edit');
     assigned = [];
-    
 }
 
 /**
@@ -364,6 +368,8 @@ function hideEditCard(status, index) {
     addDisplayNone('openCardTitle' + status + index);
     addDisplayNone('openCardDescription' + status + index);
     removeDisplayNone('taskStatusCategory' + status + index);
+    
+
 }
 
 /**
@@ -430,10 +436,17 @@ function editEditField(status, elementIndex, id, addClass) {
  * @param {number} index - The index of the task element.
  */
 function closeOpenCard(status, index) {
+    // for(let i = 0; i < users.length;i++){
+    //     if(document.getElementById(users[i]['name'] + 'Edit')) document.getElementById(users[i]['name'] + 'Edit').removeEventListener('click',() => setChecked(i, 'Edit')  );
+    // }
     addDisplayNone('openCard' + status + index);
     document.getElementById('overlay').style.display = "none";
+    usersAssignedTo = [];
+    assigned = [];
+    dropDownAssign = false;
     save();
     pushToDatabase();
+    clearAllInputs();
     updateBoardHTML();
 }
 

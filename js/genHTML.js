@@ -593,7 +593,7 @@ function addCloseBtnToAddTaskAtContacts(overlay) {
  * Adds a close button to the "Add Task" overlay at the board.
  */
 function addCloseBtnToAddTaskAtBoard() {
-    addInnerHTML('addTaskAtBoard', `<div onclick="addDisplayNone('addTaskAtBoard')" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
+    addInnerHTML('addTaskAtBoard', `<div onclick="addDisplayNone('addTaskAtBoard'),clearAllInputs()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
 }
 
 /**
