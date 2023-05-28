@@ -150,7 +150,7 @@ function addUserAcronyms(id) {
  */
 function addNamesToOpenCard(id, i, index, status, j) {
     addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen'));
-    addInnerHTML(tasks[index]['category'] + 'assignedToContainerOpen' + tasks[i]['isAssigned'][j] + status + index, generateUserNameDivHTML(tasks[i]['isAssigned'][j]));
+    addInnerHTML(tasks[index]['category'] + 'assignedToContainerOpen' + tasks[i]['isAssigned'][j] + status + index, `<div>${tasks[i]['isAssigned'][j]}</div>`);
 }
 
 /**

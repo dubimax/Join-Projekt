@@ -345,3 +345,19 @@ function showFrame(...ids) {
     removeDisplayNone(element1);
     if (element2.length > 0) removeDisplayNone(element2);
 }
+
+/** Generates the navigation links for the contacts page. */
+function generateNavigationLinksContacts() {
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+    generateNavigationLinks(color, linkname);
+}
+
+/** Adds a logout button to the page. */
+function addLogoutButton(e) {
+    let clientWidth = document.body.clientWidth;
+    document.body.innerHTML += logoutButtonHTML();
+    if (clientWidth < 1300) addInnerHTML('optionsMenu', `<div onclick="showImpressumRespo()">Legal Notice</div><div onclick="showHelpRespo()">Help</div>`);
+    addEventListenerDocumentLogoutButton(e);
+}

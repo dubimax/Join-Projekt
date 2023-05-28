@@ -7,21 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join - Contacts</title>
     <link rel="icon" type="image/png" href="../img/logo-dunkel.png">
+    <script src="../js/legalHelp.js"></script>
     <script src="../js/addTask.js"></script>
     <script src="../../smallest_backend_ever/mini_backend.js"></script>
     <script src="../js/contacts.js"></script>
-
     <script src="../js/script.js"></script>
     <script src="../js/helpers.js"></script>
-
     <script src="../js/genHTML.js"></script>
-
     <script src="../js/variables.js"></script>
     <link rel="stylesheet" href="../CSS/navi.css">
     <link rel="" href="send_mail.php">
     <link rel="stylesheet" href="../CSS/contacts.css">
     <link rel="stylesheet" href="../CSS/mediaqueries.css">
-
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
@@ -32,7 +29,6 @@
         <div id="contacts" class="details"></div>
         <div id="contactDetails" class="d-none"></div>
         <div id="addTaskAtContacts" class="d-none"></div>
-
         <div id="createNewUserAtContacts" class="d-none">
             <div onclick="addDisplayNone('createNewUserAtContacts'),addDisplayNone('overlay')" class="closeIconAtContacts addUserCloseBtn"></div>
             <div class="createNewUserAtContactsContainer">
@@ -46,7 +42,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="createNewUserAtContacts-right">
                     <form method="POST" onsubmit="onSubmitting(event)">
                         <div class="addNewContactProfileImgContainer">
@@ -60,26 +55,22 @@
                                 <img class="createNewContactNameImg" src="../img/miniProfile.png">
                             </div>
                             <div class="createNewContactNameInput">
-
                                 <input name="email" type="email" required placeholder="Email" id="createNewContactEmail">
                                 <img class="createNewContactNameImg" src="../img/miniMailIcon.png">
-
                             </div>
                             <div class="createNewContactNameInput">
-
                                 <input type="number" pattern="[0-9]*" required placeholder="Phone" id="createNewContactPhone">
                                 <img class="createNewContactNameImg" src="../img/miniPhoneIcon.png">
-
                             </div>
                             <div class="addNewContactsButtonContainer">
                                 <div onclick="addDisplayNone('createNewUserAtContacts'),addDisplayNone('overlay')" class="addNewContactCancelButton">Cancel</div>
                                 <button type="submit" class="addNewContactCreateButton">Create Contact<img
-                                        src="../img/checkIconWhite.png"></button>
+                                        src="../img/checkIconWhite.png">
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
         <div id="editUserAtContacts" class="d-none">
@@ -107,20 +98,15 @@
                                 <img class="editContactNameImg" src="../img/miniProfile.png">
                             </div>
                             <div class="editContactNameInput">
-
                                 <input type="email" required placeholder="Email" id="editContactEmail">
                                 <img class="editContactNameImg" src="../img/miniMailIcon.png">
-
                             </div>
                             <div class="editContactNameInput">
-
                                 <input type="number" pattern="[0-9]*" required placeholder="Phone" id="editContactPhone">
                                 <img class="editContactNameImg" src="../img/miniPhoneIcon.png">
-
                             </div>
                             <div class="editButtonContainer">
-                                <div class="deleteButton" id="deleteButton">
-                                    Delete
+                                <div class="deleteButton" id="deleteButton">Delete
                                 </div>
                                 <button class="editContactButton">Save</button>
                             </div>
