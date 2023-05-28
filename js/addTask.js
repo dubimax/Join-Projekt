@@ -235,7 +235,7 @@ function addEvenListenersToSelectfor(array, nameOfArray, edit) {
  */
 function addEvenListenerToSelectfor(i, array, nameFor, edit) {
     let sel = document.getElementById(array[i]['name'] + edit);
-    if (nameFor == 'users') sel.addEventListener('click', () => setChecked(i, edit));
+    if (nameFor == 'users') sel.addEventListener('click', (e) => setChecked(i, edit, e));
     if (nameFor == 'categories') sel.addEventListener('click', (e) => setEventListenerToSelectCategory(e));
 }
 
@@ -243,7 +243,8 @@ function addEvenListenerToSelectfor(i, array, nameFor, edit) {
  * Sets the checkbox of a user to checked or unchecked based on its current state.
  * @param {number} j - The index of the user in the "users" array.
  */
-function setChecked(j, edit) {
+function setChecked(j, edit, e) {
+    e.stopPropagation();
     if (!isUserAssigned(j, edit)) setCheckedToSelectUser(j, edit);
     else if (isUserAssigned(j, edit)) setUnCheckedToSelectUser(j, edit);
 }
@@ -253,7 +254,7 @@ function setChecked(j, edit) {
  * @param {number} j - Index in "users" array.
 */
 function setUnCheckedToSelectUser(j, edit) {
-    document.getElementById('colorCircleMedium' + users[j]['name'] + edit).remove();
+    removeID('colorCircleMedium' + users[j]['name'] + edit);
     document.getElementById(users[j]['name'] + edit).children[0].checked = false;
     let index = usersAssignedTo.indexOf(users[j]['name']);
     usersAssignedTo.splice(index, 1);
