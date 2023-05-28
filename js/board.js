@@ -9,10 +9,6 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
-    generateAddTaskHTML('addTaskAtBoard', '');
-    addCloseBtnToAddTaskAtBoard();
-    addEventListenerToDropDown();
-
 }
 
 /**
@@ -318,7 +314,7 @@ function setDataForEditCard(status, elementIndex, task, aID) {
     setInnerHTML('assignedUserOpen' + status + elementIndex,
         generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
     document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
-    addInviteNewContact();
+    addInviteNewContact('assignedToEdit');
     generateOptionsHTML(users, 'users', 'Edit');
     addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);
@@ -393,7 +389,7 @@ function editThisTask(index, stati) {
     editTaskData(index, stati);
     addDisplayNone('openCard' + stati + index);
     addDisplayNone('overlay');
-    closeOpenCard(stati, index);
+    closeOpenCard(stati, index, 'Board');
     save();
     updateBoardHTML();
     pushToDatabase();
@@ -436,10 +432,7 @@ function editEditField(status, elementIndex, id, addClass) {
  * @param {string} status - The status of the task.
  * @param {number} index - The index of the task element.
  */
-function closeOpenCard(status, index) {
-    // for(let i = 0; i < users.length;i++){
-    //     if(document.getElementById(users[i]['name'] + 'Edit')) document.getElementById(users[i]['name'] + 'Edit').removeEventListener('click',() => setChecked(i, 'Edit')  );
-    // }
+function closeOpenCard(status, index, board) {
     addDisplayNone('openCard' + status + index);
     document.getElementById('overlay').style.display = "none";
     usersAssignedTo = [];
@@ -447,7 +440,6 @@ function closeOpenCard(status, index) {
     dropDownAssign = false;
     save();
     pushToDatabase();
-    clearAllInputs();
     updateBoardHTML();
 }
 
@@ -486,6 +478,9 @@ function highlight(id) {
  */
 function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
+    generateAddTaskHTML('addTaskAtBoard', '');
+    addCloseBtnToAddTaskAtBoard();
+    addEventListenerToDropDown();
     setOnSubmitForm(status);
 }
 
@@ -527,8 +522,10 @@ function onlyShowFoundTasks(i, search) {
  * @param {number} ind - The index of the task to delete.
  */
 function deleteTask(status, ind) {
-    tasks.splice(ind, 1);
-    closeOpenCard(status, ind);
+    let taskToDelete = tasks.find(t => t.id == ind);
+    let taskIndex = tasks.indexOf(taskToDelete);
+    tasks.splice(taskIndex, 1);
+    closeOpenCard(status, taskIndex, '');
     pushToDatabase();
     updateBoardHTML();
 }

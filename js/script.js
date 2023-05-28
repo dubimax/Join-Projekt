@@ -242,9 +242,9 @@ function closeAtContacts() {
 }
 
 function closeTaskAtBoard() {
-    // setInnerHTML('addTaskAtBoard', '');
-    addDisplayNone('addTaskAtBoard')
-    removeMessage();
+    setInnerHTML('addTaskAtBoard', '');
+    addDisplayNone('addTaskAtBoard');
+    if(isElementExistent('confirmMessage')) removeMessage();
     updateBoardHTML();
 }
 
@@ -253,7 +253,6 @@ function removeMessage() {
         removeID('confirmMessage');
         window.location.href = './board.html';
     }, 1000);
-
 }
 
 /**

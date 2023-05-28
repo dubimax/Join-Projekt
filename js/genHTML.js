@@ -100,7 +100,7 @@ function generateAddTaskHTML(id, board) {
             </div>
         </form>
     `;
-    addInviteNewContact();
+    addInviteNewContact('assignedTo');
     generateOptionsHTML(users, 'users', '');
     addOptionWithFunction('addNewCat');
     generateOptionsHTML(categories, 'categories', '');
@@ -312,8 +312,8 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
 /**
  * Adds the "Invite Contact" option to the assignedTo dropdown menu.
  */
-function addInviteNewContact() {
-    document.getElementById('assignedTo').innerHTML += `
+function addInviteNewContact(id) {
+    document.getElementById(id).innerHTML += `
         <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">
             <span>
                 Invite Contact
@@ -593,7 +593,7 @@ function addCloseBtnToAddTaskAtContacts(overlay) {
  * Adds a close button to the "Add Task" overlay at the board.
  */
 function addCloseBtnToAddTaskAtBoard() {
-    addInnerHTML('addTaskAtBoard', `<div onclick="addDisplayNone('addTaskAtBoard'),clearAllInputs()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
+    addInnerHTML('addTaskAtBoard', `<div onclick="closeTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
 }
 
 /**
@@ -693,6 +693,7 @@ function generateUserNameDivHTML(username){
  */
 function generateOpenCardHTML(element,status) {
     let elementIndex = tasks.indexOf(element);
+    let elementID = tasks[elementIndex]['id'];
     return `
         <div class="openCard d-none" id="openCard${status}${elementIndex}">
                 <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
@@ -726,7 +727,7 @@ function generateOpenCardHTML(element,status) {
             </div>
             
             <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
-                <div class="deleteBtnOpenCard" onclick="deleteTask('${status}',${elementIndex})"></div>
+                <div class="deleteBtnOpenCard" onclick="deleteTask('${status}',${elementID})"></div>
                 <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
             </div>
             <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
