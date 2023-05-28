@@ -357,6 +357,7 @@ function randomcolor() {
 
 /** Function for generating all ContactDetails */
 function generateContactDetailsHTML() {
+    setInnerHTML('contactDetails','');
     addInnerHTML('contactDetails', genContactDetailsTitleHTML());
     addInnerHTML('contactDetails', generateContactHeadHTML());
     addInnerHTML('contactDetails', generateContactBodyHTML());
