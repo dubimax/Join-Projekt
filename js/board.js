@@ -478,9 +478,13 @@ function highlight(id) {
  */
 function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
+<<<<<<< HEAD
     generateAddTaskHTML('addTaskAtBoard', '');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
+=======
+    document.getElementById('overlay').style.display = "block";
+>>>>>>> c37e0f19ab2d01b3f9a7516c4ee5e83e8f01078d
     setOnSubmitForm(status);
 }
 

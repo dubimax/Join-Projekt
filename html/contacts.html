@@ -27,13 +27,14 @@
 
 <body onload="initContacts()">
     <div w3-include-html="../templates/navs.html"></div>
+    <div id="overlay" class="overlay d-none"></div>
     <div class="content" id="contactDetailsContainer">
         <div id="contacts" class="details"></div>
         <div id="contactDetails" class="d-none"></div>
         <div id="addTaskAtContacts" class="d-none"></div>
 
         <div id="createNewUserAtContacts" class="d-none">
-            <div onclick="addDisplayNone('createNewUserAtContacts')" class="closeIconAtContacts addUserCloseBtn"></div>
+            <div onclick="addDisplayNone('createNewUserAtContacts'),addDisplayNone('overlay')" class="closeIconAtContacts addUserCloseBtn"></div>
             <div class="createNewUserAtContactsContainer">
                 <div class="createNewUserAtContacts-left">
                     <div class="left-side-Contacts">
@@ -71,7 +72,7 @@
 
                             </div>
                             <div class="addNewContactsButtonContainer">
-                                <div onclick="addDisplayNone('createNewUserAtContacts')" class="addNewContactCancelButton">Cancel</div>
+                                <div onclick="addDisplayNone('createNewUserAtContacts'),addDisplayNone('overlay')" class="addNewContactCancelButton">Cancel</div>
                                 <button type="submit" class="addNewContactCreateButton">Create Contact<img
                                         src="../img/checkIconWhite.png"></button>
                             </div>
@@ -82,7 +83,7 @@
             </div>
         </div>
         <div id="editUserAtContacts" class="d-none">
-            <div onclick="addDisplayNone('editUserAtContacts')" class="closeIconAtContacts editUserCloseBtn"></div>
+            <div onclick="addDisplayNone('editUserAtContacts'), addDisplayNone('overlay')" class="closeIconAtContacts editUserCloseBtn"></div>
             <div class="editUserAtContactsContainer">
                 <div class="editUserAtContacts-left">
                     <div class="left-side-Contacts">
@@ -129,7 +130,7 @@
 
             </div>
         </div>
-        <div onclick="removeDisplayNone('createNewUserAtContacts')" class="addNewContactButton" id="addNewContactButton">
+        <div onclick="removeDisplayNone('createNewUserAtContacts'), removeDisplayNone('overlay')" class="addNewContactButton" id="addNewContactButton">
             New Contact
             <img src="../img/addNewContactIcon.png" class="addNewContactIcon">
         </div>

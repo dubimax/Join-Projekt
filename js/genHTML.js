@@ -585,7 +585,7 @@ function generateContactDetailsHTML() {
  */
 function addCloseBtnToAddTaskAtContacts(overlay) {
     document.getElementById('addTaskAtContacts').innerHTML += `
-    <div onclick="addDisplayNone('addTaskAtContacts')" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>
+    <div onclick="addDisplayNone('addTaskAtContacts'), addDisplayNone('overlay')" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>
     `;
 }
 
@@ -593,7 +593,11 @@ function addCloseBtnToAddTaskAtContacts(overlay) {
  * Adds a close button to the "Add Task" overlay at the board.
  */
 function addCloseBtnToAddTaskAtBoard() {
+<<<<<<< HEAD
     addInnerHTML('addTaskAtBoard', `<div onclick="closeTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
+=======
+    addInnerHTML('addTaskAtBoard', `<div onclick="addDisplayNone('addTaskAtBoard'),addDisplayNone('overlay'),clearAllInputs()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
+>>>>>>> c37e0f19ab2d01b3f9a7516c4ee5e83e8f01078d
 }
 
 /**

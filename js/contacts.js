@@ -89,6 +89,7 @@ function addEventListenerToDeleButton(id) {
 function setEventToDeleteButton(contactToDelete) {
     deleteContact(contactToDelete);
     addDisplayNone('editUserAtContacts');
+    addDisplayNone('overlay');
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
@@ -197,6 +198,7 @@ function setVissible(i) {
  */
 function showAddNewTaskAtContacts() {
     removeDisplayNone('addTaskAtContacts');
+    removeDisplayNone('overlay');
     setStyleOfCloseIconAtContacts();
 }
 
@@ -210,6 +212,7 @@ function showEditContact() {
     let oldPhone = document.getElementById('contactDetailsPhone').innerHTML;
     setEditContact(oldName, oldEmail, oldPhone);
     addEventListenerToDeleButton('deleteButton');
+    removeDisplayNone('overlay');
 }
 
 /**
@@ -279,6 +282,7 @@ function closeEditContact() {
     save();
     pushToDatabase();
     addDisplayNone('editUserAtContacts');
+    addDisplayNone('overlay');
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
