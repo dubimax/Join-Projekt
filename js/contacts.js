@@ -10,8 +10,9 @@ function setSiteActive() {
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
-    generateAddTaskHTML('addTaskAtContacts','');
-    addCloseBtnToAddTaskAtContacts('editUserCloseBtn');
+    generateAddTaskHTML('addTaskAtContacts', '');
+    addInnerHTML('addTaskAtContacts', `<div onclick="addDisplayNone('addTaskAtContacts'), addDisplayNone('overlay')" 
+        class="closeIconAtContacts editUserCloseBtn" id="closeIconAtContacts"></div>`);
     setOnSubmitForm('toDo');
     addEventListenerToDropDown();
 }
@@ -36,7 +37,7 @@ function setContactCategory(i) {
 
 /** Adds Contact Categories from A to Z */
 function addContactCategories() {
-    document.getElementById('contacts').innerHTML = '';
+    setInnerHTML('contacts', '');
     for (let i = 0; i < 26; i++) setContactCategory(i);
 }
 
@@ -161,7 +162,7 @@ function setAlphaContainerForLetter(i, letter) {
     let userMail = getContactWith(i, 'email');
     let userPhone = getContactWith(i, 'phone');
     let userColor = getContactWith(i, 'color')
-    addInnerHTML('contact' + letter.toUpperCase(),setContactsContainerHTML(contactName, userMail, userPhone, userColor));
+    addInnerHTML('contact' + letter.toUpperCase(), setContactsContainerHTML(contactName, userMail, userPhone, userColor));
     names.splice(0);
 }
 
@@ -185,7 +186,7 @@ function setVissible(i) {
 function showAddNewTaskAtContacts() {
     removeDisplayNone('addTaskAtContacts');
     removeDisplayNone('overlay');
-    setStyleOfCloseIconAtContacts();
+    toggle('closeIconAtContacts', `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`, 1300)
 }
 
 /** Shows the edit contact form by retrieving existing contact details and setting up event listeners. */
@@ -277,8 +278,8 @@ function setOldData(oldEmail, userName, userEmail, userPhone) {
 /** Hides the contact details section and performs various actions. */
 function hideContactDetails() {
     addDisplayNone('contactDetails');
-    toggle('kpmt','display:none !important;',1000);
-    toggle('addNewContactButton','display:flex !important;',1300);
+    toggle('kpmt', 'display:none !important;', 1000);
+    toggle('addNewContactButton', 'display:flex !important;', 1300);
 }
 
 /**
@@ -299,8 +300,8 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
 function resetSetContactDetails() {
     removeDisplayNone('contactHeadContainer');
     removeDisplayNone('contactInformationContainer');
-    toggle('kpmt','display:unset !important;top:120px !important;padding-left:25px !important;',1000);
-    toggle('addNewContactButton','display:none !important;',1300)
+    toggle('kpmt', 'display:unset !important;top:120px !important;padding-left:25px !important;', 1000);
+    toggle('addNewContactButton', 'display:none !important;', 1300);
     addEventListenerToDeleButton('deleteButtonContent');
 }
 
@@ -354,31 +355,10 @@ function randomcolor() {
     return '#' + ('00000' + random.toString(16)).slice(-6).toUpperCase();
 }
 
-/** Toggles the styling of an element based on the client width of the document body. */
-function toggle(id,styling,pixels) {
-    let clientWidth = document.body.clientWidth;
-    let hideButton = document.getElementById(id);
-    if (clientWidth <= pixels) hideButton.style = styling;
-}
-
-function setStyleOfCloseIconAtContacts() {
-    let clientWidth = document.body.clientWidth;
-    let hideButton = document.getElementById('closeIconAtContacts');
-    if (clientWidth <= 1300) hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`;
-}
-
-/**
- * Adds a close button to the "Add Task" overlay at contacts.
- * @param {string} overlay - The class name for the overlay.
- */
-function addCloseBtnToAddTaskAtContacts(overlay) {
-    addInnerHTML('addTaskAtContacts',`<div onclick="addDisplayNone('addTaskAtContacts'), addDisplayNone('overlay')" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>`);
-}
-
 /** Function for generating all ContactDetails */
 function generateContactDetailsHTML() {
     addInnerHTML('contactDetails', genContactDetailsTitleHTML());
-    addInnerHTML('contactDetails',generateContactHeadHTML());
-    addInnerHTML('contactDetails',generateContactBodyHTML());
+    addInnerHTML('contactDetails', generateContactHeadHTML());
+    addInnerHTML('contactDetails', generateContactBodyHTML());
     addInnerHTML('contactDetails', `<img src="../img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">`);
 }

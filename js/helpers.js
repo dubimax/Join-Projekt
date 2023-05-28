@@ -237,3 +237,10 @@ function getValue(id) {
 function isContainingClassDnone(id) {
     return document.getElementById(id).classList.contains('d-none');
 }
+
+/** Toggles the styling of an element based on the client width of the document body. */
+function toggle(id,styling,pixels) {
+    let clientWidth = document.body.clientWidth;
+    let hideButton = document.getElementById(id);
+    if (clientWidth <= pixels) hideButton.style = styling;
+}

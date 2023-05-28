@@ -1,8 +1,6 @@
 let currentDraggedElement;
 
-/**
- * Initialize the Board Page
- */
+/** Initialize the Board Page */
 async function initBoard() {
     await includeHTML();
     load();
@@ -11,9 +9,7 @@ async function initBoard() {
     updateBoardHTML();
 }
 
-/**
- * Uptade the Board Page
- */
+/** Uptade the Board Page */
 function updateBoardHTML() {
     resetBoardComplete();
     addArea('toDo');
@@ -53,8 +49,6 @@ function taskDetails() {
 function addTaskDetail(i) {
     if (!isElementExistent('openCard' + tasks[i]['status'] + i)) addInnerHTML('boardContainer', generateOpenCardHTML(tasks[i], tasks[i]['status']));
 }
-
-
 
 /**
  * Checks if the element's category matches the category at the specified index in the categories array.
@@ -223,21 +217,24 @@ function editCard(status, elementIndex, aID) {
  */
 function setDataForEditCard(status, elementIndex, task, aID) {
     setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio', 'Board'));
-    setInnerHTML('assignedUserOpen' + status + elementIndex,
-        generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
-    document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
+    setInnerHTML('assignedUserOpen' + status + elementIndex, generatesOptionsFieldHTML('label', 'Assigned to',
+        'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
     addInviteNewContact('assignedToEdit');
     generateOptionsHTML(users, 'users', 'Edit');
     addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);
     setStyles(aID + 'Board', 'Board');
-    editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
-    editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
-    editEditField(status, elementIndex, 'editDate', 'inputTextStd');
+    setEditFields(status, elementIndex);
     dropDownAssign = false;
     addEventListenerToSelectBoxFor('assignedToEdit', 'users', 'Edit');
     addEvenListenersToSelectfor(users, 'users', 'Edit');
     assigned = [];
+}
+
+function setEditFields(status, elementIndex) {
+    editEditField(status, elementIndex, 'editTitle', 'inputTextStd');
+    editEditField(status, elementIndex, 'editDescription', 'inputDescriptionField');
+    editEditField(status, elementIndex, 'editDate', 'inputTextStd');
 }
 
 /**
@@ -250,6 +247,7 @@ function setStyleForEditCard(status, elementIndex) {
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
     document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
+    document.getElementById('assignedUserOpen' + status + elementIndex).style = "overflow:hidden;"
 }
 
 /**
@@ -341,10 +339,7 @@ function closeOpenCard(status, index) {
     updateBoardHTML();
 }
 
-/**
- * Allows dropping of dragged elements by preventing the default behavior.
- * @param {Event} ev - The dragover event object.
- */
+/** Allows dropping of dragged elements by preventing the default behavior. */
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -373,20 +368,15 @@ function deleteTask(status, ind) {
     updateBoardHTML();
 }
 
-/**
- * Adds a close button to the "Add Task" overlay at the board.
- */
+/** Adds a close button to the "Add Task" overlay at the board. */
 function addCloseBtnToAddTaskAtBoard() {
     addInnerHTML('addTaskAtBoard', `<div onclick="closeTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
 }
 
-/**
- * Generates the "Add Task" images for each section in the board.
- * Clicking on the image triggers the checkStatusToSet function with the specified status.
- */
+/** Generates the "Add Task" images for each section in the board. */
 function generateAddTaskToBoardImg() {
     addInnerHTML('dragAreaToDoTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="showAddNewTaskAtBoard('toDo')">`);
     addInnerHTML('dragAreaIPTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="ipImg" onclick="showAddNewTaskAtBoard('inProgress')">`);
-    addInnerHTML('dragAreaAFTitle',`<img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="showAddNewTaskAtBoard('awaitingFeedback')">`);
+    addInnerHTML('dragAreaAFTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="showAddNewTaskAtBoard('awaitingFeedback')">`);
     addInnerHTML('dragAreaDoneTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="doneImg" onclick="showAddNewTaskAtBoard('done')">`);
 }

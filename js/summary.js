@@ -6,8 +6,7 @@ async function initSummary() {
     await includeHTML();
     generateSummary();
     generateNavigationLinks('Summary', 'Summary', 'Board', 'AddTask', 'Contacts');
-};
-
+}
 
 /**
  * Generates the summary content based on the user's login status.
@@ -22,18 +21,11 @@ function generateSummary() {
  * Activates the summary by displaying tasks, numbers, greeting, and user information.
  */
 function activeSummary() {
-    tasksInBoardBox();
+    setInnerHTML('tasksInBoardBox', tasks.length);
     tasksNumbersInBox();
     greeting();
     showUserName();
     greetingMobile();
-}
-
-/**
- * Opens the board page by redirecting to 'board.html'.
- */
-function openBoardPage() {
-    showLink('board.html');
 }
 
 /**
@@ -69,7 +61,7 @@ function greet(greeting) {
  * Displays the user's name.
 */
 function showUserName() {
-    if(indexOfEmail.name == 'Guest Guest') addDisplayNone('currentUser');
+    if (indexOfEmail.name == 'Guest Guest') addDisplayNone('currentUser');
     else setUserName(indexOfEmail.name);
 }
 
@@ -115,83 +107,30 @@ function hideGreetingsResponsive() {
  */
 function showGreetingResponsive() {
     removeDisplayNone('summaryWelcomeTextMobile');
-    if(indexOfEmail.name == 'Guest Guest') addDisplayNone('currentUserMobile');
+    if (indexOfEmail.name == 'Guest Guest') addDisplayNone('currentUserMobile');
     addDisplayNone('mainContainer');
     showUserName();
-}
-
-/**
- * Updates the number of tasks displayed in the board box.
- */
-function tasksInBoardBox() {
-    document.getElementById('tasksInBoardBox').innerHTML = tasks.length;
 }
 
 /**
  * Updates the numbers of tasks displayed in various boxes.
  */
 function tasksNumbersInBox() {
-    numberOfInPorgressBox();
-    numberOfAwaitingFeedbackBox();
-    numberOfToDoBox();
-    numberOfDoneBox();
-    numberOfUrgentTasksBox();
+    updateNumerOfBox('tasksInProgressBox', 'inProgress');
+    updateNumerOfBox('awaitingFeedbackBox', 'awaitingFeedback')
+    updateNumerOfBox('toDo', 'toDo');
+    updateNumerOfBox('done', 'done');
+    updateNumerOfBox('urgent', 'urgent');
     checkNextDueDate();
 }
 
 /**
  * Updates the number of tasks in the "In Progress" box.
  */
-function numberOfInPorgressBox() {
-    let iPBox = [];
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'inProgress') iPBox.push(tasks[i]);
-    }
-    setInnerHTML('tasksInProgressBox', iPBox.length);
-}
-
-/**
- * Updates the number of tasks in the "Awaiting Feedback" box.
- */
-function numberOfAwaitingFeedbackBox() {
-    let aFBox = [];
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'awaitingFeedback') aFBox.push(tasks[i]);
-    }
-    setInnerHTML('awaitingFeedbackBox', aFBox.length);
-}
-
-/**
- * Updates the number of tasks in the "To Do" box.
- */
-function numberOfToDoBox() {
-    let tDBox = [];
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'toDo') tDBox.push(tasks[i]);
-    }
-    setInnerHTML('toDo', tDBox.length);
-}
-
-/**
- * Updates the number of tasks in the "done" box.
- */
-function numberOfDoneBox() {
-    let dBox = [];
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['status'] == 'done') dBox.push(tasks[i]);
-    }
-    setInnerHTML('done', dBox.length);
-}
-
-/**
- * Updates the number of tasks with prio Urgent.
- */
-function numberOfUrgentTasksBox() {
-    let uBox = [];
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['prio'] == 'Urgent') uBox.push(tasks[i]);
-    }
-    setInnerHTML('urgent', uBox.length);
+function updateNumerOfBox(id, status) {
+    let box = [];
+    for (let i = 0; i < tasks.length; i++) if (tasks[i]['status'] == status) box.push(tasks[i]);
+    setInnerHTML(id, box.length);
 }
 
 /**
@@ -201,8 +140,8 @@ function checkNextDueDate() {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks.length > 0 && tasks[0] != '') setDate(i,months);
-        else setInnerHTML('upcomingDeadline',`No upcoming deadline`);
+        if (tasks.length > 0 && tasks[0] != '') setDate(i, months);
+        else setInnerHTML('upcomingDeadline', `No upcoming deadline`);
     }
 }
 
@@ -211,7 +150,7 @@ function checkNextDueDate() {
  * @param {number} i - The index of the task.
  * @param {string[]} months - An array of month names.
  */
-function setDate(i,months) {
+function setDate(i, months) {
     let dueDate = new Date(tasks[i]['dueDate']);
     let month = months[dueDate.getMonth()];
     let nextDueDate = month + ' ' + dueDate.getDate() + ', ' + dueDate.getFullYear();

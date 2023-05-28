@@ -3,11 +3,11 @@
  * @param {string} statusTag - The status tag of the task.
  */
 function createNewTask(statusTag) {
-    setSubtasksCheckedIf();
+    for (let i = 0; i < subtasks.length; i++) { if (isSubtaskChecked(i)) subtasks[i]['checked'] = true; }
     tasks.push({
         'title': getValue('inputTitle'), 'description': getValue('inputDescription'),
         'category': selectedCategory, 'isAssigned': getAssignedContacts(''), 'dueDate': getValue('inputDate'),
-        'prio': getTasksPrio(), 'subtasks': subtasks, 'id': setTaskID(), 'status': statusTag
+        'prio': getTasksPrio(), 'subtasks': subtasks, 'id': tasks.length +1, 'status': statusTag
     });
     pushToDatabase();
     clearAllInputs();
@@ -33,21 +33,7 @@ function generateAddTaskHTML(id, board) {
  */
 function getTasksPrio() {
     let taskPrio = document.getElementById(activeID).innerHTML.split(' ');
-    taskPrio = taskPrio[0];
-    return taskPrio;
-}
-
-/**
- * Generates and returns a unique ID for a new task.
- * @returns {number} - The unique ID for the new task.
- */
-function setTaskID() {
-    return tasks.length + 1;
-}
-
-/** Sets the 'checked' property of subtasks based on their current checked state. */
-function setSubtasksCheckedIf() {
-    for (let i = 0; i < subtasks.length; i++) { if (isSubtaskChecked(i)) subtasks[i]['checked'] = true; }
+    return taskPrio[0];
 }
 
 /**
