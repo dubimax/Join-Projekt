@@ -116,7 +116,9 @@ function setLoggedIn(userEmail) {
  * Performs a guest login by checking the user data.
  */
 function guestLogin() {
-    checkUserData('guest@guest.de', 'guest');
+    document.getElementById('userMailLogIn').value = 'guest@guest.de';
+    document.getElementById('userPasswordLogIn').value = 'guest';
+    login();
 }
 
 /**
