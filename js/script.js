@@ -1,7 +1,5 @@
 setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
-/**
- * Includes other HTML Files
- */
+/** Includes other HTML Files */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -67,9 +65,7 @@ function firstLetterToLowerCase(string) {
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
-/**
- * Performs the logout action.
- */
+/** Performs the logout action. */
 function logout() {
     localStorage.removeItem(indexOfEmail);
     localStorage.removeItem(loggedIn);
@@ -87,9 +83,7 @@ function cancelAddNew(id) {
     if (id == 'assignedTo') cancelAssignedTo();
 }
 
-/**
- * Cancels the assignedTo action by setting all checkboxes to false.
- */
+/** Cancels the assignedTo action by setting all checkboxes to false. */
 function cancelAssignedTo() {
     let children = document.getElementById('assignedTo').children;
     for (let i = 0; i < children.length; i++) setCheckBoxFalse(i);
@@ -103,10 +97,7 @@ function setCheckBoxFalse(i) {
     if (i > 1) document.getElementById('assignedTo').children[i].children[0].checked = false;
 }
 
-/**
- * Cancels the process of adding a new category.
- * Restores the category selection field to its initial state.
- */
+/** Cancels the process of adding a new category. */
 function cancelAddNewCat() {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
     addOptionWithFunction('addNewCat');
@@ -126,25 +117,19 @@ function showDropDownItems(usedItems, edit) {
     if (usedItems + edit == 'users' + edit) showUsersItems(edit);
 }
 
-/**
- * Shows the category items in the dropdown.
- */
+/** Shows the category items in the dropdown. */
 function showCategoryItems() {
     if (document.getElementById('CategorycategoryBox')) showCategories();
 }
 
-/**
- * Shows the categories in the dropdown.
- */
+/** Shows the categories in the dropdown. */
 function showCategories() {
     checkDropDown();
     setCategoriesVisisble();
     if (selectedCategory) removeDisplayNone(selectedCategory);
 }
 
-/**
- * Sets the visibility of the categories.
- */
+/** Sets the visibility of the categories. */
 function setCategoriesVisisble() {
     for (let i = 0; i < categories.length; i++) {
         if (isContainingClassDnone(categories[i]['name'])) removeDisplayNone(categories[i]['name']);
@@ -152,50 +137,38 @@ function setCategoriesVisisble() {
     }
 }
 
-/**
- * Checks the state of the drop-down menu and sets it to visible.
- */
+/** Checks the state of the drop-down menu and sets it to visible. */
 function checkDropDown() {
     if (!selectedCategory) setContainerCategeroyVisible();
     else setContainerVisibleAlerternate();
 }
 
-/**
- * Toggles the visibility of the container based on the state of the dropDownCat variable.
- */
+/** Toggles the visibility of the container based on the state of the dropDownCat variable. */
 function setContainerVisibleAlerternate() {
     if (!dropDownCat) showDropDonwsMenu();
     else hideDropDownWithAddNewCat();
 }
 
-/**
- * Toggles the visibility of the container category based on the state of the dropDownCat variable.
- */
+/** Toggles the visibility of the container category based on the state of the dropDownCat variable. */
 function setContainerCategeroyVisible() {
     if (!dropDownCat) showDropDonwsMenu();
     else hideDropDownWithOutAddNewCat();
 }
 
-/**
- * Hides the drop-down menu without showing the "Add New Category" option.
- */
+/** Hides the drop-down menu without showing the "Add New Category" option. */
 function hideDropDownWithOutAddNewCat() {
     addDisplayNone('addNewCat');
     dropDownCat = false;
 }
 
-/**
- * Hides the drop-down menu along with the "Add New Category" option.
- */
+/** Hides the drop-down menu along with the "Add New Category" option. */
 function hideDropDownWithAddNewCat() {
     addDisplayNone('addNewCat');
     addDisplayNone('CategorycategoryBox');
     dropDownCat = false;
 }
 
-/**
- * Shows the drop-down menu with the "Add New Category" option.
- */
+/** Shows the drop-down menu with the "Add New Category" option. */
 function showDropDonwsMenu() {
     removeDisplayNone('CategorycategoryBox');
     removeDisplayNone('addNewCat');
@@ -226,21 +199,25 @@ function setForm(addForm) {
     else if (isElementExistent('addTaskAtBoard').children.length != 0) closeTaskAtBoard();
 }
 
+/** Shows the Help and responsible information by setting the logout button and adding the legal notice. */
 function showHelpRespo() {
     setLogoutButton();
     addHelp();
 }
 
+/** Shows the impressum and responsible information by setting the logout button and adding the legal notice. */
 function showImpressumRespo() {
     setLogoutButton();
     addLegalNotice();
 }
 
+/** Closes an element at contacts by hiding related elements and removing the confirm message. */
 function closeAtContacts() {
     addDisplayNone('addTaskAtContacts');
     removeMessage();
 }
 
+/** Closes a task at the board by updating the HTML and hiding related elements. */
 function closeTaskAtBoard() {
     setInnerHTML('addTaskAtBoard', '');
     addDisplayNone('addTaskAtBoard');
@@ -249,6 +226,7 @@ function closeTaskAtBoard() {
     updateBoardHTML();
 }
 
+/** Removes the confirm message element after a delay and redirects to the board page. */
 function removeMessage() {
     setTimeout(() => {
         removeID('confirmMessage');
@@ -256,47 +234,30 @@ function removeMessage() {
     }, 1000);
 }
 
-/**
- * Shows the useritems in Dropdown menu
- */
+/**  Shows the useritems in Dropdown menu */
 function showUsersItems(edit) {
     if (!dropDownAssign) setUserItems(edit);
     else hideUserItems(edit);
     setStyleOfSelectedUsers(edit);
 }
-let targetElement;
-
+/** Adds an event listener to the document that handles clicks outside of the logout button. */
 function addEventListenerDocumentLogoutButton(e) {
     e.preventDefault();
     e.stopPropagation();
     document.addEventListener("click", (event) => {
         let optionDiv = document.getElementById('optionsMenu');
         targetElement = event.target;
-        if (optionDiv && !optionDiv.contains(targetElement)) removeLogoutButton();
+        if (optionDiv && !optionDiv.contains(targetElement)) removeID('optionsMenu');
     });
 }
 
-/**
- * Removes the logout button from the document
- */
-function removeLogoutButton() {
-    removeEventListenerDocumentLogoutButton();
-    document.getElementById('optionsMenu').remove();
-}
-
-function removeEventListenerDocumentLogoutButton() {
-    let meineDiv = document.getElementById('optionsMenu')
-    meineDiv.removeEventListener('click', () => { });
-}
-
+/** Toggles the presence of a logout button based on the existence of an element. */
 function setLogoutButton(event) {
-    if (isElementExistent('optionsMenu')) removeLogoutButton();
+    if (isElementExistent('optionsMenu')) removeID('optionsMenu');
     else addLogoutButton(event);
 }
 
-/**
- * Sets the style of the selected users in the dropdown.
- */
+/** Sets the style of the selected users in the dropdown. */
 function setStyleOfSelectedUsers(edit) {
     for (let i = 0; i < users.length; i++) {
         if (isContainingClassDnone(users[i]['name'] + edit)) setUserItemsandShow(i, edit)
@@ -304,9 +265,7 @@ function setStyleOfSelectedUsers(edit) {
     }
 }
 
-/**
- * Hides the user items in the dropdown.
- */
+/** Hides the user items in the dropdown. */
 function hideUserItems(edit) {
     if (isContainingClassDnone('Assigned toassignedTo' + edit)) toggleUsersDropDown('invite', 'Assigned toassignedTo');
     else toggleUsersDropDown('Assigned toassignedTo' + edit, 'invite');
@@ -322,17 +281,13 @@ function setUserItemsandShow(i, edit) {
     document.getElementById('assignedTo' + edit).style = `height:unset !important;`;
 }
 
-/**
- * toggles the users dropdown.
- */
+/** Toggles the users dropdown. */
 function toggleUsersDropDown(showID, hideID) {
     removeDisplayNone(showID);
     addDisplayNone(hideID);
 }
 
-/**
- * Sets the user items and shows the user dropdown.
- */
+/** Sets the user items and shows the user dropdown. */
 function setUserItems(edit) {
     removeDisplayNone('Assigned toassignedTo' + edit);
     document.getElementById('assignedTo' + edit).style = `height:unset;`;
@@ -340,9 +295,7 @@ function setUserItems(edit) {
     dropDownAssign = true;
 }
 
-/**
- * Generates a checkbox item, adds it to the list of subtasks, and clears the input field.
- */
+/** Generates a checkbox item, adds it to the list of subtasks, and clears the input field. */
 function generateCheckboxItem() {
     let isChecked;
     addInnerHTML('list-subtask', setCheckBox());
@@ -373,30 +326,12 @@ function generateOptionsHTML(array, nameOfArray, edit) {
 }
 
 /**
- * Adds a content title to an element by setting its innerHTML.
- * @param {string} title - The title to be added.
- * @param {string} id - The ID of the element.
- */
-function addContentTitle(title, id) {
-    addInnerHTML(id, `<h2>${title}</h2>`);
-}
-
-/**
  * Redirects to the specified link after saving the data.
  * @param {string} id - The URL or path of the link to be navigated to.
  */
 async function showLink(id) {
     await save();
     location.href = id;
-}
-
-/**
- * Checks if an element contains the 'd-none' class.
- * @param {string} id - The ID of the element.
- * @returns {boolean} True if the element contains the 'd-none' class, false otherwise.
- */
-function isContainingClassDnone(id) {
-    return document.getElementById(id).classList.contains('d-none');
 }
 
 /**

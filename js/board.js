@@ -54,13 +54,7 @@ function addTaskDetail(i) {
     if (!isElementExistent('openCard' + tasks[i]['status'] + i)) addInnerHTML('boardContainer', generateOpenCardHTML(tasks[i], tasks[i]['status']));
 }
 
-/**
- * Sets the currently dragged element ID.
- * @param {string} id - The ID of the element being dragged.
- */
-function startDragging(id) {
-    currentDraggedElement = id;
-}
+
 
 /**
  * Checks if the element's category matches the category at the specified index in the categories array.
@@ -106,17 +100,6 @@ function isTaskAndProgressNotZero(i, progress) {
  */
 function getProgressOfSubtasks(index) {
     return 100 / tasks[index]['subtasks'].length * getCheckedSubtasks(index);
-}
-
-/**
- * Counts the number of checked subtasks for a given task.
- * @param {number} elementIndex - The index of the task in the tasks array.
- * @returns {number} - The number of checked subtasks.
- */
-function getCheckedSubtasks(elementIndex) {
-    let count = 0;
-    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) if (isSubtaskCheckedBoard(elementIndex, i)) count++;
-    return count;
 }
 
 /**
@@ -168,17 +151,6 @@ function addUserAcronyms(id) {
 function addNamesToOpenCard(id, i, index, status, j) {
     addInnerHTML(id + tasks[i]['status'] + index, generateAssignedUserHTML(tasks[i]['isAssigned'][j], index, status, 'assignedToContainerOpen'));
     addInnerHTML(tasks[index]['category'] + 'assignedToContainerOpen' + tasks[i]['isAssigned'][j] + status + index, generateUserNameDivHTML(tasks[i]['isAssigned'][j]));
-}
-
-/**
- * Finds the color associated with the specified username.
- * @param {string} username - The username for which to find the color.
- * @returns {string|undefined} - The color associated with the username, or undefined if not found.
- */
-function findColor(username) {
-    let color;
-    users.find((user) => { if (user.name == username) color = user.color; });
-    return color;
 }
 
 /**
@@ -377,25 +349,6 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-/**
- * Moves the currently dragged element to the specified status.
- * @param {string} status - The status to move the task to.
- */
-function moveTo(status) {
-    tasks[currentDraggedElement]['status'] = status;
-    save();
-    updateBoardHTML();
-    pushToDatabase();
-}
-
-/**
- * Adds the 'dragAreaHighlight' class to the specified element to highlight it.
- * @param {string} id - The ID of the element to highlight.
- */
-function highlight(id) {
-    document.getElementById(id).classList.add('dragAreaHighlight');
-}
-
 /** Shows the "Add New Task" section on the board and populates it with necessary HTML. */
 function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
@@ -404,27 +357,6 @@ function showAddNewTaskAtBoard(status) {
     addEventListenerToDropDown();
     removeDisplayNone('overlay');
     setOnSubmitForm(status);
-}
-
-/** Searches for tasks based on the entered search query and updates the display to show only the found tasks. */
-function searchTasks() {
-    let search = document.getElementById('search').value;
-    search = search.toLowerCase();
-    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i, search);
-}
-
-/**
- * Updates the display to show only the tasks that match the search query.
- * @param {number} i - The index of the task to check.
- * @param {string} search - The search query to match against task titles and descriptions.
- */
-function onlyShowFoundTasks(i, search) {
-    let taskTitle = tasks[i]['title'];
-    let taskIndex = tasks.indexOf(tasks[i]);
-    let tDescription = tasks[i]['description'];
-    if ((taskTitle.toLowerCase().includes(search) || tDescription.toLowerCase().includes(search))) {
-        if (isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
-    } else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
 }
 
 /**

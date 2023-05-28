@@ -23,6 +23,15 @@ function getValueOf(id) {
 }
 
 /**
+ * Sets the style properties and image source for the specified element ID with the 'urgent' designation.
+ * If the provided ID matches 'id_urgent', it calls the setStyle() function to set the style properties.
+ * @param {string} id - The ID of the element to set the style properties.
+ */
+function setStyleOf(id, color, name, board) {
+    if (id == 'id_' + name + board) setStyle(id, color, name, board);
+}
+
+/**
  * Checks if an element with the specified ID exists in the DOM.
  *
  * @param {string} id - The ID of the element to check.
@@ -141,4 +150,90 @@ function getUser(i) {
  */
 function isHTMLElement(id, status, index) {
     return document.getElementById(id + status + index);
+}
+
+/**
+ * Finds the color associated with the specified username.
+ * @param {string} username - The username for which to find the color.
+ * @returns {string|undefined} - The color associated with the username, or undefined if not found.
+ */
+function findColor(username) {
+    let color;
+    users.find((user) => { if (user.name == username) color = user.color; });
+    return color;
+}
+
+/**
+ * Counts the number of checked subtasks for a given task.
+ * @param {number} elementIndex - The index of the task in the tasks array.
+ * @returns {number} - The number of checked subtasks.
+ */
+function getCheckedSubtasks(elementIndex) {
+    let count = 0;
+    for (let i = 0; i < tasks[elementIndex]['subtasks'].length; i++) if (isSubtaskCheckedBoard(elementIndex, i)) count++;
+    return count;
+}
+
+/**
+ * Sets the currently dragged element ID.
+ * @param {string} id - The ID of the element being dragged.
+ */
+function startDragging(id) {
+    currentDraggedElement = id;
+}
+
+
+/**
+ * Moves the currently dragged element to the specified status.
+ * @param {string} status - The status to move the task to.
+ */
+function moveTo(status) {
+    tasks[currentDraggedElement]['status'] = status;
+    save();
+    updateBoardHTML();
+    pushToDatabase();
+}
+
+/**
+ * Adds the 'dragAreaHighlight' class to the specified element to highlight it.
+ * @param {string} id - The ID of the element to highlight.
+ */
+function highlight(id) {
+    document.getElementById(id).classList.add('dragAreaHighlight');
+}
+
+/** Searches for tasks based on the entered search query and updates the display to show only the found tasks. */
+function searchTasks() {
+    let search = document.getElementById('search').value;
+    for (let i = 0; i < tasks.length; i++) onlyShowFoundTasks(i, search.toLowerCase());
+}
+
+/**
+ * Updates the display to show only the tasks that match the search query.
+ * @param {number} i - The index of the task to check.
+ * @param {string} search - The search query to match against task titles and descriptions.
+ */
+function onlyShowFoundTasks(i, search) {
+    let taskIndex = tasks.indexOf(tasks[i]);
+    if ((tasks[i]['title'].toLowerCase().includes(search) || tasks[i]['description'].toLowerCase().includes(search))) {
+        if (isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
+    } else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
+}
+
+/**
+ * Retrieves the value of an input element with the specified ID.
+ * @param {string} id - The ID of the input element.
+ * @returns {string} - The value of the input element.
+ */
+function getValue(id) {
+    return document.getElementById(id).value;
+}
+
+/**
+ * Checks if an element contains the 'd-none' class.
+ * @param {string} id - The ID of the element.
+ * @returns {boolean} True if the element contains the 'd-none' class, false otherwise.
+ */
+function isContainingClassDnone(id) {
+    return document.getElementById(id).classList.contains('d-none');
 }

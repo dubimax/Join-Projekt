@@ -64,7 +64,7 @@ function generateCategoryOptionHTML(nameOfArray, i){
 function generateAddTaskHTML(id, board) {
     load();
     if (loggedIn) {
-        addContentTitle('Add Task', id);
+        addInnerHTML(id, `<h2>Add Task</h2>`);
         document.getElementById(id).innerHTML += `
         <form id="submitting" onsubmit="" class="addTaskForm" >
             <div class="details detailBox">
