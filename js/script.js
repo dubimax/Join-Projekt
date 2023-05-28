@@ -244,6 +244,7 @@ function closeAtContacts() {
 function closeTaskAtBoard() {
     setInnerHTML('addTaskAtBoard', '');
     addDisplayNone('addTaskAtBoard');
+    addDisplayNone('overlay');
     if(isElementExistent('confirmMessage')) removeMessage();
     updateBoardHTML();
 }

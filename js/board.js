@@ -164,7 +164,7 @@ function openCard(index, status) {
     setInnerHTML('assignedUserLogoOpen' + status + index, '');
     addUserAcronyms('assignedUserLogoOpen');
     addSubtasksToCardOpen(status, index);
-    document.getElementById('overlay').style.display = "block";
+    removeDisplayNone('overlay');
 }
 
 /**
@@ -434,7 +434,7 @@ function editEditField(status, elementIndex, id, addClass) {
  */
 function closeOpenCard(status, index, board) {
     addDisplayNone('openCard' + status + index);
-    document.getElementById('overlay').style.display = "none";
+    addDisplayNone('overlay');
     usersAssignedTo = [];
     assigned = [];
     dropDownAssign = false;
@@ -478,13 +478,10 @@ function highlight(id) {
  */
 function showAddNewTaskAtBoard(status) {
     removeDisplayNone('addTaskAtBoard');
-<<<<<<< HEAD
     generateAddTaskHTML('addTaskAtBoard', '');
     addCloseBtnToAddTaskAtBoard();
     addEventListenerToDropDown();
-=======
-    document.getElementById('overlay').style.display = "block";
->>>>>>> c37e0f19ab2d01b3f9a7516c4ee5e83e8f01078d
+    removeDisplayNone('overlay');
     setOnSubmitForm(status);
 }
 
