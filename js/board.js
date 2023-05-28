@@ -372,3 +372,21 @@ function deleteTask(status, ind) {
     pushToDatabase();
     updateBoardHTML();
 }
+
+/**
+ * Adds a close button to the "Add Task" overlay at the board.
+ */
+function addCloseBtnToAddTaskAtBoard() {
+    addInnerHTML('addTaskAtBoard', `<div onclick="closeTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
+}
+
+/**
+ * Generates the "Add Task" images for each section in the board.
+ * Clicking on the image triggers the checkStatusToSet function with the specified status.
+ */
+function generateAddTaskToBoardImg() {
+    addInnerHTML('dragAreaToDoTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="showAddNewTaskAtBoard('toDo')">`);
+    addInnerHTML('dragAreaIPTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="ipImg" onclick="showAddNewTaskAtBoard('inProgress')">`);
+    addInnerHTML('dragAreaAFTitle',`<img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="showAddNewTaskAtBoard('awaitingFeedback')">`);
+    addInnerHTML('dragAreaDoneTitle', `<img class="cursor" src="../img/plusButtonDark.png" id="doneImg" onclick="showAddNewTaskAtBoard('done')">`);
+}

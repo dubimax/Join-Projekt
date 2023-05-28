@@ -18,3 +18,4 @@ let today = new Date().toISOString().split('T')[0];
 let usersAssignedTo = [];
 let usersAssignedToShown = [];
 let targetElement;
+let names = [];

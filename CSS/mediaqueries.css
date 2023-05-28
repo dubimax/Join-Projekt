@@ -11,8 +11,6 @@
         width: unset !important;
     }
 
-
-
     #contactDetailsContainer {
         width: unset;
         left: 0;
@@ -21,7 +19,6 @@
     .addNewContactCancelButton {
         display: none !important;
     }
-
 
     .editUserAtContacts-right form,
     .createNewUserAtContacts-right form {
@@ -135,12 +132,8 @@
         width: 100%;
         align-items: center;
         z-index: 99 !important;
-        background: rgb(245, 245, 245);
         animation: myAnimRevert 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
-
     }
-
-
 
     .addNewContactProfileImgContainer,
     .editContactProfileImgContainer {
@@ -156,12 +149,9 @@
         top: unset !important;
     }
 
-
     .left-side-Contacts img {
         display: none;
     }
-
-
 
     .addNewContactInputs,
     .editContactInputs {
@@ -191,7 +181,6 @@
         width: unset;
     }
 
-
     /* #addTaskAtBoard, */
     #addTaskAtContacts {
         position: relative !important;
@@ -209,7 +198,6 @@
         align-items: center;
         transform: unset !important;
     }
-
 
     .details {
         flex-direction: column !important;
@@ -269,8 +257,6 @@
         padding: 9px 21px !important;
     }
 
-
-
     .backArrow {
         position: absolute;
         top: 98px;
@@ -288,10 +274,8 @@
         position: absolute !important;
     }
 
-
     .createNewUserAtContactsContainer,
     .editUserAtContactsContainer {
-
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
@@ -305,8 +289,6 @@
         position: unset !important;
         width: 340px;
     }
-
-
 
     /* ===== Scrollbar CSS ===== */
     /* Firefox */
@@ -365,15 +347,6 @@
         display: none;
     }
     
-}
-
-@media (max-width:600px) {
-
-    #createNewUserAtContacts,
-    #editUserAtContacts {
-        background: rgba(245, 245, 245, 1) !important;
-    }
-
 }
 
 @media (max-width:420px) {

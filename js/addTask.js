@@ -13,6 +13,20 @@ function createNewTask(statusTag) {
     clearAllInputs();
 }
 
+function generateAddTaskHTML(id, board) {
+    load();
+    if (loggedIn) {
+        addInnerHTML(id, `<h2>Add Task</h2>`);
+        addInnerHTML(id, genAddTaskHTML(board));
+        addInnerHTML('assignedTo',generateInviteNewContactHTML());
+        generateOptionsHTML(users, 'users', '');
+        addInnerHTML('categoryBox', `<div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`);
+        generateOptionsHTML(categories, 'categories', '');
+        document.getElementById('inputDate').setAttribute('min', today);
+        addEventListenerToDropDown();
+    } else window.location.href = '../login.html';
+}
+
 /**
  * Retrieves the priority value of the active task.
  * @returns {string} The priority value of the active task.
@@ -45,10 +59,7 @@ function isSubtaskChecked(i) {
     return document.getElementById('list-subtask-' + subtasks[i]['item']).checked == true;
 }
 
-/** 
- * Initializes Add Task functionality: includes HTML, generates navigation links, Add Task HTML, and sets onSubmit form.
- * @returns {Promise<void>}
-*/
+/** Initializes Add Task functionality: includes HTML, generates navigation links, Add Task HTML, and sets onSubmit form.*/
 async function initAddTask() {
     await includeHTML();
     generateNavigationLinks('AddTask', 'Summary', 'Board', 'AddTask', 'Contacts');
@@ -197,7 +208,7 @@ function changeToInputField(id) {
 function changeToAddNewCat() {
     setInnerHTML('id_categoryBox', generatesChangedInputFieldHTML('label', 'input', 'Category',
         'inputTextStd', 'text', 'newCat', 'addNewCat', 'addCategory()', 'newCategoriesField'));
-    addColorChoser();
+    addInnerHTML('id_categoryBox', genColorChooserHTML());
     dropDown = false;
 }
 
@@ -220,10 +231,7 @@ function addEventListenerToSelectBoxFor(id, setfor, edit) {
     if (isElementExistent(id)) document.getElementById(id).addEventListener('click', () => showDropDownItems(setfor, edit));
 }
 
-/**
- * Sets the event listener to the select category element.
- * @param {Event} e - The event object.
- */
+/** Sets the event listener to the select category element. */
 function setEventListenerToSelectCategory(e) {
     let txt = e.currentTarget.attributes[1].textContent;
     setOption(txt, 'category');

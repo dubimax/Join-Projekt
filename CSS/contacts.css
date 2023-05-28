@@ -314,6 +314,12 @@
 }
 
 @media (max-width:1300px) {
+
+    #createNewUserAtContacts,
+    #editUserAtContacts {
+        background-color: unset;
+    }
+
     .contactInformationContent {
         margin-top: 0 !important;
     }
@@ -369,11 +375,13 @@
         font-size: 20px !important;
     }
 
-    .editUserAtContacts-right, .createNewUserAtContacts-right {
+    .editUserAtContacts-right,
+    .createNewUserAtContacts-right {
         width: 100% !important;
     }
 
-    .editUserAtContactsContainer, .createNewUserAtContactsContainer {
+    .editUserAtContactsContainer,
+    .createNewUserAtContactsContainer {
         width: 80% !important;
     }
 
@@ -381,17 +389,24 @@
         width: 90% !important;
     }
 
-    .addNewContactInputs, .editContactInputs {
+    .addNewContactInputs,
+    .editContactInputs {
         width: 90% !important;
     }
 
-    .editUserCloseBtn, .addUserCloseBtn {
+    .editUserCloseBtn,
+    .addUserCloseBtn {
         background-image: url('../img/closeIconWhite.png') !important;
         z-index: 10;
         right: 15% !important;
     }
 
-    #createNewContactName, #createNewContactEmail, #createNewContactPhone, #editContactName, #editContactEmail, #editContactPhone {
+    #createNewContactName,
+    #createNewContactEmail,
+    #createNewContactPhone,
+    #editContactName,
+    #editContactEmail,
+    #editContactPhone {
         width: 95% !important;
     }
 
@@ -446,11 +461,6 @@
     }
 }
 
-
-@media (max-width:1000px) {}
-
-@media (max-width:700px) {}
-
 @media (max-width:420px) {
 
     .createNewUserAtContactsContainer {
@@ -473,7 +483,8 @@
         padding: 66px 33px !important;
     }
 
-    .editUserAtContacts-right, .createNewUserAtContacts-right {
+    .editUserAtContacts-right,
+    .createNewUserAtContacts-right {
         width: 340px !important;
     }
 }
@@ -498,11 +509,13 @@
         padding: 45px 33px !important;
     }
 
-    .createNewUserAtContacts-left, .editUserAtContacts-left {
+    .createNewUserAtContacts-left,
+    .editUserAtContacts-left {
         height: 190px !important;
     }
 
-    .addNewContactTitle, .editContact {
+    .addNewContactTitle,
+    .editContact {
         font-size: 35px !important;
     }
 
@@ -521,7 +534,8 @@
         gap: 20px;
     }
 
-    .editContactsButtonContainer, .addNewContactsButtonContainer {
+    .editContactsButtonContainer,
+    .addNewContactsButtonContainer {
         margin-top: 20px !important;
         margin-bottom: 20px !important;
     }

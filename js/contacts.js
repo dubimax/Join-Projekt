@@ -1,8 +1,4 @@
-let names = [];
-
-/**
- * initialises the contacts page
- */
+/** initialises the contacts page */
 async function initContacts() {
     await includeHTML();
     generateNavigationLinks('Contacts', 'Summary', 'Board', 'AddTask', 'Contacts');
@@ -20,9 +16,7 @@ function setSiteActive() {
     addEventListenerToDropDown();
 }
 
-/**
- * Generates HTML content for Contacts page: loads resources, checks login status, sets site active if logged in, redirects to login page if not logged in.
- */
+/** Generates HTML content for Contacts page: loads resources, checks login status, sets site active if logged in, redirects to login page if not logged in. */
 function generateContactsHTML() {
     load();
     if (loggedIn) setSiteActive();
@@ -40,9 +34,7 @@ function setContactCategory(i) {
     getContactsWith(value);
 }
 
-/**
- * Adds Contact Categories from A to Z
- */
+/** Adds Contact Categories from A to Z */
 function addContactCategories() {
     document.getElementById('contacts').innerHTML = '';
     for (let i = 0; i < 26; i++) setContactCategory(i);
@@ -119,9 +111,7 @@ function getContactToDeleteButtonContent() {
  */
 function getContactsWith(startLetter) {
     names = [];
-    for (let i = 0; i < users.length; i++) {
-        if (isStartingWith(i, startLetter)) setAlphaContainer(i);
-    }
+    for (let i = 0; i < users.length; i++) if (isStartingWith(i, startLetter)) setAlphaContainer(i);
 }
 
 /**
@@ -175,9 +165,7 @@ function setAlphaContainerForLetter(i, letter) {
     names.splice(0);
 }
 
-/**
- * Sets the visibility of alpha containers based on whether they have any contacts.
- */
+/** Sets the visibility of alpha containers based on whether they have any contacts. */
 function setVisibleIfnotEmpty() {
     for (let i = 0; i < 26; i++) setVissible(i);
 }
@@ -193,19 +181,14 @@ function setVissible(i) {
     if (child[2]) removeDisplayNone('contact' + value);
 }
 
-/**
- * Removes the class "d-none" to show AddNewTaskAtContacts page
- */
+/** Removes the class "d-none" to show AddNewTaskAtContacts page */
 function showAddNewTaskAtContacts() {
     removeDisplayNone('addTaskAtContacts');
     removeDisplayNone('overlay');
     setStyleOfCloseIconAtContacts();
 }
 
-/**
- * Removes the class "d-none" to show editContacts page
- * Set the value from the selected user to the inputfields
- */
+/** Shows the edit contact form by retrieving existing contact details and setting up event listeners. */
 function showEditContact() {
     let oldName = document.getElementById('contactName').innerHTML;
     let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
@@ -228,10 +211,7 @@ function setEditContact(oldName, oldEmail, oldPhone) {
     removeDisplayNone('editUserAtContacts');
 }
 
-/**
- * Creates a new contact by retrieving input values, generating a random color, adding the contact to the users array,
- * pushing the contact to the database, and displaying a confirmation message.
- */
+/** Creates a new contact by retrieving user input, adding it to the users array, and updating the database. */
 function createNewContact() {
     let userName = getValueOf('createNewContactName');
     let userEmail = getValueOf('createNewContactEmail');
@@ -242,18 +222,14 @@ function createNewContact() {
     confirmMessage();
 }
 
-/**
- * Displays a confirmation message, hides the 'create new user' section, and removes the confirmation message after a delay.
- */
+/** Displays a confirmation message, hides the 'create new user' section, and removes the confirmation message after a delay. */
 function confirmMessage() {
     addConfirmMessage('Contact');
     addDisplayNone('createNewUserAtContacts');
     setTimeout(() => removeConfirmMessageContacts(), 1000);
 }
 
-/**
- * Performs various actions after removing the confirmation message.
- */
+/** Performs various actions after removing the confirmation message. */
 function removeConfirmMessageContacts() {
     removeID('confirmMessage');
     addContactCategories();
@@ -261,9 +237,7 @@ function removeConfirmMessageContacts() {
     save();
 }
 
-/**
- * Edits a contact by retrieving input values, getting the old email, setting old data, and closing the edit contact section.
- */
+/** Edits a contact by retrieving input values, getting the old email, setting old data, and closing the edit contact section. */
 function editContact() {
     let oldEmail = getInnerHTMLOf('contactDetailsEmail');
     let userName = getValueOf('editContactName');
@@ -275,9 +249,7 @@ function editContact() {
     setContactDetails(userName, userEmail, userPhone, user.color);
 }
 
-/**
- * Closes the edit contact section and performs various actions.
- */
+/** Closes the edit contact section and performs various actions. */
 function closeEditContact() {
     save();
     pushToDatabase();
@@ -302,9 +274,7 @@ function setOldData(oldEmail, userName, userEmail, userPhone) {
     users[oldUser]['phone'] = userPhone;
 }
 
-/**
- * Hides the contact details section and performs various actions.
- */
+/** Hides the contact details section and performs various actions. */
 function hideContactDetails() {
     addDisplayNone('contactDetails');
     toggle('kpmt','display:none !important;',1000);
@@ -325,9 +295,7 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
     resetSetContactDetails();
 }
 
-/**
- * Resets the set contact details state and performs various actions.
- */
+/** Resets the set contact details state and performs various actions. */
 function resetSetContactDetails() {
     removeDisplayNone('contactHeadContainer');
     removeDisplayNone('contactInformationContainer');
@@ -352,10 +320,7 @@ function setContactDetail(userName, userColor, userMail, userPhone) {
     document.getElementById('contactDetailsPhone').href = `tel:${userPhone}`;
 }
 
-/**
- * Hides the contact details container by adding the 'd-none' class to specific child elements.
- */
-
+/** Hides the contact details container by adding the 'd-none' class to specific child elements. */
 function hideCOntactDetailsContainer() {
     document.getElementById('contactDetailsContainer').children[5].classList.add('d-none');
     document.getElementById('navigation-top').children[1].classList.remove('d-none');
@@ -370,9 +335,8 @@ function isClientWidthSmaller350() {
 }
 
 /**
- * Sets the color of a selected element identified by the provided ID.
- * Performs additional actions such as adding contact categories, setting visibility, and updating styles.
- * @param {string} id - The ID of the selected element.
+ * Sets the background color and text color of the selected element.
+ * @param {string} id - The ID of the element to be selected.
  */
 function setColorWhenSelectet(id) {
     addContactCategories();
@@ -390,12 +354,31 @@ function randomcolor() {
     return '#' + ('00000' + random.toString(16)).slice(-6).toUpperCase();
 }
 
-/**
- * Shows the addNewContactButton element based on the client width.
- * Adjusts the style of the addNewContactButton element for smaller client widths.
- */
+/** Toggles the styling of an element based on the client width of the document body. */
 function toggle(id,styling,pixels) {
     let clientWidth = document.body.clientWidth;
     let hideButton = document.getElementById(id);
     if (clientWidth <= pixels) hideButton.style = styling;
+}
+
+function setStyleOfCloseIconAtContacts() {
+    let clientWidth = document.body.clientWidth;
+    let hideButton = document.getElementById('closeIconAtContacts');
+    if (clientWidth <= 1300) hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`;
+}
+
+/**
+ * Adds a close button to the "Add Task" overlay at contacts.
+ * @param {string} overlay - The class name for the overlay.
+ */
+function addCloseBtnToAddTaskAtContacts(overlay) {
+    addInnerHTML('addTaskAtContacts',`<div onclick="addDisplayNone('addTaskAtContacts'), addDisplayNone('overlay')" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>`);
+}
+
+/** Function for generating all ContactDetails */
+function generateContactDetailsHTML() {
+    addInnerHTML('contactDetails', genContactDetailsTitleHTML());
+    addInnerHTML('contactDetails',generateContactHeadHTML());
+    addInnerHTML('contactDetails',generateContactBodyHTML());
+    addInnerHTML('contactDetails', `<img src="../img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">`);
 }

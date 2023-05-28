@@ -1,30 +1,9 @@
 /**
- * Generates the "Add Task" images for each section in the board.
- * Clicking on the image triggers the checkStatusToSet function with the specified status.
- */
-function generateAddTaskToBoardImg() {
-    document.getElementById('dragAreaToDoTitle').innerHTML += `
-        <img class="cursor" src="../img/plusButtonDark.png" id="todoImg" onclick="showAddNewTaskAtBoard('toDo')">
-    `;
-    document.getElementById('dragAreaIPTitle').innerHTML += `
-        <img class="cursor" src="../img/plusButtonDark.png" id="ipImg" onclick="showAddNewTaskAtBoard('inProgress')">
-    `;
-    document.getElementById('dragAreaAFTitle').innerHTML += `
-        <img class="cursor" src="../img/plusButtonDark.png" id="awImg" onclick="showAddNewTaskAtBoard('awaitingFeedback')">
-    `;
-    document.getElementById('dragAreaDoneTitle').innerHTML += `
-    <img class="cursor" src="../img/plusButtonDark.png" id="doneImg" onclick="showAddNewTaskAtBoard('done')">
-`;
-}
-
-/**
  * Generates HTML for a checkbox item.
  * @returns {string} The HTML code for the checkbox item.
  */
 function setCheckBox() {
-    return `
-        <li><input type="checkbox" id="list-subtask-${getValueOf('newSubtasks')}" value="${getValueOf('newSubtasks')}"> ${getValueOf('newSubtasks')}</li>
-    `;
+    return `<li><input type="checkbox" id="list-subtask-${getValueOf('newSubtasks')}" value="${getValueOf('newSubtasks')}"> ${getValueOf('newSubtasks')}</li>`;
 }
 
 /**
@@ -35,10 +14,10 @@ function setCheckBox() {
  */
 function generateTheOptionHTML(nameOfArray, content, edit) {
     return `
-            <div class="cl_${nameOfArray} d-none" id="${content}${edit}" value="${content}">
-                ${content} 
-                <input type="checkbox" value="${content}">
-            </div>
+        <div class="cl_${nameOfArray} d-none" id="${content}${edit}" value="${content}">
+            ${content} 
+            <input type="checkbox" value="${content}">
+        </div>
     `;
 }
 
@@ -48,7 +27,7 @@ function generateTheOptionHTML(nameOfArray, content, edit) {
  * @param {number} i - The index of the category.
  * @returns {string} The HTML for the category option.
  */
-function generateCategoryOptionHTML(nameOfArray, i){
+function generateCategoryOptionHTML(nameOfArray, i) {
     return `
         <div class="cl_${nameOfArray} d-none" id="${getCategory(i)}" value="${getCategory(i)}" >
             ${getCategory(i)}
@@ -57,72 +36,46 @@ function generateCategoryOptionHTML(nameOfArray, i){
     `;
 }
 
-/**
- * Generates the HTML for the "Add Task" section.
- * @param {string} id - The ID of the element to append the HTML content.
- */
-function generateAddTaskHTML(id, board) {
-    load();
-    if (loggedIn) {
-        addInnerHTML(id, `<h2>Add Task</h2>`);
-        document.getElementById(id).innerHTML += `
-        <form id="submitting" onsubmit="" class="addTaskForm" >
-            <div class="details detailBox">
-                <div class="detailBox-left">
-                    ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
-                    ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
-                    ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
-                    ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
-                    <div class="p-relative d-flex align-c">
-                        <list class="d-flex" id="list-assigned-user">
-                        </list>
-                    </div>
-                </div>
-                <div class="border-1px-solid"></div>
-                <div class="detailBox-right">
-                    ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-                    ${generateLabelsHTML('label', 'Prio','')} 
-                    ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
-                    <div class="p-relative d-flex align-c">
-                        <list class="" id="list-subtask">
-                        </list>
-                    </div>
-                    <div class="d-flex align-c container-btns">
-                        <div class="clearButton" onclick="clearAllInputs('${board}')">
-                            Clear
-                        </div>
-                        <button type="submit" class="createTaskBtn">
-                            Create Task  
-                            <img class="" src="../img/checkIconWhite.png">
-                        </button>
-                    </div>
+function genAddTaskHTML(board) {
+    return `
+    <form id="submitting" onsubmit="" class="addTaskForm" >
+        <div class="details detailBox">
+            <div class="detailBox-left">
+                ${generatesInputFieldHTML('label', 'input', 'Title', 'inputTextStd', 'text', 'inputTitle', 'Enter a title')}
+                ${generatesTextareaFieldHTML('label', 'textarea', 'Description', 'Enter a description')}
+                ${generatesOptionsFieldHTML('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category')}
+                ${generatesOptionsFieldHTML('label', 'Assigned to', 'dropDownMenuField', 'assignedTo', './img/dropdownIcon.png', 'contacts to assign')}
+                <div class="p-relative d-flex align-c">
+                    <list class="d-flex" id="list-assigned-user">
+                    </list>
                 </div>
             </div>
-        </form>
-    `;
-    addInviteNewContact('assignedTo');
-    generateOptionsHTML(users, 'users', '');
-    addOptionWithFunction('addNewCat');
-    generateOptionsHTML(categories, 'categories', '');
-    document.getElementById('inputDate').setAttribute('min',today);
-    addEventListenerToDropDown();
-    } else window.location.href = '../login.html';
+            <div class="border-1px-solid"></div>
+            <div class="detailBox-right">
+                ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
+                ${generateLabelsHTML('label', 'Prio', '')} 
+                ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
+                <div class="p-relative d-flex align-c">
+                    <list class="" id="list-subtask">
+                    </list>
+                </div>
+                <div class="d-flex align-c container-btns">
+                    <div class="clearButton" onclick="clearAllInputs('${board}')">
+                        Clear
+                    </div>
+                    <button type="submit" class="createTaskBtn">
+                        Create Task  
+                        <img class="" src="../img/checkIconWhite.png">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+`;
 }
 
-/**
- * Adds a new option to the category dropdown field with a function to handle the click event.
- * @param {string} id - The ID of the option.
- */
-function addOptionWithFunction(id) {
-    document.getElementById('categoryBox').innerHTML += `
-            <div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`;
-}
-
-/**
- * Adds color choices to the category box in the "Add Task" form.
- */
-function addColorChoser() {
-    document.getElementById('id_categoryBox').innerHTML += `
+function genColorChooserHTML() {
+    return `
     <div class="d-flex">
         <a onclick="setActiveColor('8AA4FF')" id="8AA4FF" class="colorCircle"style="background-color:#8AA4FF;"></a>
         <a onclick="setActiveColor('FF0000')" id="FF0000" class="colorCircle"style="background-color:#FF0000;"></a>
@@ -134,35 +87,18 @@ function addColorChoser() {
     `;
 }
 
-/**
- * Adds a new category option with a corresponding function to the category dropdown menu.
- * @param {string} id - The ID of the new category option.
- */
-function generateContactDetailsTitle() {
-    document.getElementById('contactDetails').innerHTML = `
+function genContactDetailsTitleHTML() {
+    return `
     <div class="contactsTitleContainer">
         <h2 class="contactsTitle"">Contacts</h2>
         <div class="fillerDiv"></div>
         <h4>Better with a team</h4>
     </div>
-`;
-}
-
-/**
- * Adds a back arrow button to the contact details section and attaches an event listener to hide the contact details.
- */
-function hideContactDetailsButton() {
-    document.getElementById('contactDetails').innerHTML += `
-        <img src="../img/arrowBackBlack.png" onclick="hideContactDetails()" class="backArrow">
     `;
 }
 
-/**
- * Generates the contact head section in the contact details.
- * It includes the contact's logo, name, and an option to add a new task for the contact.
- */
-function generateContactHead() {
-    document.getElementById('contactDetails').innerHTML += `
+function generateContactHeadHTML() {
+    return `
     <div class="contactHeadContainer d-none" id="contactHeadContainer">
         <div class="colorCircle-big" id="contactDetailsLogo" style="background-color:#8AA4FF;">AB</div>
         <div class="contactHead">
@@ -176,12 +112,8 @@ function generateContactHead() {
     `;
 }
 
-/**
- * Generates the contact body section in the contact details.
- * It includes contact information such as email and phone, and an option to edit or delete the contact.
- */
-function generateContactBody() {
-    document.getElementById('contactDetails').innerHTML += `
+function generateContactBodyHTML() {
+    return `
     <div class="contactInformationContainer d-none" id="contactInformationContainer">
         <div class="contactInformationTitle">
             <span>Contact Information</span>
@@ -211,7 +143,7 @@ function generateContactBody() {
  * @param {string} headline - The headline for the labels section.
  * @returns {string} - The generated HTML for the labels.
  */
-function generateLabelsHTML(field, headline,board) {
+function generateLabelsHTML(field, headline, board) {
     return `
     <div class="detail">
         <${field}>${headline}</${field}>
@@ -274,7 +206,7 @@ function generatesInputFieldHTML(field1, field2, headline, properties, type, id,
  * @param {string} newclass - The CSS class for the change container.
  * @returns {string} - The generated HTML for the input field with change option.
  */
-function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick,newclass) {
+function generatesChangedInputFieldHTML(field1, field2, headline, properties, type, id, restoreID, atClick, newclass) {
     return `
     <${field1}>${headline}</${field1}>
     <${field2} class="${properties}" type="${type}" id="${id}" >
@@ -309,17 +241,14 @@ function generatesOptionsFieldHTML(field1, headline, properties, id, source, sel
     `;
 }
 
-/**
- * Adds the "Invite Contact" option to the assignedTo dropdown menu.
- */
-function addInviteNewContact(id) {
-    document.getElementById(id).innerHTML += `
-        <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">
-            <span>
-                Invite Contact
-            </span>
-            <img src="../img/invite.png" style="width: 15px;height: 15px;object-fit: contain;">
-        </div>
+function generateInviteNewContactHTML() {
+    return `
+    <div class="cl_users d-none" id="invite" onclick="showLink('contacts.html')">
+        <span>
+            Invite Contact
+        </span>
+        <img src="../img/invite.png" style="width: 15px;height: 15px;object-fit: contain;">
+    </div>
     `;
 }
 
@@ -428,12 +357,10 @@ function addHelp() {
             </div>
         </div>
     </div>
-        `;
+`;
 }
 
-/**
- * Adds a legal notice section to the webpage.
- */
+/** Adds a legal notice section to the webpage. */
 function addLegalNotice() {
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
@@ -508,7 +435,6 @@ function generateSelectedNavigationLinkHTML(linkname) {
  * @param {string} linkname - The name of the navigation link.
  * @returns {string} The generated HTML code for the unselected navigation link.
  */
-
 function generateUnSelectedNavigationLinkHTML(linkname) {
     return `
     <a onclick="showLink('${firstLetterToLowerCase(linkname)}.html')" target="_self" class="navigation-left-link" id="show${linkname}">
@@ -516,9 +442,7 @@ function generateUnSelectedNavigationLinkHTML(linkname) {
     `;
 }
 
-/**
- * Adds a logout button to the page.
- */
+/** Adds a logout button to the page. */
 function addLogoutButton(e) {
     let clientWidth = document.body.clientWidth;
     document.body.innerHTML += `
@@ -533,7 +457,6 @@ function addLogoutButton(e) {
         <div onclick="showHelpRespo()">Help</div>`;
     }
     addEventListenerDocumentLogoutButton(e);
-
 }
 
 /**
@@ -570,56 +493,14 @@ function setContactsContainerHTML(contactName, userMail, userPhone, userColor) {
 }
 
 /**
- * Function for generating all ContactDetails
- */
-function generateContactDetailsHTML() {
-    generateContactDetailsTitle();
-    generateContactHead();
-    generateContactBody();
-    hideContactDetailsButton();
-}
-
-/**
- * Adds a close button to the "Add Task" overlay at contacts.
- * @param {string} overlay - The class name for the overlay.
- */
-function addCloseBtnToAddTaskAtContacts(overlay) {
-    document.getElementById('addTaskAtContacts').innerHTML += `
-    <div onclick="addDisplayNone('addTaskAtContacts'), addDisplayNone('overlay')" class="closeIconAtContacts ${overlay}" id="closeIconAtContacts"></div>
-    `;
-}
-
-/**
- * Adds a close button to the "Add Task" overlay at the board.
- */
-function addCloseBtnToAddTaskAtBoard() {
-    addInnerHTML('addTaskAtBoard', `<div onclick="closeTaskAtBoard()" class="closeIconAtContacts" id="closeIconAtContacts"></div>`);
-}
-
-/**
  * Generates HTML for an assigned circle element with the specified username.
  * @param {Object} username - The username object.
  * @param {string} username.name - The username.
  * @param {string} username.color - The color for the circle background.
  * @returns {string} The HTML for the assigned circle element.
  */
-function setAssignedCircleHTML(username, edit) {
-    return `
-    <div class="colorCircleMedium" id="colorCircleMedium${username.name}${edit}" style="background:${username.color}">${getFirstLettersOfName(username.name)}</div>
- `;
-}
-
-/**
- * Generates the HTML for the assigned circle element with the specified username.
- * @param {string} username - The username.
- * @returns {string} The HTML for the assigned circle element.
- */
-function setStyleOfCloseIconAtContacts() {
-    let clientWidth = document.body.clientWidth;
-    let hideButton = document.getElementById('closeIconAtContacts');
-    if (clientWidth <= 1300) {
-        hideButton.style = `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`;
-    }
+function setAssignedCircleHTML(user, edit) {
+    return `<div class="colorCircleMedium" id="colorCircleMedium${user.name}${edit}" style="background:${user.color}">${getFirstLettersOfName(user.name)}</div>`;
 }
 
 /**
@@ -638,10 +519,11 @@ function setConfirmMessage(text) {
  */
 function generateTodoHTML(element, status) {
     let elementIndex = tasks.indexOf(element);
-    return /*html*/`
+    return `
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
         <div style="background:${getCategoryColor(elementIndex)}" class="taskStatus" id="cardTaskStatus">
-            ${element['category']}</div>
+            ${element['category']}
+        </div>
         <div class="taskTitle" id="cardTaskTitle">
             ${element['title']}
         </div>
@@ -649,16 +531,15 @@ function generateTodoHTML(element, status) {
             ${element['description']}
         </div>  
         <div class="barContainer">
-        <div class="bar" id="progressbar${element['status']}${elementIndex}">
+            <div class="bar" id="progressbar${element['status']}${elementIndex}">
+            </div>
+            <div class="taskProgressbar">
+                ${getCheckedSubtasks(elementIndex)}/${element['subtasks'].length} Done 
+            </div>   
         </div>
-        <div class="taskProgressbar">
-            ${getCheckedSubtasks(elementIndex)}/${element['subtasks'].length} Done 
-        </div>   
-       </div>
         <div class="containerUserAndPrio">
             <div class="assignedUser" id="assignedUserLogo${element['status']}${elementIndex}">
             </div>
-
             <div class="taskPrio">
                 <img src="../img/${element['prio'].toLowerCase()}.png">
             </div>
@@ -666,14 +547,14 @@ function generateTodoHTML(element, status) {
     </div>`;
 }
 
-function generateProgresstStyleHTML(progress, difference){
+function generateProgresstStyleHTML(progress, difference) {
     return `background:linear-gradient(to right,#29ABE2 ${progress}%,#F4F4F4 ${difference}%);`;
 }
 
 function generateAssignedUserHTML(username, index, status, id) {
     let category = tasks[index]['category'];
     let color = findColor(username);
-    return /*html*/`
+    return `
     <div class="assignedToContainer" id="${category}${id}${username}${status}${index}">
         <div class="colorCircleMedium boardCircle" style="background:${color}">
             ${getFirstLettersOfName(username)} 
@@ -682,7 +563,7 @@ function generateAssignedUserHTML(username, index, status, id) {
     `;
 }
 
-function generateUserNameDivHTML(username){
+function generateUserNameDivHTML(username) {
     return `<div>${username}</div>`;
 }
 
@@ -691,17 +572,15 @@ function generateUserNameDivHTML(username){
  * @param {*} element elemts of the card 
  * @returns the bigger card with more information
  */
-function generateOpenCardHTML(element,status) {
+function generateOpenCardHTML(element, status) {
     let elementIndex = tasks.indexOf(element);
     let elementID = tasks[elementIndex]['id'];
     return `
         <div class="openCard d-none" id="openCard${status}${elementIndex}">
-                <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
-
+            <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
             <div id="taskStatusCategory${status}${elementIndex}" style="background:${getCategoryColor(elementIndex)}" class="taskStatusOpen">
                 ${element['category']}
-            </div>
-            
+            </div>         
             <div>
                 <label id="openCardTitle${status}${elementIndex}" class="d-none editcard">Title</label>
                 <textarea class="taskTitleOpen" id="editTitle${status}${elementIndex}" readonly wrap="hard">${element['title']}</textarea>
@@ -721,23 +600,22 @@ function generateOpenCardHTML(element,status) {
             <div id="editSubtasksContainer${status}${elementIndex}">
             </div>  
             <div class="taskAssignedUserOpen" id="assignedUserOpen${status}${elementIndex}"> 
-            <span class="taskLabelOpen">Assigned to: </span> 
-
-            <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
+                <span class="taskLabelOpen">Assigned to: </span> 
+                <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${elementIndex}"></label>
             </div>
-            
             <div class="editDeleteBtnOpen" id="editDeleteBtnOpen${status}${elementIndex}">
                 <div class="deleteBtnOpenCard" onclick="deleteTask('${status}',${elementID})"></div>
                 <div class="editBtnOpenCard"  onclick="editCard('${status}',${elementIndex},'id_${element['prio'].toLowerCase()}')"></div>
             </div>
-            <div class="editSaveBtnOpenContainer"> <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
+            <div class="editSaveBtnOpenContainer"> 
+                <button class="editSaveBtnOpen d-none" id="editSaveBtnOpen${status}${elementIndex}" onclick="editThisTask(${elementIndex},'${status}')">
                     Ok<img src="../img/okWhite.png">
                 </button>
             </div>
         </div>`;
 }
 
-function addCheckBoxAtBoardHTML(index,i,status) {
+function addCheckBoxAtBoardHTML(index, i, status) {
     return `
         <div> 
             <input type="checkbox"class="taskSubtasksOpen" onchange="setSubtaskChecked('${status}', ${index}, ${i})"
@@ -754,15 +632,14 @@ function resetTaskPrioHTML(element) {
     `;
 }
 
-function resetAssignedHTML(status,index){
+function resetAssignedHTML(status, index) {
     return `
-    <span class="taskLabelOpen">Assigned to: </span> 
-
+        <span class="taskLabelOpen">Assigned to: </span> 
         <label class="taskLabelOpen" id="assignedUserLogoOpen${status}${index}"></label>
     `;
 }
 
-function generateAssignedListHTML(edit){
+function generateAssignedListHTML(edit) {
     return `
     <div class="p-relative d-flex align-c">
         <list class="d-flex" id="list-assigned-user${edit}">
