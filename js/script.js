@@ -77,7 +77,7 @@ function logout() {
  * @param {string} id - The ID of the element.
  */
 function cancelAddNew(id) {
-    if (id == 'addNewCat') cancelAddNewCat();
+    if (id == 'addNewCat') cancelAddNewCat(id);
     if (id == 'addNewSubTask') setInnerHTML('id_' + 'addNewSubTask', setBackToSubTaskField('label', 'Subtasks',
         'dropDownMenuField', 'addNewSubTask', './img/addIcon.png'));
     if (id == 'assignedTo') cancelAssignedTo();
@@ -98,9 +98,9 @@ function setCheckBoxFalse(i) {
 }
 
 /** Cancels the process of adding a new category. */
-function cancelAddNewCat() {
+function cancelAddNewCat(id) {
     setInnerHTML('id_categoryBox', setBackToOptionsField('label', 'Category', 'dropDownMenuField', 'categoryBox', './img/dropdownIcon.png', 'task category'));
-    addOptionWithFunction('addNewCat');
+    addInnerHTML('categoryBox', `<div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`);
     generateOptionsHTML(categories, 'categories');
     addEventListenerToSelectBoxFor('categoryBox', 'categories', '');
     addEvenListenersToSelectfor(categories, 'categories', '');

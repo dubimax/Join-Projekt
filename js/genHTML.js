@@ -392,9 +392,13 @@ function setConfirmMessage(text) {
  */
 function generateTodoHTML(element, status) {
     let elementIndex = tasks.indexOf(element);
-    return `
+    let color;
+    categories.forEach(c => {
+        if(c.name == tasks[elementIndex]['category']) color = c.color});
+    
+        return `
     <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
-        <div style="background:${getCategoryColor(elementIndex)}" class="taskStatus" id="cardTaskStatus">
+        <div style="background:${color}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}
         </div>
         <div class="taskTitle" id="cardTaskTitle">
@@ -443,10 +447,14 @@ function generateAssignedUserHTML(username, index, status, id) {
 function generateOpenCardHTML(element, status) {
     let elementIndex = tasks.indexOf(element);
     let elementID = tasks[elementIndex]['id'];
+    let color;
+    categories.forEach(c => {
+        if(c.name == tasks[elementIndex]['category']) color = c.color});
+    
     return `
         <div class="openCard d-none" id="openCard${status}${elementIndex}">
             <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">
-            <div id="taskStatusCategory${status}${elementIndex}" style="background:${getCategoryColor(elementIndex)}" class="taskStatusOpen">
+            <div id="taskStatusCategory${status}${elementIndex}" style="background:${color}" class="taskStatusOpen">
                 ${element['category']}
             </div>         
             <div>

@@ -219,7 +219,7 @@ function setDataForEditCard(status, elementIndex, task, aID) {
     setInnerHTML('taskPrioOpen' + status + elementIndex, generateLabelsHTML('label', 'Prio', 'Board'));
     setInnerHTML('assignedUserOpen' + status + elementIndex, generatesOptionsFieldHTML('label', 'Assigned to',
         'dropDownMenuField', 'assignedToEdit', './img/dropdownIcon.png', 'contacts to assign'));
-    addInviteNewContact('assignedToEdit');
+    addInnerHTML('assignedToEdit',generateInviteNewContactHTML());
     generateOptionsHTML(users, 'users', 'Edit');
     addInnerHTML('assignedUserOpen' + status + elementIndex, generateAssignedListHTML('Edit'));
     setActiveCheckbox(task);

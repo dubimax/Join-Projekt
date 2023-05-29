@@ -25,7 +25,6 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        margin-top: -71px;
     }
 
     #contacts {
@@ -138,9 +137,8 @@
     .addNewContactProfileImgContainer,
     .editContactProfileImgContainer {
         left: unset;
-        top: unset;
         border: none;
-        position: unset;
+        top: 128px !important;
     }
 
     .profileDummyInside,
@@ -153,9 +151,12 @@
         display: none;
     }
 
-    .addNewContactInputs,
     .editContactInputs {
-        margin-top: 15px;
+        margin-top: 75px;
+        align-items: center;
+    }
+    .addNewContactInputs{
+        margin-top: 70px;
         align-items: center;
     }
 
