@@ -10,7 +10,6 @@
     }
 }
 
-
 @media (max-width:1300px) {
     .addTaskForm {
         align-items: center;
@@ -73,7 +72,6 @@
     .clearButton {
         display: none !important;
     }
-    
 }
 
 @media (max-width:420px) {
@@ -81,10 +79,6 @@
     h2{
         text-align: left !important;
     }
-
-
-    
-    
 
     .clearButton {
         display: none !important;
@@ -97,6 +91,4 @@
     .details div[class='border-1px-solid'] {
         display: none !important;
     }
-
-
 }
