@@ -244,6 +244,7 @@ function setEditFields(status, elementIndex) {
  */
 function setStyleForEditCard(status, elementIndex) {
     document.getElementById('editTitle' + status + elementIndex).classList.remove('taskTitleOpen');
+    document.getElementById('openCardTitle' + status + elementIndex).style = 'margin-top:60px';
     document.getElementById('editDescription' + status + elementIndex).classList.remove('taskDescriptionOpen');
     document.getElementById('editDate' + status + elementIndex).classList.remove('taskDueDateOpen');
     document.getElementById('dateContainer' + status + elementIndex).style = "display:block;";
