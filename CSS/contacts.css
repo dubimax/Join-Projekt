@@ -159,7 +159,6 @@
 #editContactEmail,
 #editContactPhone {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0px;
@@ -173,7 +172,6 @@
 .createNewContactNameInput,
 .editContactNameInput {
     display: flex;
-    flex-direction: row;
     align-items: center;
     padding: 13px 21px;
     gap: 10px;
@@ -183,7 +181,6 @@
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     position: relative;
-
 }
 
 .createNewUserAtContacts-left,
@@ -223,7 +220,6 @@
 .addNewContactProfileImgContainer,
 .editContactProfileImgContainer {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 0px;
@@ -255,7 +251,6 @@
 
 .addNewContactCreateButton {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 18px 15px;
@@ -314,7 +309,13 @@
 }
 
 @media (max-width:1300px) {
+    .contactsTitleContainer{
+        margin-bottom: 20px !important;
+    }
 
+    .contactHeadContainer {
+        margin-bottom: 0 !important;
+    }
     #createNewUserAtContacts,
     #editUserAtContacts {
         background-color: unset;
@@ -335,11 +336,14 @@
 
     .detailBox {
         height: 100vh !important;
-        overflow: scroll !important;
     }
 
     #addTasksAtContacts {
         overflow: scroll !important;
+    }
+
+    #contactDetails{
+        bottom:80px !important;
     }
 
     .createNewUserAtContacts-right,
@@ -355,14 +359,15 @@
         border-bottom-left-radius: unset !important;
         border-top-right-radius: 30px !important;
         padding: 66px 33px !important;
-        height: 380px !important;
+        height: 373px;
     }
 
     .closeIconAtContacts {
         left: unset !important;
     }
 
-    .kpmt {
+    .kpmt,
+    .clearButton {
         display: none !important;
     }
 
@@ -385,12 +390,9 @@
         width: 80% !important;
     }
 
-    .editContactNameInput {
-        width: 90% !important;
-    }
-
     .addNewContactInputs,
-    .editContactInputs {
+    .editContactInputs,
+    .editContactNameInput {
         width: 90% !important;
     }
 
@@ -422,10 +424,6 @@
         margin-top: unset !important;
     }
 
-    .clearButton {
-        display: none !important;
-    }
-
     .newCat {
         position: relative !important;
         left: unset !important;
@@ -442,9 +440,7 @@
         right: -72% !important;
     }
 
-    #addTaskAtContacts h2 {
-        margin-top: 80px !important;
-    }
+   
 
     #addTaskAtContacts {
         overflow: overlay !important;
@@ -459,15 +455,15 @@
         margin-top: 25px !important;
         margin-bottom: 25px !important;
     }
+    .overlay {
+        display: none !important;
+    }
+    .addTaskForm {
+        top: unset !important;
+    }
 }
 
 @media (max-width:420px) {
-
-    .createNewUserAtContactsContainer {
-        width: 340px !important;
-
-    }
-
     .addUserCloseBtn {
         position: absolute !important;
         background-image: url('../img/closeIconWhite.png') !important;
@@ -484,62 +480,27 @@
     }
 
     .editUserAtContacts-right,
-    .createNewUserAtContacts-right {
+    .createNewUserAtContacts-right,
+    .createNewUserAtContactsContainer {
         width: 340px !important;
     }
 }
-
-@media (max-height:900px) {
-    #contactDetails {
-        top: 50px !important;
+@media (max-height:800px) {
+    .editContactInputs,.addNewContactInputs {
+        gap:10px;
     }
-
-    .contactsTitleContainer {
-        margin-bottom: 25px !important;
+    .editButtonContainer,.addNewContactsButtonContainer{
+        margin-top:10px !important;
+        margin-bottom: 20px !important;
     }
-
-    .contactHeadContainer {
-        margin-bottom: 0px;
-    }
-
-    .createNewUserAtContacts-left {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 45px 33px !important;
-    }
-
     .createNewUserAtContacts-left,
     .editUserAtContacts-left {
-        height: 190px !important;
+        height: unset !important;
+        max-height: 186px;
+    }
+    .addNewContactProfileImgContainer,
+    .editContactProfileImgContainer {
+        top: 128px !important;
     }
 
-    .addNewContactTitle,
-    .editContact {
-        font-size: 35px !important;
-    }
-
-    .addNewContactSubTitle {
-        font-size: 15px !important;
-    }
-
-    #addTaskAtContacts {
-        padding-bottom: 74px !important;
-        padding-top: 83px !important;
-        padding-left: 30px !important;
-        padding-right: 30px !important;
-    }
-
-    .addNewContactInputs,.editContactInputs {
-        gap: 14px;
-    }
-
-    .editButtonContainer{
-        margin-top: 0px !important;
-        margin-bottom: 15px !important;
-    }
-    .addNewContactsButtonContainer {
-        margin-top: 0px !important;
-        margin-bottom: 10.5px !important;
-    }
 }

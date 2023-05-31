@@ -138,7 +138,7 @@
     .editContactProfileImgContainer {
         left: unset;
         border: none;
-        top: 128px !important;
+        top: 41%;
     }
 
     .profileDummyInside,
@@ -182,9 +182,7 @@
         width: unset;
     }
 
-    /* #addTaskAtBoard, */
     #addTaskAtContacts {
-        position: relative !important;
         left: 0 !important;
         right: 0 !important;
         bottom: 0 !important;
@@ -194,11 +192,9 @@
         background-color: #F5F5F5 !important;
         border-radius: 0 !important;
         z-index: 8;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         transform: unset !important;
     }
+
 
     .details {
         flex-direction: column !important;
