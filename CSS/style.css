@@ -430,6 +430,8 @@ li {
     border-radius: 10px;
     position: relative;
     cursor: pointer;
+    max-height: 205px;
+    overflow: auto;
 }
 
 #id_urgent,

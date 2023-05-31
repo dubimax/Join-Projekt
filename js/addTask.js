@@ -7,7 +7,7 @@ function createNewTask(statusTag) {
     tasks.push({
         'title': getValue('inputTitle'), 'description': getValue('inputDescription'),
         'category': selectedCategory, 'isAssigned': getAssignedContacts(''), 'dueDate': getValue('inputDate'),
-        'prio': getTasksPrio(), 'subtasks': subtasks, 'id': tasks.length +1, 'status': statusTag
+        'prio': getTasksPrio(), 'subtasks': subtasks, 'id': tasks.length + 1, 'status': statusTag
     });
     pushToDatabase();
     clearAllInputs();
@@ -18,13 +18,35 @@ function generateAddTaskHTML(id, board) {
     if (loggedIn) {
         addInnerHTML(id, `<h2>Add Task</h2>`);
         addInnerHTML(id, genAddTaskHTML(board));
-        addInnerHTML('assignedTo',generateInviteNewContactHTML());
+        addInnerHTML('assignedTo', generateInviteNewContactHTML());
         generateOptionsHTML(users, 'users', '');
         addInnerHTML('categoryBox', `<div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`);
         generateOptionsHTML(categories, 'categories', '');
         document.getElementById('inputDate').setAttribute('min', today);
         addEventListenerToDropDown();
+        document.addEventListener('click', (event) => closeDropdownIfOpen(event));
     } else window.location.href = '../login.html';
+}
+
+/** Initializes Add Task functionality: includes HTML, generates navigation links, Add Task HTML, and sets onSubmit form.*/
+async function initAddTask() {
+    await includeHTML();
+    generateNavigationLinks('AddTask', 'Summary', 'Board', 'AddTask', 'Contacts');
+    generateAddTaskHTML('addTask', '');
+    setOnSubmitForm('toDo');
+}
+
+function setEnter() {
+    if (isElementExistent('newSubtasks')) setEventListenerToInputSubtask();
+}
+
+function setEventListenerToInputSubtask() {
+    document.getElementById("newSubtasks").onkeypress = (e) => {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            generateCheckboxItem();
+        }
+    }
 }
 
 /**
@@ -43,14 +65,6 @@ function getTasksPrio() {
  */
 function isSubtaskChecked(i) {
     return document.getElementById('list-subtask-' + subtasks[i]['item']).checked == true;
-}
-
-/** Initializes Add Task functionality: includes HTML, generates navigation links, Add Task HTML, and sets onSubmit form.*/
-async function initAddTask() {
-    await includeHTML();
-    generateNavigationLinks('AddTask', 'Summary', 'Board', 'AddTask', 'Contacts');
-    generateAddTaskHTML('addTask', '');
-    setOnSubmitForm('toDo');
 }
 
 /**
@@ -202,6 +216,7 @@ function changeToAddNewCat() {
 function changeToAddNewSubtask() {
     setInnerHTML('id_addNewSubTask', generatesChangedInputFieldHTML('label', 'input', 'Subtasks', 'inputTextStd', 'text',
         'newSubtasks', 'addNewSubTask', 'generateCheckboxItem()', 'newSubtasksField'));
+    setEnter();
 }
 
 /** Adds the event listeners to the dropdown elements, such as categories and select user box. */
@@ -247,6 +262,17 @@ function setChecked(j, edit, e) {
     e.stopPropagation();
     if (!isUserAssigned(j, edit)) setCheckedToSelectUser(j, edit);
     else if (isUserAssigned(j, edit)) setUnCheckedToSelectUser(j, edit);
+}
+
+function closeDropdownIfOpen(e) {
+    let target = document.getElementById('assignedTo');
+    if (dropDownAssign && !target.contains(e.target)) {
+        hideUserItems('');
+        setStyleOfSelectedUsers('');
+        e.stopPropagation();
+        e.preventDefault();
+        document.removeEventListener('click', (e) => closeDropdownIfOpen(e));
+    }
 }
 
 /** 
@@ -359,15 +385,6 @@ function setCategoryOptions(id) {
 function changeCategoryOptions(id) {
     document.getElementById(id).classList.add('d-none', 'cl_categories');
     document.getElementById(id).classList.remove('dropDownStart');
-}
-
-/**
- * Resets the category options of the specified element.
- * @param {HTMLElement} sID - The target element to reset.
- */
-function resetCategoryOptions(id) {
-    document.getElementById(id).classList.remove('d-none', 'cl_categories');
-    document.getElementById(id).classList.add('dropDownStart');
 }
 
 /**

@@ -24,6 +24,15 @@ function getFirstLettersOfName(username) {
 }
 
 /**
+ * Resets the category options of the specified element.
+ * @param {HTMLElement} sID - The target element to reset.
+ */
+function resetCategoryOptions(id) {
+    document.getElementById(id).classList.remove('d-none', 'cl_categories');
+    document.getElementById(id).classList.add('dropDownStart');
+}
+
+/**
  * Performs an action by sending a POST request to a specified URL with the provided form data.
  * @param {FormData} formData - The form data to be sent in the request body.
  * @returns {Promise<Response>} A promise that resolves to the response from the server.
@@ -246,8 +255,7 @@ function addEventListenerDocumentLogoutButton(e) {
     e.stopPropagation();
     document.addEventListener("click", (event) => {
         let optionDiv = document.getElementById('optionsMenu');
-        targetElement = event.target;
-        if (optionDiv && !optionDiv.contains(targetElement)) removeID('optionsMenu');
+        if (optionDiv && !optionDiv.contains(event.target)) removeID('optionsMenu');
     });
 }
 

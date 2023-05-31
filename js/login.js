@@ -32,14 +32,13 @@ async function onSubmitRQPassword(event) {
     event.preventDefault();
     let formData = new FormData(event.target);
     let response = await action(formData);
-    if (response.ok) getRedirected(); 
+    if (response.ok) getRedirected();
 }
 
-/**
- * Updates the HTML content and redirects the user to the login page after a successful password reset request.
- */
-function getRedirected(){
-    document.getElementById('forgotMyPasswordText').innerHTML = 'We have successfully sent the email.<br>You will now be redirected back to login.<br>If not please click <a class="clickHereLink" href="../login.html">here</a>!';
+/** Updates the HTML content and redirects the user to the login page after a successful password reset request. */
+function getRedirected() {
+    addInnerHTML('forgotMyPasswordText', `We have successfully sent the email.<br>You will now be redirected back to login.<br>
+        If not please click <a class="clickHereLink" href="../login.html">here</a>!`);
     document.getElementById('forgotPwForm').style.display = "none";
     setTimeout(() => goToLogin(), 3000);
 }
@@ -58,9 +57,7 @@ async function init() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
 }
 
-/**
- * Performs the login operation.
- */
+/** Performs the login operation. */
 function login() {
     let userEmail = document.getElementById('userMailLogIn').value;
     let userPassword = document.getElementById('userPasswordLogIn').value;
@@ -73,9 +70,7 @@ function login() {
  * @param {string} userPassword - The user password to check.
  */
 function checkUserData(userEmail, userPassword) {
-    for (let i = 0; i < users.length; i++) {
-        checkUserDataForUser(i, userEmail, userPassword);
-    }
+    for (let i = 0; i < users.length; i++) checkUserDataForUser(i, userEmail, userPassword);
     removeDisplayNone('dataCheck');
 }
 
