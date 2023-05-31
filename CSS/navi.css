@@ -3,7 +3,7 @@
     position: absolute;
     width: calc(100% - 232px);
     right: 0;
-    bottom: 80px;
+    bottom: 0;
     top: 89px;
     align-items: flex-start;
     overflow: hidden;
@@ -21,7 +21,7 @@
 }
 
 .noticeContainer {
-    overflow: scroll;
+    overflow: overlay;
     padding: 50px 120px;
     padding-bottom: 150px;
 }
@@ -131,6 +131,7 @@
 
     .help, .legalNotice {
         width: unset;
+        bottom: 80px;
     }
 
     #helpContainer, #noticeContainer {
