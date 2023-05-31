@@ -213,7 +213,7 @@ function showImpressumRespo() {
 
 /** Closes an element at contacts by hiding related elements and removing the confirm message. */
 function closeAtContacts() {
-    addDisplayNone('addTaskAtContacts');
+    hideAddNewTaskAtContatcs();
     removeMessage();
 }
 

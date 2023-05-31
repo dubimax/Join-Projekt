@@ -1,6 +1,6 @@
-
 /** Adds a legal notice section to the webpage. */
 function addLegalNotice() {
+    if(!isElementExistent('legalNotice'))
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
         <a class="back" onclick="removeID('legalNotice')"><img src="../img/backIconBlack.png" class="backImg"></a>
@@ -59,6 +59,7 @@ function addLegalNotice() {
 
 /** Adds a help section to the webpage. */
 function addHelp() {
+    if(!isElementExistent('helpContent'))
     document.body.innerHTML += `
     <div class="help content" id="helpContent">
         <a class="back" onclick="removeID('helpContent')"><img src="../img/backIconBlack.png" class="backImg"></a>

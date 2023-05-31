@@ -10,11 +10,6 @@ function setSiteActive() {
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
-    generateAddTaskHTML('addTaskAtContacts', '');
-    addInnerHTML('addTaskAtContacts', `<div onclick="addDisplayNone('addTaskAtContacts'), addDisplayNone('overlay')" 
-        class="closeIconAtContacts editUserCloseBtn" id="closeIconAtContacts"></div>`);
-    setOnSubmitForm('toDo');
-    addEventListenerToDropDown();
 }
 
 /** Generates HTML content for Contacts page: loads resources, checks login status, sets site active if logged in, redirects to login page if not logged in. */
@@ -184,9 +179,20 @@ function setVissible(i) {
 
 /** Removes the class "d-none" to show AddNewTaskAtContacts page */
 function showAddNewTaskAtContacts() {
+    generateAddTaskHTML('addTaskAtContacts', '');
+    addInnerHTML('addTaskAtContacts', `<div onclick="hideAddNewTaskAtContatcs()" 
+        class="closeIconAtContacts editUserCloseBtn" id="closeIconAtContacts"></div>`);
+    setOnSubmitForm('toDo');
     removeDisplayNone('addTaskAtContacts');
     removeDisplayNone('overlay');
-    toggle('closeIconAtContacts', `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`, 1300)
+    toggle('closeIconAtContacts', `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`, 1300);
+    addEventListenerToDropDown();
+}
+
+function hideAddNewTaskAtContatcs(){
+    addDisplayNone('addTaskAtContacts');
+    addDisplayNone('overlay');
+    setInnerHTML('addTaskAtContacts','');
 }
 
 /** Shows the edit contact form by retrieving existing contact details and setting up event listeners. */
@@ -221,6 +227,7 @@ function createNewContact() {
     users.push({ 'name': userName, 'email': userEmail, 'phone': userPhone, 'color': userColor });
     pushToDatabase();
     confirmMessage();
+    addDisplayNone('overlay');
 }
 
 /** Displays a confirmation message, hides the 'create new user' section, and removes the confirmation message after a delay. */
