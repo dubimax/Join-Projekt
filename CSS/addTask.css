@@ -64,7 +64,7 @@
     }
     .container-btns {
         position: fixed !important;
-        top: -110px !important;
+        top: 12px !important;
         right: 10px !important;
         bottom: unset !important;
         z-index: 99 !important;

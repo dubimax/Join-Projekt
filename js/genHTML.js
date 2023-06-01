@@ -48,7 +48,7 @@ function genAddTaskHTML(board) {
             <div class="border-1px-solid"></div>
             <div class="detailBox-right">
                 ${generatesInputFieldHTML('label', 'input', 'Due Date', 'inputTextStd', 'date', 'inputDate')}
-                ${generateLabelsHTML('label', 'Prio', '')} 
+                ${generateLabelsHTML('label', 'Prio', '','idPrio')} 
                 ${generateSubTaskField('label', 'Subtasks', 'dropDownMenuField', 'addNewSubTask', './img/addIcon.png')}
                 <div class="p-relative d-flex align-c">
                     <list class="" id="list-subtask">
@@ -138,9 +138,9 @@ function generateContactBodyHTML() {
  * @param {string} headline - The headline for the labels section.
  * @returns {string} - The generated HTML for the labels.
  */
-function generateLabelsHTML(field, headline, board) {
+function generateLabelsHTML(field, headline, board,id) {
     return `
-    <div class="detail">
+    <div class="detail" id="${id}">
         <${field}>${headline}</${field}>
         <div class="d-flex">
             <${field} id="id_urgent${board}" value="urgent" onclick="changeStyleOfLabel('id_urgent${board}','${board}')">Urgent <img src="../img/urgentIcon.png" class="prioImg" id="urgentImgID${board}"> </${field}>
@@ -332,7 +332,7 @@ function generateUnSelectedNavigationLinkHTML(linkname) {
     `;
 }
 
-function logoutButtonHTML(){
+function logoutButtonHTML() {
     return `<div class="logoutButton" id="optionsMenu"><div  id="logoutButton" onclick="logout()">Logout</div></div>`;
 }
 
@@ -390,14 +390,12 @@ function setConfirmMessage(text) {
  * @param {*} element Elements of the card
  * @returns the card with elements
  */
-function generateTodoHTML(element, status) {
+function generateTodoHTML(element, status, index) {
     let elementIndex = tasks.indexOf(element);
     let color;
-    categories.forEach(c => {
-        if(c.name == tasks[elementIndex]['category']) color = c.color});
-    
-        return `
-    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${elementIndex}" onclick="openCard('${elementIndex}','${status}')">
+    categories.forEach(c => { if (c.name == tasks[elementIndex]['category']) color = c.color });
+    return `
+    <div draggable="true" ondragstart="startDragging(${elementIndex})" class="card" id="card${status}${index}" onclick="openCard('${elementIndex}','${status}')">
         <div style="background:${color}" class="taskStatus" id="cardTaskStatus">
             ${element['category']}
         </div>
@@ -421,6 +419,14 @@ function generateTodoHTML(element, status) {
             </div>
         </div>  
     </div>`;
+}
+
+function generateMoveToMobile(element, statusToMoveUp, statusToMoveDown) {
+    return `
+        <div class="mobileSwitch">
+            <a class="moveUp" onclick="moveUp('${element}','${statusToMoveUp}',event)" style="color:black;"></a>
+            <a class="moveDown" onclick="moveUp('${element}','${statusToMoveDown}',event)" style="color:black;"></a> 
+        </div>`;
 }
 
 function generateProgresstStyleHTML(progress, difference) {
@@ -449,8 +455,9 @@ function generateOpenCardHTML(element, status) {
     let elementID = tasks[elementIndex]['id'];
     let color;
     categories.forEach(c => {
-        if(c.name == tasks[elementIndex]['category']) color = c.color});
-    
+        if (c.name == tasks[elementIndex]['category']) color = c.color
+    });
+
     return `
         <div class="openCard d-none" id="openCard${status}${elementIndex}">
             <img src="../img/closeBtn.png" class="closeBtnOpen" onclick="closeOpenCard('${status}',${elementIndex})">

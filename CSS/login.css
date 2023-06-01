@@ -350,7 +350,7 @@ p {
     width: 100%;
     height: 100vh;
     position: absolute;
-    top: -64px;
+    top: 0;
     left: 0;
     display: flex;
     justify-content: center;
@@ -380,19 +380,18 @@ p {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    animation: start-logo-animation 2.5s ease-in-out both;
+    animation: start-logo-animation 1.0s ease-in-out both;
 }
 
 @keyframes start-logo-animation {
     0% {
         opacity: 1;
     }
-
     100% {
         width: 101px;
         height: 122px;
-        top: 80px;
-        left: 80px;
+        top: 125px;
+        left: 125px;
         opacity: 0.5;
     }
 }

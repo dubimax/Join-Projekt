@@ -20,7 +20,7 @@ function generateAddTaskHTML(id, board) {
         addInnerHTML(id, genAddTaskHTML(board));
         addInnerHTML('assignedTo', generateInviteNewContactHTML());
         generateOptionsHTML(users, 'users', '');
-        addInnerHTML('categoryBox', `<div class="cl_categories d-none" onclick="changeToInputField('${id}')" id="addNewCat" >New Category</div>`);
+        addInnerHTML('categoryBox', `<div class="cl_categories d-none" onclick="changeToInputField('addNewCat${board}')" id="addNewCat" >New Category</div>`);
         generateOptionsHTML(categories, 'categories', '');
         document.getElementById('inputDate').setAttribute('min', today);
         addEventListenerToDropDown();

@@ -45,6 +45,7 @@ async function onSubmitting(event) {
     let formData = new FormData(event.target);
     let response = await action(formData);
     if (response.ok) createNewContact();
+    return false;
 }
 
 /**
@@ -75,6 +76,8 @@ function addEventListenerToDeleButton(id) {
  * @param {string} contactToDelete - The name of the contact to delete.
  */
 function setEventToDeleteButton(contactToDelete) {
+    let clientWidth = document.body.clientWidth;
+    if(clientWidth<=1300) addDisplayNone('kpmt');
     deleteContact(contactToDelete);
     addDisplayNone('editUserAtContacts');
     addDisplayNone('overlay');
@@ -83,6 +86,7 @@ function setEventToDeleteButton(contactToDelete) {
     generateContactDetailsHTML();
     addDisplayNone('contactDetails');
     save();
+    return false;
 }
 
 /**
@@ -284,8 +288,10 @@ function setOldData(oldEmail, userName, userEmail, userPhone) {
 
 /** Hides the contact details section and performs various actions. */
 function hideContactDetails() {
+    let clientWidth = document.body.clientWidth;
     addDisplayNone('contactDetails');
-    toggle('kpmt', 'display:none !important;', 1000);
+    if (clientWidth <= 1300) addDisplayNone('kpmt');
+    toggle('kpmt', '', 1300);
     toggle('addNewContactButton', 'display:flex !important;', 1300);
 }
 
@@ -305,9 +311,11 @@ function setContactDetails(userName, userMail, userPhone, userColor) {
 
 /** Resets the set contact details state and performs various actions. */
 function resetSetContactDetails() {
+    let clientWidth = document.body.clientWidth;
     removeDisplayNone('contactHeadContainer');
     removeDisplayNone('contactInformationContainer');
-    toggle('kpmt', 'display:unset !important;top:120px !important;padding-left:25px !important;', 1000);
+    if (clientWidth <= 1300) addDisplayNone('kpmt');
+    toggle('kpmt', 'top:120px !important;padding-left:25px !important;', 1300);
     toggle('addNewContactButton', 'display:none !important;', 1300);
     addEventListenerToDeleButton('deleteButtonContent');
 }

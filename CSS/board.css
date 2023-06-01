@@ -380,6 +380,35 @@ h1 {
     right: 47px;
 }
 
+.moveUp {
+    background-image: url('../img/arrowIconMobile.svg');
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 15px;
+    background-size: 100% 100%;
+    rotate: -90deg;
+    display: block;
+}
+
+.moveDown {
+    background-image: url('../img/arrowIconMobile.svg');
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 15px;
+    background-size: 100% 100%;
+    rotate: 90deg;
+    display: block;
+}
+
+.mobileSwitch {
+    position: relative;
+    top: -163px;
+    right: -234px;
+    gap: 5px;
+    flex-direction: column;
+    display: none;
+}
+
 .editDeleteBtnOpen img {
     height: 50px;
     width: 50px;
@@ -396,6 +425,7 @@ h1 {
     border-top-left-radius: 10px;
     background-image: center;
     background-position: center;
+    cursor: pointer;
 }
 
 .deleteBtnOpenCard {
@@ -405,7 +435,7 @@ h1 {
 .editBtnOpenCard {
     background-image: url("../img/editPenInvert.png");
     background-color: #2A3647;
-    border:none;
+    border: none;
     rotate: 180deg;
 }
 
@@ -467,7 +497,7 @@ h1 {
     .cardHeaders {
         margin-top: 25px;
         height: 72%;
-        overflow-x: hidden;
+        overflow: unset;
     }
 
     .dragAreaTitle {
@@ -535,7 +565,6 @@ h1 {
         width: 27px;
         height: 27px;
     }
-
 }
 
 @media (max-width:1300px) {
@@ -545,7 +574,6 @@ h1 {
         top: 89px;
         bottom: 80px;
     }
-
 }
 
 @media (max-width:1000px) {
@@ -570,6 +598,8 @@ h1 {
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow-y: overlay;
+        overflow-x: hidden;
     }
 
     .boardHeaderContainer {
@@ -600,7 +630,6 @@ h1 {
     }
 
     .cardHeaders {
-        overflow-y: scroll;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -757,5 +786,11 @@ h1 {
 
     .detailBox {
         height: 100%;
+    }
+}
+
+@media (max-height:800px) {
+    .mobileSwitch {
+        display: flex;
     }
 }

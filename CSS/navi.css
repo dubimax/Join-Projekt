@@ -128,13 +128,12 @@
         overflow-y: scroll;
     }
     
-
     .help, .legalNotice {
         width: unset;
         bottom: 80px;
     }
 
-    #helpContainer, #noticeContainer {
+    #noticeContainer {
         display: none;
     }
     .back {

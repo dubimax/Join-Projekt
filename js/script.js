@@ -201,6 +201,13 @@ function setOnSubmitForm(addForm) {
  * @param {string} addForm - The form to set the behavior for.
  */
 function setForm(addForm) {
+    if (selectedCategory && activeID) createTheTask(addForm);
+    else if (!selectedCategory) document.getElementById('id_categoryBox').children[0].innerHTML += '<span style="color:red;">Please choose a Category';
+    else if (!activeID) document.getElementById('idPrio').children[0].innerHTML += '<span style="color:red;">Please choose a Category';
+    return false;
+}
+
+function createTheTask(addForm) {
     createNewTask(addForm);
     addConfirmMessage('Task');
     if (isElementExistent('addTask')) removeMessage();
@@ -231,7 +238,7 @@ function closeTaskAtBoard() {
     setInnerHTML('addTaskAtBoard', '');
     addDisplayNone('addTaskAtBoard');
     addDisplayNone('overlay');
-    if(isElementExistent('confirmMessage')) removeMessage();
+    if (isElementExistent('confirmMessage')) removeMessage();
     updateBoardHTML();
 }
 

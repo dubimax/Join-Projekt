@@ -7,15 +7,16 @@ async function initBoard() {
     generateNavigationLinks('Board', 'Summary', 'Board', 'AddTask', 'Contacts');
     generateAddTaskToBoardImg();
     updateBoardHTML();
+    document.getElementById('boardContainer').addEventListener('scroll',()=> scrolling());
 }
 
 /** Uptade the Board Page */
 function updateBoardHTML() {
     resetBoardComplete();
-    addArea('toDo');
-    addArea('inProgress');
-    addArea('awaitingFeedback');
-    addArea('done');
+    addArea('toDo','toDo','inProgress');
+    addArea('inProgress','toDo','awaitingFeedback');
+    addArea('awaitingFeedback','inProgress','done');
+    addArea('done','awaitingFeedback','done');
     taskDetails();
     setStyleProgressbar();
     addUserAcronyms('assignedUserLogo');
@@ -26,15 +27,33 @@ function resetBoardComplete() {
         if (document.getElementById('boardContainer').children[2]) document.getElementById('boardContainer').children[2].remove();
     }
 }
+function scrolling() {
+        if(document.getElementById('boardContainer').scrollTop ==0) removeDisplayNone('kpmt');
+        else addDisplayNone('kpmt');
+}
 
 /**
  * Adds task areas to the specified container based on the given status ID.
  * @param {string} id - The ID of the container to which the task areas will be added.
  */
-function addArea(id) {
+function addArea(id,statusToMoveUp,statusToMoveDown) {
     let area = tasks.filter(t => t['status'] == id);
     setInnerHTML(id, '');
-    for (let index = 0; index < area.length; index++) if (!isElementExistent('openCard' + id + index)) addInnerHTML(id, generateTodoHTML(area[index], id));
+    for (let index = 0; index < area.length; index++) {
+        if (!isElementExistent('card' + id + area[index]['id'])){
+            addInnerHTML(id, generateTodoHTML(area[index], id,area[index]['id']));
+            if(isElementExistent('card'+id+area[index]['id']))addInnerHTML('card'+id+area[index]['id'],generateMoveToMobile(area[index]['id'],statusToMoveUp,statusToMoveDown));
+        } 
+    }
+}
+
+function moveUp(element,statusToMoveUp,event){
+    let elem = tasks.find(t => t.id == element ); 
+    let eID = tasks.indexOf(elem);
+    event.stopPropagation();
+    startDragging(eID);
+    moveTo(statusToMoveUp);
+    pushToDatabase();
 }
 
 /** Adds task details for all tasks. */
