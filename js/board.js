@@ -364,7 +364,7 @@ function deleteTask(status, ind) {
     let taskToDelete = tasks.find(t => t.id == ind);
     let taskIndex = tasks.indexOf(taskToDelete);
     tasks.splice(taskIndex, 1);
-    closeOpenCard(status, taskIndex, '');
+    addDisplayNone('overlay');
     pushToDatabase();
     updateBoardHTML();
 }

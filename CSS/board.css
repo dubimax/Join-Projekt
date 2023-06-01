@@ -388,7 +388,6 @@ h1 {
 
 .deleteBtnOpenCard,
 .editBtnOpenCard {
-    height: 24px;
     width: 21px;
     border: 1px solid rgba(42, 54, 71, 1);
     padding: 25px;
@@ -405,6 +404,9 @@ h1 {
 
 .editBtnOpenCard {
     background-image: url("../img/editPenInvert.png");
+    background-color: #2A3647;
+    border:none;
+    rotate: 180deg;
 }
 
 .deleteBtnOpenCard:hover {
