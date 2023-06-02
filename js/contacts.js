@@ -10,7 +10,6 @@ function setSiteActive() {
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
-    addEventListenerToDeleButton('deleteButton');
 }
 
 /** Generates HTML content for Contacts page: loads resources, checks login status, sets site active if logged in, redirects to login page if not logged in. */
@@ -69,17 +68,20 @@ function addEventListenerToDeleButton(id) {
     let contactToDelete;
     if (id == 'deleteButtonContent') contactToDelete = getContactToDeleteButtonContent();
     else if (id == 'deleteButton') contactToDelete = getContactToDeleteButton();
-    deleteButton.addEventListener('click', () => setEventToDeleteButton(contactToDelete));
+    deleteButton.addEventListener('click', (e) => setEventToDeleteButton(e,contactToDelete, deleteButton));
 }
+
 
 /**
  * Sets the event handler for the delete button of a contact.
  * @param {string} contactToDelete - The name of the contact to delete.
  */
-function setEventToDeleteButton(contactToDelete) {
+function setEventToDeleteButton(e,contactToDelete, button) {
+    e.stopPropagation();
     let clientWidth = document.body.clientWidth;
     if(clientWidth<=1300) addDisplayNone('kpmt');
     deleteContact(contactToDelete);
+    button.onclick = '';
     addDisplayNone('editUserAtContacts');
     addDisplayNone('overlay');
     addContactCategories();
@@ -204,11 +206,13 @@ function hideAddNewTaskAtContatcs(){
 
 /** Shows the edit contact form by retrieving existing contact details and setting up event listeners. */
 function showEditContact() {
+    addInnerHTML('contactDetailsContainer',generatesEditUserHTML());
     let oldName = document.getElementById('contactName').innerHTML;
     let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
     let oldPhone = document.getElementById('contactDetailsPhone').innerHTML;
     setEditContact(oldName, oldEmail, oldPhone);
     removeDisplayNone('overlay');
+    addEventListenerToDeleButton('deleteButton');
 }
 
 /**
@@ -264,14 +268,15 @@ function editContact() {
 }
 
 /** Closes the edit contact section and performs various actions. */
-function closeEditContact() {
+function closeEditContact(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    removeID('editUserAtContacts');
     save();
     pushToDatabase();
-    addDisplayNone('editUserAtContacts');
     addDisplayNone('overlay');
     addContactCategories();
     setVisibleIfnotEmpty();
-    generateContactDetailsHTML();
 }
 
 /**

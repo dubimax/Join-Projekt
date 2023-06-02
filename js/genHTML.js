@@ -16,6 +16,54 @@ function generateTheOptionHTML(nameOfArray, content, edit) {
     return `<div class="cl_${nameOfArray} d-none" id="${content}${edit}" value="${content}">${content}<input type="checkbox" value="${content}"></div>`;
 }
 
+function generatesEditUserHTML(){
+    return `
+    <div id="editUserAtContacts" class="d-none">
+            <div onclick="closeEditContact(event)" class="closeIconAtContacts editUserCloseBtn"></div>
+            <div class="editUserAtContactsContainer">
+                <div class="editUserAtContacts-left">
+                    <div class="left-side-Contacts">
+                        <img src="../img/logo-nav.png" alt="">
+                        <div>
+                            <h3 class="addNewContactTitle">Edit Contact</h3>
+                            <div class="fillDiv-w90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="editUserAtContacts-right">
+                    <form onsubmit="editContact(); return false;">
+                        <div class="editContactProfileImgContainer">
+                            <img class="profileDummy" src="../img/profileDummy.png">
+                            <img class="profileDummyInside" src="../img/profileDummyInside.png">
+                        </div>
+                        <div class="editContactInputs">
+                            <div class="editContactNameInput">
+                                <input type="text" required placeholder="Firstname Lastname"
+                                    pattern="[A-Z]{1}[a-z]*[\s][A-Z]{1}[a-z]*" id="editContactName">
+                                <img class="editContactNameImg" src="../img/miniProfile.png">
+                            </div>
+                            <div class="editContactNameInput">
+                                <input type="email" required placeholder="Email" id="editContactEmail">
+                                <img class="editContactNameImg" src="../img/miniMailIcon.png">
+                            </div>
+                            <div class="editContactNameInput">
+                                <input type="number" pattern="[0-9]*" required placeholder="Phone" id="editContactPhone">
+                                <img class="editContactNameImg" src="../img/miniPhoneIcon.png">
+                            </div>
+                            <div class="editButtonContainer">
+                                <div class="deleteButton" id="deleteButton">Delete
+                                </div>
+                                <button class="editContactButton">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    `;
+}
+
 /**
  * Generates the HTML for a category option in a dropdown menu.
  * @param {string} nameOfArray - The name of the array.

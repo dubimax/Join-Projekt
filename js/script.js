@@ -1,4 +1,4 @@
-setURL('https://gruppe-527.developerakademie.net/smallest_backend_ever');
+setURL('https://marijan-dupkovic.developerakademie.net/smallest_backend_ever');
 /** Includes other HTML Files */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
