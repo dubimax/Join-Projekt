@@ -1,9 +1,15 @@
 /** Adds a legal notice section to the webpage. */
 function addLegalNotice() {
-    if(!isElementExistent('legalNotice'))
+    
+    let reference = document.location.href;
+    if(reference.includes('summary.html')) document.getElementById('showSummary').style = '';
+    else if (reference.includes('board.html')) document.getElementById('showBoard').style = '';
+    else if (reference.includes('addTask.html')) document.getElementById('showAddTask').style = '';
+    else if (reference.includes('contacts.html')) document.getElementById('showContacts').style = '';
+    if(isElementExistent('legalNotice')) removeID('legalNotice');
     document.body.innerHTML += `
     <div class="legalNotice content" id="legalNotice">
-        <a class="back" onclick="removeID('legalNotice')"><img src="../img/backIconBlack.png" class="backImg"></a>
+        <a class="back" onclick="removeID('legalNotice');resetStyleOfSelectedPage('${reference}')"><img src="../img/backIconBlack.png" class="backImg"></a>
         <div class="noticeContainer">
             <div class='impressum'>
                 <h1>Impressum</h1><br>
@@ -57,9 +63,17 @@ function addLegalNotice() {
     </div>`;
 }
 
+function resetStyleOfSelectedPage(reference){
+    setStyleOfLegalNotice('');
+    if(reference.includes('summary.html')) document.getElementById('showSummary').style = 'background:#091931;';
+    else if (reference.includes('board.html')) document.getElementById('showBoard').style = 'background:#091931;';
+    else if (reference.includes('addTask.html')) document.getElementById('showAddTask').style = 'background:#091931;';
+    else if (reference.includes('contacts.html')) document.getElementById('showContacts').style = 'background:#091931;';
+}
+
 /** Adds a help section to the webpage. */
 function addHelp() {
-    if(!isElementExistent('helpContent'))
+    if(isElementExistent('helpContent')) removeID('helpContent');
     document.body.innerHTML += `
     <div class="help content" id="helpContent">
         <a class="back" onclick="removeID('helpContent')"><img src="../img/backIconBlack.png" class="backImg"></a>

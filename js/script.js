@@ -202,8 +202,8 @@ function setOnSubmitForm(addForm) {
  */
 function setForm(addForm) {
     if (selectedCategory && activeID) createTheTask(addForm);
-    else if (!selectedCategory) document.getElementById('id_categoryBox').children[0].innerHTML += '<span style="color:red;">Please choose a Category';
-    else if (!activeID) document.getElementById('idPrio').children[0].innerHTML += '<span style="color:red;">Please choose a Category';
+    else if (!selectedCategory) document.getElementById('id_categoryBox').children[0].innerHTML += '<span style="color:red;">Please choose a Category</span>';
+    else if (!activeID) document.getElementById('idPrio').children[0].innerHTML += '<span style="color:red;">Please choose a Category</span>';
     return false;
 }
 
@@ -313,11 +313,17 @@ function setUserItems(edit) {
 /** Generates a checkbox item, adds it to the list of subtasks, and clears the input field. */
 function generateCheckboxItem() {
     let isChecked;
-    addInnerHTML('list-subtask', setCheckBox());
-    if (isItemChecked()) isChecked = true;
-    else isChecked = false;
-    subtasks.push({ 'item': getValueOf('newSubtasks'), 'checked': isChecked });
-    document.getElementById('newSubtasks').value = '';
+    if (document.getElementById('newSubtasks').value) {
+        if(document.getElementById('warningMessage')) removeID('warningMessage');
+        addInnerHTML('list-subtask', setCheckBox());
+        if (isItemChecked()) isChecked = true;
+        else isChecked = false;
+        subtasks.push({ 'item': getValueOf('newSubtasks'), 'checked': isChecked });
+        document.getElementById('newSubtasks').value = '';
+    }else {
+        if(document.getElementById('warningMessage')) removeID('warningMessage');
+        document.getElementById('id_addNewSubTask').children[0].innerHTML += `<span style="color:red;" id="warningMessage">Please choose a Category</span>`;
+    }
 }
 
 /**

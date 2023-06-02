@@ -131,11 +131,17 @@ function isSubtaskCheckedBoard(elementIndex, i) {
  * @param {string} status - The status of the task.
  */
 function openCard(index, status) {
+    let clientWidth = document.body.clientWidth;
     if (isHTMLElement('openCard', status, index)) removeDisplayNone('openCard' + status + index);
     setInnerHTML('assignedUserLogoOpen' + status + index, '');
     addUserAcronyms('assignedUserLogoOpen');
     addSubtasksToCardOpen(status, index);
     removeDisplayNone('overlay');
+    if (clientWidth < 1000) {
+        document.getElementById('boardContainer').style = `overflow-y:hidden;`;
+        document.getElementById('boardContainer').children[0].classList.add('d-none');
+        document.getElementById('boardContainer').children[1].classList.add('d-none');
+    } 
 }
 
 /**
@@ -349,8 +355,14 @@ function editEditField(status, elementIndex, id, addClass) {
  * @param {number} index - The index of the task element.
  */
 function closeOpenCard(status, index) {
+    let clientWidth = document.body.clientWidth;
     addDisplayNone('openCard' + status + index);
     addDisplayNone('overlay');
+    if (clientWidth < 1000) {
+        document.getElementById('boardContainer').style = `overflow-y:overlay;`;
+        document.getElementById('boardContainer').children[0].classList.remove('d-none');
+        document.getElementById('boardContainer').children[1].classList.remove('d-none');
+    }
     usersAssignedTo = [];
     assigned = [];
     dropDownAssign = false;

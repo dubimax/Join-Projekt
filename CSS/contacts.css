@@ -21,6 +21,10 @@
     overflow-x: hidden;
 }
 
+#addTaskAtContacts{
+    z-index: 21 !important;
+}
+
 .details {
     overflow: overlay;
 }
@@ -149,7 +153,7 @@
     background: #FFFFFF;
     border-radius: 30px;
     animation: myAnim 0.5s cubic-bezier(0.32, 0, 0.67, 0) 0s 1 normal none;
-    z-index: 10;
+    z-index: 20;
 }
 
 #createNewContactName,
@@ -299,7 +303,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 9;
+    z-index: 20;
 }
 
 @media (max-width:1500px) {
@@ -422,6 +426,7 @@
         top: 15px !important;
         right: 15px !important;
         margin-top: unset !important;
+        bottom: unset !important;
     }
 
     .newCat {
@@ -455,9 +460,7 @@
         margin-top: 25px !important;
         margin-bottom: 25px !important;
     }
-    .overlay {
-        display: none !important;
-    }
+
     .addTaskForm {
         top: unset !important;
     }
@@ -485,7 +488,7 @@
         width: 340px !important;
     }
 }
-@media (max-height:800px) {
+@media (max-height:850px) {
     .editContactInputs,.addNewContactInputs {
         gap:10px;
     }

@@ -22,6 +22,10 @@ function getValueOf(id) {
     return document.getElementById(id).value;
 }
 
+function setStyleOfLegalNotice(styling){
+    document.getElementById('addLegal').style = styling;
+}
+
 /**
  * Sets the style properties and image source for the specified element ID with the 'urgent' designation.
  * If the provided ID matches 'id_urgent', it calls the setStyle() function to set the style properties.
@@ -216,8 +220,8 @@ function searchTasks() {
 function onlyShowFoundTasks(i, search) {
     let taskIndex = tasks.indexOf(tasks[i]);
     if ((tasks[i]['title'].toLowerCase().includes(search) || tasks[i]['description'].toLowerCase().includes(search))) {
-        if (isContainingClassDnone('card' + tasks[i]['status'] + taskIndex)) removeDisplayNone('card' + tasks[i]['status'] + taskIndex);
-    } else addDisplayNone('card' + tasks[i]['status'] + taskIndex);
+        if (isContainingClassDnone('card' + tasks[i]['status'] + tasks[i]['id'])) removeDisplayNone('card' + tasks[i]['status'] + tasks[i]['id']);
+    } else addDisplayNone('card' + tasks[i]['status'] + tasks[i]['id']);
 }
 
 /**

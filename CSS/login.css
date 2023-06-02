@@ -146,6 +146,7 @@ h1 {
     font-size: 21px;
     line-height: 120%;
     outline: none;
+    width: 100%;
 }
 
 .inputField::placeholder {
@@ -418,6 +419,7 @@ p {
 
     .notJoinUserContainer {
         margin-top: 73vh !important;
+        align-self: center;
     }
 
     .frameStyle {

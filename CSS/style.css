@@ -556,7 +556,7 @@ a {
     justify-content: space-between;
     gap: 34px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-    z-index: 7;
+    z-index: 16;
     height: 89px;
     padding-left: 340px;
     padding-right: 20px;
@@ -745,6 +745,9 @@ select option:hover {
 .container-btns {
     align-self: flex-end;
     cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
 }
 
 .addTaskForm {
@@ -886,6 +889,10 @@ a {
 }
 .helpHeader{
     margin-bottom: 30px;
+}
+
+.impressum h1 {
+    font-size: 61px;
 }
 
 .helpDescriptionContainer{

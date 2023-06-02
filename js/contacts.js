@@ -10,6 +10,7 @@ function setSiteActive() {
     addContactCategories();
     setVisibleIfnotEmpty();
     generateContactDetailsHTML();
+    addEventListenerToDeleButton('deleteButton');
 }
 
 /** Generates HTML content for Contacts page: loads resources, checks login status, sets site active if logged in, redirects to login page if not logged in. */
@@ -183,12 +184,14 @@ function setVissible(i) {
 
 /** Removes the class "d-none" to show AddNewTaskAtContacts page */
 function showAddNewTaskAtContacts() {
+    let clientWidth = document.body.clientWidth;
+    if(clientWidth<=1300) addDisplayNone('overlay');
+    else removeDisplayNone('overlay');
     generateAddTaskHTML('addTaskAtContacts', '');
     addInnerHTML('addTaskAtContacts', `<div onclick="hideAddNewTaskAtContatcs()" 
         class="closeIconAtContacts editUserCloseBtn" id="closeIconAtContacts"></div>`);
     setOnSubmitForm('toDo');
     removeDisplayNone('addTaskAtContacts');
-    removeDisplayNone('overlay');
     toggle('closeIconAtContacts', `background-image:url('../img/closeIconEditUserAtContacts.png') !important;`, 1300);
     addEventListenerToDropDown();
 }
@@ -205,7 +208,6 @@ function showEditContact() {
     let oldEmail = document.getElementById('contactDetailsEmail').innerHTML;
     let oldPhone = document.getElementById('contactDetailsPhone').innerHTML;
     setEditContact(oldName, oldEmail, oldPhone);
-    addEventListenerToDeleButton('deleteButton');
     removeDisplayNone('overlay');
 }
 

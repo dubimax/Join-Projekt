@@ -65,6 +65,7 @@
         width: 100% !important;
         background-color: #F5F5F5;
         padding-left: 36px !important;
+        padding-top: unset !important;
     }
 
     .contactsTitleContainer {
@@ -78,7 +79,7 @@
         margin: 0 !important;
         align-self: unset !important;
         position: absolute !important;
-        top: 189px !important;
+        top: 102px !important;
     }
 
     h4 {
@@ -195,7 +196,6 @@
         transform: unset !important;
     }
 
-
     .details {
         flex-direction: column !important;
         margin-top: 0 !important;
@@ -226,17 +226,21 @@
     #id_urgent,
     #id_medium,
     #id_low {
-        width: 90px !important;
+        width: 95px !important;
         height: 41px !important;
+        font-size: smaller;
     }
 
     .detail {
         font-weight: 400;
         font-size: 16px !important;
     }
-
+    .prioImg{
+        height: 10px !important;
+        width: 14px !important;
+    }
     .detail div {
-        gap: 5px;
+        gap: 5px !important;
     }
 
     .selectImg {
@@ -312,14 +316,13 @@
     .deleteButtonContent {
         display: flex !important;
         position: absolute;
-        right: 33px;
+        right: 29px;
         bottom: 160px;
-        background-image: url('../img/trashIcon.png');
+        background-image: url(../img/trashIcon.png);
         background-repeat: no-repeat;
-        background-size: 52% 66%;
         background-position: center;
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         justify-content: center;
         align-items: center;
         padding: 8px 18px;

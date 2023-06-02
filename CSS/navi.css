@@ -4,7 +4,7 @@
     width: calc(100% - 232px);
     right: 0;
     bottom: 0;
-    top: 89px;
+    top: 90px;
     align-items: flex-start;
     overflow: hidden;
     background-color: #F5F5F5;
@@ -68,7 +68,7 @@
     height: 100%;
     left: 0px;
     top: 0px;
-    z-index: 9;
+    z-index: 17;
     box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.3);
 }
 
