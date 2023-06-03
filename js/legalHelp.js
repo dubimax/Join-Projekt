@@ -20,7 +20,6 @@ function addLegalNotice() {
                 </p><br>
                 <p><strong>Vertreten durch: </strong><br><br>
                     Marijan Dupkovic<br>
-                    Oural Mantenli<br>
                 </p><br>
                 <p><strong>Kontakt:</strong> <br><br>
                     E-Mail: <a style="color:blue;" href='mailto:m.dupkovic@gmail.com'>m.dupkovic@gmail.com</a></br>
